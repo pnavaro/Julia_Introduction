@@ -28,6 +28,7 @@ COPY . ${HOME}
 RUN chown -R ${NB_UID} ${HOME}
 USER $NB_UID
 
+ENV PYTHON=/opt/conda/bin/python
 RUN julia -e 'import Pkg; Pkg.update()' && \
     julia -e 'import Pkg; Pkg.add("IJulia")' && \
     # Precompile Julia packages \
