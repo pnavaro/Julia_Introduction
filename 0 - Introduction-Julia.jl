@@ -69,7 +69,9 @@
 #
 # Un programme Julia est un script extension .jl on peut soit l'exécuter en ligne de commande "julia nomfichier.jl" ou en l'incluant 
 
-include("MonFichier.jl")
+# ```julia
+# include("MonFichier.jl")
+# ```
 
 # Toute ligne ou fin de ligne commançant par `#` est en commentaire, une bloc est délimité par `#=` et `=#`:
 
@@ -129,17 +131,19 @@ de commentaires  =#
 #
 # Pour installer un package faire "]"
 
-(v1.1) pkg> add IJuliaNom_du_Package
+# (v1.1) pkg> add IJuliaNom_du_Package
 
 # et il est installé physiquement dans votre espace disque (répertoire .julia/).
 #
 # L'utilisation se fait en début de chaque programme (ou script par "using"). L'initialisation est assez longue (pour les versions 0.3.xx) le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l'installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.
 
-using Nom_du_Package
+# ```julia
+# using Nom_du_Package
+# ```
 
 # La commande Pkg permet de gérer les actions faire "]" 
 
-(v1.1) pkg> rm Nom_du_Package # rm : remove
-(v1.1) pkg>update # comme dit le nom
+# (v1.1) pkg> rm Nom_du_Package # rm : remove
+# (v1.1) pkg>update # comme dit le nom
 
 # On verra dans les sections suivantes l'utilisation de quelques packages plus prisés et même jusqu'à la création d'un package !
