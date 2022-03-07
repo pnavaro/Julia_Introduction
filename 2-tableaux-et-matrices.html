@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tableaux et matrices &#8212; Introduction au langage Julia</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Eléments de programmation" href="3-elements-de-programmation.html" />
+    <link rel="prev" title="Prise en main" href="1-prise-en-main.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0-introduction.html">
+   Présentation de JULIA
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-prise-en-main.html">
+   Prise en main
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Tableaux et matrices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-elements-de-programmation.html">
+   Eléments de programmation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-les-fonctions.html">
+   Les fonctions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-quelques-packages-utiles.html">
+   Packages utiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6-calcul-parallele.html">
+   Calcul parallèle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-type-et-methode.html">
+   Type et méthodes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/2-tableaux-et-matrices.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pnavaro/Julia_Introduction"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F2-tableaux-et-matrices.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Tableaux et matrices
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterateur">
+   Iterateur
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tableau">
+   Tableau
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manipulation-de-tableau">
+     Manipulation de Tableau
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#push">
+       push!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#append">
+       append!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#attention-sur-la-conversion-de-type">
+       Attention sur la conversion de type !
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algebre-lineaire">
+     Algèbre linéaire
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-scientifiques-et-operations">
+     Fonctions scientifiques et opérations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operateurs-booleens-sur-les-tableaux">
+     Opérateurs booléens sur les tableaux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#particularite-max-maximum-min-minimum">
+     Particularité max, maximum, min, minimum
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructeurs">
+     Constructeurs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-sparse">
+     type sparse
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affectation-et-copie">
+     Affectation et copie
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Tableaux et matrices</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Tableaux et matrices
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterateur">
+   Iterateur
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tableau">
+   Tableau
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manipulation-de-tableau">
+     Manipulation de Tableau
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#push">
+       push!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#append">
+       append!
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#attention-sur-la-conversion-de-type">
+       Attention sur la conversion de type !
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algebre-lineaire">
+     Algèbre linéaire
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fonctions-scientifiques-et-operations">
+     Fonctions scientifiques et opérations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operateurs-booleens-sur-les-tableaux">
+     Opérateurs booléens sur les tableaux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#particularite-max-maximum-min-minimum">
+     Particularité max, maximum, min, minimum
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructeurs">
+     Constructeurs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-sparse">
+     type sparse
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#affectation-et-copie">
+     Affectation et copie
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="tableaux-et-matrices">
+<h1>Tableaux et matrices<a class="headerlink" href="#tableaux-et-matrices" title="Permalink to this headline">¶</a></h1>
+<p>La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel du Julia.</p>
+<p>Julia ne possède qu’un seul type de tableau : <strong>Array</strong> on peut définir sont nombre d’entrées (1 entrée= 1 dimension …) et sont contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément…</p>
+<p>Une particularité est que les indices de tableaux commencent à 1, et l’accès aux éléments se fera à l’aide de ‘[‘ ’]’ et non ‘(‘ ‘)’ qui est réservé aux fonctions.</p>
+<p>Avant de rentrer dans la construction et manipulation de tableau regardons une autre classe</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="iterateur">
+<h1>Iterateur<a class="headerlink" href="#iterateur" title="Permalink to this headline">¶</a></h1>
+<p>Julia possède un Type particulier fait à l’aide du “:”</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ce type “formel” permet d’avoir une définition et une méthode associée sans stocker l’ensemble des valeurs. Attention celui-ci peut être vide :</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span> <span class="c"># itérateur formel mais correspond à un ensemble vide de valeurs</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="tableau">
+<h1>Tableau<a class="headerlink" href="#tableau" title="Permalink to this headline">¶</a></h1>
+<p>On vient de voir que l’on peut transformer l’itérateur précédent en tableau à l’aide de la commande “collect”</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="n">aa</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La réponse est de la forme <strong>Array{Type,dim}</strong> un tableau de <strong>Type</strong> à <strong>dim</strong> entrées (1 pour vecteur, 2 pour matrices …)</p>
+<p>A remarquer :</p>
+<ul class="simple">
+<li><p>l’indexation des tableaux commence à 1.</p></li>
+<li><p>un tableau à une entrée est vu comme un vecteur colonne par défaut.</p></li>
+<li><p>le crochet [ ] sert à extraire ou affecter une valeur ou un bloc de valeur. Attention le crochet [ ] sert également de “concatenateur” et constructeur de tableau (voir suite)</p></li>
+<li><p>Il est possible de faire des tableaux de n’importe quoi (fonction, tableau, …).</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="k">end</span><span class="p">]</span> <span class="c"># pour accèder au dernier élément</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span><span class="o">.=</span><span class="mi">1</span><span class="p">;</span> <span class="n">println</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Les crochets permettent la construction explicite de tableaux (ou leur concaténation)</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="c"># {espace} = séparateur de colonne</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span>  <span class="n">A</span><span class="p">]</span> <span class="c"># concaténation par bloc</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span> <span class="c"># commande équivalent à la précédente [A  A]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span> <span class="p">;</span> <span class="n">A</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span> <span class="c"># commande équivalent à la précédente [A  ; A]</span>
+</pre></div>
+</div>
+<p>On peut accéder à tout ou partie d’un tableau à l’aide de 2 indices</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="k">end</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A noter que l’on peut faire des tableaux de tout type voir de les mélanger (Any)</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="p">;</span><span class="s">&quot;deux&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">false</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="p">;</span> <span class="mi">2</span> <span class="p">;</span> <span class="nb">true</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l’exemple si dessous pour construire une matrice de VanderMonde</p>
+<div class="math notranslate nohighlight">
+\[ V_{i,j}=x_i^{j-1}\]</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">V</span><span class="o">=</span><span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">6</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">6</span><span class="p">]</span> <span class="c"># ligne et colonne</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="p">[</span> <span class="n">u</span><span class="o">*</span><span class="n">v</span> <span class="k">for</span> <span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>On peux évidemment faire des tableaux à 3,4… entrèes.</p>
+<div class="section" id="manipulation-de-tableau">
+<h2>Manipulation de Tableau<a class="headerlink" href="#manipulation-de-tableau" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="push">
+<h3>push!<a class="headerlink" href="#push" title="Permalink to this headline">¶</a></h3>
+<p>Le fonction push permet d’ajouter à un tableau une valeur supplémentaire</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>     <span class="c"># =&gt; [1]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>     <span class="c"># =&gt; [1,2]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>     <span class="c"># =&gt; [1,2,4]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>     <span class="c"># =&gt; [1,2,4,6]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="append">
+<h3>append!<a class="headerlink" href="#append" title="Permalink to this headline">¶</a></h3>
+<p>Cette fonction permet de mettre bout à bout 2 tableaux</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">append!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A noté le  <strong>Array{Any,1}</strong> !</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>     <span class="c"># =&gt; [1]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>     <span class="c"># =&gt; [1,2]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>     <span class="c"># =&gt; [1,2,4]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>  
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="attention-sur-la-conversion-de-type">
+<h3>Attention sur la conversion de type !<a class="headerlink" href="#attention-sur-la-conversion-de-type" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">map</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="kt">Float64</span><span class="o">.</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="algebre-lineaire">
+<h2>Algèbre linéaire<a class="headerlink" href="#algebre-lineaire" title="Permalink to this headline">¶</a></h2>
+<p>On retrouve beaucoup (toutes) de fonctions usuelles de l’algèbre linéaire</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">];</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span><span class="p">];</span> <span class="c">#résolution du système Ax=b</span>
+<span class="n">x</span><span class="o">=</span><span class="n">A</span><span class="o">\</span><span class="n">b</span> 
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonctions-scientifiques-et-operations">
+<h2>Fonctions scientifiques et opérations<a class="headerlink" href="#fonctions-scientifiques-et-operations" title="Permalink to this headline">¶</a></h2>
+<p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,*</code>,<code>^</code>,<code>/</code> et <code>&lt;/code&gt;(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code>.&lt;/code&gt; toujours avec une contrainte de dimensions compatibles.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c"># exponentielle matricielle</span>
+</pre></div>
+</div>
+<p>De plus les tableaux possèdes des opérations de multiplication, division, puissance termes à termes</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">^</span><span class="mi">2</span> <span class="c">#Multiplication Matricielle</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.^</span><span class="mi">2</span> <span class="c">#Multiplication terme à terme</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="p">[</span><span class="mi">2</span> <span class="mi">3</span> <span class="p">;</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]</span> <span class="c">#Division terme à terme </span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operateurs-booleens-sur-les-tableaux">
+<h2>Opérateurs booléens sur les tableaux<a class="headerlink" href="#operateurs-booleens-sur-les-tableaux" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="particularite-max-maximum-min-minimum">
+<h2>Particularité max, maximum, min, minimum<a class="headerlink" href="#particularite-max-maximum-min-minimum" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructeurs">
+<h2>Constructeurs<a class="headerlink" href="#constructeurs" title="Permalink to this headline">¶</a></h2>
+<p>Enfin il est possible de construire rapidement certaines matrices</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c"># loi normale centrée de variance 1</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="c"># concaténation de tableaux</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="c"># , ou ; jouent le rôle de retour à la ligne</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">=</span><span class="n">Diagonal</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="c"># extraction d&#39;une diagonale</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-sparse">
+<h2>type sparse<a class="headerlink" href="#type-sparse" title="Permalink to this headline">¶</a></h2>
+<p>Julia possède un type sparse i.e. des matrices creuses, ces dernières ayant un comportement identique aux matrices elles ne diffèrent que dans leur définition (et leur stockage).</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">SparseArrays</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spzeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="o">+</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sparse</span><span class="p">([</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">])</span> <span class="c"># pour rendre sparse une matrice &quot;full&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="affectation-et-copie">
+<h2>Affectation et copie<a class="headerlink" href="#affectation-et-copie" title="Permalink to this headline">¶</a></h2>
+<p>Attention julia à un mode de passage de valeur qui fonctionne différemment suivant une variable type ou un tableau.</p>
+<p>Pour une varibla scalire</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="n">b</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
+</pre></div>
+</div>
+<p>Par contre maintenant si la variable est un tableau</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">A</span>
+<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
+</pre></div>
+</div>
+<p>Pour avoir un comportement il faut copier le tableau A</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="1-prise-en-main.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Prise en main</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3-elements-de-programmation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Eléments de programmation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

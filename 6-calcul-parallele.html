@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcul parallèle &#8212; Introduction au langage Julia</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Type et méthodes" href="7-type-et-methode.html" />
+    <link rel="prev" title="Packages utiles" href="5-quelques-packages-utiles.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0-introduction.html">
+   Présentation de JULIA
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1-prise-en-main.html">
+   Prise en main
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2-tableaux-et-matrices.html">
+   Tableaux et matrices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3-elements-de-programmation.html">
+   Eléments de programmation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4-les-fonctions.html">
+   Les fonctions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5-quelques-packages-utiles.html">
+   Packages utiles
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Calcul parallèle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7-type-et-methode.html">
+   Type et méthodes
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/6-calcul-parallele.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pnavaro/Julia_Introduction"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F6-calcul-parallele.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Calcul parallèle
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-for">
+   @parallel for
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-bassin-d-attraction-de-newton">
+   Application Bassin d’attraction de Newton :
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#premier-calcul-mono-processeur-temps-de-reference">
+     premier calcul mono-processeur (temps de référence)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-en-parallele">
+     Newton en parallèle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encore-plus-de">
+   Encore plus de //
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-parallel-2">
+     Newton parallel 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#package-parallelaccelerator">
+   Package ParallelAccelerator
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Calcul parallèle</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Calcul parallèle
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-for">
+   @parallel for
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application-bassin-d-attraction-de-newton">
+   Application Bassin d’attraction de Newton :
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#premier-calcul-mono-processeur-temps-de-reference">
+     premier calcul mono-processeur (temps de référence)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-en-parallele">
+     Newton en parallèle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encore-plus-de">
+   Encore plus de //
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-parallel-2">
+     Newton parallel 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#package-parallelaccelerator">
+   Package ParallelAccelerator
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <!-- #region -->
+<div class="tex2jax_ignore mathjax_ignore section" id="calcul-parallele">
+<h1>Calcul parallèle<a class="headerlink" href="#calcul-parallele" title="Permalink to this headline">¶</a></h1>
+<p>(Version pour Julia 0.4 … 0.6 à venir)
+JULIA dans sa grande force permet nativement le calcul parallel plus précisément calcul parallel à mémoire partagée ou distribuée.</p>
+<p>Le document référence officiel : <a class="reference external" href="http://julia.readthedocs.org/en/latest/manual/parallel-computing/">http://julia.readthedocs.org/en/latest/manual/parallel-computing/</a></p>
+<p><a class="reference external" href="http://www.csd.uwo.ca/~moreno/cs2101a_moreno/Parallel_computing_with_Julia.pdf">http://www.csd.uwo.ca/~moreno/cs2101a_moreno/Parallel_computing_with_Julia.pdf</a> Très transparants très bien fait la notion de Task est abordée…</p>
+<p><a class="reference external" href="http://www.admin-magazine.com/HPC/Articles/Julia-Distributed-Arrays">http://www.admin-magazine.com/HPC/Articles/Julia-Distributed-Arrays</a></p>
+<p><a class="reference external" href="http://www.admin-magazine.com/HPC/Articles/Parallel-Julia-Jumping-Right-In">http://www.admin-magazine.com/HPC/Articles/Parallel-Julia-Jumping-Right-In</a></p>
+<p><a class="reference external" href="http://www.blog.juliaferraioli.com/2014/02/julia-on-google-compute-engine-parallel.html">http://www.blog.juliaferraioli.com/2014/02/julia-on-google-compute-engine-parallel.html</a></p>
+<p><a class="reference external" href="http://www.alshum.com/parallel-julia/">http://www.alshum.com/parallel-julia/</a></p>
+<!-- #endregion -->
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;PyPlot&quot;</span><span class="p">)</span>
+<span class="k">using</span> <span class="n">PyPlot</span> <span class="c"># pour afficher le résultat sur le noeud master</span>
+</pre></div>
+</div>
+<p>En tout premier lieu on peut lancer une instance de JULIA avec plusieurs processeurs (ou plusieurs instances de JULIA) à l’aide de la commande shell</p>
+<p>julia -p 4</p>
+<p>Autrement on peut à la volée ajouter/enlever des processeurs ou plutôt workers à l’aide des commandes <code>addproc()</code> <code>rmproc()</code> et <code>worker()</code> ainsi que les commandes <code>nprocs</code> et <code>nworker</code></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span> <span class="c"># par défaut un worker le &quot;maitre&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c">#ajout de 2 workers</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span> <span class="c"># le processeur 1 n&#39;est plus worker il est evenu master</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="parallel-for">
+<h1>&#64;parallel for<a class="headerlink" href="#parallel-for" title="Permalink to this headline">¶</a></h1>
+<p>JULIA offre une façon simple de paralleliser une boucle for à l’aide de la macro &#64;parallel</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span>
+<span class="nd">@parallel</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">taille</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">myid</span><span class="p">());</span> <span class="c"># renvoie le numéro du worker</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myid</span><span class="p">()</span> <span class="c"># numéro du processus maitre</span>
+</pre></div>
+</div>
+<p>Regardons plus exactement la répartition du calcul pour cela utilisons un tableau partagé <code>SharedArray</code> (voir également <code>SharedMatrix</code>, <code>SharedVector</code>). Autrement dit un tableau qui sera accessible en lecture et en écriture pour chaque worker (et le master).</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">a</span> <span class="o">=</span> <span class="kt">SharedArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="n">taille</span><span class="p">)</span> <span class="c"># Tableau partagé</span>
+<span class="nd">@parallel</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">taille</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">();</span> <span class="c"># renvoie le numéro du worker stocké dans a</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+<p>La boucle à été partagée et envoyée pour <span class="math notranslate nohighlight">\(i=1:4\)</span> sur le worker 2 et pour <span class="math notranslate nohighlight">\(i=5:7\)</span> sur le worker 3.</p>
+<p>Regardons si nous n’avions pas utilisé de tableau partagé</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span> <span class="c"># Tableau non partagé il est ici en local myid()==1</span>
+ <span class="nd">@parallel</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">taille</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">();</span> <span class="c"># renvoie le numéro du worker</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>On peut voire que localement les workers ont accès à une copie de <code>a</code> dont ils peuvent modifier les valeurs “localement”.</p>
+<p>Par contre</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>la valeur sur master n’a pas été modifiée. Autrement dit chaque worker a utilisé une copie locale de a, localement modifiable mais une fois l’exécution terminée cette copie est effacée.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span>
+<span class="nd">@parallel</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># nouvelle copie locale</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="application-bassin-d-attraction-de-newton">
+<h1>Application Bassin d’attraction de Newton :<a class="headerlink" href="#application-bassin-d-attraction-de-newton" title="Permalink to this headline">¶</a></h1>
+<p>Plaçons nous sur un exemple de calcul de bassin d’attraction de Newton</p>
+<div class="section" id="premier-calcul-mono-processeur-temps-de-reference">
+<h2>premier calcul mono-processeur (temps de référence)<a class="headerlink" href="#premier-calcul-mono-processeur-temps-de-reference" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># algorithme de Newton</span>
+<span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">;</span>
+    <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xnew</span>
+        <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">xnew</span>
+<span class="k">end</span>
+<span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
+<span class="c"># le jacobien de f</span>
+<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+<span class="k">function</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+            <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">Imag</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">)</span>
+<span class="n">colorbar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="newton-en-parallele">
+<h2>Newton en parallèle<a class="headerlink" href="#newton-en-parallele" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c"># on ajoute 2 processeurs</span>
+</pre></div>
+</div>
+<p>Dans un premier temps on redéfinie les fonctions newton, f et df pour tous les workers à l’aide de la macro &#64;everywhere</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># algorithme de Newton</span>
+<span class="nd">@everywhere</span> <span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">;</span>
+    <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xnew</span>
+        <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">xnew</span>
+<span class="k">end</span>
+<span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
+<span class="nd">@everywhere</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
+<span class="c"># le jacobien de f</span>
+<span class="nd">@everywhere</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+<span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+</pre></div>
+</div>
+<p>Puis on uitlise <code>&#64;parallel</code> dans la boucle extérieure ainsi que <code>&#64;sync</code> pour resynchroniser les process autrement attendre que tous les workers aient fini leurs calculs</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">Imag</span><span class="o">=</span><span class="kt">SharedArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="nd">@sync</span> <span class="k">begin</span>
+        <span class="nd">@parallel</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+             <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+                <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">Imag</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># pour efficacité il faut relancer 2 fois</span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span><span class="o">/</span><span class="mf">1.33</span><span class="o">/</span><span class="n">nworkers</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">)</span>
+<span class="n">colorbar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="encore-plus-de">
+<h1>Encore plus de //<a class="headerlink" href="#encore-plus-de" title="Permalink to this headline">¶</a></h1>
+<p>On a utilisé les macros <code>&#64;everywhere</code> <code>&#64;parallel</code> <code>&#64;sync</code>
+regardons</p>
+<ul class="simple">
+<li><p><code>remotecall</code> appel asynchrone (n’attends pas le résultat dit appel non bloquant)</p></li>
+<li><p><code>fetch</code> récupère le résultat (synchronise)</p></li>
+<li><p><code>remotecall_fetch</code> les 2 commandes précédentes réunies ou appel bloquant (tant que le résultat n’est pas calculé la fonction ne rend pas la main.</p></li>
+<li><p><code>remotecall_wait</code> appel bloquant attend la fin de l’éxacution.</p></li>
+<li><p><code>&#64;async</code> exécute le bloc en mode asynchrone.</p></li>
+<li><p><code>&#64;spawn</code> et <code>&#64;spawnat</code> macros pour <code>remotecall</code></p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">proc</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span><span class="n">myid</span><span class="p">))</span> <span class="c"># demande l&#39;exécution de myid() sur chaque proc</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">nworkers</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">nworkers</span><span class="p">()</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">myid</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># a contien les numéros des workers  </span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nd">@spawn</span> <span class="n">myid</span><span class="p">()</span> 
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;process: </span><span class="si">$</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="k">where</span><span class="p">)</span><span class="s"> int: </span><span class="si">$</span><span class="p">(</span><span class="n">fetch</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="s">&quot;</span><span class="p">)</span>  
+<span class="k">end</span>  
+</pre></div>
+</div>
+<div class="section" id="newton-parallel-2">
+<h2>Newton parallel 2<a class="headerlink" href="#newton-parallel-2" title="Permalink to this headline">¶</a></h2>
+<p>Reprenons notre algorithme de calcul de bassin</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+<span class="k">function</span> <span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">wo</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span>
+    <span class="n">nw</span><span class="o">=</span><span class="n">nworkers</span><span class="p">()</span>
+    <span class="nd">@sync</span> <span class="k">begin</span>
+        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+            <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+                <span class="nd">@async</span> <span class="k">begin</span>    <span class="c"># lancement asynchrone      </span>
+                    <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+                    <span class="n">wk</span><span class="o">=</span><span class="n">wo</span><span class="p">[</span><span class="n">k</span><span class="o">%</span><span class="n">nw</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c"># worker suivant</span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">wk</span><span class="p">,</span><span class="n">newton</span><span class="p">,[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+                    <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+            <span class="k">end</span> <span class="c"># ens @async</span>
+            <span class="k">end</span>
+        <span class="k">end</span>     
+    <span class="k">end</span> <span class="c"># end @sync</span>
+    <span class="k">return</span> <span class="n">Imag</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">32</span> <span class="c"># efficacité pas très grande voir catastrophique !</span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+<p>On peut voir que le code n’est pas très efficace on perd beaucoup de temps en communication on fait trop d’appels aux workers (<span class="math notranslate nohighlight">\(n^2\)</span>).</p>
+<p>Changeons de principe et divisons la tache en nombre de workers :</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># résoltion d&#39;un block du probleme du bassin de Newtown</span>
+<span class="nd">@everywhere</span> <span class="k">function</span> <span class="n">calc_block</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">m</span>
+            <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+            <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">Imag</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+    
+    <span class="c"># permet la répartition du travail</span>
+    <span class="n">wo</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span>
+    <span class="n">nw</span><span class="o">=</span><span class="n">nworkers</span><span class="p">()</span>
+    <span class="n">part</span><span class="o">=</span><span class="p">[</span><span class="n">round</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">nw</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">nw</span><span class="p">]</span>
+    <span class="n">rest</span><span class="o">=</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">nw</span><span class="o">*</span><span class="n">part</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">part</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">rest</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">part</span><span class="o">=</span><span class="n">cumsum</span><span class="p">(</span><span class="n">part</span><span class="p">);</span>
+    <span class="n">part</span><span class="o">=</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,[</span><span class="mi">0</span><span class="p">;</span><span class="n">part</span><span class="p">])</span>
+    
+    <span class="nd">@sync</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">nw</span> <span class="c"># répartition sur tous les workers</span>
+        <span class="nd">@async</span> <span class="k">begin</span>  
+            <span class="n">Imag</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">part</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">part</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span>
+                <span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">wo</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">calc_block</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">part</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">part</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">end</span> <span class="c"># end @async</span>
+    <span class="k">end</span>     
+    <span class="k">return</span> <span class="n">Imag</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># efficacité correcte </span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">)</span>
+<span class="n">colorbar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>En diminuant le nombre d’appels on à retrouver une efficacité de l’ordre de 88% <span class="math notranslate nohighlight">\(\left(\dfrac{T_{ref}}{T_{multiproc} * nbproc}\right)\)</span> comme avec la macro <code>&#64;parallel</code> précédente.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="package-parallelaccelerator">
+<h1>Package ParallelAccelerator<a class="headerlink" href="#package-parallelaccelerator" title="Permalink to this headline">¶</a></h1>
+<p>Un peu comme pour Pythran il existe un package assez interressant mais avec tout de suite des limites : voir <a class="reference external" href="http://julialang.org/blog/2016/03/parallelaccelerator">http://julialang.org/blog/2016/03/parallelaccelerator</a></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;ParallelAccelerator&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">ParallelAccelerator</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@acc</span> <span class="k">begin</span>
+    <span class="c"># algorithme de Newton séquentiel</span>
+    <span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
+        <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">;</span>
+        <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">xnew</span>
+            <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">end</span>
+        <span class="k">return</span> <span class="n">xnew</span>
+    <span class="k">end</span>
+    <span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
+    <span class="c"># le jacobien de f</span>
+    <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+    <span class="k">function</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+            <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+                <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+                <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+        <span class="k">return</span> <span class="n">Imag</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="5-quelques-packages-utiles.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Packages utiles</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="7-type-et-methode.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Type et méthodes</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
