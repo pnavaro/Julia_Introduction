@@ -1,19 +1,3 @@
----
-jupyter:
-  jupytext:
-    encoding: '# -*- coding: utf-8 -*-'
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Julia 0.6.4
-    language: julia
-    name: julia-0.6
----
-
-<!-- #region -->
 # Calcul parallèle
 
 (Version pour Julia 0.4 ... 0.6 à venir)

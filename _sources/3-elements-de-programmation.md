@@ -1,19 +1,3 @@
----
-jupyter:
-  jupytext:
-    encoding: '# -*- coding: utf-8 -*-'
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Julia 1.1.0
-    language: julia
-    name: julia-1.1
----
-
-<!-- #region -->
 # Eléments de programmation
 
 Pour mener à bien un calcul algorithmique le nombre d'éléments de langage n'est pas très important et peut se résumer aux 3 syntaxes suivantes
@@ -270,7 +254,3 @@ typeof(Z2)
 ```
 
 La conclusion n'est pas toujours évidente a priori... Néanmoins on peut voir que le fait de mettre le code dans une fonction impose une optimisation à la compilation et une contextualisation du type et que l'écriture explicite des boucles donne un meilleur résultat.
-
-```julia
-
-```
