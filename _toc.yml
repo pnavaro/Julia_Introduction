@@ -1,0 +1,13 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 0-introduction
+chapters:
+- file: 1-prise-en-main
+- file: 2-tableaux-et-matrices
+- file: 3-elements-de-programmation
+- file: 4-les-fonctions
+- file: 5-quelques-packages-utiles
+- file: 6-calcul-parallele
+- file: 7-type-et-methode

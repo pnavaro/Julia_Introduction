@@ -1,0 +1,20 @@
+title: Introduction au langage Julia
+logo: logo.png
+
+execute:
+  execute_notebooks: false
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - references.bib
+
+repository:
+  url: https://github.com/pnavaro/Julia_Introduction  # Online location of your book
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+html:
+  use_issues_button: true
+  use_repository_button: true

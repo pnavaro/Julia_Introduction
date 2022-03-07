@@ -1,9 +1,3 @@
 .ipynb_checkpoints
-0 - Introduction-Julia.ipynb
-1 - Prise en main-Julia.ipynb
-2 - Tableaux et Matrices-Julia.ipynb
-3 - Eléments de programmation-Julia.ipynb
-4 - Les fonctions-Julia.ipynb
-5 - Quelques packages utiles.ipynb
-6 - Calcul parallèle.ipynb
-7 - Type et méthode.ipynb
+*.swp
+_build/
