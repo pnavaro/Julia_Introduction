@@ -1,30 +1,8 @@
----
-jupyter:
-  jupytext:
-    encoding: '# -*- coding: utf-8 -*-'
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Julia 1.1.0
-    language: julia
-    name: julia-1.1
----
-
-<!-- #region -->
-<img class="julia-logo"
-     src="http://docs.julialang.org/en/release-0.4/_static/julia-logo.svg"
-     alt=""
-     style="float: right;">
-
-
 # Présentation de JULIA
 
 Hello tout le monde !
 
-*JULIA* est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C'est un logiciel libre sous "licence MIT":https://github.com/JuliaLang/julia/blob/master/LICENSE.md.
+*JULIA* est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C'est un logiciel libre sous [licence MIT](https://github.com/JuliaLang/julia/blob/master/LICENSE.md).
 
 *JULIA* se veut la combinaison de :
 * la facilité de développement des environnements interprétés comme *R*, *MATLAB*, *OCTAVE*, *SCILAB*, *PYTHON* … 
@@ -156,9 +134,7 @@ using Nom_du_Package
 
 La commande Pkg permet de gérer les actions faire "]" 
 
-
 (v1.1) pkg> rm Nom_du_Package # rm : remove
 (v1.1) pkg>update # comme dit le nom
-
 
 On verra dans les sections suivantes l'utilisation de quelques packages plus prisés et même jusqu'à la création d'un package !

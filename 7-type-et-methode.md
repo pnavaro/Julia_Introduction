@@ -1,19 +1,3 @@
----
-jupyter:
-  jupytext:
-    cell_metadata_json: true
-    encoding: '# -*- coding: utf-8 -*-'
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.7
-  kernelspec:
-    display_name: Julia 1.1.0
-    language: julia
-    name: julia-1.1
----
-
 # Type et méthodes
 
 JULIA possède un système de type et de méthode qui lui confère une approche objet.
