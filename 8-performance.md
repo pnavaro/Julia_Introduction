@@ -44,4 +44,62 @@ end
 ```
 
 ## Alignement de la mémoire
-`$ù
+
+Les opérations le long des premiers indices seront plus rapides que l'inverse.
+
+```{code-cell}
+using FFTW
+
+T = randn(1024, 1024)
+
+@btime fft(T, 1);
+```
+
+```{code-cell}
+@btime fft(T, 2);
+```
+
+## Vues explicites
+
+```{code-cell}
+@btime sum(T[:,1]) # Somme de la première colonne
+```
+
+```{code-cell}
+@btime sum(view(T,:,1))  
+```
+
+## Eviter les calculs dans l'environnement global.
+
+```{code-cell}
+v = rand(1000)
+
+function somme()
+    acc = 0
+    for i in eachindex(v) 
+        acc += v[i]
+    end
+    acc
+end
+
+@btime somme()
+```
+
+Il faut écrire des fonctions
+
+```{code-cell}
+function somme( x )
+    acc = 0
+    for i in eachindex(x) 
+        acc += x[i]
+    end
+    acc
+end
+
+@btime somme( v )
+    
+```
+
+```{code-cell}
+
+```
