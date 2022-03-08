@@ -348,7 +348,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Structurée<a class="headerlink" href="#structuree" title="Permalink to this headline">¶</a></h2>
 <p>JULIA possède une structure plus classique à l’aide de <strong>function</strong>-<strong>end</strong> comme précédemment la dernière valeur calculée est par défaut la variable de retour autrement l’utilisation de <strong>return</strong> spécifie la ou les variables de sortie.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">y</span>
     <span class="n">z</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
@@ -418,7 +418,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="portee-des-variables">
 <h2>Portée des variables<a class="headerlink" href="#portee-des-variables" title="Permalink to this headline">¶</a></h2>
-<p>Quelle est la portée des variables autrement dit une variable définie peut elle être accessible, modifiable dans une fonction sans la passer en paramètre ?</p>
+<p>Quelle est la portée des variables, autrement dit une variable définie peut elle être accessible, modifiable dans une fonction sans la passer en paramètre ?</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">x</span>
 <span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -450,8 +450,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
 </pre></div>
 </div>
-<p>Donc par défaut une variable définie est connue et utilisable par toute fonction appelée (de même à l’intérieure d’une fonction).</p>
-<p>Si on redéfinie localement dans la fonction la variable alors “elle écrase localement” la dite variable et en sortie de fonction rien n’est modifié.</p>
+<p>Donc par défaut une variable définie est connue et utilisable par toute fonction appelée (de même à l’intérieur d’une fonction).</p>
+<p>Si on redéfinit localement dans la fonction la variable alors “elle écrase localement” la dite variable et en sortie de fonction rien n’est modifié.</p>
 <p>Attention à l’utilisation dans la fonction d’une variable extérieure puis d’affecter une valeur à cette variable…</p>
 </div>
 <div class="section" id="le-mapping">
@@ -468,7 +468,14 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">v</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
@@ -485,6 +492,15 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Il existe également un opérateur pour “composer” les fonctions <code class="docutils literal notranslate"><span class="pre">\circ</span></code></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">4</span><span class="n">x</span>
+<span class="p">(</span><span class="n">f1</span> <span class="o">∘</span> <span class="n">f2</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">f2</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
