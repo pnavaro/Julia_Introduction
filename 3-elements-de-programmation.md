@@ -13,7 +13,7 @@ Un choix simple si le test est vrai (k==1) alors le bloc d'instruction est éval
 <!-- #endregion -->
 
 ```julia
-k=1;
+k=1
 if k==1
     println("k=1")
 end
@@ -22,7 +22,7 @@ end
 Le **else** permet de donner un résultat par défaut...
 
 ```julia
-k=1;
+k=1
 if k!=1
     println("k<>1")
 else
@@ -33,7 +33,7 @@ end
 Une succession de **elseif** permet de choisir parmi plusieurs critères, dans la succession des blocs de **if** et **elseif** le premier qui est "vrai" est évaluer et l'instruction s'arrète.
 
 ```julia
-k=2;
+k=2
 if k==1
     println("k=1")
 elseif k>1
@@ -45,7 +45,7 @@ end
 
 # La boucle for
 
-Elle peut se définir à l'aide d'itérateurs ou de tableaux de valeurs les syntaxes "=" ou "in" sont équivalentes
+Elle peut se définir à l'aide d'itérateurs ou de tableaux de valeurs les syntaxes "=" , "in" ou "$\in$" sont équivalentes
 
 ```julia
 for i=1:10
@@ -86,7 +86,7 @@ end
 Tant que le test est "vrai" le bloc est évalué, le test se faisant en entrée de bloc
 
 ```julia
-k=0;
+k=0
 while k<10
     k+=1  # k=k+1
     println(k)
@@ -96,7 +96,7 @@ end
 De même que la boucle **for** les commandes **break** et **continue** sont valables ...
 
 ```julia
-k=0;
+k=0
 while k<1000
     k+=1  # k=k+1
     if k % 5 != 0 # k modulo 5 diffèrent de 0
@@ -116,12 +116,13 @@ JULIA est dit un langage performant, regardons rapidement quelques exemples à f
 ## Exemple de préallocation et utilisation de push!
 
 ```julia
-start = time()
-A=zeros(0);
-for i=1:1000000
-    A=[A;i];   # a chaque itération on change la taille de A
+n = 100000
+@time begin
+    A = zeros(0) # Tableau vide qui contiendra des Float64
+    for i=1:n
+        A=[A;i]   # a chaque itération on change la taille de A
+    end
 end
-elapsed = time() - start
 ```
 
 ```julia
@@ -133,12 +134,12 @@ A
 ```
 
 ```julia
-start = time()
-A=zeros(0);
-for i=1:1000000
-    push!(A,i);   # a chaque itération on change la taille de A
+@time begin
+    A=zeros(0);
+    for i=1:n
+        push!(A,i)   # a chaque itération on change la taille de A
+    end
 end
-elapsed = time() - start
 ```
 
 ```julia
@@ -146,18 +147,18 @@ A
 ```
 
 ```julia
-start = time()
-A=zeros(Int64,1000000)
-for i=1:1000000
-    A[i]=i;
+@time begin
+    A=zeros(Int64,n)
+    for i=1:n
+        A[i]=i
+    end
 end
-elapsed = time() - start
 ```
 
 ```julia
-start = time()
-A=[i for i=1:1000000]
-elapsed = time() - start
+@time begin
+    A=[i for i=1:n]
+end
 ```
 
 ```julia
@@ -172,14 +173,14 @@ Regardons la vectorisation sous JULIA à l'aide de la construction d'une matrice
 
 
 ```julia
-start = time()
-n=3000;
-x=range(0,stop=1,length=n);
-V=zeros(n,n);
-for i=1:n
-    V[:,i]=x.^(i-1) # calcul vectorisé
+@elapsed begin
+    n=3000;
+    x=range(0,stop=1,length=n)
+    V=zeros(n,n)
+    for i=1:n
+        V[:,i]=x.^(i-1) # calcul vectorisé
+    end
 end
-elapsed = time() - start
 ```
 
 ```julia
@@ -189,16 +190,16 @@ A
 ```
 
 ```julia
-start = time()
-n=3000;
-x=range(0,stop=1,length=n);
-X=zeros(n,n);
-for i=1:n
-    for j=1:n
-        X[i,j]=x[i]^(j-1) # calcul dévectorisé
+@elapsed begin
+    n=3000
+    x=range(0,stop=1,length=n)
+    X=zeros(n,n)
+    for i=1:n
+        for j=1:n
+            X[i,j]=x[i]^(j-1) # calcul dévectorisé
+        end
     end
 end
-elapsed = time() - start
 ```
 
 ```julia
@@ -206,11 +207,11 @@ typeof(X)
 ```
 
 ```julia
-start = time()
-n=3000;
-x=range(0,stop=1,length=n);
-W=[x[i]^(j-1) for i=1:n, j=1:n];
-elapsed = time() - start
+@elapsed begin 
+    n=3000;
+    x=range(0,stop=1,length=n)
+    W=[x[i]^(j-1) for i=1:n, j=1:n]
+end
 ```
 
 ```julia
@@ -219,8 +220,8 @@ typeof(W)
 
 ```julia
 function Vander(n)
-    x=range(0,stop=1,length=n);
-    V=zeros(n,n);
+    x=range(0,stop=1,length=n)
+    V=zeros(n,n)
     for i=1:n
         #V[:,i]=x.^(i-1)
         for j=1:n
@@ -229,27 +230,30 @@ function Vander(n)
     end
     return V
 end
-start = time(); Z=Vander(3000); elapsed = time() - start
+@elapsed Z = Vander(3000)
 ```
 
 ```julia
-start = time(); Z=Vander(3000); elapsed = time() - start 
+@elapsed Z=Vander(3000)
 ```
 
 ```julia
-start = time(); Z=Vander(3000); elapsed = time() - start  
+@elapsed Z=Vander(3000) 
 ```
 
 ```julia
 function Vander2(n)
-    x=range(0,stop=1,length=n);
-    [x[i]^(j-1) for i=1:n, j=1:n];
+    x=range(0,stop=1,length=n)
+    [x[i]^(j-1) for i=1:n, j=1:n]
 end
-start = time(); Z2=Vander2(3000); elapsed = time() - start 
+@elapsed Z2=Vander2(3000)
 ```
 
 ```julia
-start = time(); Z2=Vander2(3000); elapsed = time() - start  
+@elapsed Z2=Vander2(3000)
+```
+
+```julia
 typeof(Z2)
 ```
 
