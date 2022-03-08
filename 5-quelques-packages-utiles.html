@@ -306,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="packages-utiles">
 <h1>Packages utiles<a class="headerlink" href="#packages-utiles" title="Permalink to this headline">¶</a></h1>
-<p>Comme vu dans l’introduction JULIA possède une bibliothèque de package assez grande dont il n’est pas forcément aisé d’en faire le tri…</p>
+<p>Comme vu dans l’introduction JULIA possède une bibliothèque de packages assez grande dont il n’est pas forcément aisé d’en faire le tri…</p>
 <p>Je vous propose ici la description et utilisation de quelques classiques</p>
 <p>En premier lieu un packages graphiques :</p>
 <ul class="simple">
@@ -316,7 +316,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>et deux packages plus “statistiques” :</p>
 <ul class="simple">
 <li><p><strong>DataFrames</strong></p></li>
-<li><p><strong>Rdatasets</strong></p></li>
+<li><p><strong>RDatasets</strong></p></li>
 </ul>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="graphiques">
@@ -325,39 +325,48 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="plots">
 <h2>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
 <p>Plots est basé sur une bibliothèque éprouvée MatPlotLib (en Python). Sa syntaxe est identique à celle de MATLAB</p>
+<!-- #region -->
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">Plots</span>
 <span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">PlotlyJS</span>
 <span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">PyPlot</span>
 </pre></div>
 </div>
+<!-- #endregion -->
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span> 
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">3000</span><span class="p">);</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">3000</span><span class="p">);</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">&quot;g&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">grid</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="n">title</span><span class="p">(</span><span class="s">&quot;tracé 2&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lc</span><span class="o">=</span> <span class="ss">:green</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">lc</span><span class="o">=</span> <span class="ss">:red</span><span class="p">)</span>
+<span class="n">title!</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;tracé 2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span>
-<span class="n">X</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">Y</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">PyPlot</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">&quot;g&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="n">PyPlot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;tracé 2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">Y</span><span class="o">=-</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">X</span><span class="o">.^</span><span class="mi">2</span><span class="o">+</span><span class="n">Y</span><span class="o">.^</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=-</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s">&quot;#9999ff&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
 <span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s">&quot;#ff9999&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
@@ -366,26 +375,42 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">txt</span><span class="o">=</span><span class="n">string</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mf">0.08</span><span class="p">,</span><span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">7</span><span class="p">])</span>
 <span class="k">end</span>
-<span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ylims!</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">pie</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
+<span class="n">pie</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contour</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
-<span class="n">colorbar</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contour</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="n">colobar</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">surf</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">palette</span><span class="p">(</span><span class="ss">:rainbow</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">=</span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="o">=-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">Y</span><span class="o">=</span><span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="o">=-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">quiver</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">surface</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="ss">:rainbow</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>D’autres packages sont disponible Gadfly, Winston, AsciiPlot, GLVisualize…</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">.-</span> <span class="n">y</span><span class="o">&#39;.^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">)</span>
+
+<span class="n">v</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">.*</span> <span class="p">[</span><span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">px</span> <span class="k">for</span> <span class="n">px</span> <span class="k">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">py</span> <span class="k">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">py</span> <span class="k">for</span> <span class="n">px</span> <span class="k">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">py</span> <span class="k">in</span> <span class="n">y</span><span class="p">]</span>
+
+<span class="n">quiver!</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">quiver</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>D’autres packages sont disponibles :</p>
+<ul class="simple">
+<li><p>Gadfly</p></li>
+<li><p>UnicodePlots</p></li>
+<li><p>Makie
+voir <a class="reference external" href="https://github.com/JuliaPlots">JuliaPlots</a> et <a class="reference external" href="https://github.com/JuliaGraphics">JuliaGraphics</a></p></li>
+</ul>
 </div>
 <div class="section" id="type-dataframes">
 <h2>Type DataFrames<a class="headerlink" href="#type-dataframes" title="Permalink to this headline">¶</a></h2>
@@ -398,8 +423,8 @@ Ce sont des tables dont les colonnes sont des DataArray. Voici deux façons de c
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">df</span><span class="p">[</span><span class="ss">:A</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="p">;</span>
-<span class="n">df</span><span class="p">[</span><span class="ss">:B</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">];</span>
+<span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:A</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span>
+<span class="n">df</span><span class="p">[</span><span class="o">!</span><span class="p">,</span><span class="ss">:B</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;M&quot;</span><span class="p">,</span> <span class="s">&quot;F&quot;</span><span class="p">]</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -425,6 +450,12 @@ Ce sont des tables dont les colonnes sont des DataArray. Voici deux façons de c
 <div class="section" id="rdatasets">
 <h2>RDatasets<a class="headerlink" href="#rdatasets" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">RDatasets</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span> <span class="s">&quot;iris&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
