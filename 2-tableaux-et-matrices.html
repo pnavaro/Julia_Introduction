@@ -402,8 +402,8 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="tableaux-et-matrices">
 <h1>Tableaux et matrices<a class="headerlink" href="#tableaux-et-matrices" title="Permalink to this headline">¶</a></h1>
-<p>La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel du Julia.</p>
-<p>Julia ne possède qu’un seul type de tableau : <strong>Array</strong> on peut définir sont nombre d’entrées (1 entrée= 1 dimension …) et sont contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément…</p>
+<p>La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel de Julia.</p>
+<p>Julia ne possède qu’un seul type de tableau : <strong>Array</strong> on peut définir son nombre d’entrées (1 entrée= 1 dimension …) et son contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément…</p>
 <p>Une particularité est que les indices de tableaux commencent à 1, et l’accès aux éléments se fera à l’aide de ‘[‘ ’]’ et non ‘(‘ ‘)’ qui est réservé aux fonctions.</p>
 <p>Avant de rentrer dans la construction et manipulation de tableau regardons une autre classe</p>
 </div>
@@ -508,7 +508,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="p">;</span> <span class="mi">2</span> <span class="p">;</span> <span class="nb">true</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l’exemple si dessous pour construire une matrice de VanderMonde</p>
+<p>Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l’exemple ci-dessous pour construire une matrice de VanderMonde</p>
 <div class="math notranslate nohighlight">
 \[ V_{i,j}=x_i^{j-1}\]</div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
@@ -598,7 +598,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="fonctions-scientifiques-et-operations">
 <h2>Fonctions scientifiques et opérations<a class="headerlink" href="#fonctions-scientifiques-et-operations" title="Permalink to this headline">¶</a></h2>
-<p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,*</code>,<code>^</code>,<code>/</code> et <code>&lt;/code&gt;(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code>.&lt;/code&gt; toujours avec une contrainte de dimensions compatibles.</p>
+<p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,<code>*</code>,<code>^</code>,<code>/</code> et <code class="docutils literal notranslate"><span class="pre">\</span></code>(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code>.&lt;/code&gt; toujours avec une contrainte de dimensions compatibles.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
 <span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
@@ -665,6 +665,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="nb">π</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -689,6 +692,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="c"># extraction d&#39;une diagonale</span>
 </pre></div>
 </div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Matrix</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="type-sparse">
 <h2>type sparse<a class="headerlink" href="#type-sparse" title="Permalink to this headline">¶</a></h2>
@@ -697,9 +706,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spzeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span>
@@ -718,7 +724,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="affectation-et-copie">
 <h2>Affectation et copie<a class="headerlink" href="#affectation-et-copie" title="Permalink to this headline">¶</a></h2>
 <p>Attention julia à un mode de passage de valeur qui fonctionne différemment suivant une variable type ou un tableau.</p>
-<p>Pour une varibla scalire</p>
+<p>Pour une variable scalaire</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">b</span><span class="o">=</span><span class="n">a</span>
 <span class="n">b</span><span class="o">+=</span><span class="mi">1</span>
