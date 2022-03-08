@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tableaux et matrices" href="2-tableaux-et-matrices.html" />
-    <link rel="prev" title="Présentation de JULIA" href="0-introduction.html" />
+    <link rel="prev" title="Présentation" href="0-introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="0-introduction.html">
-   Présentation de JULIA
+   Présentation
   </a>
  </li>
 </ul>
@@ -134,6 +134,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="7-type-et-methode.html">
    Type et méthodes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="8-performance.html">
+   Performance
   </a>
  </li>
 </ul>
@@ -414,7 +419,7 @@ const thebe_selector_output = ".output, .cell_output"
 </tr>
 </tbody>
 </table>
-<p>JULIA possède une algèbre étendue avec la possibilité de divisé par 0</p>
+<p><em>Julia</em> possède une algèbre étendue avec la possibilité de divisé par 0</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
 </pre></div>
 </div>
@@ -469,7 +474,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>On voit dans ce qui précède que les variables sont typées, mais un mécanisme automatique de changement de type (comme <code>Int64</code> <span class="math notranslate nohighlight">\( \rightarrow\)</span> <code>Float64</code>) permet la somme d’un entier et d’un réel. On peut demander à JULIA d’identifier un entier comme un réel (Float) avec l’ajout d’un <code>.</code> exemple <code>a=1.</code>.</p>
+<p>On voit dans ce qui précède que les variables sont typées, mais un mécanisme automatique de changement de type (comme <code>Int64</code> <span class="math notranslate nohighlight">\( \rightarrow\)</span> <code>Float64</code>) permet la somme d’un entier et d’un réel. On peut demander à <em>Julia</em> d’identifier un entier comme un réel (Float) avec l’ajout d’un <code>.</code> exemple <code>a=1.</code>.</p>
 <p>Une particularité est de ne pas avoir la possibilité de supprimer une variable ! Il est juste possible de récupérer l’espace mémoire en faisant <code>a=[]</code>.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[]</span>
 </pre></div>
@@ -496,7 +501,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standards *, /, + ….</p>
 <div class="section" id="les-nombres-scalaires">
 <h3>Les nombres scalaires<a class="headerlink" href="#les-nombres-scalaires" title="Permalink to this headline">¶</a></h3>
-<p>On a vu précédemment que JULIA est assez flexible sur l’utilisation et l’affectation des variables et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
+<p>On a vu précédemment que <em>Julia</em> est assez flexible sur l’utilisation et l’affectation des variables et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
 <p>De manière naturel on trouve les types :</p>
 <ul class="simple">
 <li><p><code>Int8</code>, <code>UInt8</code>, <code>Int16</code>, <code>UInt16</code>,<code>Int32</code>, <code>UInt32</code>, <code>Int64</code>, <code>UInt64</code>,<code>Int128</code>, <code>UInt128</code>.</p></li>
@@ -536,7 +541,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="les-booleens">
 <h3>Les booléens<a class="headerlink" href="#les-booleens" title="Permalink to this headline">¶</a></h3>
-<p>Les variables booléennes (1bit) sont naturellement définies dans JULIA à l’aide des opérateurs de comparaison</p>
+<p>Les variables booléennes (1bit) sont naturellement définies dans <em>Julia</em> à l’aide des opérateurs de comparaison</p>
 <p>| opération |égalité|différent| supérieur | supérieur ou égal | inférieur | inférieur ou égal|
 |——|——||——|——|——|——|
 | syntaxe | a==b | a!=b| a&gt;b | a&gt;=b | a&lt;b | a&lt;=b |</p>
@@ -567,7 +572,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="les-chaines-de-caractere">
 <h3>Les chaines de caractère<a class="headerlink" href="#les-chaines-de-caractere" title="Permalink to this headline">¶</a></h3>
-<p>JULIA possède un type <strong>Char</strong> (Charactere) il s’agit d’une lettre délimité par ‘’ à ne pas confondre avec la chaine de caractère.</p>
+<p><em>Julia</em> possède un type <strong>Char</strong> (Charactere) il s’agit d’une lettre délimité par ‘’ à ne pas confondre avec la chaine de caractère.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">=</span><span class="sc">&#39;a&#39;</span>
 </pre></div>
 </div>
@@ -650,7 +655,7 @@ const thebe_selector_output = ".output, .cell_output"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Présentation de JULIA</p>
+            <p class="prev-next-title">Présentation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="2-tableaux-et-matrices.html" title="next page">

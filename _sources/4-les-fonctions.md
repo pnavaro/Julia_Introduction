@@ -43,7 +43,7 @@ h(3)
 
 ## Structurée
 
-JULIA possède une structure plus classique à l'aide de **function**-**end** comme précédemment la dernière valeur calculée est par défaut la variable de retour autrement l'utilisation de **return** spécifie la ou les variables de sortie. 
+*Julia* possède une structure plus classique à l'aide de **function**-**end** comme précédemment la dernière valeur calculée est par défaut la variable de retour autrement l'utilisation de **return** spécifie la ou les variables de sortie. 
 
 ```julia
 function H(x,y)

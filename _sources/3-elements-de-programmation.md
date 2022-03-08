@@ -111,7 +111,7 @@ end
 
 # Un peu d'optimisation
 
-JULIA est dit un langage performant, regardons rapidement quelques exemples à faire ou ne pas faire.
+*Julia* est dit un langage performant, regardons rapidement quelques exemples à faire ou ne pas faire.
 
 ## Exemple de préallocation et utilisation de push!
 
@@ -169,7 +169,7 @@ Cet exemple montre le coût prohibitif d'une réallocation dynamique qui impose 
 
 ## Exemple de vectorisation
 
-Regardons la vectorisation sous JULIA à l'aide de la construction d'une matrice de Vandermond
+Regardons la vectorisation sous *Julia* à l'aide de la construction d'une matrice de Vandermond
 
 
 ```julia

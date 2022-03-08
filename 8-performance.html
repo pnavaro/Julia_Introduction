@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction au langage Julia &#8212; Introduction au langage Julia</title>
+    <title>Performance &#8212; Introduction au langage Julia</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Type et méthodes" href="7-type-et-methode.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1-prise-en-main.html">
    Prise en main
@@ -132,8 +133,8 @@ const thebe_selector_output = ".output, .cell_output"
    Type et méthodes
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="8-performance.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Performance
   </a>
  </li>
@@ -178,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/README.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/8-performance.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -198,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F8-performance.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -219,6 +220,24 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#allocations">
+   Allocations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alignement-de-la-memoire">
+   Alignement de la mémoire
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -226,34 +245,48 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction au langage Julia</h1>
+                <h1>Performance</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#allocations">
+   Allocations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alignement-de-la-memoire">
+   Alignement de la mémoire
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
             
               <div>
                 
-  <p><a class="reference external" href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="introduction-au-langage-julia">
-<h1>Introduction au langage Julia<a class="headerlink" href="#introduction-au-langage-julia" title="Permalink to this headline">¶</a></h1>
-<p>Une introduction à Julia sous forme de notebooks jupyter. Elle a été écrite par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a> avec la version 1.1 de Julia. J’ai fait quelques corrections pour l’adapter à la version 1.7.</p>
-<p>La visualisation est automatique sous Github, pour rendre interactif les notebooks il faut “cloner” le répertoire sur sa machine (ou sur un serveur Jupyter).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pnavaro</span><span class="o">/</span><span class="n">Julia_Introduction</span>
-<span class="n">cd</span> <span class="n">Julia_Introduction</span>
-<span class="n">julia</span> <span class="o">--</span><span class="n">project</span>
-<span class="n">julia</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">Pkg</span>
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">using</span> <span class="n">IJulia</span>
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">notebook</span><span class="p">()</span>
-</pre></div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="performance">
+<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<p><em>Julia</em> avec la compilation <em>Just-In-Time</em> est un langage naturellement performant. Il n’est pas allergique aux boucles comme le sont les langages Python et R. Les opérations vectorisées fonctionnent également très bien à condition d’être attentifs aux allocations mémoire et aux vues explicites.</p>
+<div class="section" id="allocations">
+<h2>Allocations<a class="headerlink" href="#allocations" title="Permalink to this headline">¶</a></h2>
+<p>Dans l’appel de la macro <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> on interpole les arguments avec le signe <code class="docutils literal notranslate"><span class="pre">$</span></code> pour être sur que les fonctions
+<code class="docutils literal notranslate"><span class="pre">rand</span></code> ont déjà été evaluées avant l’appel de la fonction <code class="docutils literal notranslate"><span class="pre">test</span></code>. La matrice <code class="docutils literal notranslate"><span class="pre">C</span></code> est modifiée dans la fonction suivante donc par convention on ajoute un <code class="docutils literal notranslate"><span class="pre">!</span></code> au nom de la fonction. Par convention également, l’argument modifié se placera en premier. Comme dans la fonction <code class="docutils literal notranslate"><span class="pre">push!</span></code> par exemple.</p>
+<p>En effectuant une opération “en place”, on supprime une allocation mais celle pour effectuer l’opération <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> est toujours nécessaire. On peut supprimer cette allocation en utilisant la bibliothèque <code class="docutils literal notranslate"><span class="pre">BLAS</span></code>, cependant le code perd en lisibilité ce qu’il a gagné en performance.</p>
 </div>
-<p>Une version html <a class="reference external" href="https://jupyterbook.org/">jupyterbook</a> est <a class="reference external" href="https://pnavaro.github.io/Julia_Introduction">disponible</a></p>
-<p>Toute contribution est la bien-venue à l’aide d’un simple “pull request”.</p>
-<p>Pierre</p>
+<div class="section" id="alignement-de-la-memoire">
+<h2>Alignement de la mémoire<a class="headerlink" href="#alignement-de-la-memoire" title="Permalink to this headline">¶</a></h2>
+<p>`$ù</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -280,7 +313,14 @@ const thebe_selector_output = ".output, .cell_output"
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="7-type-et-methode.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Type et méthodes</p>
+        </div>
+    </a>
 </div>
             
         </div>

@@ -1,6 +1,6 @@
 # Packages utiles
 
-Comme vu dans l'introduction JULIA possède une bibliothèque de packages assez grande dont il n'est pas forcément aisé d'en faire le tri...
+Comme vu dans l'introduction *Julia* possède une bibliothèque de packages assez grande dont il n'est pas forcément aisé d'en faire le tri...
 
 Je vous propose ici la description et utilisation de quelques classiques
 
@@ -15,7 +15,7 @@ et deux packages plus "statistiques" :
 
 # Graphiques
 
-La gestion graphique ne fait pas partie intégrante de JULIA il faut faire appel à des packages extérieurs et plusieurs choix sont possibles. En voici quelques uns
+La gestion graphique ne fait pas partie intégrante de *Julia* il faut faire appel à des packages extérieurs et plusieurs choix sont possibles. En voici quelques uns
 
 ## Plots
 

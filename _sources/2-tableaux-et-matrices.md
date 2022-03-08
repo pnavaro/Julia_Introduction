@@ -13,11 +13,11 @@ Avant de rentrer dans la construction et manipulation de tableau regardons une a
 Julia possède un Type particulier fait à l'aide du ":"
 
 ```julia
-a=1:5
+a = 1:5
 ```
 
 ```julia
-a.+1
+a .+ 1
 ```
 
 ```julia
@@ -53,6 +53,10 @@ aa=collect(a)
 
 ```julia
 collect(a')
+```
+
+```julia
+a  .+ a'
 ```
 
 ```julia
@@ -120,11 +124,27 @@ A[end,end]
 ```
 
 ```julia
+sum(AA, dims=1)
+```
+
+```julia
 B=[1 2 3 4]
 ```
 
 ```julia
 B=[1;2;3;4]
+```
+
+```julia
+for i in eachindex(AA)
+    println(i)
+end
+```
+
+```julia
+for row in eachrow(AA)
+    println(row)
+end
 ```
 
 A noter que l'on peut faire des tableaux de tout type voir de les mélanger (Any)
@@ -458,3 +478,29 @@ A
 ```julia
 B
 ```
+
+# Dictionnaire
+
+```julia
+d = Dict(:key1 => "val1", :key2 => "val2")
+```
+
+```julia
+keys(d) # Toutes clés (itérateur)
+```
+
+```julia
+values(d) # Toutes valeurs (itérateur)
+```
+
+```julia
+for (k,v) in d # Itérer par paire clé-valeur
+    println("key: $k, value: $v")
+end
+```
+
+```julia
+haskey(d, :k) # Vérifier la présence de la clé :k
+```
+
+Les dictionnaires sont muables; quand des symboles sont utilisés comme clés, les clés sont immuables.
