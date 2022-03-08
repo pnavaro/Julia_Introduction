@@ -393,7 +393,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">im</span><span class="o">^</span><span class="mi">2</span>
 </pre></div>
 </div>
-<p>Certaines fonctions sont possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>… sur <span class="math notranslate nohighlight">\(I\!\!R\)</span> extensible aux nombres complexes :</p>
+<p>Certaines fonctions possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>… sur <span class="math notranslate nohighlight">\(I\!\!R\)</span> extensible aux nombres complexes :</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -436,12 +436,18 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">NaN</span><span class="o">+</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p><code>Inf</code> et <code>NaN</code> représentant l’infini et Not A Number. Toutes les formes indéterminées donnant <code>NaN</code> et toute combinaison avec <code>NaN</code> renvoie également <code>NaN</code>.</p>
+<p><code>Inf</code> et <code>NaN</code> représentant l’infini et Not A Number. Toutes les formes indéterminées donnant <code>NaN</code> et toute combinaison avec <code>NaN</code> renvoie également <code>NaN</code>. <code class="docutils literal notranslate"><span class="pre">missing</span></code> existe également avec un comportement similaire pour gérer les données manquantes mais attention, cela change le type de vos variables.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">NaN</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="variables">
 <h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
 <p>L’utilisation de variable est très intuitive sans déclaration préalable de type (entier, réel, imaginaire, fraction rationnelle…). Le nom de la variable doit commencer par une lettre entre a-z ou A-Z mais aussi par un underscore (‘_’) ou encore un caractère Unicode (voir dernier exemple pour comprendre)</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -472,10 +478,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ρ¹</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>L’utilisation de caractères spétiaux comme les lettres grecques se font par utilisation d’une syntaxe de type LaTex. Dans la Plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le charactère</p>
+<p>L’utilisation de caractères spéciaux comme les lettres grecques se font par utilisation d’une syntaxe de type <span class="math notranslate nohighlight">\(\LaTeX\)</span>. Dans la plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le caractère</p>
 <div class="section" id="convention-et-style">
 <h3>Convention et style<a class="headerlink" href="#convention-et-style" title="Permalink to this headline">¶</a></h3>
-<p>Julia impose quelques restriction de nom de variable, de plus les conventions suivantes sont d’usage :</p>
+<p>Julia impose quelques restrictions de nom de variable, de plus les conventions suivantes sont d’usage :</p>
 <ul class="simple">
 <li><p>Les noms des variables sont en minuscule.</p></li>
 <li><p>La séparation des mots dans une variable se fait à l’aide d’un underscore (‘_’) mais cette pratique n’est pas recommandé pour une question de lisibilité des noms de variable.</p></li>
@@ -487,15 +493,15 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="types-de-variable">
 <h2>Types de variable<a class="headerlink" href="#types-de-variable" title="Permalink to this headline">¶</a></h2>
-<p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonter. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standarts *, /, + ….</p>
+<p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standards *, /, + ….</p>
 <div class="section" id="les-nombres-scalaires">
 <h3>Les nombres scalaires<a class="headerlink" href="#les-nombres-scalaires" title="Permalink to this headline">¶</a></h3>
-<p>On a vu précédemment que JULIA est assez flexible sur l’utilisation et affectation des variable et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
+<p>On a vu précédemment que JULIA est assez flexible sur l’utilisation et l’affectation des variables et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
 <p>De manière naturel on trouve les types :</p>
 <ul class="simple">
-<li><p><code>int8</code>, <code>uint8</code>, <code>int16</code>, <code>uint16</code>,<code>int32</code>, <code>uint32</code>, <code>int64</code>, <code>uint64</code>,<code>int128</code>, <code>uint128</code>.</p></li>
-<li><p><code>float16</code> (simple précision i.e 8 chiffres significatifs), <code>float32</code> (double précision, 16 chiffres significatifs), <code>float64</code> (32 chiffres significatifs)</p></li>
-<li><p><code>complex32</code>, <code>complex64</code>, <code>complex128</code>.</p></li>
+<li><p><code>Int8</code>, <code>UInt8</code>, <code>Int16</code>, <code>UInt16</code>,<code>Int32</code>, <code>UInt32</code>, <code>Int64</code>, <code>UInt64</code>,<code>Int128</code>, <code>UInt128</code>.</p></li>
+<li><p><code>Float16</code> (simple précision i.e 8 chiffres significatifs), <code>Float32</code> (double précision, 16 chiffres significatifs), <code>Float64</code> (32 chiffres significatifs)</p></li>
+<li><p><code>ComplexF32</code>, <code>ComplexF64</code>.</p></li>
 </ul>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1000000000000</span><span class="p">;</span> <span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
@@ -513,14 +519,13 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kt">Float64</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="mf">1.0</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="mf">1.0</span>
 <span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Il est possible de forcer le type d’une variable à l’aide des commandes <code>Int8()</code>, <code>Int16()</code>…<code>Float32()</code>…</p>
 <p>Remarque : Opérations type unaire sur une variable</p>
-<p>| opération | += | -= | *= | /= | = |
-|——|——|——|——|——|</p>
+<p><code class="docutils literal notranslate"><span class="pre">+=</span></code>,  <code class="docutils literal notranslate"><span class="pre">-=</span></code>, <code class="docutils literal notranslate"><span class="pre">*=</span></code>,  <code class="docutils literal notranslate"><span class="pre">/=</span></code>, <code class="docutils literal notranslate"><span class="pre">\=</span></code></p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">a</span><span class="o">+=</span><span class="mi">1</span>
 </pre></div>
@@ -583,6 +588,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>  <span class="c"># \n renvoie à la ligne</span>
 </pre></div>
 </div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">*=</span> <span class="s">&quot;puis une autre...&quot;</span><span class="o">^</span><span class="mi">2</span> <span class="c"># la puissance permet de répéter la chaine</span>
+</pre></div>
+</div>
 <p>On peut extraire ou affecter une partie de cette chaîne considérée comme un tableau</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
@@ -599,7 +607,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">println</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">])))</span>
 </pre></div>
 </div>
-<p>L’usage de $ permet comme en php de convertir et d’inclure une variable dans une chaîne de caractère (interpolation)</p>
+<p>L’usage de $ permet comme en php de convertir et d’inclure une variable dans une chaîne de caractères (interpolation)</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">=</span><span class="mi">11</span><span class="p">;</span>
 <span class="n">a</span><span class="o">=</span><span class="s">&quot;le mois de novembre est le </span><span class="si">$m</span><span class="s"> ième mois &quot;</span>
 </pre></div>
