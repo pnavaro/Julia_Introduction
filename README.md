@@ -1,10 +1,23 @@
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master)
 
-# Julia_Introduction
-Une introduction à Julia sous forme de Notebook (Jupyter).
+# Introduction au langage Julia
 
-La visualisation est automatique sous Github, pour rendre interactif les Notebook il faut "cloner" le répertoire sur sa machine (ou sur un serveur Jupyter).
+Une introduction à Julia sous forme de notebooks jupyter. Elle a été écrite par [Thierry Clopeau](https://github.com/clopeau/Julia_Introduction) avec la version 1.1 de Julia. J'ai fait quelques corrections pour l'adapter à la version 1.7.
+
+La visualisation est automatique sous Github, pour rendre interactif les notebooks il faut "cloner" le répertoire sur sa machine (ou sur un serveur Jupyter).
+
+```
+git clone https://github.com/pnavaro/Julia_Introduction
+cd Julia_Introduction
+julia --project
+julia> import Pkg
+julia> Pkg.instantiate()
+julia> using IJulia
+julia> notebook()
+```
+
+Une version html [jupyterbook](https://jupyterbook.org/) est [disponible](https://pnavaro.github.io/Julia_Introduction)
 
 Toute contribution est la bien-venue à l'aide d'un simple "pull request".
 
-T. Clopeau
+Pierre 
