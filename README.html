@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Julia_Introduction &#8212; Introduction au langage Julia</title>
+    <title>Introduction au langage Julia &#8212; Introduction au langage Julia</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -221,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Julia_Introduction</h1>
+                <h1>Introduction au langage Julia</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -233,12 +233,22 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <p><a class="reference external" href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master"><img alt="Binder" src="https://mybinder.org/badge.svg" /></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="julia-introduction">
-<h1>Julia_Introduction<a class="headerlink" href="#julia-introduction" title="Permalink to this headline">¶</a></h1>
-<p>Une introduction à Julia sous forme de Notebook (Jupyter).</p>
-<p>La visualisation est automatique sous Github, pour rendre interactif les Notebook il faut “cloner” le répertoire sur sa machine (ou sur un serveur Jupyter).</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="introduction-au-langage-julia">
+<h1>Introduction au langage Julia<a class="headerlink" href="#introduction-au-langage-julia" title="Permalink to this headline">¶</a></h1>
+<p>Une introduction à Julia sous forme de notebooks jupyter. Elle a été écrite par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a> avec la version 1.1 de Julia. J’ai fait quelques corrections pour l’adapter à la version 1.7.</p>
+<p>La visualisation est automatique sous Github, pour rendre interactif les notebooks il faut “cloner” le répertoire sur sa machine (ou sur un serveur Jupyter).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pnavaro</span><span class="o">/</span><span class="n">Julia_Introduction</span>
+<span class="n">cd</span> <span class="n">Julia_Introduction</span>
+<span class="n">julia</span> <span class="o">--</span><span class="n">project</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">Pkg</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">using</span> <span class="n">IJulia</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Une version html <a class="reference external" href="https://jupyterbook.org/">jupyterbook</a> est <a class="reference external" href="https://pnavaro.github.io/Julia_Introduction">disponible</a></p>
 <p>Toute contribution est la bien-venue à l’aide d’un simple “pull request”.</p>
-<p>T. Clopeau</p>
+<p>Pierre</p>
 </div>
 
     <script type="text/x-thebe-config">
