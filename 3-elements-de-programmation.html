@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Les fonctions" href="4-les-fonctions.html" />
@@ -337,14 +339,14 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>if … elseif … else … end<a class="headerlink" href="#if-elseif-else-end" title="Permalink to this headline">¶</a></h1>
 <p>Un choix simple si le test est vrai (k==1) alors le bloc d’instruction est évalué</p>
 <!-- #endregion -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">1</span>
 <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">1</span>
     <span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 <p>Le <strong>else</strong> permet de donner un résultat par défaut…</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">1</span>
 <span class="k">if</span> <span class="n">k!</span><span class="o">=</span><span class="mi">1</span>
     <span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;&gt;1&quot;</span><span class="p">)</span>
 <span class="k">else</span>
@@ -353,7 +355,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>Une succession de <strong>elseif</strong> permet de choisir parmi plusieurs critères, dans la succession des blocs de <strong>if</strong> et <strong>elseif</strong> le premier qui est “vrai” est évaluer et l’instruction s’arrète.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">2</span>
 <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">1</span>
     <span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
 <span class="k">elseif</span> <span class="n">k</span><span class="o">&gt;</span><span class="mi">1</span>
@@ -366,7 +368,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="la-boucle-for">
 <h1>La boucle for<a class="headerlink" href="#la-boucle-for" title="Permalink to this headline">¶</a></h1>
-<p>Elle peut se définir à l’aide d’itérateurs ou de tableaux de valeurs les syntaxes “=” ou “in” sont équivalentes</p>
+<p>Elle peut se définir à l’aide d’itérateurs ou de tableaux de valeurs les syntaxes “=” , “in” ou “<span class="math notranslate nohighlight">\(\in\)</span>” sont équivalentes</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
     <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 <span class="k">end</span>
@@ -399,7 +401,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="tex2jax_ignore mathjax_ignore section" id="la-boucle-while">
 <h1>La boucle while<a class="headerlink" href="#la-boucle-while" title="Permalink to this headline">¶</a></h1>
 <p>Tant que le test est “vrai” le bloc est évalué, le test se faisant en entrée de bloc</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span>
 <span class="k">while</span> <span class="n">k</span><span class="o">&lt;</span><span class="mi">10</span>
     <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>  <span class="c"># k=k+1</span>
     <span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
@@ -407,7 +409,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>De même que la boucle <strong>for</strong> les commandes <strong>break</strong> et <strong>continue</strong> sont valables …</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span>
 <span class="k">while</span> <span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span>
     <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>  <span class="c"># k=k+1</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">!=</span> <span class="mi">0</span> <span class="c"># k modulo 5 diffèrent de 0</span>
@@ -426,12 +428,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>JULIA est dit un langage performant, regardons rapidement quelques exemples à faire ou ne pas faire.</p>
 <div class="section" id="exemple-de-preallocation-et-utilisation-de-push">
 <h2>Exemple de préallocation et utilisation de push!<a class="headerlink" href="#exemple-de-preallocation-et-utilisation-de-push" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">1000000</span>
-    <span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="n">i</span><span class="p">];</span>   <span class="c"># a chaque itération on change la taille de A</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="nd">@time</span> <span class="k">begin</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># Tableau vide qui contiendra des Float64</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="n">i</span><span class="p">]</span>   <span class="c"># a chaque itération on change la taille de A</span>
+    <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -440,28 +443,28 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">1000000</span>
-    <span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>   <span class="c"># a chaque itération on change la taille de A</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="k">begin</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>   <span class="c"># a chaque itération on change la taille de A</span>
+    <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">1000000</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="k">begin</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span>
+    <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="k">begin</span>
+    <span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -472,14 +475,14 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="exemple-de-vectorisation">
 <h2>Exemple de vectorisation<a class="headerlink" href="#exemple-de-vectorisation" title="Permalink to this headline">¶</a></h2>
 <p>Regardons la vectorisation sous JULIA à l’aide de la construction d’une matrice de Vandermond</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
-<span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">);</span>
-<span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-    <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># calcul vectorisé</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="k">begin</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># calcul vectorisé</span>
+    <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
@@ -487,34 +490,34 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="n">A</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
-<span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">);</span>
-<span class="n">X</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-    <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-        <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># calcul dévectorisé</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="k">begin</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">X</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># calcul dévectorisé</span>
+        <span class="k">end</span>
     <span class="k">end</span>
 <span class="k">end</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
-<span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">);</span>
-<span class="n">W</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">];</span>
-<span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="k">begin</span> 
+    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">W</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">Vander</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
         <span class="c">#V[:,i]=x.^(i-1)</span>
         <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
@@ -523,24 +526,26 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">end</span>
     <span class="k">return</span> <span class="n">V</span>
 <span class="k">end</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">Z</span><span class="o">=</span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+<span class="nd">@elapsed</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">Z</span><span class="o">=</span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">Z</span><span class="o">=</span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">Z</span><span class="o">=</span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>  
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">Z</span><span class="o">=</span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span> 
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">Vander2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">);</span>
-    <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">];</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
 <span class="k">end</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> 
+<span class="nd">@elapsed</span> <span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>  
-<span class="n">typeof</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>La conclusion n’est pas toujours évidente a priori… Néanmoins on peut voir que le fait de mettre le code dans une fonction impose une optimisation à la compilation et une contextualisation du type et que l’écriture explicite des boucles donne un meilleur résultat.</p>
