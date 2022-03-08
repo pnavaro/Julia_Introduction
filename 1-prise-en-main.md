@@ -46,7 +46,7 @@ Il est possible d'utiliser les notations scientifiques <code>1e2</code> pour 100
 im^2
 ```
 
-Certaines fonctions sont possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>... sur $I\!\!R$ extensible aux nombres complexes :
+Certaines fonctions possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>... sur $I\!\!R$ extensible aux nombres complexes :
 
 ```julia
 sqrt(-1)
@@ -96,15 +96,22 @@ Inf-Inf
 NaN+1
 ```
 
-<code>Inf</code> et <code>NaN</code> représentant l'infini et Not A Number. Toutes les formes indéterminées donnant <code>NaN</code> et toute combinaison avec <code>NaN</code> renvoie également <code>NaN</code>.
+<code>Inf</code> et <code>NaN</code> représentant l'infini et Not A Number. Toutes les formes indéterminées donnant <code>NaN</code> et toute combinaison avec <code>NaN</code> renvoie également <code>NaN</code>. `missing` existe également avec un comportement similaire pour gérer les données manquantes mais attention, cela change le type de vos variables.
 
+```julia
+typeof(NaN)
+```
+
+```julia
+typeof(missing)
+```
 
 ## Variables 
 
 L'utilisation de variable est très intuitive sans déclaration préalable de type (entier, réel, imaginaire, fraction rationnelle...). Le nom de la variable doit commencer par une lettre entre a-z ou A-Z mais aussi par un underscore ('_') ou encore un caractère Unicode (voir dernier exemple pour comprendre)
 
 ```julia
-a=1
+a = 1
 ```
 
 ```julia
@@ -146,12 +153,12 @@ Toujours dans la rubrique particularité on verra que les fonctions sont aussi d
 ρ¹=1
 ```
 
-L'utilisation de caractères spétiaux comme les lettres grecques se font par utilisation d'une syntaxe de type LaTex. Dans la Plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le charactère 
+L'utilisation de caractères spéciaux comme les lettres grecques se font par utilisation d'une syntaxe de type $\LaTeX$. Dans la plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le caractère 
 
 
 ### Convention et style
 
-Julia impose quelques restriction de nom de variable, de plus les conventions suivantes sont d'usage :
+Julia impose quelques restrictions de nom de variable, de plus les conventions suivantes sont d'usage :
 
 * Les noms des variables sont en minuscule.
 * La séparation des mots dans une variable se fait à l'aide d'un underscore ('_') mais cette pratique n'est pas recommandé pour une question de lisibilité des noms de variable.
@@ -162,15 +169,16 @@ Julia impose quelques restriction de nom de variable, de plus les conventions su
 
 ## Types de variable
 
-Julia n'est pas à proprement parler un "langage objet" néanmoins c'est ce que l'on peut appeler un "langage typé". En effet ce langage possède un certain nombre de types prédéfinis et permet d'en ajouter à volonter. Les nouveaux types faisant office de structure tel un objet (C++/Java...) permettant la surcharge des opérateurs standarts *, /, + ....
+Julia n'est pas à proprement parler un "langage objet" néanmoins c'est ce que l'on peut appeler un "langage typé". En effet ce langage possède un certain nombre de types prédéfinis et permet d'en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java...) permettant la surcharge des opérateurs standards *, /, + ....
 
 ### Les nombres scalaires
-On a vu précédemment que JULIA est assez flexible sur l'utilisation et affectation des variable et est capable de rendre compatible l'addition d'entier, réel (float)...
+
+On a vu précédemment que JULIA est assez flexible sur l'utilisation et l'affectation des variables et est capable de rendre compatible l'addition d'entier, réel (float)...
 
 De manière naturel on trouve les types :
-* <code>int8</code>, <code>uint8</code>, <code>int16</code>, <code>uint16</code>,<code>int32</code>, <code>uint32</code>, <code>int64</code>, <code>uint64</code>,<code>int128</code>, <code>uint128</code>.
-* <code>float16</code> (simple précision i.e 8 chiffres significatifs), <code>float32</code> (double précision, 16 chiffres significatifs), <code>float64</code> (32 chiffres significatifs)
-* <code>complex32</code>, <code>complex64</code>, <code>complex128</code>.
+* <code>Int8</code>, <code>UInt8</code>, <code>Int16</code>, <code>UInt16</code>,<code>Int32</code>, <code>UInt32</code>, <code>Int64</code>, <code>UInt64</code>,<code>Int128</code>, <code>UInt128</code>.
+* <code>Float16</code> (simple précision i.e 8 chiffres significatifs), <code>Float32</code> (double précision, 16 chiffres significatifs), <code>Float64</code> (32 chiffres significatifs)
+* <code>ComplexF32</code>, <code>ComplexF64</code>.
 
 ```julia
 a=1000000000000; typeof(a)
@@ -193,7 +201,7 @@ Float64(b)
 ```
 
 ```julia
-c=1.0;
+c=1.0
 println(typeof(c))
 ```
 
@@ -203,7 +211,7 @@ Il est possible de forcer le type d'une variable à l'aide des commandes <code>I
 Remarque : Opérations type unaire sur une variable 
 
 | opération | += | -= | *= | /= | \= | 
-|------|------|------|------|------|
+|------|------|------|------|------|------|
 
 ```julia
 a=1
@@ -272,6 +280,10 @@ b= a * "puis une autre..."
 println(b)  # \n renvoie à la ligne
 ```
 
+```julia
+b *= "puis une autre..."^2 # la puissance permet de répéter la chaine
+```
+
 On peut extraire ou affecter une partie de cette chaîne considérée comme un tableau
 
 ```julia
@@ -293,7 +305,7 @@ println(string(typeof(a[1]))*"\n")
 println(string(typeof(a[1:1])))
 ```
 
-L'usage de $ permet comme en php de convertir et d'inclure une variable dans une chaîne de caractère (interpolation)
+L'usage de $ permet comme en php de convertir et d'inclure une variable dans une chaîne de caractères (interpolation)
 
 ```julia
 m=11;
