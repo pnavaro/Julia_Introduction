@@ -47,7 +47,7 @@ JULIA possède une structure plus classique à l'aide de **function**-**end** co
 
 ```julia
 function H(x,y)
-    z=x+y;
+    z=x+y
     z^2/(abs(x)+1)
 end
 ```
@@ -132,7 +132,7 @@ b
 
 ## Portée des variables 
 
-Quelle est la portée des variables autrement dit une variable définie peut elle être accessible, modifiable dans une fonction sans la passer en paramètre ?
+Quelle est la portée des variables, autrement dit une variable définie peut elle être accessible, modifiable dans une fonction sans la passer en paramètre ?
 
 ```julia
 a=1
@@ -170,9 +170,9 @@ ff(1)
 a
 ```
 
-Donc par défaut une variable définie est connue et utilisable par toute fonction appelée (de même à l'intérieure d'une fonction).
+Donc par défaut une variable définie est connue et utilisable par toute fonction appelée (de même à l'intérieur d'une fonction).
 
-Si on redéfinie localement dans la fonction la variable alors "elle écrase localement" la dite variable et en sortie de fonction rien n'est modifié.
+Si on redéfinit localement dans la fonction la variable alors "elle écrase localement" la dite variable et en sortie de fonction rien n'est modifié.
 
 Attention à l'utilisation dans la fonction d'une variable extérieure puis d'affecter une valeur à cette variable...
 
@@ -199,7 +199,16 @@ f.(1:5)
 ```
 
 ```julia
-map(f,[1 2; 3 4])
+v = [1 2; 3 4]
+map(f,v)
+```
+
+```julia
+reduce(+, v )
+```
+
+```julia
+sum(v)
 ```
 
 ```julia
@@ -221,6 +230,18 @@ g(f,x)=f(x)+1
 
 ```julia
 g(sin,1)
+```
+
+Il existe également un opérateur pour "composer" les fonctions `\circ`
+
+```julia
+f1(x) = 2x + 1
+f2(x) = 1 - 4x
+(f1 ∘ f2)(3)
+```
+
+```julia
+f1(f2(3))
 ```
 
 ```julia
