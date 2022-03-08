@@ -2,21 +2,21 @@
 
 Hello tout le monde !
 
-*JULIA* est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C'est un logiciel libre sous [licence MIT](https://github.com/JuliaLang/julia/blob/master/LICENSE.md).
+**Julia** est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C'est un logiciel libre sous [licence MIT](https://github.com/JuliaLang/julia/blob/master/LICENSE.md).
 
-*JULIA* se veut la combinaison de :
+**Julia** se veut la combinaison de :
 * la facilité de développement des environnements interprétés comme *R*, *MATLAB*, *OCTAVE*, *SCILAB*, *PYTHON* … 
 * la performance d'un langage compilé, permettant une exécution parallèle et/ou distribuée *C*, *C++*, *Fortran*...
 
-*JULIA* est jeune à l'échelle de l'âge des langages. On peut voir son activité de développement [sous GITHUB](https://github.com/JuliaLang/julia), naissance en *aôut 2009*!
+**Julia** est jeune à l'échelle de l'âge des langages. On peut voir son activité de développement [sous GITHUB](https://github.com/JuliaLang/julia), naissance en *aôut 2009*!. La première version stable 1.0 est sortie en juillet 2018 durant la conférence JuliaCon à Londres.
 
 Ce langage possède déjà un grand nombre d'atouts :
 * des fonctions mathématiques de précision numérique étendue (<code>Int128</code>, <code>Float64</code>...).
-* de nombreuses bibliothèques  (ou package) dont beaucoup écrites en Julia http://pkg.julialang.org/.
-* l'intégration naturel de très nombreuses bibliothèques en C, fortran, Python... 
+* de nombreuses bibliothèques (ou packages) dont beaucoup écrites en Julia http://pkg.julialang.org/.
+* l'intégration naturel de très nombreuses bibliothèques en C, Fortran, Python... 
 * Mais surtout l'usage d'un compilateur à la volée (Just In Time) !
 
-Les quelques pages qui suivent vont - nous l'espérons- vous guider dans l'usage de *JULIA* il est possible également de consulter :
+Les quelques pages qui suivent vont - nous l'espérons- vous guider dans l'usage de **Julia** il est possible également de consulter :
 * Le site officiel http://julialang.org/ avec une documentation très complète.
 * http://en.wikibooks.org/wiki/Introducing_Julia excellent et très complet guide de Julia.
 * https://zestedesavoir.com/articles/141/a-la-decouverte-de-julia/ très bon article à lire absolument !
@@ -48,11 +48,9 @@ Dans la console de JULIA on retrouve l'usage classique d'un terminal avec
 Un programme Julia est un script extension .jl on peut soit l'exécuter en ligne de commande "julia nomfichier.jl" ou en l'incluant 
 <!-- #endregion -->
 
-<!-- #region -->
 ```julia
-include("MonFichier.jl")
+include("monfichier.jl")
 ```
-<!-- #endregion -->
 
 Toute ligne ou fin de ligne commançant par `#` est en commentaire, une bloc est délimité par `#=` et `=#`:
 
@@ -80,7 +78,8 @@ Il existe des fichier de configuration pour la coloration syntaxique dans les é
 * Atom 
 * ...
 
-Certains offre la possibilité de gérer un terminal dans une fenêtre.
+On les retrouve dans l'organisation [JuliaEditorSupport](https://github.com/JuliaEditorSupport). 
+Certains offrent la possibilité de gérer un terminal, les graphiques et un debugger dans la même fenêtre.
 
 ## Environnement intégré (IDE)
 
@@ -91,7 +90,8 @@ Néanmoins certains éditeurs offrent des extensions qui "intègrent" Julia
 * Sublime Text 3 et l'extension https://github.com/quinnj/Sublime-IJulia
 * Atom et l'extension https://github.com/JunoLab/atom-julia-client
 
-[Junio](http://junolab.org/) est une interface atypique permettant l'évaluation au fur et à mesure du code. Junio est en autocontenu avec l'inclusion de Julia, disponible en télechargement sur la page de Julia http://julialang.org/downloads/
+Depuis 2020 l'IDE préconisé par les développeurs de Julia est [Visual Studio Code](https://www.julia-vscode.org). 
+
 
 ## Notebook
 
@@ -108,33 +108,39 @@ On peut aussi convertir un fichier notebook (extension `.ipynb`) en fichier `.jl
 * Dans l'interface Jupyter faire : `File->Download as`
 * Dans un terminal : ```ipython nbconvert --to script nomfichier.ipynb```.
 
+L'outil [jupytext](https://github.com/mwouts/jupytext) permet de synchroniser un notebook (.ipynb) avec un fichier au format markdown (.md) ou au format script (.jl).
+Intégré avec Jupyter, il permet d'ouvrir n'importe lequel de ces 3 formats.
+
+Le package [Literate.jl](https://github.com/fredrikekre/Literate.jl) est un outil Julia qui permet également de générer des notebooks et des fichiers markdown.
+
 <!-- #endregion -->
 
 # Les Packages
 
 Julia possède une communauté très dynamique, à la fois pour développer le coeur du langage mais aussi pour mettre à disposition de nouvelles fonctionnalités qui pour certaines feront partie des prochaines versions de Julia.
 
-Un listing complet des packages officiels et disponible : http://pkg.julialang.org/
+Un listing complet des packages officiels est disponible sur [juliapackages.com](https://juliapackages.com) et/ou [juliahub.com](https://juliahub.com/ui/Packages). 
 
 Pour installer un package faire "]"
 
 
-(v1.1) pkg> add IJuliaNom_du_Package
+(v1.1) pkg> add NomDuPackage
 
 
 et il est installé physiquement dans votre espace disque (répertoire .julia/).
 
-L'utilisation se fait en début de chaque programme (ou script par "using"). L'initialisation est assez longue (pour les versions 0.3.xx) le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l'installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.
+L'utilisation se fait en début de chaque programme (ou script par "using"). L'initialisation est assez longue, le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l'installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.
 
 <!-- #region -->
 ```julia
-using Nom_du_Package
+using NomDuPackage
 ```
 <!-- #endregion -->
 
 La commande Pkg permet de gérer les actions faire "]" 
 
-(v1.1) pkg> rm Nom_du_Package # rm : remove
-(v1.1) pkg>update # comme dit le nom
+(v1.1) pkg> rm NomDuPackage # rm : remove
+(v1.1) pkg> update # comme dit le nom
+(v1.1) pkg> precompile # pour forcer la compilation
 
 On verra dans les sections suivantes l'utilisation de quelques packages plus prisés et même jusqu'à la création d'un package !
