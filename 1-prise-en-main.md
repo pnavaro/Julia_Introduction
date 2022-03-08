@@ -210,8 +210,7 @@ Il est possible de forcer le type d'une variable à l'aide des commandes <code>I
 
 Remarque : Opérations type unaire sur une variable 
 
-| opération | += | -= | *= | /= | \= | 
-|------|------|------|------|------|------|
+`+=`,  `-=`, `*=`,  `/=`, `\=` 
 
 ```julia
 a=1
