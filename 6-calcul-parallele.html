@@ -686,6 +686,7 @@ regardons</p>
 <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Je reprends les exemples ci-dessus et je parallélise avec la mémoire partagée.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># algorithme de Newton séquentiel</span>
 <span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
     <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
@@ -705,8 +706,8 @@ regardons</p>
 
 <span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
 <span class="k">function</span> <span class="n">calc_bassin_threads_1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
         <span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span> <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>

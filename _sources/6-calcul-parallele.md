@@ -400,6 +400,8 @@ import Base.Threads
 Threads.nthreads()
 ```
 
+Je reprends les exemples ci-dessus et je parallélise avec la mémoire partagée.
+
 ```julia
 # algorithme de Newton séquentiel
 function newton(x0,f,df,epsi)
@@ -420,8 +422,8 @@ df(x)=[3*x[1]^2-3*x[2]^2 -6*x[1]*x[2];6*x[1]*x[2] 3*x[1]^2-3*x[2]^2]
 
 # Calcul du bassin si on converge vers la Ieme racine suivant le point de départ
 function calc_bassin_threads_1(f,df,n)
-    x=LinRange(-1,1,n)
-    y=LinRange(-1,1,n)
+    x = LinRange(-1,1,n)
+    y = LinRange(-1,1,n)
     Imag=zeros(n,n)
     Threads.@sync for i=1:n
         Threads.@spawn for j=1:n
