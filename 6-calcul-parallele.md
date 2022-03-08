@@ -1,6 +1,6 @@
 # Calcul parallèle
 
-JULIA dans sa grande force permet nativement le calcul parallel plus précisément calcul parallel à mémoire partagée ou distribuée.
+*Julia* dans sa grande force permet nativement le calcul parallel plus précisément calcul parallel à mémoire partagée ou distribuée.
 
 Le document référence officiel : https://docs.julialang.org/en/v1/manual/parallel-computing/
 
@@ -14,7 +14,7 @@ Le document référence officiel : https://docs.julialang.org/en/v1/manual/paral
 using Plots
 ```
 
-En tout premier lieu on peut lancer une instance de JULIA avec plusieurs processeurs (ou plusieurs instances de JULIA) à l'aide de la commande shell
+En tout premier lieu on peut lancer une instance de *Julia* avec plusieurs processeurs (ou plusieurs instances de *Julia*) à l'aide de la commande shell
 
 julia -p 4
 
@@ -37,7 +37,7 @@ workers() # le processeur 1 n'est plus worker il est devenu master
 
 # Parallélisation avec Distributed
 
-JULIA offre une façon simple de programmer des processus asynchrones à l'aide de fonction `pmap` et la macro @spawnat
+*Julia* offre une façon simple de programmer des processus asynchrones à l'aide de fonction `pmap` et la macro @spawnat
 
 ```julia
 @everywhere begin  # la fonction slow_add est définit sur tous les processus

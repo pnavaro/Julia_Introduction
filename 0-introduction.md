@@ -1,4 +1,4 @@
-# Présentation de JULIA
+# Présentation
 
 Hello tout le monde !
 
@@ -21,6 +21,7 @@ Les quelques pages qui suivent vont - nous l'espérons- vous guider dans l'usage
 * http://en.wikibooks.org/wiki/Introducing_Julia excellent et très complet guide de Julia.
 * https://zestedesavoir.com/articles/141/a-la-decouverte-de-julia/ très bon article à lire absolument !
 * http://bioinfo-fr.net/julia-le-successeur-de-r un exemple en bioinfo.
+* https://juliadocs.github.io/Julia-Cheat-Sheet/fr/ Aide-mémoire
 
 
 # Installation et accessibilité
@@ -36,7 +37,7 @@ Une fois installé une interface _brut de pomme_ apparait, en fait, une simple c
 
 Le prompt <code>julia></code> invitant la commande... 
 
-Dans la console de JULIA on retrouve l'usage classique d'un terminal avec 
+Dans la console de *Julia* on retrouve l'usage classique d'un terminal avec 
 * "flèche vers le haut" pour rappeler une commande précédente.
 * "Tab" la tabulation qui complète ou propose la fin d'un mot.
 * Des commandes <code>pwd()</code> (affiche le répertoire courant) <code>cd()</code> (Change directory), <code>homedir()</code> (pointe sur le home directory)...

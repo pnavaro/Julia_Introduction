@@ -11,3 +11,4 @@ chapters:
 - file: 5-quelques-packages-utiles
 - file: 6-calcul-parallele
 - file: 7-type-et-methode
+- file: 8-performance

@@ -1,7 +1,7 @@
 # Type et méthodes
 
-JULIA possède un système de type et de méthode qui lui confère une approche objet.
-La fonction `typeof()` renvoie le type d'une variable de base `Int32`, `Float64`... JULIA est conçu pour permettre facilement d'étendre l'environnement à de nouveaux type de variable.
+*Julia* possède un système de type et de méthode qui lui confère une approche objet.
+La fonction `typeof()` renvoie le type d'une variable de base `Int32`, `Float64`... *Julia* est conçu pour permettre facilement d'étendre l'environnement à de nouveaux type de variable.
 
 Le types sont organisés suivant un hiérarchie comme on peut le voir sur l'arborescence partielle ci-dessous
 

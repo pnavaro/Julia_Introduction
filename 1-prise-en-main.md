@@ -66,7 +66,7 @@ sin(1+im)
 |-|
 |round, floor, ceil, trunc|
 
-JULIA possède une algèbre étendue avec la possibilité de divisé par 0
+*Julia* possède une algèbre étendue avec la possibilité de divisé par 0
 
 ```julia
 1/0
@@ -139,7 +139,7 @@ c=a+b;
 typeof(c)
 ```
 
-On voit dans ce qui précède que les variables sont typées, mais un mécanisme automatique de changement de type (comme <code>Int64</code> $ \rightarrow$ <code>Float64</code>) permet la somme d'un entier et d'un réel. On peut demander à JULIA d'identifier un entier comme un réel (Float) avec l'ajout d'un <code>.</code> exemple <code>a=1.</code>.
+On voit dans ce qui précède que les variables sont typées, mais un mécanisme automatique de changement de type (comme <code>Int64</code> $ \rightarrow$ <code>Float64</code>) permet la somme d'un entier et d'un réel. On peut demander à *Julia* d'identifier un entier comme un réel (Float) avec l'ajout d'un <code>.</code> exemple <code>a=1.</code>.
 
 Une particularité est de ne pas avoir la possibilité de supprimer une variable ! Il est juste possible de récupérer l'espace mémoire en faisant <code>a=[]</code>.
 
@@ -173,7 +173,7 @@ Julia n'est pas à proprement parler un "langage objet" néanmoins c'est ce que 
 
 ### Les nombres scalaires
 
-On a vu précédemment que JULIA est assez flexible sur l'utilisation et l'affectation des variables et est capable de rendre compatible l'addition d'entier, réel (float)...
+On a vu précédemment que *Julia* est assez flexible sur l'utilisation et l'affectation des variables et est capable de rendre compatible l'addition d'entier, réel (float)...
 
 De manière naturel on trouve les types :
 * <code>Int8</code>, <code>UInt8</code>, <code>Int16</code>, <code>UInt16</code>,<code>Int32</code>, <code>UInt32</code>, <code>Int64</code>, <code>UInt64</code>,<code>Int128</code>, <code>UInt128</code>.
@@ -223,7 +223,7 @@ a*=3
 
 ### Les booléens
 
-Les variables booléennes (1bit) sont naturellement définies dans JULIA à l'aide des opérateurs de comparaison 
+Les variables booléennes (1bit) sont naturellement définies dans *Julia* à l'aide des opérateurs de comparaison 
 
 | opération |égalité|différent| supérieur | supérieur ou égal | inférieur | inférieur ou égal|
 |------|------||------|------|------|------|
@@ -249,7 +249,7 @@ Avec les opérateurs de conjonctions
 
 ### Les chaines de caractère
 
-JULIA possède un type **Char** (Charactere) il s'agit d'une lettre délimité par '' à ne pas confondre avec la chaine de caractère.
+*Julia* possède un type **Char** (Charactere) il s'agit d'une lettre délimité par '' à ne pas confondre avec la chaine de caractère.
 
 ```julia
 z='a'
