@@ -336,21 +336,21 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="presentation-de-julia">
 <h1>Présentation de JULIA<a class="headerlink" href="#presentation-de-julia" title="Permalink to this headline">¶</a></h1>
 <p>Hello tout le monde !</p>
-<p><em>JULIA</em> est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C’est un logiciel libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence MIT</a>.</p>
-<p><em>JULIA</em> se veut la combinaison de :</p>
+<p><strong>Julia</strong> est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C’est un logiciel libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence MIT</a>.</p>
+<p><strong>Julia</strong> se veut la combinaison de :</p>
 <ul class="simple">
 <li><p>la facilité de développement des environnements interprétés comme <em>R</em>, <em>MATLAB</em>, <em>OCTAVE</em>, <em>SCILAB</em>, <em>PYTHON</em> …</p></li>
 <li><p>la performance d’un langage compilé, permettant une exécution parallèle et/ou distribuée <em>C</em>, <em>C++</em>, <em>Fortran</em>…</p></li>
 </ul>
-<p><em>JULIA</em> est jeune à l’échelle de l’âge des langages. On peut voir son activité de développement <a class="reference external" href="https://github.com/JuliaLang/julia">sous GITHUB</a>, naissance en <em>aôut 2009</em>!</p>
+<p><strong>Julia</strong> est jeune à l’échelle de l’âge des langages. On peut voir son activité de développement <a class="reference external" href="https://github.com/JuliaLang/julia">sous GITHUB</a>, naissance en <em>aôut 2009</em>!. La première version stable 1.0 est sortie en juillet 2018 durant la conférence JuliaCon à Londres.</p>
 <p>Ce langage possède déjà un grand nombre d’atouts :</p>
 <ul class="simple">
 <li><p>des fonctions mathématiques de précision numérique étendue (<code>Int128</code>, <code>Float64</code>…).</p></li>
-<li><p>de nombreuses bibliothèques  (ou package) dont beaucoup écrites en Julia <a class="reference external" href="http://pkg.julialang.org/">http://pkg.julialang.org/</a>.</p></li>
-<li><p>l’intégration naturel de très nombreuses bibliothèques en C, fortran, Python…</p></li>
+<li><p>de nombreuses bibliothèques (ou packages) dont beaucoup écrites en Julia <a class="reference external" href="http://pkg.julialang.org/">http://pkg.julialang.org/</a>.</p></li>
+<li><p>l’intégration naturel de très nombreuses bibliothèques en C, Fortran, Python…</p></li>
 <li><p>Mais surtout l’usage d’un compilateur à la volée (Just In Time) !</p></li>
 </ul>
-<p>Les quelques pages qui suivent vont - nous l’espérons- vous guider dans l’usage de <em>JULIA</em> il est possible également de consulter :</p>
+<p>Les quelques pages qui suivent vont - nous l’espérons- vous guider dans l’usage de <strong>Julia</strong> il est possible également de consulter :</p>
 <ul class="simple">
 <li><p>Le site officiel <a class="reference external" href="http://julialang.org/">http://julialang.org/</a> avec une documentation très complète.</p></li>
 <li><p><a class="reference external" href="http://en.wikibooks.org/wiki/Introducing_Julia">http://en.wikibooks.org/wiki/Introducing_Julia</a> excellent et très complet guide de Julia.</p></li>
@@ -380,11 +380,9 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Un programme Julia est un script extension .jl on peut soit l’exécuter en ligne de commande “julia nomfichier.jl” ou en l’incluant</p>
 <!-- #endregion -->
-<!-- #region -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;MonFichier.jl&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- #endregion -->
 <p>Toute ligne ou fin de ligne commançant par <code class="docutils literal notranslate"><span class="pre">#</span></code> est en commentaire, une bloc est délimité par <code class="docutils literal notranslate"><span class="pre">#=</span></code> et <code class="docutils literal notranslate"><span class="pre">=#</span></code>:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span>
 <span class="mi">1</span><span class="o">+</span><span class="mi">2</span>    <span class="c">#commentaire en fin de ligne</span>
@@ -409,7 +407,8 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <li><p>Atom</p></li>
 <li><p>…</p></li>
 </ul>
-<p>Certains offre la possibilité de gérer un terminal dans une fenêtre.</p>
+<p>On les retrouve dans l’organisation <a class="reference external" href="https://github.com/JuliaEditorSupport">JuliaEditorSupport</a>.
+Certains offrent la possibilité de gérer un terminal, les graphiques et un debugger dans la même fenêtre.</p>
 </div>
 <div class="section" id="environnement-integre-ide">
 <h2>Environnement intégré (IDE)<a class="headerlink" href="#environnement-integre-ide" title="Permalink to this headline">¶</a></h2>
@@ -419,7 +418,7 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <li><p>Sublime Text 3 et l’extension <a class="reference external" href="https://github.com/quinnj/Sublime-IJulia">https://github.com/quinnj/Sublime-IJulia</a></p></li>
 <li><p>Atom et l’extension <a class="reference external" href="https://github.com/JunoLab/atom-julia-client">https://github.com/JunoLab/atom-julia-client</a></p></li>
 </ul>
-<p><a class="reference external" href="http://junolab.org/">Junio</a> est une interface atypique permettant l’évaluation au fur et à mesure du code. Junio est en autocontenu avec l’inclusion de Julia, disponible en télechargement sur la page de Julia <a class="reference external" href="http://julialang.org/downloads/">http://julialang.org/downloads/</a></p>
+<p>Depuis 2020 l’IDE préconisé par les développeurs de Julia est <a class="reference external" href="https://www.julia-vscode.org">Visual Studio Code</a>.</p>
 </div>
 <div class="section" id="notebook">
 <h2>Notebook<a class="headerlink" href="#notebook" title="Permalink to this headline">¶</a></h2>
@@ -435,25 +434,29 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <li><p>Dans l’interface Jupyter faire : <code class="docutils literal notranslate"><span class="pre">File-&gt;Download</span> <span class="pre">as</span></code></p></li>
 <li><p>Dans un terminal : <code class="docutils literal notranslate"><span class="pre">ipython</span> <span class="pre">nbconvert</span> <span class="pre">--to</span> <span class="pre">script</span> <span class="pre">nomfichier.ipynb</span></code>.</p></li>
 </ul>
+<p>L’outil <a class="reference external" href="https://github.com/mwouts/jupytext">jupytext</a> permet de synchroniser un notebook (.ipynb) avec un fichier au format markdown (.md) ou au format script (.jl).
+Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats.</p>
+<p>Le package <a class="reference external" href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a> est un outil Julia qui permet également de générer des notebooks et des fichiers markdown.</p>
 <!-- #endregion -->
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="les-packages">
 <h1>Les Packages<a class="headerlink" href="#les-packages" title="Permalink to this headline">¶</a></h1>
 <p>Julia possède une communauté très dynamique, à la fois pour développer le coeur du langage mais aussi pour mettre à disposition de nouvelles fonctionnalités qui pour certaines feront partie des prochaines versions de Julia.</p>
-<p>Un listing complet des packages officiels et disponible : <a class="reference external" href="http://pkg.julialang.org/">http://pkg.julialang.org/</a></p>
+<p>Un listing complet des packages officiels est disponible sur <a class="reference external" href="https://juliapackages.com">juliapackages.com</a> et/ou <a class="reference external" href="https://juliahub.com/ui/Packages">juliahub.com</a>.</p>
 <p>Pour installer un package faire “]”</p>
-<p>(v1.1) pkg&gt; add IJuliaNom_du_Package</p>
+<p>(v1.1) pkg&gt; add NomDuPackage</p>
 <p>et il est installé physiquement dans votre espace disque (répertoire .julia/).</p>
-<p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation est assez longue (pour les versions 0.3.xx) le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
+<p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation est assez longue, le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
 <!-- #region -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Nom_du_Package</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">NomDuPackage</span>
 </pre></div>
 </div>
 <!-- #endregion -->
 <p>La commande Pkg permet de gérer les actions faire “]”</p>
-<p>(v1.1) pkg&gt; rm Nom_du_Package # rm : remove
-(v1.1) pkg&gt;update # comme dit le nom</p>
+<p>(v1.1) pkg&gt; rm NomDuPackage # rm : remove
+(v1.1) pkg&gt; update # comme dit le nom
+(v1.1) pkg&gt; precompile # pour forcer la compilation</p>
 <p>On verra dans les sections suivantes l’utilisation de quelques packages plus prisés et même jusqu’à la création d’un package !</p>
 <div class="toctree-wrapper compound">
 </div>
