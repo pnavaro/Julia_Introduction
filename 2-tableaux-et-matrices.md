@@ -1,8 +1,8 @@
 # Tableaux et matrices
 
-La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel du Julia.
+La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel de Julia.
 
-Julia ne possède qu'un seul type de tableau : **Array** on peut définir sont nombre d'entrées (1 entrée= 1 dimension ...) et sont contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément...
+Julia ne possède qu'un seul type de tableau : **Array** on peut définir son nombre d'entrées (1 entrée= 1 dimension ...) et son contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément...
 
 Une particularité est que les indices de tableaux commencent à 1, et l'accès aux éléments se fera à l'aide de '[' ’]' et non '(' ')' qui est réservé aux fonctions.
 
@@ -141,7 +141,7 @@ b=[1>2,true,false]
 c=["un"; 2 ; true]
 ```
 
-Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l'exemple si dessous pour construire une matrice de VanderMonde
+Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l'exemple ci-dessous pour construire une matrice de VanderMonde
 
 $$ V_{i,j}=x_i^{j-1}$$
 
@@ -250,7 +250,7 @@ x=A\b
 
 ## Fonctions scientifiques et opérations
 
-L'usage des fonction scientifiques se fait termes à termes pour l'ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> ...). L'usage des opérations <code>+</code>,<code>-</code>,\*</code>,<code>^</code>,<code>/</code> et <code>\</code>(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.\*</code>,<code>.^</code>,<code>./</code> et <code>.\</code> toujours avec une contrainte de dimensions compatibles.
+L'usage des fonction scientifiques se fait termes à termes pour l'ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> ...). L'usage des opérations <code>+</code>,<code>-</code>,<code>\*</code>,<code>^</code>,<code>/</code> et `\`(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.\*</code>,<code>.^</code>,<code>./</code> et <code>.\</code> toujours avec une contrainte de dimensions compatibles.
 
 ```julia
 A=[1 2;3 4]
@@ -336,6 +336,10 @@ b=range(0,stop=2*pi,length=10)
 ```
 
 ```julia
+c = LinRange(0, 2π, 10)
+```
+
+```julia
 collect(b)
 ```
 
@@ -367,6 +371,14 @@ C=Diagonal(ones(3,3))
 diag(C) # extraction d'une diagonale
 ```
 
+```julia
+diagm(ones(3))
+```
+
+```julia
+Matrix(I, 3, 3)
+```
+
 ## type sparse
 
 Julia possède un type sparse i.e. des matrices creuses, ces dernières ayant un comportement identique aux matrices elles ne diffèrent que dans leur définition (et leur stockage).
@@ -377,10 +389,6 @@ using SparseArrays
 
 ```julia
 A=spzeros(3,3)
-```
-
-```julia
-
 ```
 
 ```julia
@@ -403,7 +411,7 @@ det(A)
 
 Attention julia à un mode de passage de valeur qui fonctionne différemment suivant une variable type ou un tableau.
 
-Pour une varibla scalire
+Pour une variable scalaire
 
 ```julia
 a=1
