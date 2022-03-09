@@ -67,18 +67,7 @@ end
 ```
 
 ```julia
-@elapsed results = [fetch(f) for f in futures] # les futures ont déjà été exécuté
-```
-
-```julia
-@elapsed begin
-    futures = []
-    for x in 1:8
-        proc = mod1(x, nworkers())
-        push!(futures, remotecall(slow_add, proc,  x))  # il faut donner le numero du proc 
-    end
-    results = [fetch(f) for f in futures]
-end
+@elapsed results = [fetch(f) for f in futures] # les futures ont déjà été exécutées
 ```
 
 ```julia
@@ -181,7 +170,7 @@ end
 
 ```julia
 Imag = calc_bassin(f,df,4); # pour la compilation
-n = 512 # un deuxième appel est plus rapide
+n = 1024 # un deuxième appel est plus rapide
 @time Imag = calc_bassin(f,df,n); 
 ```
 
@@ -193,8 +182,13 @@ contourf(LinRange(-1,1,n),LinRange(-1,1,n),Imag,
 ## Newton en parallèle
 
 ```julia
-rmprocs()   # on supprime les processus précedents
+using Distributed, SharedArrays
+
 addprocs(2) # on ajoute 2 processeurs
+```
+
+```julia
+workers()
 ```
 
 Dans un premier temps on redéfinit les fonctions `newton`, `f` et `df` pour tous les workers à l'aide de la macro @everywhere
@@ -240,7 +234,7 @@ end
 ```
 
 ```julia
-n = 512 # pour efficacité il faut relancer 2 fois
+n = 1024 # pour efficacité il faut relancer 2 fois
 @time Imag = calc_bassin_distributed(f,df,n); 
 ```
 
@@ -269,11 +263,11 @@ end
 ```
 
 ```julia
-a=zeros(nworkers())
-for i=1:nworkers()
-    a[i]=remotecall_fetch(myid, i+1)
+data=zeros(nworkers())
+for (i,w) in enumerate(workers())
+    data[i]=remotecall_fetch(myid, w)
 end
-println(a) # a contient les numéros des workers  
+data # data contient les numéros des workers  
 ```
 
 ```julia
@@ -359,7 +353,7 @@ end
 ```
 
 ```julia
-n=512 # efficacité correcte 
+n=1024 # efficacité correcte 
 @time Imag=calc_bassin_parallel(f,df,n); 
 ```
 
@@ -399,8 +393,11 @@ Threads.nthreads()
 ```
 
 ```julia
-Threads.@threads for i in 1:Threads.nthreads()
-    println(" Bonjour du thread $(Threads.threadid())")
+@elapsed begin
+    Threads.@threads for i in 1:Threads.nthreads()
+        sleep(1)
+        println(" Bonjour du thread $(Threads.threadid())")
+    end
 end
 ```
 
@@ -422,7 +419,7 @@ end
 etime, w
 ```
 
-Je reprends l'exemple ci-dessus et je parallélise avec la mémoire partagée.
+Je reprends l'exemple ci-dessus de la fractale et je parallélise avec la mémoire partagée.
 
 ```julia
 function newton(x0,f,df,epsi)
@@ -470,6 +467,105 @@ n=1024 # un deuxième appel est plus rapide
 
 ```julia
 contourf(LinRange(-1,1,n),LinRange(-1,1,n),Imag, aspect_ratio = :equal)
+```
+
+## Cas particulier des opérations de réduction parallèle
+
+
+La fonction suivante permet de calculer l'histogramme de particules tirées au hasard avec une distribution normale
+
+```julia
+using Random, Plots
+
+const nx = 64
+const np = 100000
+const xmin = -6
+const xmax = +6
+
+
+rng = MersenneTwister(123)
+xp = randn(rng, np)
+
+function serial_deposition( xp )
+
+    Lx = xmax - xmin
+    rho = zeros(Float64, nx)
+    
+    fill!(rho, 0.0)
+
+    for i in eachindex(xp)
+        x_norm = (xp[i]-xmin) / Lx
+        ip = trunc(Int,  x_norm * nx)+1
+        rho[ip] += 1
+    end
+
+    rho
+
+end
+
+histogram(xp, bins=nx)
+plot!(LinRange(xmin, xmax, nx), serial_deposition(xp), lw = 5)
+
+```
+
+Si on essaye de paralléliser cette boucle, on se heurte à un problème d'accès concurrents. Chaque fil d'execution a accès à la mémoire occupée par le tableau `rho`. Lorsque deux threads accèdent à la mémoire en même temps c'est le dernier qui met à jour le tableau qui gagne et la modification faite par l'autre thread n'est pas toujours comptabilisé. Ce type d'opération de réduction n'est pas (encore) prise en charge par **Julia**.
+
+```julia
+function parallel_deposition_bad( xp )
+
+    Lx = xmax - xmin
+    rho = zeros(Float64, nx)
+    Threads.@threads for i in eachindex(xp)
+        x_norm = (xp[i]-xmin) / Lx
+        ip = trunc(Int,  x_norm * nx)+1
+        rho[ip] += 1
+    end
+
+    rho
+
+end
+
+histogram(xp, bins=nx)
+plot!(LinRange(xmin, xmax, nx), parallel_deposition_bad(xp), lw = 5)
+
+
+```
+
+On peut résoudre ce problème en créant une version de `rho` nommée `rho_local` qui sera propre à chaque thread.
+Il suffira ensuite de sommer ces tableaux locaux pour calculer le tableau global.
+
+```julia
+function parallel_deposition( xp )
+
+    Lx = xmax - xmin
+    rho = zeros(Float64, nx)
+    ntid = Threads.nthreads()
+    rho_local = [zero(rho) for _ in 1:ntid]
+    chunks = Iterators.partition(1:np, np÷ntid)
+
+    Threads.@sync for chunk in chunks
+        Threads.@spawn begin
+            tid = Threads.threadid()
+            fill!(rho_local[tid], 0.0)
+            for i in chunk
+                x_norm = (xp[i]-xmin) / Lx
+                ip = trunc(Int,  x_norm * nx)+1
+                rho_local[tid][ip] += 1
+            end
+        end
+    end
+
+    rho .= reduce(+,rho_local)
+
+    rho
+
+end
+
+histogram(xp, bins=nx)
+plot!(LinRange(xmin, xmax, nx), parallel_deposition(xp), lw = 5)
+
+
+
 ```
 
 ```julia
