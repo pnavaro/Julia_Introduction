@@ -203,6 +203,206 @@ end
 @btime addition_variable_globale_en_argument(10, $variable)
 ```
 
-```julia
 
+## Instabilité de type
+
+Une fonction est de type stable lorsque vous pouvez déduire ce que doit être la sortie de la fonction. L'exemple ci-dessous rendra les choses plus claires. En règle générale, les fonctions de type stable sont plus rapides.
+
+
+```julia
+function carre_plus_un(v::T) where T <:Number
+    g = v*v
+    return g+1
+end
+```
+
+```julia
+v = rand()
+```
+
+```julia
+@code_warntype carre_plus_un(v)
+```
+
+```julia
+w = 5
+```
+
+```julia
+@code_warntype carre_plus_un(w)
+```
+
+Sur les deux exemples précedents on peut déduire le type de sortie de la fonction.
+```
+function carre_plus_un(v::T) where T <:Number
+    g = v*v         # Type(T * T) ==> T
+    return g+1      # Type(T + Int)) ==> "max" (T,Int)
+end
+
+```
+Le type de la valeur de retour peut être différent: `Float64` ou `Int64`. Mais la fonction est toujours stable.
+
+Créons maintenant un nouveau type:
+
+```julia
+mutable struct Cube
+    length
+    width
+    height
+end
+```
+
+```julia
+volume(c::Cube) = c.length*c.width*c.height
+```
+
+```julia
+mutable struct Cube_typed
+    length::Float64
+    width::Float64
+    height::Float64
+end
+volume(c::Cube_typed) = c.length*c.width*c.height
+```
+
+```julia
+mutable struct Cube_parametric_typed{T <: Real}
+    length::T
+    width::T
+    height::T
+end
+volume(c::Cube_parametric_typed) = c.length*c.width*c.height
+```
+
+```julia
+c1 = Cube(1.1,1.2,1.3)
+c2 = Cube_typed(1.1,1.2,1.3)
+c3 = Cube_parametric_typed(1.1,1.2,1.3)
+@show volume(c1) == volume(c2) == volume(c3)
+```
+
+```julia
+using BenchmarkTools
+@btime volume(c1) # not typed
+@btime volume(c2) # typed float
+@btime volume(c3) # typed parametric
+```
+
+The second and the third function calls are faster! Let's call `@code_warntype` and check type stability
+
+```julia
+@code_warntype volume(c1)
+```
+
+```julia
+@code_warntype volume(c2)
+```
+
+```julia
+@code_warntype volume(c3)
+```
+
+**Conclusion**: Les types en Julia sont importants donc si vous les connaissez, ajoutez-les, cela peut améliorer les performances.
+
+```julia
+function zero_or_val(x::Real)
+    if x >= 0
+        return x
+    else
+        return 0
+    end
+end
+@code_warntype zero_or_val(0.2)
+```
+
+```julia
+function zero_or_val_stable(x::Real)
+    if x >= 0
+        y = x
+    else
+        y = 0
+    end
+    T = promote_type(typeof(x),Int)
+    return T(y)
+end
+@code_warntype zero_or_val_stable(0.2)
+```
+
+**Conclusion**: `promote_type` peut vous permettre de supprimer une instabilité de type en utilisant la réprésentation la plus haute dans l'abre des types.
+
+
+Je vous propose le jeu suivant: Soit un vecteur de nombres. Calculons la somme comme suit. 
+Pour chaque nombre du vecteur, on lance une pièce de monnaie (`rand()`), si c'est face (`>=0.5`), vous ajoutez `1`. Sinon, vous ajoutez le nombre lui-même.
+
+
+```julia
+function flipcoin_then_add(v::Vector{T}) where T <: Real
+    s = 0
+    for vi in v
+        r = rand()
+        if r >=0.5
+            s += 1
+        else
+            s += vi
+        end
+    end
+end
+
+function flipcoin_then_add_typed(v::Vector{T}) where T <: Real
+    s = zero(T)
+    for vi in v
+        r = rand()
+        if r >=0.5
+            s += one(T)
+        else
+            s += vi
+        end
+    end
+end
+myvec = rand(1000)
+@show flipcoin_then_add(myvec) == flipcoin_then_add_typed(myvec)
+```
+
+```julia
+@btime flipcoin_then_add(rand(1000))
+@btime flipcoin_then_add_typed(rand(1000))
+```
+
+**Conclusion**: Think about the variables you are declaring. Do you know their types? If so, specify the type somehow.
+
+
+### @code_XXX
+
+Nous avons vu durant ce chapitre que regarder le code généré peut nous aider à améliorer les performances. Voici toutes les macros à votre disposition:
+
+```julia
+# @code_llvm 
+# @code_lowered 
+# @code_native 
+# @code_typed 
+# @code_warntype
+
+function flipcoin(randval::Float64)
+    if randval<0.5
+        return "H"
+    else
+        return "T"
+    end
+end
+```
+
+```julia
+@code_lowered flipcoin(rand()) # syntax tree
+```
+
+```julia
+@code_warntype flipcoin(rand()) # try @code_typed
+```
+
+```julia
+@code_llvm flipcoin(rand()) # this and code_warntype are probably the most relevant
+```
+
+```julia
+@code_native flipcoin(rand())
 ```
