@@ -246,10 +246,10 @@ end
 ```
 
 ```julia
-a = [ 0   0   0 0; 
+a = BigFloat.([ 0   0   0 0; 
       1/2 0   0 0; 
       0   1/2 0 0; 
-      0   0   1 0]
+      0   0   1 0])
 ```
 
 ```julia
@@ -291,32 +291,33 @@ plot!(solver(f, rk4_38, t₀, x₀, dt, nsteps), marker = :r,  label="rk4_38")
 Voyons maintenant comment créer la fonction "solveur" en utilisant la métaprogrammation.
 
 ```julia
-macro add(x, y)
+macro addition(x, y)
     return :($x + $y)
 end
 ```
 
 ```julia
-@add 2 3      ## or @add(2, 3) 
-#----------------------------------------------------------------------------
+@add 2 3      ## ou @add(2, 3) 
 ```
+
+Cette macro n'est pas une fonction, elle crée une expression en utilisant les deux arguments et place le symbole `+` entre les deux. Créons maintenant une macro qui calcul la valeur absolue.
 
 ```julia
 macro abs(x)
     return :( $x > 0 ? $x : -$x)
 end
 @abs(-2), @abs(2)
-#----------------------------------------------------------------------------
 ```
+
+Pour des expressions  plus longues et plus compliquées, on utilisera le mot-clé `quote`. La macro suivante va créer la fonction solveur avec la méthode numérique choisie.
 
 ```julia
 macro make_method( meth)
     return quote
-        function (f::Function, t₀::Float64,
-                  x₀::Float64, dt::Float64, nsteps::Int64)
+        function (f::Function, t₀::T, x₀::T, dt::T, nsteps::Int64) where T
 
-            t = zeros(Float64,nsteps)
-            x = zeros(Float64,nsteps)
+            t = zeros(T,nsteps)
+            x = zeros(T,nsteps)
 
             t[1] = t₀
             x[1] = x₀
@@ -337,55 +338,8 @@ rk4_solver = @make_method rk4
 
 ```julia
 plot(rk4_solver(f, t₀, x₀, dt, nsteps))
-#----------------------------------------------------------------------------
-```
-
-[DifferentialEquations.jl](http://docs.juliadiffeq.org/latest/)
-
-[ODE Solvers](http://docs.juliadiffeq.org/latest/solvers/ode_solve.html#OrdinaryDiffEq.jl-1)
-
-```julia
-using OrdinaryDiffEq
-using Plots
-```
-
-
-```julia
-f(y,p,t) = 1.0 - y
-y₀ = 0.0
-t  = (0.0,5.0)
-prob = ODEProblem(f,y₀,t)
-euler  = solve(prob,Euler(), dt=1.0)
-rk4  = solve(prob, RK4(), dt=1.0)
-plot(euler,label="Euler")
-plot!(rk4,label="RK4")
-plot!(1:0.1:5, t->1. - exp(-t),lw=3,ls=:dash,label="True Solution!")
-#----------------------------------------------------------------------------
 ```
 
 ```julia
-using DifferentialEquations
-```
 
-```julia
-function lorenz(du,u,p,t)
- du[1] = 10.0*(u[2]-u[1])
- du[2] = u[1]*(28.0-u[3]) - u[2]
- du[3] = u[1]*u[2] - (8/3)*u[3]
-end
-#----------------------------------------------------------------------------
 ```
-
-```julia
-u0 = [1.0;0.0;0.0]
-tspan = (0.0,100.0)
-prob = ODEProblem(lorenz,u0,tspan)
-sol = solve(prob)
-#----------------------------------------------------------------------------
-```
-
-```julia
-plot(sol,vars=(1,2,3))
-```
-
-----------------------------------------------------------------------------
