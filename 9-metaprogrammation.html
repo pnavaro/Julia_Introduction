@@ -541,10 +541,10 @@ y_{n+1} = y_n + h_n \sum_{k = 1}^q b_k p_{n,k}.
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kt">BigFloat</span><span class="o">.</span><span class="p">([</span> <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
       <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="mi">0</span>   <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
       <span class="mi">0</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
-      <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+      <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">1</span> <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span> <span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">]</span>
@@ -580,29 +580,28 @@ y_{n+1} = y_n + h_n \sum_{k = 1}^q b_k p_{n,k}.
 <div class="section" id="id1">
 <h2>Metaprogrammation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Voyons maintenant comment créer la fonction “solveur” en utilisant la métaprogrammation.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span> <span class="n">addition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="o">:</span><span class="p">(</span><span class="o">$</span><span class="n">x</span> <span class="o">+</span> <span class="o">$</span><span class="n">y</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@add</span> <span class="mi">2</span> <span class="mi">3</span>      <span class="c">## or @add(2, 3) </span>
-<span class="c">#----------------------------------------------------------------------------</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@add</span> <span class="mi">2</span> <span class="mi">3</span>      <span class="c">## ou @add(2, 3) </span>
 </pre></div>
 </div>
+<p>Cette macro n’est pas une fonction, elle crée une expression en utilisant les deux arguments et place le symbole <code class="docutils literal notranslate"><span class="pre">+</span></code> entre les deux. Créons maintenant une macro qui calcul la valeur absolue.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span> <span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="o">:</span><span class="p">(</span> <span class="o">$</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">$</span><span class="n">x</span> <span class="o">:</span> <span class="o">-$</span><span class="n">x</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="nd">@abs</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="nd">@abs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="c">#----------------------------------------------------------------------------</span>
 </pre></div>
 </div>
+<p>Pour des expressions  plus longues et plus compliquées, on utilisera le mot-clé <code class="docutils literal notranslate"><span class="pre">quote</span></code>. La macro suivante va créer la fonction solveur avec la méthode numérique choisie.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span> <span class="n">make_method</span><span class="p">(</span> <span class="n">meth</span><span class="p">)</span>
     <span class="k">return</span> <span class="k">quote</span>
-        <span class="k">function</span> <span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span> <span class="n">t₀</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span>
-                  <span class="n">x₀</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">dt</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">::</span><span class="kt">Int64</span><span class="p">)</span>
+        <span class="k">function</span> <span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span> <span class="n">t₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span> <span class="n">x₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span>
 
-            <span class="n">t</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span>
 
             <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t₀</span>
             <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x₀</span>
@@ -621,49 +620,11 @@ y_{n+1} = y_n + h_n \sum_{k = 1}^q b_k p_{n,k}.
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">rk4_solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t₀</span><span class="p">,</span> <span class="n">x₀</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">))</span>
-<span class="c">#----------------------------------------------------------------------------</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="http://docs.juliadiffeq.org/latest/">DifferentialEquations.jl</a></p>
-<p><a class="reference external" href="http://docs.juliadiffeq.org/latest/solvers/ode_solve.html#OrdinaryDiffEq.jl-1">ODE Solvers</a></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">OrdinaryDiffEq</span>
-<span class="k">using</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">y</span>
-<span class="n">y₀</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">t</span>  <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">y₀</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">euler</span>  <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">Euler</span><span class="p">(),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="n">rk4</span>  <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">RK4</span><span class="p">(),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">euler</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Euler&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">rk4</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&quot;RK4&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">-&gt;</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&quot;True Solution!&quot;</span><span class="p">)</span>
-<span class="c">#----------------------------------------------------------------------------</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">DifferentialEquations</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">lorenz</span><span class="p">(</span><span class="n">du</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
- <span class="n">du</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.0</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
- <span class="n">du</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mf">28.0</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
- <span class="n">du</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="k">end</span>
-<span class="c">#----------------------------------------------------------------------------</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">;</span><span class="mf">0.0</span><span class="p">;</span><span class="mf">0.0</span><span class="p">]</span>
-<span class="n">tspan</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">lorenz</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">tspan</span><span class="p">)</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
-<span class="c">#----------------------------------------------------------------------------</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span><span class="n">vars</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</pre></div>
-</div>
-<hr class="docutils" />
 </div>
 </div>
 
