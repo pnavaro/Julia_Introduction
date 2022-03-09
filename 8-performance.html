@@ -247,6 +247,18 @@ const thebe_selector_output = ".output, .cell_output"
    Eviter les calculs dans l’environnement global.
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instabilite-de-type">
+   Instabilité de type
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-xxx">
+     @code_XXX
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -286,6 +298,18 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#eviter-les-calculs-dans-l-environnement-global">
    Eviter les calculs dans l’environnement global.
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instabilite-de-type">
+   Instabilité de type
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-xxx">
+     @code_XXX
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -469,8 +493,174 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">$</span><span class="n">variable</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
+</div>
+<div class="section" id="instabilite-de-type">
+<h2>Instabilité de type<a class="headerlink" href="#instabilite-de-type" title="Permalink to this headline">¶</a></h2>
+<p>Une fonction est de type stable lorsque vous pouvez déduire ce que doit être la sortie de la fonction. L’exemple ci-dessous rendra les choses plus claires. En règle générale, les fonctions de type stable sont plus rapides.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">&lt;:</span><span class="kt">Number</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span>
+    <span class="k">return</span> <span class="n">g</span><span class="o">+</span><span class="mi">1</span>
+<span class="k">end</span>
 </pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sur les deux exemples précedents on peut déduire le type de sortie de la fonction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span>         <span class="c1"># Type(T * T) ==&gt; T</span>
+    <span class="k">return</span> <span class="n">g</span><span class="o">+</span><span class="mi">1</span>      <span class="c1"># Type(T + Int)) ==&gt; &quot;max&quot; (T,Int)</span>
+<span class="n">end</span>
+
+</pre></div>
+</div>
+<p>Le type de la valeur de retour peut être différent: <code class="docutils literal notranslate"><span class="pre">Float64</span></code> ou <code class="docutils literal notranslate"><span class="pre">Int64</span></code>. Mais la fonction est toujours stable.</p>
+<p>Créons maintenant un nouveau type:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable struct</span> <span class="kt">Cube</span>
+    <span class="n">length</span>
+    <span class="n">width</span>
+    <span class="n">height</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable struct</span> <span class="kt">Cube_typed</span>
+    <span class="n">length</span><span class="o">::</span><span class="kt">Float64</span>
+    <span class="n">width</span><span class="o">::</span><span class="kt">Float64</span>
+    <span class="n">height</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_typed</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable struct</span> <span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">T</span> <span class="o">&lt;:</span> <span class="kt">Real</span><span class="p">}</span>
+    <span class="n">length</span><span class="o">::</span><span class="kt">T</span>
+    <span class="n">width</span><span class="o">::</span><span class="kt">T</span>
+    <span class="n">height</span><span class="o">::</span><span class="kt">T</span>
+<span class="k">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_parametric_typed</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Cube_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">Cube_parametric_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">==</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="o">==</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">BenchmarkTools</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c"># not typed</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c"># typed float</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c"># typed parametric</span>
+</pre></div>
+</div>
+<p>The second and the third function calls are faster! Let’s call <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code> and check type stability</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Conclusion</strong>: Les types en Julia sont importants donc si vous les connaissez, ajoutez-les, cela peut améliorer les performances.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">zero_or_val</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="nd">@code_warntype</span> <span class="n">zero_or_val</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">zero_or_val_stable</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">else</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">end</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">promote_type</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="nd">@code_warntype</span> <span class="n">zero_or_val_stable</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Conclusion</strong>: <code class="docutils literal notranslate"><span class="pre">promote_type</span></code> peut vous permettre de supprimer une instabilité de type en utilisant la réprésentation la plus haute dans l’abre des types.</p>
+<p>Je vous propose le jeu suivant: Soit un vecteur de nombres. Calculons la somme comme suit.
+Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docutils literal notranslate"><span class="pre">rand()</span></code>), si c’est face (<code class="docutils literal notranslate"><span class="pre">&gt;=0.5</span></code>), vous ajoutez <code class="docutils literal notranslate"><span class="pre">1</span></code>. Sinon, vous ajoutez le nombre lui-même.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">&lt;:</span> <span class="kt">Real</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">vi</span> <span class="k">in</span> <span class="n">v</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;=</span><span class="mf">0.5</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">vi</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span> <span class="k">where</span> <span class="kt">T</span> <span class="o">&lt;:</span> <span class="kt">Real</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">vi</span> <span class="k">in</span> <span class="n">v</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;=</span><span class="mf">0.5</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">one</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">else</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">vi</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">myvec</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span> <span class="o">==</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="nd">@btime</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Conclusion</strong>: Think about the variables you are declaring. Do you know their types? If so, specify the type somehow.</p>
+<div class="section" id="code-xxx">
+<h3>&#64;code_XXX<a class="headerlink" href="#code-xxx" title="Permalink to this headline">¶</a></h3>
+<p>Nous avons vu durant ce chapitre que regarder le code généré peut nous aider à améliorer les performances. Voici toutes les macros à votre disposition:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># @code_llvm </span>
+<span class="c"># @code_lowered </span>
+<span class="c"># @code_native </span>
+<span class="c"># @code_typed </span>
+<span class="c"># @code_warntype</span>
+
+<span class="k">function</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">randval</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">randval</span><span class="o">&lt;</span><span class="mf">0.5</span>
+        <span class="k">return</span> <span class="s">&quot;H&quot;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="s">&quot;T&quot;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c"># syntax tree</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c"># try @code_typed</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c"># this and code_warntype are probably the most relevant</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
