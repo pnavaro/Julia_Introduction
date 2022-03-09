@@ -61,8 +61,8 @@ results
 ```julia
 futures = []
 for x in 1:8
-    f = @spawnat :any slow_add(x)  # remplacez :any par un id pour exécuter 
-    push!(futures, f)              # sur un processus particulier
+    future = @spawnat :any slow_add(x)  # remplacez :any par un id pour exécuter 
+    push!(futures, future)              # sur un processus particulier
 end
 ```
 
@@ -180,7 +180,8 @@ end
 ```
 
 ```julia
-n=512 # un deuxième appel est plus rapide
+Imag = calc_bassin(f,df,4); # pour la compilation
+n = 512 # un deuxième appel est plus rapide
 @time Imag = calc_bassin(f,df,n); 
 ```
 
@@ -222,7 +223,7 @@ end
 Puis on uitlise <code>@parallel</code> dans la boucle extérieure ainsi que <code>@sync</code> pour resynchroniser les process autrement attendre que tous les workers aient fini leurs calculs 
 
 ```julia
-function calc_bassin(f,df,n)
+function calc_bassin_distributed(f,df,n)
     x = LinRange(-1,1,n);
     y = LinRange(-1,1,n);
     Imag = SharedArray{Int}(n,n);
@@ -240,11 +241,7 @@ end
 
 ```julia
 n = 512 # pour efficacité il faut relancer 2 fois
-@time Imag = calc_bassin(f,df,n); 
-```
-
-```julia
-4/1.33/nworkers()
+@time Imag = calc_bassin_distributed(f,df,n); 
 ```
 
 ```julia
@@ -332,8 +329,8 @@ Changeons de principe et divisons la tache en nombre de workers :
     Imag=zeros(m,n)
     for i=1:n
         for j=1:m
-            r=newton([x[i],y[m-j+1]],f,df,1e-10)
-            Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3;
+            @inbounds r=newton([x[i],y[m-j+1]],f,df,1e-10)
+            @inbounds Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3;
         end
     end
     return Imag
@@ -353,7 +350,7 @@ function calc_bassin_parallel(f,df,n)
     
     @sync for (i,part) in enumerate(parts) # répartition sur tous les workers
         @async begin  
-            Imag[:,part]=
+            Imag[:,part] .=
                 remotecall_fetch(calc_block, wo[i], f,df,x[part],y)
             end # end @async
     end     
@@ -367,7 +364,7 @@ n=512 # efficacité correcte
 ```
 
 ```julia
-contourf(LinRange(-1,1,n),LinRange(-1,1,n),Imag, aspect_ration = :equal)
+contourf(LinRange(-1,1,n),LinRange(-1,1,n),Imag, aspect_ratio = :equal)
 ```
 
 En diminuant le nombre d'appels on à retrouver une efficacité de l'ordre de 88% $\left(\dfrac{T_{ref}}{T_{multiproc} * nbproc}\right)$ comme avec la macro <code>@parallel</code> précédente.
@@ -396,14 +393,38 @@ Pour vérifier que cela a fonctionné :
 
 ```julia
 import Base.Threads
+using LinearAlgebra
 
 Threads.nthreads()
 ```
 
-Je reprends les exemples ci-dessus et je parallélise avec la mémoire partagée.
+```julia
+Threads.@threads for i in 1:Threads.nthreads()
+    println(" Bonjour du thread $(Threads.threadid())")
+end
+```
 
 ```julia
-# algorithme de Newton séquentiel
+function slow_add(x, y)
+    sleep(1)
+    x + y
+end
+
+v = 1:8
+w = zero(v)
+
+etime = @elapsed begin
+    Threads.@threads for i in eachindex(v)
+        w[i] = slow_add( v[i], v[i])
+    end
+end
+
+etime, w
+```
+
+Je reprends l'exemple ci-dessus et je parallélise avec la mémoire partagée.
+
+```julia
 function newton(x0,f,df,epsi)
     k=0
     x=x0
@@ -421,39 +442,20 @@ f(x)=[x[1]^3-3*x[1]*x[2]^2-1,3*x[1]^2*x[2]-x[2]^3]
 df(x)=[3*x[1]^2-3*x[2]^2 -6*x[1]*x[2];6*x[1]*x[2] 3*x[1]^2-3*x[2]^2]
 
 # Calcul du bassin si on converge vers la Ieme racine suivant le point de départ
-function calc_bassin_threads_1(f,df,n)
+function calc_bassin_threads(f,df,n)
     x = LinRange(-1,1,n)
     y = LinRange(-1,1,n)
-    Imag=zeros(n,n)
-    Threads.@sync for i=1:n
-        Threads.@spawn for j=1:n
-            @inbounds r = newton([x[i],y[n-j+1]],f,df,1e-10)
-            @inbounds Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3;
-        end
-    end
-    return Imag
-end
-```
-
-```julia
-n=512 # un deuxième appel est plus rapide
-@time Imag=calc_bassin_threads_1(f,df,n); 
-```
-
-```julia
-
-# Calcul du bassin si on converge vers la Ieme racine suivant le point de départ
-function calc_bassin_threads_2(f,df,n)
-    x=LinRange(-1,1,n)
-    y=LinRange(-1,1,n)
     Imag=zeros(n,n)
     nt = Threads.nthreads()
     parts = Iterators.partition( 1:n, n ÷ nt)
     Threads.@sync for part in parts
         Threads.@spawn begin
-            for i=part, j=1:n
-                @inbounds r = newton([x[i],y[n-j+1]],f,df,1e-10)
-                @inbounds Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3
+            println(" Thread $(Threads.threadid()) : $part ")
+            for i in part
+                for j=1:n
+                    @inbounds r = newton([x[i],y[n-j+1]],f,df,1e-10)
+                    @inbounds Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3;
+                end
             end
         end
     end
@@ -462,6 +464,14 @@ end
 ```
 
 ```julia
-n=512 # un deuxième appel est plus rapide
-@time Imag=calc_bassin_threads_2(f,df,n); 
+n=1024 # un deuxième appel est plus rapide
+@time Imag=calc_bassin_threads(f,df,n); 
+```
+
+```julia
+contourf(LinRange(-1,1,n),LinRange(-1,1,n),Imag, aspect_ratio = :equal)
+```
+
+```julia
+
 ```

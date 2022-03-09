@@ -395,8 +395,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nd">@spawnat</span> <span class="ss">:any</span> <span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c"># remplacez :any par un id pour exécuter </span>
-    <span class="n">push!</span><span class="p">(</span><span class="n">futures</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>              <span class="c"># sur un processus particulier</span>
+    <span class="n">future</span> <span class="o">=</span> <span class="nd">@spawnat</span> <span class="ss">:any</span> <span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c"># remplacez :any par un id pour exécuter </span>
+    <span class="n">push!</span><span class="p">(</span><span class="n">futures</span><span class="p">,</span> <span class="n">future</span><span class="p">)</span>              <span class="c"># sur un processus particulier</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -496,7 +496,8 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span> <span class="c"># pour la compilation</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
 <span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
@@ -533,7 +534,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>Puis on uitlise <code>&#64;parallel</code> dans la boucle extérieure ainsi que <code>&#64;sync</code> pour resynchroniser les process autrement attendre que tous les workers aient fini leurs calculs</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
     <span class="n">y</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
     <span class="n">Imag</span> <span class="o">=</span> <span class="kt">SharedArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
@@ -550,10 +551,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">512</span> <span class="c"># pour efficacité il faut relancer 2 fois</span>
-<span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span><span class="o">/</span><span class="mf">1.33</span><span class="o">/</span><span class="n">nworkers</span><span class="p">()</span>
+<span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span>
@@ -632,8 +630,8 @@ regardons</p>
     <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
         <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">m</span>
-            <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-            <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+            <span class="nd">@inbounds</span> <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+            <span class="nd">@inbounds</span> <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
         <span class="k">end</span>
     <span class="k">end</span>
     <span class="k">return</span> <span class="n">Imag</span>
@@ -652,7 +650,7 @@ regardons</p>
     
     <span class="nd">@sync</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">part</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="c"># répartition sur tous les workers</span>
         <span class="nd">@async</span> <span class="k">begin</span>  
-            <span class="n">Imag</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">part</span><span class="p">]</span><span class="o">=</span>
+            <span class="n">Imag</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">part</span><span class="p">]</span> <span class="o">.=</span>
                 <span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">calc_block</span><span class="p">,</span> <span class="n">wo</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">part</span><span class="p">],</span><span class="n">y</span><span class="p">)</span>
             <span class="k">end</span> <span class="c"># end @async</span>
     <span class="k">end</span>     
@@ -664,7 +662,7 @@ regardons</p>
 <span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ration</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>En diminuant le nombre d’appels on à retrouver une efficacité de l’ordre de 88% <span class="math notranslate nohighlight">\(\left(\dfrac{T_{ref}}{T_{multiproc} * nbproc}\right)\)</span> comme avec la macro <code>&#64;parallel</code> précédente.</p>
@@ -687,13 +685,35 @@ regardons</p>
 <p>Pour vérifier que cela a fonctionné :</p>
 <!-- #endregion -->
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">.</span><span class="n">Threads</span>
+<span class="k">using</span> <span class="n">LinearAlgebra</span>
 
 <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Je reprends les exemples ci-dessus et je parallélise avec la mémoire partagée.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># algorithme de Newton séquentiel</span>
-<span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot; Bonjour du thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="k">end</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="n">etime</span> <span class="o">=</span> <span class="nd">@elapsed</span> <span class="k">begin</span>
+    <span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">slow_add</span><span class="p">(</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">etime</span><span class="p">,</span> <span class="n">w</span>
+</pre></div>
+</div>
+<p>Je reprends l’exemple ci-dessus et je parallélise avec la mémoire partagée.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
     <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
     <span class="n">x</span><span class="o">=</span><span class="n">x0</span>
     <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -710,36 +730,20 @@ regardons</p>
 <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
-<span class="k">function</span> <span class="n">calc_bassin_threads_1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-        <span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span> <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-            <span class="nd">@inbounds</span> <span class="n">r</span> <span class="o">=</span> <span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-            <span class="nd">@inbounds</span> <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
-        <span class="k">end</span>
-    <span class="k">end</span>
-    <span class="k">return</span> <span class="n">Imag</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
-<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_threads_1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
-<span class="k">function</span> <span class="n">calc_bassin_threads_2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="n">nt</span> <span class="o">=</span> <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
     <span class="n">parts</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">÷</span> <span class="n">nt</span><span class="p">)</span>
     <span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span> <span class="k">for</span> <span class="n">part</span> <span class="k">in</span> <span class="n">parts</span>
         <span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span> <span class="k">begin</span>
-            <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="n">part</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-                <span class="nd">@inbounds</span> <span class="n">r</span> <span class="o">=</span> <span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-                <span class="nd">@inbounds</span> <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span>
+            <span class="n">println</span><span class="p">(</span><span class="s">&quot; Thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s"> : </span><span class="si">$part</span><span class="s"> &quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">part</span>
+                <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+                    <span class="nd">@inbounds</span> <span class="n">r</span> <span class="o">=</span> <span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
+                    <span class="nd">@inbounds</span> <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+                <span class="k">end</span>
             <span class="k">end</span>
         <span class="k">end</span>
     <span class="k">end</span>
@@ -747,8 +751,14 @@ regardons</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
-<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_threads_2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span> <span class="c"># un deuxième appel est plus rapide</span>
+<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
