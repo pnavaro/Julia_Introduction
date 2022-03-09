@@ -19,7 +19,7 @@ A = rand(1024, 256); B = rand(256, 1024); C = rand(1024, 1024)
 ```
 
 Dans l'appel de la macro `@benchmark` on interpole les arguments avec le signe `$` pour être sur que les fonctions
-    `rand` ont déjà été evaluées avant l'appel de la fonction `test`. La matrice `C` est modifiée dans la fonction suivante donc par convention on ajoute un `!` au nom de la fonction. Par convention également, l'argument modifié se placera en premier. Comme dans la fonction `push!` par exemple.
+    `rand` aient déjà été evaluées avant l'appel de la fonction `test`. La matrice `C` est modifiée dans la fonction suivante donc par convention on ajoute un `!` au nom de la fonction. Par convention également, l'argument modifié se placera en premier. Comme dans la fonction `push!` par exemple.
 
 ```julia
 function test!(C, A, B)
