@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Type et méthodes" href="7-type-et-methode.html" />
@@ -344,6 +346,38 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">fft</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>Voici un autre exemple ou on calcule la dérivée de la quantité <span class="math notranslate nohighlight">\(f\)</span> suivant la coordonnée <span class="math notranslate nohighlight">\(y\)</span> en passant par l’espace de Fourier</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">FFTW</span>
+
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="nb">π</span><span class="p">,</span> <span class="mi">1024</span>
+<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="nb">π</span><span class="p">,</span> <span class="mi">1024</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ky</span>  <span class="o">=</span> <span class="mi">2</span><span class="nb">π</span> <span class="o">./</span> <span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span> <span class="o">.*</span> <span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">exky</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span> <span class="mi">1</span><span class="nb">im</span> <span class="o">.*</span> <span class="n">ky</span><span class="o">&#39;</span> <span class="o">.*</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">df_dy</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="n">exky</span> <span class="p">)</span>
+    <span class="n">ifft</span><span class="p">(</span><span class="n">exky</span> <span class="o">.*</span> <span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">.*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span> <span class="c"># f is a 2d array created by broadcasting</span>
+<span class="nd">@btime</span> <span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span> <span class="o">$</span><span class="n">exky</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En utilisant les “plans” de FFTW qui permettent de pré-allouer la mémoire nécessaire et le calcul “en place”. On peut améliorer les performances. On réutilise le même tableau pour la valeur de <span class="math notranslate nohighlight">\(f\)</span> et sa transformée de Fourier. On prend soin également de respecter l’alignement de la mémoire en transposant le tableau contenant <span class="math notranslate nohighlight">\(f\)</span> pour calculer la FFT. On utilise plus de mémoire, on fait plus de calcul en ajoutant les transpositions mais finalement le calcul va 3 fois plus vite car on évite les allocations et on limite les accès mémoire.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
+<span class="n">fᵗ</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="n">f̂ᵗ</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="n">f</span> <span class="o">.=</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">.*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="n">fft_plan</span> <span class="o">=</span> <span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">df_dy!</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="n">fᵗ</span><span class="p">,</span> <span class="n">f̂ᵗ</span><span class="p">,</span> <span class="n">exky</span> <span class="p">)</span>
+    <span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span>  <span class="n">fft_plan</span><span class="p">,</span> <span class="n">fᵗ</span><span class="p">)</span>
+    <span class="n">f̂ᵗ</span> <span class="o">.=</span> <span class="n">f̂ᵗ</span> <span class="o">.*</span> <span class="n">exky</span>
+    <span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span> <span class="n">fft_plan</span><span class="p">,</span> <span class="n">f̂ᵗ</span><span class="p">)</span>
+    <span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fᵗ</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="nd">@btime</span> <span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span> <span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span> <span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span> <span class="o">$</span><span class="n">exky</span> <span class="p">);</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="vues-explicites">
 <h2>Vues explicites<a class="headerlink" href="#vues-explicites" title="Permalink to this headline">¶</a></h2>
@@ -380,6 +414,59 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="nd">@btime</span> <span class="n">somme</span><span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
     
+</pre></div>
+</div>
+<p>Pour comprendre pourquoi l’utilisation de variable global influence les performances, prenons un exemple simple d’une fonction additionnant deux nombres:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">function</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">variable</span>
+<span class="k">end</span>
+
+<span class="nd">@btime</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Comparons la performance avec cette fonction qui retourne la somme de ses deux arguments</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="k">end</span>
+
+<span class="nd">@btime</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On remarque que la deuxième fonction est 300 fois plus rapide que la première. Pour comprendre pourquoi elle est plus rapide, on peut regarder le code généré avant la compilation. On s’appercoit que le code est relativement simple avec une utilisation unique de l’instruction <code class="docutils literal notranslate"><span class="pre">add</span></code>.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Si on regarde le code généré utilisant la variable globale, on comprend rapidement pourquoi c’est plus long. Pourquoi le code est-il si compliqué ? Ici le langage ne connait pas le type de <code class="docutils literal notranslate"><span class="pre">variable</span></code>, il doit donc prendre en compte le fait que ce type puisse être modifié à tout moment. Comme tous les cas sont envisagés, cela provoque un surcoût important.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Il est donc possible d’améliorer la performance en fixant la valeur de la variable globale avec l’instruction <code class="docutils literal notranslate"><span class="pre">const</span></code>.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="n">constante</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">function</span> <span class="n">addition_variable_constante</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">constante</span>
+<span class="k">end</span>
+
+<span class="nd">@btime</span> <span class="n">addition_variable_constante</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On peut également fixer le type de cette variable. C’est mieux mais cela reste éloigné, en terme de performance, du résultat précedent.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">addition_variable_typee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">variable</span><span class="o">::</span><span class="kt">Int</span>
+<span class="k">end</span>
+
+<span class="nd">@btime</span> <span class="n">addition_variable_typee</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pour régler notre problème de performance avec une variable globale, il faut la passer en argument dans la fonction.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">v</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">$</span><span class="n">variable</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
