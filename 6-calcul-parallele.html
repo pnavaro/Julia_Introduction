@@ -271,6 +271,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#threads">
    Threads
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cas-particulier-des-operations-de-reduction-parallele">
+     Cas particulier des opérations de réduction parallèle
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -335,6 +342,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#threads">
    Threads
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cas-particulier-des-operations-de-reduction-parallele">
+     Cas particulier des opérations de réduction parallèle
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -400,17 +414,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="k">in</span> <span class="n">futures</span><span class="p">]</span> <span class="c"># les futures ont déjà été exécuté</span>
-</pre></div>
-</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="k">begin</span>
-    <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">8</span>
-        <span class="n">proc</span> <span class="o">=</span> <span class="n">mod1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nworkers</span><span class="p">())</span>
-        <span class="n">push!</span><span class="p">(</span><span class="n">futures</span><span class="p">,</span> <span class="n">remotecall</span><span class="p">(</span><span class="n">slow_add</span><span class="p">,</span> <span class="n">proc</span><span class="p">,</span>  <span class="n">x</span><span class="p">))</span>  <span class="c"># il faut donner le numero du proc </span>
-    <span class="k">end</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="k">in</span> <span class="n">futures</span><span class="p">]</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="k">in</span> <span class="n">futures</span><span class="p">]</span> <span class="c"># les futures ont déjà été exécutées</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results</span>
@@ -497,7 +501,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span> <span class="c"># pour la compilation</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">512</span> <span class="c"># un deuxième appel est plus rapide</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1024</span> <span class="c"># un deuxième appel est plus rapide</span>
 <span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
@@ -508,8 +512,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="newton-en-parallele">
 <h2>Newton en parallèle<a class="headerlink" href="#newton-en-parallele" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rmprocs</span><span class="p">()</span>   <span class="c"># on supprime les processus précedents</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Distributed</span><span class="p">,</span> <span class="n">SharedArrays</span>
+
 <span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c"># on ajoute 2 processeurs</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Dans un premier temps on redéfinit les fonctions <code class="docutils literal notranslate"><span class="pre">newton</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code> et <code class="docutils literal notranslate"><span class="pre">df</span></code> pour tous les workers à l’aide de la macro &#64;everywhere</p>
@@ -550,7 +558,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">512</span> <span class="c"># pour efficacité il faut relancer 2 fois</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1024</span> <span class="c"># pour efficacité il faut relancer 2 fois</span>
 <span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
@@ -577,11 +585,11 @@ regardons</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">nworkers</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">nworkers</span><span class="p">()</span>
-    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">nworkers</span><span class="p">())</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
 <span class="k">end</span>
-<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># a contient les numéros des workers  </span>
+<span class="n">data</span> <span class="c"># data contient les numéros des workers  </span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
@@ -658,7 +666,7 @@ regardons</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">512</span> <span class="c"># efficacité correcte </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span> <span class="c"># efficacité correcte </span>
 <span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
 </pre></div>
 </div>
@@ -690,8 +698,11 @@ regardons</p>
 <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot; Bonjour du thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="k">begin</span>
+    <span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&quot; Bonjour du thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -712,7 +723,7 @@ regardons</p>
 <span class="n">etime</span><span class="p">,</span> <span class="n">w</span>
 </pre></div>
 </div>
-<p>Je reprends l’exemple ci-dessus et je parallélise avec la mémoire partagée.</p>
+<p>Je reprends l’exemple ci-dessus de la fractale et je parallélise avec la mémoire partagée.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
     <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
     <span class="n">x</span><span class="o">=</span><span class="n">x0</span>
@@ -758,8 +769,95 @@ regardons</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="ss">:equal</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="section" id="cas-particulier-des-operations-de-reduction-parallele">
+<h2>Cas particulier des opérations de réduction parallèle<a class="headerlink" href="#cas-particulier-des-operations-de-reduction-parallele" title="Permalink to this headline">¶</a></h2>
+<p>La fonction suivante permet de calculer l’histogramme de particules tirées au hasard avec une distribution normale</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Plots</span>
+
+<span class="k">const</span> <span class="n">nx</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="k">const</span> <span class="n">np</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="k">const</span> <span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">6</span>
+<span class="k">const</span> <span class="n">xmax</span> <span class="o">=</span> <span class="o">+</span><span class="mi">6</span>
+
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">MersenneTwister</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">xp</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">np</span><span class="p">)</span>
+
+<span class="k">function</span> <span class="n">serial_deposition</span><span class="p">(</span> <span class="n">xp</span> <span class="p">)</span>
+
+    <span class="n">Lx</span> <span class="o">=</span> <span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+    
+    <span class="n">fill!</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Lx</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span>  <span class="n">x_norm</span> <span class="o">*</span> <span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">rho</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">end</span>
+
+    <span class="n">rho</span>
+
+<span class="k">end</span>
+
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">serial_deposition</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Si on essaye de paralléliser cette boucle, on se heurte à un problème d’accès concurrents. Chaque fil d’execution a accès à la mémoire occupée par le tableau <code class="docutils literal notranslate"><span class="pre">rho</span></code>. Lorsque deux threads accèdent à la mémoire en même temps c’est le dernier qui met à jour le tableau qui gagne et la modification faite par l’autre thread n’est pas toujours comptabilisé. Ce type d’opération de réduction n’est pas (encore) prise en charge par <strong>Julia</strong>.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">parallel_deposition_bad</span><span class="p">(</span> <span class="n">xp</span> <span class="p">)</span>
+
+    <span class="n">Lx</span> <span class="o">=</span> <span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+    <span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Lx</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span>  <span class="n">x_norm</span> <span class="o">*</span> <span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">rho</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">end</span>
+
+    <span class="n">rho</span>
+
+<span class="k">end</span>
+
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">parallel_deposition_bad</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On peut résoudre ce problème en créant une version de <code class="docutils literal notranslate"><span class="pre">rho</span></code> nommée <code class="docutils literal notranslate"><span class="pre">rho_local</span></code> qui sera propre à chaque thread.
+Il suffira ensuite de sommer ces tableaux locaux pour calculer le tableau global.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">parallel_deposition</span><span class="p">(</span> <span class="n">xp</span> <span class="p">)</span>
+
+    <span class="n">Lx</span> <span class="o">=</span> <span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+    <span class="n">ntid</span> <span class="o">=</span> <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+    <span class="n">rho_local</span> <span class="o">=</span> <span class="p">[</span><span class="n">zero</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">ntid</span><span class="p">]</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">np</span><span class="p">,</span> <span class="n">np÷ntid</span><span class="p">)</span>
+
+    <span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span> <span class="k">for</span> <span class="n">chunk</span> <span class="k">in</span> <span class="n">chunks</span>
+        <span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span> <span class="k">begin</span>
+            <span class="n">tid</span> <span class="o">=</span> <span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">()</span>
+            <span class="n">fill!</span><span class="p">(</span><span class="n">rho_local</span><span class="p">[</span><span class="n">tid</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">chunk</span>
+                <span class="n">x_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Lx</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span>  <span class="n">x_norm</span> <span class="o">*</span> <span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">rho_local</span><span class="p">[</span><span class="n">tid</span><span class="p">][</span><span class="n">ip</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">rho</span> <span class="o">.=</span> <span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="n">rho_local</span><span class="p">)</span>
+
+    <span class="n">rho</span>
+
+<span class="k">end</span>
+
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">parallel_deposition</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
+</div>
 </div>
 </div>
 
