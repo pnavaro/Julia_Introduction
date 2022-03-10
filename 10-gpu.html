@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPU &#8212; Introduction au langage Julia</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00-introduction.html">
+   Présentation
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-prise-en-main.html">
+   Prise en main
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-tableaux-et-matrices.html">
+   Tableaux et matrices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-elements-de-programmation.html">
+   Eléments de programmation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-les-fonctions.html">
+   Les fonctions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-quelques-packages-utiles.html">
+   Packages utiles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-calcul-parallele.html">
+   Calcul parallèle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-type-et-methode.html">
+   Type et méthodes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-performance.html">
+   Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-metaprogrammation.html">
+   Metaprogrammation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/10-gpu.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/pnavaro/Julia_Introduction"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F10-gpu.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   GPU
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-de-tableaux-pour-le-gpu">
+     Création de tableaux pour le GPU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construction">
+       Construction
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfert-vers-le-cpu">
+     Transfert vers le CPU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compatibilite-avec-les-tableaux-julia">
+       Compatibilité avec les tableaux Julia
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tirages-aleatoires">
+     Tirages aléatoires
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#curand">
+   CURAND
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cublas">
+   CUBLAS
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cusolver">
+   CUSOLVER
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cufft">
+   CUFFT
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cuddn">
+   CUDDN
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cusparse">
+   CUSPARSE
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#workflow">
+     Workflow
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-regression-example">
+     Linear regression example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#moving-to-gpu">
+       Moving to GPU
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#custom-kernel">
+   Custom Kernel
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nvidia-nsight-compute">
+   NVIDIA Nsight Compute
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-development">
+   Interactive development
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unsupported">
+   Unsupported
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-optimization">
+   12 Performance optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cooperative-groups">
+   Cooperative groups
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shared-memory">
+   Shared memory
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-parallelism">
+   Dynamic parallelism
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-output">
+   Standard output
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#atomics">
+   Atomics
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gpu-programming-performance-tips">
+     GPU programming performance tips
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>GPU</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   GPU
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creation-de-tableaux-pour-le-gpu">
+     Création de tableaux pour le GPU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#construction">
+       Construction
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfert-vers-le-cpu">
+     Transfert vers le CPU
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#compatibilite-avec-les-tableaux-julia">
+       Compatibilité avec les tableaux Julia
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tirages-aleatoires">
+     Tirages aléatoires
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#curand">
+   CURAND
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cublas">
+   CUBLAS
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cusolver">
+   CUSOLVER
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cufft">
+   CUFFT
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cuddn">
+   CUDDN
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cusparse">
+   CUSPARSE
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#workflow">
+     Workflow
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-regression-example">
+     Linear regression example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#moving-to-gpu">
+       Moving to GPU
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#custom-kernel">
+   Custom Kernel
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nvidia-nsight-compute">
+   NVIDIA Nsight Compute
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-development">
+   Interactive development
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unsupported">
+   Unsupported
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-optimization">
+   12 Performance optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cooperative-groups">
+   Cooperative groups
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shared-memory">
+   Shared memory
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-parallelism">
+   Dynamic parallelism
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-output">
+   Standard output
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#atomics">
+   Atomics
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gpu-programming-performance-tips">
+     GPU programming performance tips
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="gpu">
+<h1>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h1>
+<p>Le calcul sur GPU permet de calculer plus rapidement certaines opérations mathématiques.
+Il est particulièrement bien adaptées pour les opérations simples entre tableaux de grandes
+dimensions. Il consiste à déporter les calculs sur la carte graphique puis récupérer les résultats.
+Ces transferts de données ont un coût qu’il faudra prendre en compte lors de l’utilisation
+de ces co-processeurs.</p>
+<p>On importe quelques packages pour nos exemples</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">BenchmarkTools</span>
+<span class="k">using</span> <span class="n">Random</span>
+<span class="k">using</span> <span class="n">Test</span>
+<span class="k">using</span> <span class="n">LinearAlgebra</span>
+<span class="k">using</span> <span class="n">ForwardDiff</span>
+<span class="k">using</span> <span class="n">ProgressMeter</span>
+<span class="k">using</span> <span class="n">Plots</span>
+</pre></div>
+</div>
+<p>Le package principal qui permet d’utiliser est <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>, il permet d’utiliser les cartes
+graphiques de la marque NVIDIA.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">CUDA</span>
+
+<span class="n">CUDA</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Lorsque vous installez <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>, une version du compilateur de NVIDIA sera également téléchargé
+sur votre poste. Il est possible d’utiliser une installation existante, c’est expliqué dans la
+documentation.</p>
+<p>Cette première fonction permet de vérifier que le package est correctement installé et que vous disposez
+de la carte graphique adéquate.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Vous pouvez également lister les matériels à votre disposition.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">device</span> <span class="k">in</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">devices</span><span class="p">()</span>
+    <span class="nd">@show</span> <span class="n">capability</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="nd">@show</span> <span class="n">name</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="section" id="creation-de-tableaux-pour-le-gpu">
+<h2>Création de tableaux pour le GPU<a class="headerlink" href="#creation-de-tableaux-pour-le-gpu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="construction">
+<h3>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">2</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="transfert-vers-le-cpu">
+<h2>Transfert vers le CPU<a class="headerlink" href="#transfert-vers-le-cpu" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">b</span></code> est alloué sur le CPU, et un transfert de données est effectué.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="compatibilite-avec-les-tableaux-julia">
+<h3>Compatibilité avec les tableaux Julia<a class="headerlink" href="#compatibilite-avec-les-tableaux-julia" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="k">isa</span> <span class="kt">AbstractArray</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tirages-aleatoires">
+<h2>Tirages aléatoires<a class="headerlink" href="#tirages-aleatoires" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">CuArray</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">.+</span> <span class="mf">0.5</span> <span class="o">.*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">.*</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nt</span><span class="p">);</span>
+<span class="n">scatter</span><span class="p">(</span> <span class="kt">Array</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="kt">Array</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plot!</span><span class="p">(</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="n">x</span><span class="p">)</span>
+<span class="n">xlims!</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ylims!</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nt</span><span class="p">),</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">X</span><span class="o">&#39;</span><span class="n">X</span> <span class="o">\</span> <span class="n">X</span><span class="o">&#39;</span><span class="n">y</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">.+</span> <span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">.*</span> <span class="n">x</span> <span class="o">.-</span> <span class="n">y</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">view</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}([</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="n">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">do</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="n">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">do</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="n">a</span> <span class="o">.+</span> <span class="mi">2</span><span class="n">b</span>
+
+<span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="curand">
+<h1>CURAND<a class="headerlink" href="#curand" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cublas">
+<h1>CUBLAS<a class="headerlink" href="#cublas" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cusolver">
+<h1>CUSOLVER<a class="headerlink" href="#cusolver" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span> <span class="n">ipiv</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrf!</span><span class="p">(</span><span class="n">a</span><span class="o">&#39;</span><span class="n">b</span><span class="p">)</span>
+<span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrs!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">ipiv</span><span class="p">,</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cufft">
+<h1>CUFFT<a class="headerlink" href="#cufft" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fft</span> <span class="o">=</span> <span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> 
+<span class="n">fft</span> <span class="o">*</span> <span class="n">a</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ifft</span> <span class="o">=</span> <span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_ifft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">real</span><span class="p">(</span><span class="n">ifft</span> <span class="o">*</span> <span class="p">(</span><span class="n">fft</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cuddn">
+<h1>CUDDN<a class="headerlink" href="#cuddn" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUDNN</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cusparse">
+<h1>CUSPARSE<a class="headerlink" href="#cusparse" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUSPARSE</span><span class="o">.</span><span class="n">CuSparseMatrixCSR</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="workflow">
+<h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
+<p>Les étapes pour porter votre code sur GPU</p>
+<ol class="simple">
+<li><p>Développez votre application sur votre CPU avec les tabeaux de type <code class="docutils literal notranslate"><span class="pre">Array</span></code></p></li>
+<li><p>port your application to the GPU by switching to the CuArray type</p></li>
+<li><p>disallow the CPU fallback (“scalar indexing”) to find operations that are not implemented for or incompatible with GPU execution</p></li>
+<li><p>(optional) use lower-level, CUDA-specific interfaces to implement missing functionality or optimize performance</p></li>
+</ol>
+</div>
+<div class="section" id="linear-regression-example">
+<h2>Linear regression example<a class="headerlink" href="#linear-regression-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># squared error loss function</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span> <span class="o">.+</span> <span class="n">b</span><span class="p">))</span> <span class="o">/</span> <span class="n">size</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c"># get gradient w.r.t to `w`</span>
+<span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">w</span> <span class="o">-&gt;</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">w</span><span class="p">)</span>
+<span class="c"># get derivative w.r.t to `b` (`ForwardDiff.derivative` is</span>
+<span class="c"># used instead of `ForwardDiff.gradient` because `b` is</span>
+<span class="c"># a scalar instead of an array)</span>
+<span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">ForwardDiff</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># proximal gradient descent function</span>
+<span class="k">function</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">lmul!</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">cpu_test</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span> <span class="o">*</span> <span class="mf">0.1</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">iter</span>
+       <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">cpu_test</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="moving-to-gpu">
+<h3>Moving to GPU<a class="headerlink" href="#moving-to-gpu" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">gpu_test</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span> <span class="o">*</span> <span class="mf">0.1</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">iter</span>
+       <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+       
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">gpu_test</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">cpu_test</span><span class="p">(</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">gpu_test</span><span class="p">(</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="custom-kernel">
+<h1>Custom Kernel<a class="headerlink" href="#custom-kernel" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>you cannot allocate memory,</p></li>
+<li><p>I/O is disallowed,</p></li>
+<li><p>badly-typed code will not compile.</p></li>
+</ul>
+<p>Keep kernels simple, and only incrementally port code while continuously verifying that it still compiles and executes as expected.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+
+<span class="k">function</span> <span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+
+<span class="nd">@cuda</span> <span class="n">threads</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">norm</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">norm</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">norm</span></code> computation is much faster on the CPU</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">allowscalar</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">9_999_999</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You need two kernels to perfom this last computation. &#64;time is not the right tool to evaluate the elasped time. The task is scheduled on the GPU device but not executed. It will be executed when you will fetch the result on the CPU.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@time</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="o">$</span><span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)));</span>
+</pre></div>
+</div>
+<!-- #region -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="nvidia-nsight-compute">
+<h1>NVIDIA Nsight Compute<a class="headerlink" href="#nvidia-nsight-compute" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nv-nsight-cu-cli --profile-from-start off julia
+</pre></div>
+</div>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span> <span class="n">CUDAdrv</span><span class="o">.</span><span class="nd">@profile</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">julia&gt;</span> <span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nsys launch julia
+</pre></div>
+</div>
+<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span> <span class="n">CUDAdrv</span><span class="o">.</span><span class="nd">@profile</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="interactive-development">
+<h1>Interactive development<a class="headerlink" href="#interactive-development" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span> <span class="o">=</span> <span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span> <span class="k">return</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span> <span class="o">=</span> <span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;bar&quot;</span><span class="p">);</span> <span class="k">return</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>There is a significant overhead when you launch several kernels</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">9_999_999</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">.=</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<!-- #region -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="unsupported">
+<h1>Unsupported<a class="headerlink" href="#unsupported" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will raise an error because some features are not supported on the GPU</p>
+<ul class="simple">
+<li><p>Dynamic allocations</p></li>
+<li><p>Garbage collection</p></li>
+<li><p>Dynamic dispatch</p></li>
+<li><p>Input/Output</p></li>
+</ul>
+<!-- #endregion -->
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="k">end</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<!-- #region -->
+<p>The following expression will also raise an error because you can’t loop over an array
+on GPU in the same way.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">attribute</span><span class="p">(</span><span class="n">device</span><span class="p">(),</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">blockIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">blockDim</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="k">end</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The kernel you built is twice faster</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="nd">@cuda</span> <span class="n">threads</span><span class="o">=</span><span class="mi">1024</span> <span class="n">blocks</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span><span class="o">÷</span><span class="mi">1024</span><span class="o">+</span><span class="mi">1</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="o">$</span><span class="n">c</span><span class="p">,</span> <span class="o">$</span><span class="n">a</span><span class="p">,</span> <span class="o">$</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="o">$</span><span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To adapt the code to your device, use this configurator function</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">configurator</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">launch_configuration</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">cld</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">threads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">threads</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">config</span><span class="o">=</span><span class="n">configurator</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="performance-optimization">
+<h1>12 Performance optimization<a class="headerlink" href="#performance-optimization" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Avoid thread divergence</p></li>
+<li><p>Reduce and coalesce global accesses</p></li>
+<li><p>Improve occuancy, optimize launch configuration</p></li>
+<li><p>Early-free array using CUDA.unsafe_free!</p></li>
+<li><p>Annotate with &#64;inbounds to avoid exception branches</p></li>
+<li><p>Use Int32 and floating-point values</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@device_code_llvm</span> <span class="nd">@cuda</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- #region -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cooperative-groups">
+<h1>Cooperative groups<a class="headerlink" href="#cooperative-groups" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://devblogs.nvidia.com/cooperative-groups/">https://devblogs.nvidia.com/cooperative-groups/</a></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">cooperative</span><span class="o">=</span><span class="nb">true</span> <span class="n">kernel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="shared-memory">
+<h1>Shared memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://devblogs.nvidia.com/using-shared-memory-cuda-cc/">https://devblogs.nvidia.com/using-shared-memory-cuda-cc/</a></p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nd">@cuStaticSharedMem</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="dynamic-parallelism">
+<h1>Dynamic parallelism<a class="headerlink" href="#dynamic-parallelism" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://devblogs.nvidia.com/cuda-dynamic-parallelism-api-principles/">https://devblogs.nvidia.com/cuda-dynamic-parallelism-api-principles/</a></p>
+<p>&#64;cuda dynamic=true kernel(…)</p>
+<!-- #region -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="standard-output">
+<h1>Standard output<a class="headerlink" href="#standard-output" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;Thread </span><span class="si">$</span><span class="p">(</span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+<!-- #region -->
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="atomics">
+<h1>Atomics<a class="headerlink" href="#atomics" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@atomic</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
+</pre></div>
+</div>
+<!-- #endregion -->
+<div class="section" id="gpu-programming-performance-tips">
+<h2>GPU programming performance tips<a class="headerlink" href="#gpu-programming-performance-tips" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Avoid thread divergence (<a class="reference external" href="https://cvw.cac.cornell.edu/gpu/thread_div">https://cvw.cac.cornell.edu/gpu/thread_div</a>)</p></li>
+<li><p>Reduce and coalesce global accesses</p></li>
+<li><p>Improve occupancy</p></li>
+<li><p>Early-free arrays  <code class="docutils literal notranslate"><span class="pre">CuArrays.unsafe_free!</span></code> (<a class="reference external" href="https://juliagpu.gitlab.io/CUDA.jl/usage/memory/">https://juliagpu.gitlab.io/CUDA.jl/usage/memory/</a>)</p></li>
+<li><p>Annotate with <code class="docutils literal notranslate"><span class="pre">&#64;inbounds</span></code></p></li>
+<li><p>Use 32 bits for float and integers</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
