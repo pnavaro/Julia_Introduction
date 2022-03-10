@@ -4,12 +4,12 @@
 format: jb-book
 root: 0-introduction
 chapters:
-- file: 1-prise-en-main
-- file: 2-tableaux-et-matrices
-- file: 3-elements-de-programmation
-- file: 4-les-fonctions
-- file: 5-quelques-packages-utiles
-- file: 6-calcul-parallele
-- file: 7-type-et-methode
-- file: 8-performance
-- file: 9-metaprogrammation
+- file: 01-prise-en-main
+- file: 02-tableaux-et-matrices
+- file: 03-elements-de-programmation
+- file: 04-les-fonctions
+- file: 05-quelques-packages-utiles
+- file: 06-calcul-parallele
+- file: 07-type-et-methode
+- file: 08-performance
+- file: 09-metaprogrammation
