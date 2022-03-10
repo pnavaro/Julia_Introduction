@@ -88,8 +88,8 @@ Il n'y a plus actuellement d'interface Julia Studio (équivalent de Rstudio)...
 
 Néanmoins certains éditeurs offrent des extensions qui "intègrent" Julia
 
-* Sublime Text 3 et l'extension https://github.com/quinnj/Sublime-IJulia
-* Atom et l'extension https://github.com/JunoLab/atom-julia-client
+* Sublime Text 3 et l'extension [Sublime-IJulia](https://github.com/quinnj/Sublime-IJulia)
+* Atom et l'extension [JunoLab](http://junolab.org/)
 
 Depuis 2020 l'IDE préconisé par les développeurs de Julia est [Visual Studio Code](https://www.julia-vscode.org). 
 
