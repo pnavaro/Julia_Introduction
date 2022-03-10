@@ -12,3 +12,4 @@ chapters:
 - file: 6-calcul-parallele
 - file: 7-type-et-methode
 - file: 8-performance
+- file: 9-metaprogrammation
