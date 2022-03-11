@@ -334,43 +334,6 @@ const thebe_selector_output = ".output, .cell_output"
    Unsupported
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#performance-optimization">
-   12 Performance optimization
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cooperative-groups">
-   Cooperative groups
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shared-memory">
-   Shared memory
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dynamic-parallelism">
-   Dynamic parallelism
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#standard-output">
-   Standard output
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#atomics">
-   Atomics
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gpu-programming-performance-tips">
-     GPU programming performance tips
-    </a>
-   </li>
-  </ul>
- </li>
 </ul>
 
             </nav>
@@ -495,43 +458,6 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#unsupported">
    Unsupported
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#performance-optimization">
-   12 Performance optimization
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cooperative-groups">
-   Cooperative groups
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shared-memory">
-   Shared memory
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dynamic-parallelism">
-   Dynamic parallelism
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#standard-output">
-   Standard output
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#atomics">
-   Atomics
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gpu-programming-performance-tips">
-     GPU programming performance tips
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -969,71 +895,6 @@ on GPU in the same way.</p>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">config</span><span class="o">=</span><span class="n">configurator</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="performance-optimization">
-<h1>12 Performance optimization<a class="headerlink" href="#performance-optimization" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Avoid thread divergence</p></li>
-<li><p>Reduce and coalesce global accesses</p></li>
-<li><p>Improve occuancy, optimize launch configuration</p></li>
-<li><p>Early-free array using CUDA.unsafe_free!</p></li>
-<li><p>Annotate with &#64;inbounds to avoid exception branches</p></li>
-<li><p>Use Int32 and floating-point values</p></li>
-</ul>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@device_code_llvm</span> <span class="nd">@cuda</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-<!-- #region -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="cooperative-groups">
-<h1>Cooperative groups<a class="headerlink" href="#cooperative-groups" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://devblogs.nvidia.com/cooperative-groups/">https://devblogs.nvidia.com/cooperative-groups/</a></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">cooperative</span><span class="o">=</span><span class="nb">true</span> <span class="n">kernel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="shared-memory">
-<h1>Shared memory<a class="headerlink" href="#shared-memory" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://devblogs.nvidia.com/using-shared-memory-cuda-cc/">https://devblogs.nvidia.com/using-shared-memory-cuda-cc/</a></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nd">@cuStaticSharedMem</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
-</pre></div>
-</div>
-<!-- #endregion -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="dynamic-parallelism">
-<h1>Dynamic parallelism<a class="headerlink" href="#dynamic-parallelism" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://devblogs.nvidia.com/cuda-dynamic-parallelism-api-principles/">https://devblogs.nvidia.com/cuda-dynamic-parallelism-api-principles/</a></p>
-<p>&#64;cuda dynamic=true kernel(…)</p>
-<!-- #region -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="standard-output">
-<h1>Standard output<a class="headerlink" href="#standard-output" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;Thread </span><span class="si">$</span><span class="p">(</span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<!-- #endregion -->
-<!-- #region -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="atomics">
-<h1>Atomics<a class="headerlink" href="#atomics" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@atomic</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
-</pre></div>
-</div>
-<!-- #endregion -->
-<div class="section" id="gpu-programming-performance-tips">
-<h2>GPU programming performance tips<a class="headerlink" href="#gpu-programming-performance-tips" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Avoid thread divergence (<a class="reference external" href="https://cvw.cac.cornell.edu/gpu/thread_div">https://cvw.cac.cornell.edu/gpu/thread_div</a>)</p></li>
-<li><p>Reduce and coalesce global accesses</p></li>
-<li><p>Improve occupancy</p></li>
-<li><p>Early-free arrays  <code class="docutils literal notranslate"><span class="pre">CuArrays.unsafe_free!</span></code> (<a class="reference external" href="https://juliagpu.gitlab.io/CUDA.jl/usage/memory/">https://juliagpu.gitlab.io/CUDA.jl/usage/memory/</a>)</p></li>
-<li><p>Annotate with <code class="docutils literal notranslate"><span class="pre">&#64;inbounds</span></code></p></li>
-<li><p>Use 32 bits for float and integers</p></li>
-</ul>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </div>
 
