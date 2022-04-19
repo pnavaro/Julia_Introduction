@@ -1,7 +1,7 @@
 # GPU
 
 Le calcul sur GPU permet de calculer plus rapidement certaines opérations mathématiques.
-Il est particulièrement bien adaptées pour les opérations simples entre tableaux de grandes
+Il est particulièrement bien adapté pour les opérations simples entre tableaux de grandes
 dimensions. Il consiste à déporter les calculs sur la carte graphique puis récupérer les résultats.
 Ces transferts de données ont un coût qu'il faudra prendre en compte lors de l'utilisation
 de ces co-processeurs.
@@ -47,10 +47,12 @@ for device in CUDA.devices()
 end
 ```
 
+Pour tester votre installation vous pouvez également regarder le package [GPUInspector.jl](https://pc2.github.io/GPUInspector.jl/dev/)
+
 ## Création de tableaux pour le GPU
 
 
-### Construction
+### Allocations sur la carte graphique
 
 ```julia
 a = CuArray{Float32,2}(undef, 2, 2)
@@ -185,11 +187,15 @@ CUDA.rand!(a)
 
 # CUBLAS
 
+Les opérations entre tableaux alloués sur le GPU sont effectués sur le co-processeur.
+
 ```julia
 a * b'
 ```
 
 # CUSOLVER
+
+Certaines fonctions d'algèbre linéaire de LAPACK sont disponibles:
 
 ```julia
 L, ipiv = CUDA.CUSOLVER.getrf!(a'b)
@@ -197,6 +203,8 @@ CUDA.CUSOLVER.getrs!('N', L, ipiv, CUDA.ones(Float64, 3))
 ```
 
 # CUFFT
+
+Pour faire des FFTs sur le GPU, il est nécessaire d'utiliser les `plans` pour allouer l'espace nécessaire sur la carte graphique.
 
 ```julia
 fft = CUFFT.plan_fft(a) 
@@ -210,11 +218,15 @@ real(ifft * (fft * a))
 
 # CUDDN
 
+Vous avez également accès à la bibliothèque NVIDIA pour les réseaux de neurones.
+
 ```julia
 CUDA.CUDNN.softmax(real(ans))
 ```
 
 # CUSPARSE
+
+Les formats destinés aux matrices creuses sont aussi disponibles.
 
 ```julia
 CUDA.CUSPARSE.CuSparseMatrixCSR(a)
@@ -230,7 +242,7 @@ Les étapes pour porter votre code sur GPU
 4. (optional) use lower-level, CUDA-specific interfaces to implement missing functionality or optimize performance
 
 
-## Linear regression example
+## Exemple avec une regression linéaire
 
 ```julia
 # squared error loss function
@@ -252,6 +264,8 @@ function train(w, b, x, y; lr=0.1)
 end
 ```
 
+Version CPU
+
 ```julia
 function cpu_test(n = 1000, p = 100, iter = 100)
     x = randn(n, p)'
@@ -269,7 +283,7 @@ end
 @time cpu_test()
 ```
 
-### Moving to GPU
+### Version GPU
 
 ```julia
 function gpu_test( n = 1000, p = 100, iter = 100)
@@ -301,14 +315,15 @@ end
 @btime gpu_test( 10000, 100, 100);
 ```
 
-# Custom Kernel
+# Noyaux CUDA
 
+L'écriture directe de noyaux CUDA est possible, cependant:
+- les allocations sont interdites,
+- pas d'entrées-sorties donc pas d'affichage,
+- si votre code n'est pas typé correctement, le code compilé sera peu performant.
 
-- you cannot allocate memory, 
-- I/O is disallowed, 
-- badly-typed code will not compile. 
-
-Keep kernels simple, and only incrementally port code while continuously verifying that it still compiles and executes as expected.
+Programmer vos noyaux de manière incrémentale, en les gardant le plus simple possible et en vérifiant
+soigneusement que le résultat escompté est correct.
 
 ```julia
 a = CUDA.zeros(1024)
@@ -330,7 +345,6 @@ a = CUDA.rand(Int, 1000)
 norm(a)
 ```
 
-
 ```julia
 @btime norm($a)
 ```
@@ -340,12 +354,11 @@ norm(a)
 @btime norm($(Array(a)))
 ```
 
-The `norm` computation is much faster on the CPU
+La fonction `norm` est bine plus rapide exécutée sur le CPU
 
 ```julia
 CUDA.allowscalar(false)
 ```
-
 
 ```julia
 a = CuArray(1:9_999_999);
@@ -355,7 +368,9 @@ a = CuArray(1:9_999_999);
 @time a .+ reverse(a);
 ```
 
-You need two kernels to perfom this last computation. @time is not the right tool to evaluate the elasped time. The task is scheduled on the GPU device but not executed. It will be executed when you will fetch the result on the CPU.
+Pour effectuer cette dernière instruction, vous avez besoin de programmer deux noyaux.
+La macro `@time` n'est pas adéquate pour évaluer la performance car on a affaire à une opération de type "lazy". C'est à dire que l'expression est programmée sur le GPU mais pas exécutée. Elle le sera lorsque vous transférerez le résultat vers le CPU. Vous pouvez utiliser `@sync` ou
+`@time` du package `CUDA`.
 
 ```julia
 @time CUDA.@sync a .+ reverse(a);
@@ -373,28 +388,9 @@ CUDA.@time a .+ reverse(a);
 @btime CUDA.@sync $(Array(a)) .+ reverse($(Array(a)));
 ```
 
+## Aide au développement
 
-<!-- #region -->
-# NVIDIA Nsight Compute
-
-```bash
-$ nv-nsight-cu-cli --profile-from-start off julia
-```
-```julia-repl
-julia> CUDAdrv.@profile a .+ reverse(a)
-julia> exit()
-```
-
-```bash
-$ nsys launch julia
-```
-```julia-repl
-julia> CUDAdrv.@profile a .+ reverse(a)
-```
-<!-- #endregion -->
-
-
-# Interactive development
+Vous avez quelques macros disponibles pour vous aidez à implémenter vos noyaux:
 
 ```julia
 kernel() = (@cuprintln("foo"); return)
@@ -412,8 +408,8 @@ kernel() = (@cuprintln("bar"); return)
 @cuda kernel()
 ```
 
-
-There is a significant overhead when you launch several kernels
+Attention, exécuter plusieurs noyaux CUDA à la suite prend du temps car il y a un temps de lattence
+plus important que sur CPU.
 
 ```julia
 a = CuArray(1:9_999_999)
@@ -431,20 +427,7 @@ function vadd_reverse(c, a, b)
 end
 ```
 
-<!-- #region -->
-# Unsupported
-
-```julia
-@cuda threads = length(a) vadd_reverse(c, a, a)
-```
-will raise an error because some features are not supported on the GPU
-
-- Dynamic allocations
-- Garbage collection
-- Dynamic dispatch
-- Input/Output
-<!-- #endregion -->
-
+Essayons de remplacer la fonction `reverse`
 
 ```julia
 function vadd_reverse(c, a, b)
@@ -457,13 +440,14 @@ function vadd_reverse(c, a, b)
 end
 ```
 
-<!-- #region -->
-The following expression will also raise an error because you can't loop over an array
-on GPU in the same way.
+Cela ne fonctionne pas car on n'itère pas sur un tableau alloué sur un GPU de la même manière qu'un tableau alloué sur CPU.
+
+
 ```julia
 @cuda threads = length(a) vadd_reverse(c, a, a)
 ```
-<!-- #endregion -->
+
+Les fonctions `blockIdx` et `threadIdx` sont disponibkes pour vous aider:
 
 ```julia
 attribute(device(), CUDA.DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK)
@@ -479,7 +463,7 @@ function vadd_reverse(c, a, b)
 end
 ```
 
-The kernel you built is twice faster 
+Le noyau construit est plus rapide que la fonction `reverse` initialement utilisée:
 
 ```julia
 @btime CUDA.@sync @cuda threads=1024 blocks=length($a)÷1024+1 vadd_reverse($c, $a, $a)
@@ -489,8 +473,7 @@ The kernel you built is twice faster
 @btime CUDA.@sync $a .+ reverse($a);
 ```
 
-
-To adapt the code to your device, use this configurator function
+Vous pouvez automatiser la configuration du noyau aux caractéristiques de votre carte.
 
 ```julia
 function configurator(kernel)
