@@ -114,6 +114,7 @@ Intégré avec Jupyter, il permet d'ouvrir n'importe lequel de ces 3 formats.
 
 Le package [Literate.jl](https://github.com/fredrikekre/Literate.jl) est un outil Julia qui permet également de générer des notebooks et des fichiers markdown.
 
+Vous pouvez également regarder sur côté de [Pluto.jl](https://github.com/fonsp/Pluto.jl) qui permet de créer des notebooks Julia avec des fonctionalités améliorant l'interactivité.
 <!-- #endregion -->
 
 # Les Packages
