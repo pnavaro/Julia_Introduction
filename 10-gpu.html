@@ -240,8 +240,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#construction">
-       Construction
+      <a class="reference internal nav-link" href="#allocations-sur-la-carte-graphique">
+       Allocations sur la carte graphique
       </a>
      </li>
     </ul>
@@ -301,13 +301,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-regression-example">
-     Linear regression example
+    <a class="reference internal nav-link" href="#exemple-avec-une-regression-lineaire">
+     Exemple avec une regression linéaire
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#moving-to-gpu">
-       Moving to GPU
+      <a class="reference internal nav-link" href="#version-gpu">
+       Version GPU
       </a>
      </li>
     </ul>
@@ -315,24 +315,16 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#custom-kernel">
-   Custom Kernel
+  <a class="reference internal nav-link" href="#noyaux-cuda">
+   Noyaux CUDA
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nvidia-nsight-compute">
-   NVIDIA Nsight Compute
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interactive-development">
-   Interactive development
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsupported">
-   Unsupported
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aide-au-developpement">
+     Aide au développement
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -365,8 +357,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#construction">
-       Construction
+      <a class="reference internal nav-link" href="#allocations-sur-la-carte-graphique">
+       Allocations sur la carte graphique
       </a>
      </li>
     </ul>
@@ -426,13 +418,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-regression-example">
-     Linear regression example
+    <a class="reference internal nav-link" href="#exemple-avec-une-regression-lineaire">
+     Exemple avec une regression linéaire
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#moving-to-gpu">
-       Moving to GPU
+      <a class="reference internal nav-link" href="#version-gpu">
+       Version GPU
       </a>
      </li>
     </ul>
@@ -440,24 +432,16 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#custom-kernel">
-   Custom Kernel
+  <a class="reference internal nav-link" href="#noyaux-cuda">
+   Noyaux CUDA
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nvidia-nsight-compute">
-   NVIDIA Nsight Compute
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interactive-development">
-   Interactive development
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsupported">
-   Unsupported
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aide-au-developpement">
+     Aide au développement
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -471,7 +455,7 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="gpu">
 <h1>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h1>
 <p>Le calcul sur GPU permet de calculer plus rapidement certaines opérations mathématiques.
-Il est particulièrement bien adaptées pour les opérations simples entre tableaux de grandes
+Il est particulièrement bien adapté pour les opérations simples entre tableaux de grandes
 dimensions. Il consiste à déporter les calculs sur la carte graphique puis récupérer les résultats.
 Ces transferts de données ont un coût qu’il faudra prendre en compte lors de l’utilisation
 de ces co-processeurs.</p>
@@ -507,10 +491,11 @@ de la carte graphique adéquate.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
+<p>Pour tester votre installation vous pouvez également regarder le package <a class="reference external" href="https://pc2.github.io/GPUInspector.jl/dev/">GPUInspector.jl</a></p>
 <div class="section" id="creation-de-tableaux-pour-le-gpu">
 <h2>Création de tableaux pour le GPU<a class="headerlink" href="#creation-de-tableaux-pour-le-gpu" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="construction">
-<h3>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="allocations-sur-la-carte-graphique">
+<h3>Allocations sur la carte graphique<a class="headerlink" href="#allocations-sur-la-carte-graphique" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">2</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -622,12 +607,14 @@ de la carte graphique adéquate.</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cublas">
 <h1>CUBLAS<a class="headerlink" href="#cublas" title="Permalink to this headline">¶</a></h1>
+<p>Les opérations entre tableaux alloués sur le GPU sont effectués sur le co-processeur.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cusolver">
 <h1>CUSOLVER<a class="headerlink" href="#cusolver" title="Permalink to this headline">¶</a></h1>
+<p>Certaines fonctions d’algèbre linéaire de LAPACK sont disponibles:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span> <span class="n">ipiv</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrf!</span><span class="p">(</span><span class="n">a</span><span class="o">&#39;</span><span class="n">b</span><span class="p">)</span>
 <span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrs!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">ipiv</span><span class="p">,</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
@@ -635,6 +622,7 @@ de la carte graphique adéquate.</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cufft">
 <h1>CUFFT<a class="headerlink" href="#cufft" title="Permalink to this headline">¶</a></h1>
+<p>Pour faire des FFTs sur le GPU, il est nécessaire d’utiliser les <code class="docutils literal notranslate"><span class="pre">plans</span></code> pour allouer l’espace nécessaire sur la carte graphique.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fft</span> <span class="o">=</span> <span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> 
 <span class="n">fft</span> <span class="o">*</span> <span class="n">a</span>
 </pre></div>
@@ -646,12 +634,14 @@ de la carte graphique adéquate.</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cuddn">
 <h1>CUDDN<a class="headerlink" href="#cuddn" title="Permalink to this headline">¶</a></h1>
+<p>Vous avez également accès à la bibliothèque NVIDIA pour les réseaux de neurones.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUDNN</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cusparse">
 <h1>CUSPARSE<a class="headerlink" href="#cusparse" title="Permalink to this headline">¶</a></h1>
+<p>Les formats destinés aux matrices creuses sont aussi disponibles.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUSPARSE</span><span class="o">.</span><span class="n">CuSparseMatrixCSR</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -665,8 +655,8 @@ de la carte graphique adéquate.</p>
 <li><p>(optional) use lower-level, CUDA-specific interfaces to implement missing functionality or optimize performance</p></li>
 </ol>
 </div>
-<div class="section" id="linear-regression-example">
-<h2>Linear regression example<a class="headerlink" href="#linear-regression-example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exemple-avec-une-regression-lineaire">
+<h2>Exemple avec une regression linéaire<a class="headerlink" href="#exemple-avec-une-regression-lineaire" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># squared error loss function</span>
 <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span> <span class="o">.+</span> <span class="n">b</span><span class="p">))</span> <span class="o">/</span> <span class="n">size</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="c"># get gradient w.r.t to `w`</span>
@@ -685,6 +675,7 @@ de la carte graphique adéquate.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
+<p>Version CPU</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">cpu_test</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span> <span class="o">*</span> <span class="mf">0.1</span>
@@ -700,8 +691,8 @@ de la carte graphique adéquate.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">cpu_test</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="moving-to-gpu">
-<h3>Moving to GPU<a class="headerlink" href="#moving-to-gpu" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="version-gpu">
+<h3>Version GPU<a class="headerlink" href="#version-gpu" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">gpu_test</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span> <span class="o">*</span> <span class="mf">0.1</span>
@@ -731,14 +722,16 @@ de la carte graphique adéquate.</p>
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="custom-kernel">
-<h1>Custom Kernel<a class="headerlink" href="#custom-kernel" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="noyaux-cuda">
+<h1>Noyaux CUDA<a class="headerlink" href="#noyaux-cuda" title="Permalink to this headline">¶</a></h1>
+<p>L’écriture directe de noyaux CUDA est possible, cependant:</p>
 <ul class="simple">
-<li><p>you cannot allocate memory,</p></li>
-<li><p>I/O is disallowed,</p></li>
-<li><p>badly-typed code will not compile.</p></li>
+<li><p>les allocations sont interdites,</p></li>
+<li><p>pas d’entrées-sorties donc pas d’affichage,</p></li>
+<li><p>si votre code n’est pas typé correctement, le code compilé sera peu performant.</p></li>
 </ul>
-<p>Keep kernels simple, and only incrementally port code while continuously verifying that it still compiles and executes as expected.</p>
+<p>Programmer vos noyaux de manière incrémentale, en les gardant le plus simple possible et en vérifiant
+soigneusement que le résultat escompté est correct.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
 
 <span class="k">function</span> <span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -762,7 +755,7 @@ de la carte graphique adéquate.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">norm</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">norm</span></code> computation is much faster on the CPU</p>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">norm</span></code> est bine plus rapide exécutée sur le CPU</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">allowscalar</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -772,7 +765,9 @@ de la carte graphique adéquate.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You need two kernels to perfom this last computation. &#64;time is not the right tool to evaluate the elasped time. The task is scheduled on the GPU device but not executed. It will be executed when you will fetch the result on the CPU.</p>
+<p>Pour effectuer cette dernière instruction, vous avez besoin de programmer deux noyaux.
+La macro <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> n’est pas adéquate pour évaluer la performance car on a affaire à une opération de type “lazy”. C’est à dire que l’expression est programmée sur le GPU mais pas exécutée. Elle le sera lorsque vous transférerez le résultat vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> ou
+<code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> du package <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -785,27 +780,9 @@ de la carte graphique adéquate.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)));</span>
 </pre></div>
 </div>
-<!-- #region -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="nvidia-nsight-compute">
-<h1>NVIDIA Nsight Compute<a class="headerlink" href="#nvidia-nsight-compute" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nv-nsight-cu-cli --profile-from-start off julia
-</pre></div>
-</div>
-<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span> <span class="n">CUDAdrv</span><span class="o">.</span><span class="nd">@profile</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="gp">julia&gt;</span> <span class="n">exit</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nsys launch julia
-</pre></div>
-</div>
-<div class="highlight-julia-repl notranslate"><div class="highlight"><pre><span></span><span class="gp">julia&gt;</span> <span class="n">CUDAdrv</span><span class="o">.</span><span class="nd">@profile</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-<!-- #endregion -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="interactive-development">
-<h1>Interactive development<a class="headerlink" href="#interactive-development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="aide-au-developpement">
+<h2>Aide au développement<a class="headerlink" href="#aide-au-developpement" title="Permalink to this headline">¶</a></h2>
+<p>Vous avez quelques macros disponibles pour vous aidez à implémenter vos noyaux:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span> <span class="o">=</span> <span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span> <span class="k">return</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -818,7 +795,8 @@ de la carte graphique adéquate.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">kernel</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>There is a significant overhead when you launch several kernels</p>
+<p>Attention, exécuter plusieurs noyaux CUDA à la suite prend du temps car il y a un temps de lattence
+plus important que sur CPU.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">9_999_999</span><span class="p">)</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">c</span> <span class="o">.=</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
@@ -833,21 +811,7 @@ de la carte graphique adéquate.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<!-- #region -->
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="unsupported">
-<h1>Unsupported<a class="headerlink" href="#unsupported" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>will raise an error because some features are not supported on the GPU</p>
-<ul class="simple">
-<li><p>Dynamic allocations</p></li>
-<li><p>Garbage collection</p></li>
-<li><p>Dynamic dispatch</p></li>
-<li><p>Input/Output</p></li>
-</ul>
-<!-- #endregion -->
+<p>Essayons de remplacer la fonction <code class="docutils literal notranslate"><span class="pre">reverse</span></code></p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
     
     <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
@@ -858,13 +822,11 @@ de la carte graphique adéquate.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<!-- #region -->
-<p>The following expression will also raise an error because you can’t loop over an array
-on GPU in the same way.</p>
+<p>Cela ne fonctionne pas car on n’itère pas sur un tableau alloué sur un GPU de la même manière qu’un tableau alloué sur CPU.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- #endregion -->
+<p>Les fonctions <code class="docutils literal notranslate"><span class="pre">blockIdx</span></code> et <code class="docutils literal notranslate"><span class="pre">threadIdx</span></code> sont disponibkes pour vous aider:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">attribute</span><span class="p">(</span><span class="n">device</span><span class="p">(),</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -877,14 +839,14 @@ on GPU in the same way.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>The kernel you built is twice faster</p>
+<p>Le noyau construit est plus rapide que la fonction <code class="docutils literal notranslate"><span class="pre">reverse</span></code> initialement utilisée:</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="nd">@cuda</span> <span class="n">threads</span><span class="o">=</span><span class="mi">1024</span> <span class="n">blocks</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span><span class="o">÷</span><span class="mi">1024</span><span class="o">+</span><span class="mi">1</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="o">$</span><span class="n">c</span><span class="p">,</span> <span class="o">$</span><span class="n">a</span><span class="p">,</span> <span class="o">$</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="o">$</span><span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>To adapt the code to your device, use this configurator function</p>
+<p>Vous pouvez automatiser la configuration du noyau aux caractéristiques de votre carte.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">configurator</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">launch_configuration</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
     <span class="n">threads</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
@@ -895,6 +857,7 @@ on GPU in the same way.</p>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">config</span><span class="o">=</span><span class="n">configurator</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 
