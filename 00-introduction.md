@@ -2,6 +2,9 @@
 
 Hello tout le monde !
 
+Je me présente, je suis ingénieur calcul à l'Institut de Recherche Mathématiques de Rennes. J'ai une formation en mécanique des fluides numérique. J'ai écrit beaucoup de codes en Fortran avec MPI et OpenMP. Depuis une dizaine d'années je fais beaucoup de Python. J'ai commencé à apprendre le langage Julia en juillet 2018 lorsque la version 1.0 est sortie. Je surveillais sa progression depuis 2015.
+Les supports que je vais utiliser ont été écrits à l'origine par [Thierry Clopeau](https://github.com/clopeau/Julia_Introduction). 
+
 **Julia** est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C'est un logiciel libre sous [licence MIT](https://github.com/JuliaLang/julia/blob/master/LICENSE.md).
 
 **Julia** se veut la combinaison de :
