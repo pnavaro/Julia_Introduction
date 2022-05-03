@@ -346,6 +346,8 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="presentation">
 <h1>Présentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h1>
 <p>Hello tout le monde !</p>
+<p>Je me présente, je suis ingénieur calcul à l’Institut de Recherche Mathématiques de Rennes. J’ai une formation en mécanique des fluides numérique. J’ai écrit beaucoup de codes en Fortran avec MPI et OpenMP. Depuis une dizaine d’années je fais beaucoup de Python. J’ai commencé à apprendre le langage Julia en juillet 2018 lorsque la version 1.0 est sortie. Je surveillais sa progression depuis 2015.
+Les supports que je vais utiliser ont été écrits à l’origine par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a>.</p>
 <p><strong>Julia</strong> est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C’est un logiciel libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence MIT</a>.</p>
 <p><strong>Julia</strong> se veut la combinaison de :</p>
 <ul class="simple">
@@ -391,17 +393,17 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Un programme Julia est un script extension .jl on peut soit l’exécuter en ligne de commande “julia nomfichier.jl” ou en l’incluant</p>
 <!-- #endregion -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Toute ligne ou fin de ligne commançant par <code class="docutils literal notranslate"><span class="pre">#</span></code> est en commentaire, une bloc est délimité par <code class="docutils literal notranslate"><span class="pre">#=</span></code> et <code class="docutils literal notranslate"><span class="pre">=#</span></code>:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span>
-<span class="mi">1</span><span class="o">+</span><span class="mi">2</span>    <span class="c">#commentaire en fin de ligne</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span><span class="w"></span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="w">    </span><span class="c">#commentaire en fin de ligne</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="cm">#=   un bloc</span>
 <span class="cm">        complet</span>
-<span class="cm">de commentaires  =#</span>        
+<span class="cm">de commentaires  =#</span><span class="w">        </span>
 </pre></div>
 </div>
 <!-- #region -->
@@ -435,9 +437,9 @@ Certains offrent la possibilité de gérer un terminal, les graphiques et un deb
 <h2>Notebook<a class="headerlink" href="#notebook" title="Permalink to this headline">¶</a></h2>
 <p>Le notebook est façon de programmer qui permet d’obtenir plus directement un rendu plus web-publiable. La plateforme Jupyter qui héberge les notebooks, offre des possibilités d’interaction supplémentaire avec l’utilisation de widgets…</p>
 <p>On peut installer sur sa propre machine une instance de <a class="reference external" href="http://jupyter.org/">Jupyter</a> (ex iPython) permettant de travailler dans son navigateur. Pour cela il faut installer le package <a class="reference external" href="https://github.com/JuliaLang/IJulia.jl">IJulia</a> dans le terminal (REPL) taper “]” :</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">IJulia</span>
-<span class="k">using</span> <span class="n">IJulia</span>
-<span class="n">notebook</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">IJulia</span><span class="w"></span>
+<span class="n">notebook</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 <p>On peut aussi convertir un fichier notebook (extension <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) en fichier <code class="docutils literal notranslate"><span class="pre">.jl</span></code> (ou autre):</p>
@@ -461,7 +463,7 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 <p>et il est installé physiquement dans votre espace disque (répertoire .julia/).</p>
 <p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation est assez longue, le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
 <!-- #region -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">NomDuPackage</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">NomDuPackage</span><span class="w"></span>
 </pre></div>
 </div>
 <!-- #endregion -->

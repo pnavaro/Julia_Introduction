@@ -349,164 +349,164 @@ const thebe_selector_output = ".output, .cell_output"
 <p><em>Julia</em> possède un système de type et de méthode qui lui confère une approche objet.
 La fonction <code class="docutils literal notranslate"><span class="pre">typeof()</span></code> renvoie le type d’une variable de base <code class="docutils literal notranslate"><span class="pre">Int32</span></code>, <code class="docutils literal notranslate"><span class="pre">Float64</span></code>… <em>Julia</em> est conçu pour permettre facilement d’étendre l’environnement à de nouveaux type de variable.</p>
 <p>Le types sont organisés suivant un hiérarchie comme on peut le voir sur l’arborescence partielle ci-dessous</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">AbstractTrees</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">AbstractTrees</span><span class="w"></span>
 
-<span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span> <span class="o">=</span> <span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">print_tree</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span>
+<span class="n">print_tree</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Dans cette arborescence, certains types sont “abstraits” et d’autres “concrets”.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Real</span><span class="p">),</span> <span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Real</span><span class="p">),</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Un réel sera forcemment de type concret <code class="docutils literal notranslate"><span class="pre">Float64</span></code> ou <code class="docutils literal notranslate"><span class="pre">Float32</span></code> par exemple, et pourra être utilisé comme argument par toutes les fonctions acceptant le type abstrait <code class="docutils literal notranslate"><span class="pre">AbstractFloat</span></code></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Float64</span> <span class="o">&lt;:</span> <span class="kt">AbstractFloat</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractFloat</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="methodes">
 <h1>Méthodes<a class="headerlink" href="#methodes" title="Permalink to this headline">¶</a></h1>
 <p>A chaque fonction est associée une méthode dépendante du type d’entrée comme dans ce qui suit suivant que l’entrée soit un entier ou pas.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span>
-    <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span>
-    <span class="n">n</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="nb">im</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="construction-d-un-nouveau-type-de-variable">
 <h1>Construction d’un nouveau Type de variable<a class="headerlink" href="#construction-d-un-nouveau-type-de-variable" title="Permalink to this headline">¶</a></h1>
 <p>En premier lieu il faut définir un type abstrait puis une instance sous-hiérarchiquement concrète :</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract type</span> <span class="kt">AbstractGrid</span> <span class="k">end</span> <span class="c"># juste en dessous de Any</span>
-<span class="k">mutable struct</span> <span class="kt">Grid1d</span> <span class="o">&lt;:</span> <span class="kt">AbstractGrid</span>
-    <span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
-    <span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
-    <span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span><span class="w"></span>
+<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Grid1d</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span><span class="w"></span>
+<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
+<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">debut</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">debut</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">fin</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">fin</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="surcharge-des-operateurs">
 <h1>Surcharge des opérateurs<a class="headerlink" href="#surcharge-des-operateurs" title="Permalink to this headline">¶</a></h1>
 <p>La surcharge des opérations usuelles se fait en définissant une nouvelle méthode associé au nouveau type pour chaque opérateur, commençons par surcharger l’affichage à l’écran de notre nouveau type. Pour cela on va ajouter une méthode à la fonction “show”</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span>
-    <span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s">&quot;Grid 1d : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1d : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">a</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="section" id="addition-soustraction">
 <h2>Addition, soustraction …<a class="headerlink" href="#addition-soustraction" title="Permalink to this headline">¶</a></h2>
 <p>Ces fonctions sont de la forme +(), -() c’est à dire</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="o">:+</span>
-<span class="k">function</span> <span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">,</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span><span class="n">n</span>
-    <span class="k">return</span> <span class="n">g</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">:+</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">,</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="n">n</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="mi">2</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+=</span><span class="mi">1</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+=</span><span class="mi">1</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Attention l’addition n’est pas forcément commutative !</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span> 
-    <span class="mi">2</span><span class="o">+</span><span class="n">a</span>
-<span class="k">catch</span> <span class="n">e</span>
-    <span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">2</span><span class="o">+</span><span class="n">a</span><span class="w"></span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 <p>ni unaire !</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span> 
-    <span class="o">-</span><span class="n">a</span>
-<span class="k">catch</span> <span class="n">e</span>
-    <span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<span class="k">end</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span>
+<span class="w">    </span><span class="o">-</span><span class="n">a</span><span class="w"></span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
 <p>Notez le message d’erreur qui est très claire !</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
-    <span class="n">a</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="k">catch</span> <span class="n">e</span>
-    <span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-<span class="k">end</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"></span>
+<span class="w">    </span><span class="n">a</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="autres-surcharges">
 <h2>Autres surcharges<a class="headerlink" href="#autres-surcharges" title="Permalink to this headline">¶</a></h2>
 <p>Toutes les fonctions usuelles sont surchargeable sans limite : size(); det() …</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">Base</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">AbstractGrid</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="n">n</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">AbstractGrid</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
 
-<span class="k">function</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span>
-<span class="k">end</span> 
+<span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="w"></span>
+<span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -514,26 +514,26 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="tex2jax_ignore mathjax_ignore section" id="type-et-constructeurs">
 <h1>Type et constructeurs<a class="headerlink" href="#type-et-constructeurs" title="Permalink to this headline">¶</a></h1>
 <p>Chaque langage “objet” définit un constructeur pour ces objets. Nous avons déjà utiliser un constructeur générique qui rempli chaque champ du nouveau type. Il est possible de faire une variante suivant le nombre d’arguments d’entrée et de leur type</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract type</span> <span class="kt">AbstractGrid</span> <span class="k">end</span> <span class="c"># juste en dessous de Any</span>
-<span class="k">struct</span> <span class="kt">Grid1D</span> <span class="o">&lt;:</span> <span class="kt">AbstractGrid</span>
-    <span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
-    <span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
-    <span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
-    
-    <span class="c"># constructeurs par défaut sans argument</span>
-    <span class="k">function</span> <span class="n">Grid1D</span><span class="p">()</span>
-        <span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">end</span>
-    
-    <span class="c"># constructeurs par défaut avec argument</span>
-    <span class="k">function</span> <span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-        <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nd">@error</span><span class="p">(</span><span class="s">&quot;pas possible&quot;</span><span class="p">)</span>
-        <span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-    <span class="k">end</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span><span class="w"></span>
+<span class="k">struct</span> <span class="kt">Grid1D</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span><span class="w"></span>
+<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
+<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c"># constructeurs par défaut sans argument</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c"># constructeurs par défaut avec argument</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nd">@error</span><span class="p">(</span><span class="s">&quot;pas possible&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Il devient possible de déterminer un constructeurs pour différentes entrées.</p>
@@ -542,15 +542,15 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="tex2jax_ignore mathjax_ignore section" id="les-iterateurs">
 <h1>Les Itérateurs<a class="headerlink" href="#les-iterateurs" title="Permalink to this headline">¶</a></h1>
 <p>Il est possible sur un type nouveau de définir un itérateur, comme ici de parcourrir les points de la grille, définissons (surchargeons) de nouvelles fonctions ou plutôt méthodes :</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&gt;</span> <span class="n">g</span><span class="o">.</span><span class="n">fin</span> <span class="o">?</span> <span class="nb">nothing</span> <span class="o">:</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">grid</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="k">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">grid</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Il devient possible de construire des itérateurs sur une grille 2d, 3d renvoyant les coordonnées des points de la grille… Mais on peut imaginer sur une triangulation etc…</p>
