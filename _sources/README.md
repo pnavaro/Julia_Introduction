@@ -13,7 +13,7 @@ julia --project
 julia> import Pkg
 julia> Pkg.instantiate()
 julia> using IJulia
-julia> notebook()
+julia> notebook(dir=pwd())
 ```
 
 Une version html [jupyterbook](https://jupyterbook.org/) est [disponible](https://pnavaro.github.io/Julia_Introduction)
