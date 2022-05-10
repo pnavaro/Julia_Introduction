@@ -4,7 +4,7 @@
 
 Une introduction à Julia sous forme de notebooks jupyter. Elle a été écrite par [Thierry Clopeau](https://github.com/clopeau/Julia_Introduction) avec la version 1.1 de Julia. J'ai fait quelques corrections pour l'adapter à la version 1.7.
 
-La visualisation est automatique sous Github, pour rendre interactif les notebooks il faut "cloner" le répertoire sur sa machine (ou sur un serveur Jupyter).
+La visualisation est automatique sous Github, pour rendre interactif les notebooks il faut "cloner" le répertoire sur sa machine (ou sur un serveur Jupyter). Pour lire les fichiers au format markdown en tant que notebook jupyter, pensez à installer [jupytext](https://jupytext.readthedocs.io/en/latest/).
 
 ```
 git clone https://github.com/pnavaro/Julia_Introduction
