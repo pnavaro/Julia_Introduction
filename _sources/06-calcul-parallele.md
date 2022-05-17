@@ -4,12 +4,6 @@
 
 Le document référence officiel : https://docs.julialang.org/en/v1/manual/parallel-computing/
 
-- http://www.csd.uwo.ca/~moreno/cs2101a_moreno/Parallel_computing_with_Julia.pdf Très transparants très bien fait la notion de Task est abordée...
-- http://www.admin-magazine.com/HPC/Articles/Julia-Distributed-Arrays
-- http://www.admin-magazine.com/HPC/Articles/Parallel-Julia-Jumping-Right-In
-- http://www.blog.juliaferraioli.com/2014/02/julia-on-google-compute-engine-parallel.html
-- http://www.alshum.com/parallel-julia/
-
 ```julia
 using Plots
 ```
