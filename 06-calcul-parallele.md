@@ -1,6 +1,6 @@
 # Calcul parallèle
 
-*Julia* dans sa grande force permet nativement le calcul parallel plus précisément calcul parallel à mémoire partagée ou distribuée.
+*Julia* permet nativement le calcul parallèle plus précisément le calcul parallèle à mémoire partagée ou distribuée.
 
 Le document référence officiel : https://docs.julialang.org/en/v1/manual/parallel-computing/
 
