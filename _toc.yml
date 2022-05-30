@@ -13,3 +13,4 @@ chapters:
 - file: 07-type-et-methode
 - file: 08-performance
 - file: 09-metaprogrammation
+- file: 10-gpu

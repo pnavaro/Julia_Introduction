@@ -3,6 +3,8 @@ logo: logo.png
 
 execute:
   execute_notebooks: false
+  exclude_patterns:
+    - 'README'
 
 latex:
   latex_documents:
