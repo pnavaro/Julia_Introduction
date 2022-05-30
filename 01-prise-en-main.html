@@ -365,9 +365,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="fonctions-scientifiques">
 <h2>Fonctions scientifiques<a class="headerlink" href="#fonctions-scientifiques" title="Permalink to this headline">¶</a></h2>
 <p>Regardons les possibilités de calcul offert par cet environnement !</p>
-<p>On est devant une superbe calculatrice comme dans la console de Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classique <code>+-*/^</code> ainsi que toutes les fonctions scientifiques <code>sin</code>, <code>cos</code> <code>exp</code> <code>log</code> (attention ici logarithme népérien)….</p>
-<p>voir <a class="reference external" href="https://docs.julialang.org/en/v1/manual/mathematical-operations/">https://docs.julialang.org/en/v1/manual/mathematical-operations/</a></p>
-<p>A remarquer l’utilisation de la fonction <code>log</code> comme le logarithme naturel (Népérien).</p>
+<p>On est devant une superbe calculatrice comme dans la console de
+Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
+<code class="docutils literal notranslate"><span class="pre">+-*/\^</span></code> ainsi que toutes les fonctions scientifiques
+<code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">cos</span></code> <code class="docutils literal notranslate"><span class="pre">exp</span></code> <code class="docutils literal notranslate"><span class="pre">log</span></code></p>
+<p>voir <a class="reference external" href="https://docs.julialang.org/en/v1/manual/mathematical-operations/">Mathematical Operations and Elementary Functions</a></p>
+<p>A remarquer l’utilisation de la fonction <code class="docutils literal notranslate"><span class="pre">log</span></code> comme le logarithme naturel (Népérien).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -404,7 +407,7 @@ const thebe_selector_output = ".output, .cell_output"
 </tr>
 </tbody>
 </table>
-<p>Il est possible d’utiliser les notations scientifiques <code>1e2</code> pour 100, ainsi que quelques nombre prédéfinis <code>pi</code>, <code>e</code>, <code>im</code> …</p>
+<p>Il est possible d’utiliser les notations scientifiques <code class="docutils literal notranslate"><span class="pre">1e2</span></code> pour 100, ainsi que quelques nombre prédéfinis <code class="docutils literal notranslate"><span class="pre">pi</span></code>, <code class="docutils literal notranslate"><span class="pre">im</span></code> …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1e-2</span>
@@ -596,6 +599,20 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>L’utilisation de caractères spéciaux comme les lettres grecques se font par utilisation d’une syntaxe de type <span class="math notranslate nohighlight">\(\LaTeX\)</span>. Dans la plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le caractère</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="n">π</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ℯ</span>     <span class="c1"># \euler</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="convention-et-style">
 <h3>Convention et style<a class="headerlink" href="#convention-et-style" title="Permalink to this headline">¶</a></h3>
 <p>Julia impose quelques restrictions de nom de variable, de plus les conventions suivantes sont d’usage :</p>
@@ -604,17 +621,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>La séparation des mots dans une variable se fait à l’aide d’un underscore (‘_’) mais cette pratique n’est pas recommandé pour une question de lisibilité des noms de variable.</p></li>
 <li><p>Les noms de Type ou de Modules commencent par une lettre majuscule, les majuscules séparant les différents mots du nom de la variable (exemple “MonModule”)</p></li>
 <li><p>Les noms des fonctions et macros sont en minuscule sans underscores.</p></li>
-<li><p>Les fonctions qui modifient en sortie leurs arguments d’entrée s’écrivent avec ! en fin.</p></li>
+<li><p>Les fonctions qui modifient en sortie leurs arguments d’entrée s’écrivent avec <code class="docutils literal notranslate"><span class="pre">!</span></code> en fin.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="types-de-variable">
 <h2>Types de variable<a class="headerlink" href="#types-de-variable" title="Permalink to this headline">¶</a></h2>
-<p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standards *, /, + ….</p>
+<p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standards <code class="docutils literal notranslate"><span class="pre">*,</span> <span class="pre">/,</span> <span class="pre">+,...</span></code>.</p>
 <div class="section" id="les-nombres-scalaires">
 <h3>Les nombres scalaires<a class="headerlink" href="#les-nombres-scalaires" title="Permalink to this headline">¶</a></h3>
 <p>On a vu précédemment que <em>Julia</em> est assez flexible sur l’utilisation et l’affectation des variables et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
-<p>De manière naturel on trouve les types :</p>
+<p>De manière naturelle on trouve les types :</p>
 <ul class="simple">
 <li><p><code>Int8</code>, <code>UInt8</code>, <code>Int16</code>, <code>UInt16</code>,<code>Int32</code>, <code>UInt32</code>, <code>Int64</code>, <code>UInt64</code>,<code>Int128</code>, <code>UInt128</code>.</p></li>
 <li><p><code>Float16</code> (simple précision i.e 8 chiffres significatifs), <code>Float32</code> (double précision, 16 chiffres significatifs), <code>Float64</code> (32 chiffres significatifs)</p></li>
@@ -665,15 +682,15 @@ const thebe_selector_output = ".output, .cell_output"
 <p><code class="docutils literal notranslate"><span class="pre">+=</span></code>,  <code class="docutils literal notranslate"><span class="pre">-=</span></code>, <code class="docutils literal notranslate"><span class="pre">*=</span></code>,  <code class="docutils literal notranslate"><span class="pre">/=</span></code>, <code class="docutils literal notranslate"><span class="pre">\=</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
-<span class="n">a</span><span class="o">+=</span><span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">*=</span><span class="mi">3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -682,9 +699,28 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="les-booleens">
 <h3>Les booléens<a class="headerlink" href="#les-booleens" title="Permalink to this headline">¶</a></h3>
 <p>Les variables booléennes (1bit) sont naturellement définies dans <em>Julia</em> à l’aide des opérateurs de comparaison</p>
-<p>| opération |égalité|différent| supérieur | supérieur ou égal | inférieur | inférieur ou égal|
-|——|——||——|——|——|——|
-| syntaxe | a==b | a!=b| a&gt;b | a&gt;=b | a&lt;b | a&lt;=b |</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>opération</p></th>
+<th class="head"><p>égalité</p></th>
+<th class="head"><p>différent</p></th>
+<th class="head"><p>supérieur</p></th>
+<th class="head"><p>supérieur ou égal</p></th>
+<th class="head"><p>inférieur</p></th>
+<th class="head"><p>inférieur ou égal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>syntaxe</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a==b</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a!=b</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&gt;b</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&gt;=b</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&lt;b</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a&lt;=b</span></code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&gt;</span><span class="mi">0</span>  <span class="p">;</span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="p">;</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -739,7 +775,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>La chaine de caractère est délimitée par “” et définit unt type <strong>ASCIIString</strong> ou <strong>UTF8String</strong></p>
+<p>La chaine de caractère est délimitée par “” et définit un type <strong>ASCIIString</strong> ou <strong>UTF8String</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;Une chaine de caractère </span><span class="se">\n</span><span class="s2">&quot;</span>  <span class="c1"># \n est le retour à la ligne</span>

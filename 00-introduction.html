@@ -351,23 +351,34 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="presentation">
 <h1>Présentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h1>
 <p>Hello tout le monde !</p>
-<p>Je me présente, je suis ingénieur calcul à l’Institut de Recherche Mathématiques de Rennes. J’ai une formation en mécanique des fluides numérique. J’ai écrit beaucoup de codes en Fortran avec MPI et OpenMP. Depuis une dizaine d’années je fais beaucoup de Python. J’ai commencé à apprendre le langage Julia en juillet 2018 lorsque la version 1.0 est sortie. Je surveillais sa progression depuis 2015.
-Les supports que je vais utiliser ont été écrits à l’origine par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a>.</p>
-<p><strong>Julia</strong> est un langage de programmation de haut niveau dédié au calcul scientifique et calcul haute performance. C’est un logiciel libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence MIT</a>.</p>
+<p>Je me présente, je suis ingénieur calcul à l’Institut de Recherche
+Mathématiques de Rennes. J’ai une formation en mécanique des fluides.
+J’ai écrit beaucoup de codes en Fortran avec MPI et
+OpenMP. Depuis une dizaine d’années je fais beaucoup de Python.
+J’ai commencé à apprendre le langage Julia en juillet 2018 mais je
+surveillais sa progression depuis 2015.  Les supports que je vais
+utiliser ont été écrits à l’origine par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a>.</p>
+<p><strong>Julia</strong> est un langage de programmation de haut niveau dédié au
+calcul scientifique et calcul haute performance. C’est un logiciel
+libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence
+MIT</a>.</p>
 <p><strong>Julia</strong> se veut la combinaison de :</p>
 <ul class="simple">
-<li><p>la facilité de développement des environnements interprétés comme <em>R</em>, <em>MATLAB</em>, <em>OCTAVE</em>, <em>SCILAB</em>, <em>PYTHON</em> …</p></li>
-<li><p>la performance d’un langage compilé, permettant une exécution parallèle et/ou distribuée <em>C</em>, <em>C++</em>, <em>Fortran</em>…</p></li>
+<li><p>la facilité de développement des environnements interprétés comme <em>R</em>, <em>MATLAB</em> ou <em>PYTHON+NUMPY</em> …</p></li>
+<li><p>la performance d’un langage compilé, permettant une exécution parallèle et/ou distribuée <em>C/C++</em> ou <em>Fortran</em>…</p></li>
 </ul>
-<p><strong>Julia</strong> est jeune à l’échelle de l’âge des langages. On peut voir son activité de développement <a class="reference external" href="https://github.com/JuliaLang/julia">sous GITHUB</a>, naissance en <em>aôut 2009</em>!. La première version stable 1.0 est sortie en juillet 2018 durant la conférence JuliaCon à Londres.</p>
+<p><strong>Julia</strong> est jeune à l’échelle de l’âge des langages. On peut voir
+son activité de développement <a class="reference external" href="https://github.com/JuliaLang/julia">sur GitHub</a>, avec
+naissance en aôut 2009. La première version stable 1.0 est sortie en juillet 2018
+durant la conférence JuliaCon à Londres. Les créateurs sont Jeff Bezanson, Stefan Karpinski, Viral B. Shah et Alan Edelman.</p>
 <p>Ce langage possède déjà un grand nombre d’atouts :</p>
 <ul class="simple">
 <li><p>des fonctions mathématiques de précision numérique étendue (<code>Int128</code>, <code>Float64</code>…).</p></li>
-<li><p>de nombreuses bibliothèques (ou packages) dont beaucoup écrites en Julia <a class="reference external" href="http://pkg.julialang.org/">http://pkg.julialang.org/</a>.</p></li>
-<li><p>l’intégration naturel de très nombreuses bibliothèques en C, Fortran, Python…</p></li>
+<li><p>de nombreuses bibliothèques (ou packages) dont beaucoup sont écrites en Julia <a class="reference external" href="http://pkg.julialang.org/">http://pkg.julialang.org/</a>.</p></li>
+<li><p>l’intégration naturelle de très nombreuses bibliothèques en C, Fortran, Python…</p></li>
 <li><p>Mais surtout l’usage d’un compilateur à la volée (Just In Time) !</p></li>
 </ul>
-<p>Les quelques pages qui suivent vont - nous l’espérons- vous guider dans l’usage de <strong>Julia</strong> il est possible également de consulter :</p>
+<p>Les quelques pages qui suivent vont - nous l’espérons - vous guider dans l’usage de <strong>Julia</strong> il est possible également de consulter :</p>
 <ul class="simple">
 <li><p>Le site officiel <a class="reference external" href="http://julialang.org/">http://julialang.org/</a> avec une documentation très complète.</p></li>
 <li><p><a class="reference external" href="http://en.wikibooks.org/wiki/Introducing_Julia">http://en.wikibooks.org/wiki/Introducing_Julia</a> excellent et très complet guide de Julia.</p></li>
@@ -381,7 +392,8 @@ Les supports que je vais utiliser ont été écrits à l’origine par <a class=
 <div class="section" id="le-terminal">
 <h2>Le terminal<a class="headerlink" href="#le-terminal" title="Permalink to this headline">¶</a></h2>
 <p>Julia est disponible sous tout OS (Mac-linux et Windows) voici la page de téléchargement officielle <a class="reference external" href="http://julialang.org/downloads/">http://julialang.org/downloads/</a>
-A voir également cette page pour des installation plus spécifiques comme sous linux <a class="reference external" href="http://julialang.org/downloads/platform.html">http://julialang.org/downloads/platform.html</a>.</p>
+Vous pouvez utiliser des installations plus spécifiques comme sous linux avec <a class="reference external" href="https://github.com/abelsiqueira/jill">jill</a> ou MacOS
+avec <a class="reference external" href="https://formulae.brew.sh/formula/julia#default">brew</a>.</p>
 <p>Une fois installé une interface <em>brut de pomme</em> apparait, en fait, une simple console ou REPL pour Read/Evaluate/Print/Loop :</p>
 <p><img alt="julia shell" src="_images/shell.png" /></p>
 <p>Le prompt <code>julia&gt;</code> invitant la commande…</p>
@@ -473,10 +485,10 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 <p>Julia possède une communauté très dynamique, à la fois pour développer le coeur du langage mais aussi pour mettre à disposition de nouvelles fonctionnalités qui pour certaines feront partie des prochaines versions de Julia.</p>
 <p>Un listing complet des packages officiels est disponible sur <a class="reference external" href="https://juliapackages.com">juliapackages.com</a> et/ou <a class="reference external" href="https://juliahub.com/ui/Packages">juliahub.com</a>.</p>
 <p>Pour installer un package faire “]”</p>
-<p>(v1.1) pkg&gt; add NomDuPackage</p>
+<p>(v1.1) pkg&gt; add Plots</p>
 <p>et il est installé physiquement dans votre espace disque (répertoire .julia/).</p>
-<p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation est assez longue, le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">NomDuPackage</span><span class="w"></span>
+<p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation peut être assez longue à cause de la compilation. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
 </pre></div>
 </div>
 <p>La commande Pkg permet de gérer les actions faire “]”</p>
