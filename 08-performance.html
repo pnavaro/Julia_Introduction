@@ -146,6 +146,11 @@ const thebe_selector_output = ".output, .cell_output"
    Metaprogrammation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-gpu.html">
+   GPU
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -187,9 +192,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/08-performance.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/08-performance.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -331,195 +336,291 @@ const thebe_selector_output = ".output, .cell_output"
 <p><em>Julia</em> avec la compilation <em>Just-In-Time</em> est un langage naturellement performant. Il n’est pas allergique aux boucles comme le sont les langages Python et R. Les opérations vectorisées fonctionnent également très bien à condition d’être attentifs aux allocations mémoire et aux vues explicites.</p>
 <div class="section" id="allocations">
 <h2>Allocations<a class="headerlink" href="#allocations" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>using Random, LinearAlgebra, BenchmarkTools
 
-<span class="k">function</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+function test(A, B, C)
+    C = C - A * B
+    return C
+end
 
-<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"></span>
+A = rand(1024, 256); B = rand(256, 1024); C = rand(1024, 1024)
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">);</span><span class="w"></span>
+@btime test($A, $B, $C);
 </pre></div>
+</div>
+</div>
 </div>
 <p>Dans l’appel de la macro <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> on interpole les arguments avec le signe <code class="docutils literal notranslate"><span class="pre">$</span></code> pour être sur que les fonctions
 <code class="docutils literal notranslate"><span class="pre">rand</span></code> aient déjà été evaluées avant l’appel de la fonction <code class="docutils literal notranslate"><span class="pre">test</span></code>. La matrice <code class="docutils literal notranslate"><span class="pre">C</span></code> est modifiée dans la fonction suivante donc par convention on ajoute un <code class="docutils literal notranslate"><span class="pre">!</span></code> au nom de la fonction. Par convention également, l’argument modifié se placera en premier. Comme dans la fonction <code class="docutils literal notranslate"><span class="pre">push!</span></code> par exemple.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">.-=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function test!(C, A, B)
+    C .-= A * B
+    return C
+end
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+@btime test!( $C, $A, $B);
 </pre></div>
 </div>
+</div>
+</div>
 <p>En effectuant une opération “en place”, on supprime une allocation mais celle pour effectuer l’opération <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> est toujours nécessaire. On peut supprimer cette allocation en utilisant la bibliothèque <code class="docutils literal notranslate"><span class="pre">BLAS</span></code>, cependant le code perd en lisibilité ce qu’il a gagné en performance.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">BLAS</span><span class="o">.</span><span class="n">gemm!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function test_opt!(C, A, B)
+    BLAS.gemm!(&#39;N&#39;,&#39;N&#39;, -1., A, B, 1., C)
+    return C
+end
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+@btime test_opt!($C, $A, $B);
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="alignement-de-la-memoire">
 <h2>Alignement de la mémoire<a class="headerlink" href="#alignement-de-la-memoire" title="Permalink to this headline">¶</a></h2>
 <p>Les opérations le long des premiers indices seront plus rapides que l’inverse.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FFTW</span>
 
-<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"></span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">fft</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">fft</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Voici un autre exemple ou on calcule la dérivée de la quantité <span class="math notranslate nohighlight">\(f\)</span> suivant la coordonnée <span class="math notranslate nohighlight">\(y\)</span> en passant par l’espace de Fourier</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>using FFTW
 
-<span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
-<span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
-<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="k">function</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">ifft</span><span class="p">(</span><span class="n">exky</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># f is a 2d array created by broadcasting</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">);</span><span class="w"></span>
+xmin, xmax, nx = 0, 4π, 1024
+ymin, ymax, ny = 0, 4π, 1024
+x = LinRange(xmin, xmax, nx+1)[1:end-1]
+y = LinRange(ymin, ymax, ny+1)[1:end-1]
+ky  = 2π ./ (ymax-ymin) .* [0:ny÷2-1;ny÷2-ny:-1]
+exky = exp.( 1im .* ky&#39; .* x)
+function df_dy( f, exky )
+    ifft(exky .* fft(f, 2), 2)
+end
+f = sin.(x) .* cos.(y&#39;) # f is a 2d array created by broadcasting
+@btime df_dy($f, $exky);
 </pre></div>
 </div>
+</div>
+</div>
 <p>En utilisant les “plans” de FFTW qui permettent de pré-allouer la mémoire nécessaire et le calcul “en place”. On peut améliorer les performances. On réutilise le même tableau pour la valeur de <span class="math notranslate nohighlight">\(f\)</span> et sa transformée de Fourier. On prend soin également de respecter l’alignement de la mémoire en transposant le tableau contenant <span class="math notranslate nohighlight">\(f\)</span> pour calculer la FFT. On utilise plus de mémoire, on fait plus de calcul en ajoutant les transpositions mais finalement le calcul va 3 fois plus vite car on évite les allocations et on limite les accès mémoire.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span><span class="w"></span>
-<span class="n">fᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span><span class="w"></span>
-<span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
-<span class="n">fft_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span><span class="w"></span>
-<span class="k">function</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w">  </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">exky</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>f  = zeros(ComplexF64, (nx,ny))
+fᵗ = zeros(ComplexF64, reverse(size(f)))
+f̂ᵗ = zeros(ComplexF64, reverse(size(f)))
+f .= sin.(x) .* cos.(y&#39;)
+fft_plan = plan_fft(fᵗ, 1, flags=FFTW.PATIENT)
+function df_dy!( f, fᵗ, f̂ᵗ, exky )
+    transpose!(fᵗ,f)
+    mul!(f̂ᵗ,  fft_plan, fᵗ)
+    f̂ᵗ .= f̂ᵗ .* exky
+    ldiv!(fᵗ, fft_plan, f̂ᵗ)
+    transpose!(f, fᵗ)
+end
+@btime df_dy!($f, $fᵗ, $f̂ᵗ, $exky );
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="vues-explicites">
 <h2>Vues explicites<a class="headerlink" href="#vues-explicites" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c"># Somme de la première colonne</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="nb">sum</span><span class="p">(</span><span class="n">T</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Somme de la première colonne</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="w">  </span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="nb">sum</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">T</span><span class="p">,:,</span><span class="mi">1</span><span class="p">))</span>  
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="eviter-les-calculs-dans-l-environnement-global">
 <h2>Eviter les calculs dans l’environnement global.<a class="headerlink" href="#eviter-les-calculs-dans-l-environnement-global" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">function</span> <span class="n">somme</span><span class="p">()</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> 
+        <span class="n">acc</span> <span class="o">+=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">end</span>
+    <span class="n">acc</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">somme</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Il faut écrire des fonctions</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">somme</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+        <span class="n">acc</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">end</span>
+    <span class="n">acc</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span>
+<span class="nd">@btime</span> <span class="n">somme</span><span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
+    
 </pre></div>
+</div>
+</div>
 </div>
 <p>Pour comprendre pourquoi l’utilisation de variable global influence les performances, prenons un exemple simple d’une fonction additionnant deux nombres:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">function</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">variable</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Comparons la performance avec cette fonction qui retourne la somme de ses deux arguments</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>On remarque que la deuxième fonction est 300 fois plus rapide que la première. Pour comprendre pourquoi elle est plus rapide, on peut regarder le code généré avant la compilation. On s’appercoit que le code est relativement simple avec une utilisation unique de l’instruction <code class="docutils literal notranslate"><span class="pre">add</span></code>.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Si on regarde le code généré utilisant la variable globale, on comprend rapidement pourquoi c’est plus long. Pourquoi le code est-il si compliqué ? Ici le langage ne connait pas le type de <code class="docutils literal notranslate"><span class="pre">variable</span></code>, il doit donc prendre en compte le fait que ce type puisse être modifié à tout moment. Comme tous les cas sont envisagés, cela provoque un surcoût important.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Il est donc possible d’améliorer la performance en fixant la valeur de la variable globale avec l’instruction <code class="docutils literal notranslate"><span class="pre">const</span></code>.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">constante</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">constante</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constante</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">function</span> <span class="n">addition_variable_constante</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">constante</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">addition_variable_constante</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>On peut également fixer le type de cette variable. C’est mieux mais cela reste éloigné, en terme de performance, du résultat précedent.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span><span class="o">::</span><span class="kt">Int</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">addition_variable_typee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">variable</span><span class="p">::</span><span class="n">Int</span>
+<span class="n">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span> <span class="n">addition_variable_typee</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Pour régler notre problème de performance avec une variable globale, il faut la passer en argument dans la fonction.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">v</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">variable</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime addition_variable_globale_en_argument(10, $variable)
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="instabilite-de-type">
 <h2>Instabilité de type<a class="headerlink" href="#instabilite-de-type" title="Permalink to this headline">¶</a></h2>
 <p>Une fonction est de type stable lorsque vous pouvez déduire ce que doit être la sortie de la fonction. L’exemple ci-dessous rendra les choses plus claires. En règle générale, les fonctions de type stable sont plus rapides.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="kt">Number</span><span class="w"></span>
-<span class="w">    </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span>
+    <span class="k">return</span> <span class="n">g</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Sur les deux exemples précedents on peut déduire le type de sortie de la fonction.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
@@ -531,141 +632,213 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>Le type de la valeur de retour peut être différent: <code class="docutils literal notranslate"><span class="pre">Float64</span></code> ou <code class="docutils literal notranslate"><span class="pre">Int64</span></code>. Mais la fonction est toujours stable.</p>
 <p>Créons maintenant un nouveau type:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutable</span> <span class="n">struct</span> <span class="n">Cube</span>
+    <span class="n">length</span>
+    <span class="n">width</span>
+    <span class="n">height</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Cube</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_typed</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutable</span> <span class="n">struct</span> <span class="n">Cube_typed</span>
+    <span class="n">length</span><span class="p">::</span><span class="n">Float64</span>
+    <span class="n">width</span><span class="p">::</span><span class="n">Float64</span>
+    <span class="n">height</span><span class="p">::</span><span class="n">Float64</span>
+<span class="n">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Cube_typed</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">T</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="o">::</span><span class="kt">T</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="o">::</span><span class="kt">T</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_parametric_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutable</span> <span class="n">struct</span> <span class="n">Cube_parametric_typed</span><span class="p">{</span><span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span> <span class="n">Real</span><span class="p">}</span>
+    <span class="n">length</span><span class="p">::</span><span class="n">T</span>
+    <span class="n">width</span><span class="p">::</span><span class="n">T</span>
+    <span class="n">height</span><span class="p">::</span><span class="n">T</span>
+<span class="n">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">Cube_parametric_typed</span><span class="p">)</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="n">c3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_parametric_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Cube_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">Cube_parametric_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">==</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="o">==</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="c"># not typed</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="c"># typed float</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="c"># typed parametric</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">BenchmarkTools</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="c1"># not typed</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="c1"># typed float</span>
+<span class="nd">@btime</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span> <span class="c1"># typed parametric</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>The second and the third function calls are faster! Let’s call <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code> and check type stability</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p><strong>Conclusion</strong>: Les types en Julia sont importants donc si vous les connaissez, ajoutez-les, cela peut améliorer les performances.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">zero_or_val</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Real</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">end</span>
+<span class="n">end</span>
+<span class="nd">@code_warntype</span> <span class="n">zero_or_val</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promote_type</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="kt">Int</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">zero_or_val_stable</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Real</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">else</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">promote_type</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">Int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">end</span>
+<span class="nd">@code_warntype</span> <span class="n">zero_or_val_stable</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p><strong>Conclusion</strong>: <code class="docutils literal notranslate"><span class="pre">promote_type</span></code> peut vous permettre de supprimer une instabilité de type en utilisant la réprésentation la plus haute dans l’abre des types.</p>
 <p>Je vous propose le jeu suivant: Soit un vecteur de nombres. Calculons la somme comme suit.
 Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docutils literal notranslate"><span class="pre">rand()</span></code>), si c’est face (<code class="docutils literal notranslate"><span class="pre">&gt;=0.5</span></code>), vous ajoutez <code class="docutils literal notranslate"><span class="pre">1</span></code>. Sinon, vous ajoutez le nombre lui-même.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"></span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">v</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">})</span> <span class="n">where</span> <span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span> <span class="n">Real</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">vi</span> <span class="ow">in</span> <span class="n">v</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;=</span><span class="mf">0.5</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">vi</span>
+        <span class="n">end</span>
+    <span class="n">end</span>
+<span class="n">end</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"></span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">myvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span><span class="w"></span>
+<span class="n">function</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">v</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">})</span> <span class="n">where</span> <span class="n">T</span> <span class="o">&lt;</span><span class="p">:</span> <span class="n">Real</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">vi</span> <span class="ow">in</span> <span class="n">v</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;=</span><span class="mf">0.5</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">one</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">else</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">vi</span>
+        <span class="n">end</span>
+    <span class="n">end</span>
+<span class="n">end</span>
+<span class="n">myvec</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span> <span class="o">==</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="nd">@btime</span> <span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p><strong>Conclusion</strong>: Think about the variables you are declaring. Do you know their types? If so, specify the type somehow.</p>
 <div class="section" id="code-xxx">
 <h3>&#64;code_XXX<a class="headerlink" href="#code-xxx" title="Permalink to this headline">¶</a></h3>
 <p>Nous avons vu durant ce chapitre que regarder le code généré peut nous aider à améliorer les performances. Voici toutes les macros à votre disposition:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># @code_llvm </span><span class="w"></span>
-<span class="c"># @code_lowered </span><span class="w"></span>
-<span class="c"># @code_native </span><span class="w"></span>
-<span class="c"># @code_typed </span><span class="w"></span>
-<span class="c"># @code_warntype</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># @code_llvm </span>
+<span class="c1"># @code_lowered </span>
+<span class="c1"># @code_native </span>
+<span class="c1"># @code_typed </span>
+<span class="c1"># @code_warntype</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">randval</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">randval</span><span class="o">&lt;</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;H&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">function</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">randval</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">randval</span><span class="o">&lt;</span><span class="mf">0.5</span>
+        <span class="k">return</span> <span class="s2">&quot;H&quot;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="s2">&quot;T&quot;</span>
+    <span class="n">end</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># syntax tree</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c1"># syntax tree</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># try @code_typed</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c1"># try @code_typed</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># this and code_warntype are probably the most relevant</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span> <span class="c1"># this and code_warntype are probably the most relevant</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span> <span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>

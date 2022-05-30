@@ -143,6 +143,11 @@ const thebe_selector_output = ".output, .cell_output"
    Metaprogrammation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-gpu.html">
+   GPU
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -184,9 +189,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/00-introduction.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/00-introduction.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -392,21 +397,31 @@ A voir également cette page pour des installation plus spécifiques comme sous 
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Un programme Julia est un script extension .jl on peut soit l’exécuter en ligne de commande “julia nomfichier.jl” ou en l’incluant</p>
-<!-- #endregion -->
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span><span class="w"></span>
+<!-- #endregion --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s2">&quot;monfichier.jl&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Toute ligne ou fin de ligne commançant par <code class="docutils literal notranslate"><span class="pre">#</span></code> est en commentaire, une bloc est délimité par <code class="docutils literal notranslate"><span class="pre">#=</span></code> et <code class="docutils literal notranslate"><span class="pre">=#</span></code>:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span><span class="w"></span>
-<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="w">    </span><span class="c">#commentaire en fin de ligne</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># commentaire</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span>    <span class="c1">#commentaire en fin de ligne</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="cm">#=   un bloc</span>
-<span class="cm">        complet</span>
-<span class="cm">de commentaires  =#</span><span class="w">        </span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#=   un bloc</span>
+        <span class="n">complet</span>
+<span class="n">de</span> <span class="n">commentaires</span>  <span class="o">=</span><span class="c1">#        </span>
 </pre></div>
 </div>
-<!-- #region -->
+</div>
+</div>
 </div>
 <div class="section" id="editeur-a-coloration-syntaxique">
 <h2>Editeur à coloration syntaxique<a class="headerlink" href="#editeur-a-coloration-syntaxique" title="Permalink to this headline">¶</a></h2>
@@ -451,7 +466,6 @@ Certains offrent la possibilité de gérer un terminal, les graphiques et un deb
 Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats.</p>
 <p>Le package <a class="reference external" href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a> est un outil Julia qui permet également de générer des notebooks et des fichiers markdown.</p>
 <p>Vous pouvez également regarder sur côté de <a class="reference external" href="https://github.com/fonsp/Pluto.jl">Pluto.jl</a> qui permet de créer des notebooks Julia avec des fonctionalités améliorant l’interactivité.</p>
-<!-- #endregion -->
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="les-packages">
@@ -462,11 +476,9 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 <p>(v1.1) pkg&gt; add NomDuPackage</p>
 <p>et il est installé physiquement dans votre espace disque (répertoire .julia/).</p>
 <p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation est assez longue, le package étant compilé en directe. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
-<!-- #region -->
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">NomDuPackage</span><span class="w"></span>
 </pre></div>
 </div>
-<!-- #endregion -->
 <p>La commande Pkg permet de gérer les actions faire “]”</p>
 <p>(v1.1) pkg&gt; rm NomDuPackage # rm : remove
 (v1.1) pkg&gt; update # comme dit le nom

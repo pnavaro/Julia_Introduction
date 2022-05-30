@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Metaprogrammation" href="09-metaprogrammation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-prise-en-main.html">
    Prise en main
@@ -142,6 +143,11 @@ const thebe_selector_output = ".output, .cell_output"
    Metaprogrammation
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   GPU
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -183,9 +189,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/10-gpu.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/10-gpu.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -460,190 +466,322 @@ dimensions. Il consiste à déporter les calculs sur la carte graphique puis ré
 Ces transferts de données ont un coût qu’il faudra prendre en compte lors de l’utilisation
 de ces co-processeurs.</p>
 <p>On importe quelques packages pour nos exemples</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">Random</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">Test</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">ForwardDiff</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">ProgressMeter</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">BenchmarkTools</span>
+<span class="n">using</span> <span class="n">Random</span>
+<span class="n">using</span> <span class="n">Test</span>
+<span class="n">using</span> <span class="n">LinearAlgebra</span>
+<span class="n">using</span> <span class="n">ForwardDiff</span>
+<span class="n">using</span> <span class="n">ProgressMeter</span>
+<span class="n">using</span> <span class="n">Plots</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Le package principal qui permet d’utiliser est <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>, il permet d’utiliser les cartes
 graphiques de la marque NVIDIA.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">CUDA</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">CUDA</span>
 
-<span class="n">CUDA</span><span class="o">.</span><span class="n">version</span><span class="p">()</span><span class="w"></span>
+<span class="n">CUDA</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Lorsque vous installez <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>, une version du compilateur de NVIDIA sera également téléchargé
 sur votre poste. Il est possible d’utiliser une installation existante, c’est expliqué dans la
 documentation.</p>
 <p>Cette première fonction permet de vérifier que le package est correctement installé et que vous disposez
 de la carte graphique adéquate.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">functional</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
 <p>Vous pouvez également lister les matériels à votre disposition.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">devices</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">capability</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">devices</span><span class="p">()</span>
+    <span class="nd">@show</span> <span class="n">capability</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="nd">@show</span> <span class="n">name</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Pour tester votre installation vous pouvez également regarder le package <a class="reference external" href="https://pc2.github.io/GPUInspector.jl/dev/">GPUInspector.jl</a></p>
 <div class="section" id="creation-de-tableaux-pour-le-gpu">
 <h2>Création de tableaux pour le GPU<a class="headerlink" href="#creation-de-tableaux-pour-le-gpu" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="allocations-sur-la-carte-graphique">
 <h3>Allocations sur la carte graphique<a class="headerlink" href="#allocations-sur-la-carte-graphique" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">2</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">{</span><span class="n">Float32</span><span class="p">,</span><span class="mi">2</span><span class="p">}(</span><span class="n">undef</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="transfert-vers-le-cpu">
 <h2>Transfert vers le CPU<a class="headerlink" href="#transfert-vers-le-cpu" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">b</span></code> est alloué sur le CPU, et un transfert de données est effectué.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="compatibilite-avec-les-tableaux-julia">
 <h3>Compatibilité avec les tableaux Julia<a class="headerlink" href="#compatibilite-avec-les-tableaux-julia" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Float32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="k">isa</span><span class="w"> </span><span class="kt">AbstractArray</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="n">isa</span> <span class="n">AbstractArray</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="tirages-aleatoires">
 <h2>Tirages aléatoires<a class="headerlink" href="#tirages-aleatoires" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">CuArray</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">1.0</span><span class="p">)</span><span class="w"></span>
-<span class="n">nt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nt</span><span class="p">);</span><span class="w"></span>
-<span class="n">scatter</span><span class="p">(</span><span class="w"> </span><span class="kt">Array</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="kt">Array</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="w"></span>
-<span class="n">plot!</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="n">xlims!</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="n">ylims!</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>x = CUDA.CuArray(0:0.01:1.0)
+nt = length(x)
+y = 0.2 .+ 0.5 .* x + 0.1 .* CUDA.randn(nt);
+scatter( Array(x), Array(y))
+plot!( x -&gt; 0.2 + 0.5x)
+xlims!(0,1)
+ylims!(0,1)
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nt</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="p">(</span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nt</span><span class="p">),</span> <span class="n">x</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">β</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="n">X</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="n">y</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">X</span><span class="s1">&#39;X \ X&#39;</span><span class="n">y</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span> <span class="p">(</span> <span class="n">β</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">.+</span> <span class="n">β</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">.*</span> <span class="n">x</span> <span class="o">.-</span> <span class="n">y</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">view</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">view</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}([</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w"></span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">CuArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}([</span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">])</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">{</span><span class="n">Float64</span><span class="p">}([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">{</span><span class="n">Float64</span><span class="p">}([</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">])</span>
 
-<span class="n">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="nb">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">do</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w"></span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">([</span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">])</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">([</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">])</span>
 
-<span class="n">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="nb">map</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">do</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">end</span>
 
-<span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">2</span><span class="n">b</span><span class="w"></span>
+<span class="n">a</span> <span class="o">.+</span> <span class="mi">2</span><span class="n">b</span>
 
-<span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 
-<span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="n">accumulate</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<span class="n">findfirst</span><span class="p">(</span><span class="n">isequal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="curand">
 <h1>CURAND<a class="headerlink" href="#curand" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CUDA.rand!(a)
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cublas">
 <h1>CUBLAS<a class="headerlink" href="#cublas" title="Permalink to this headline">¶</a></h1>
 <p>Les opérations entre tableaux alloués sur le GPU sont effectués sur le co-processeur.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="o">&#39;</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*</span> <span class="sa">b</span><span class="s1">&#39;</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cusolver">
 <h1>CUSOLVER<a class="headerlink" href="#cusolver" title="Permalink to this headline">¶</a></h1>
 <p>Certaines fonctions d’algèbre linéaire de LAPACK sont disponibles:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">ipiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrf!</span><span class="p">(</span><span class="n">a</span><span class="o">&#39;</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="n">CUDA</span><span class="o">.</span><span class="n">CUSOLVER</span><span class="o">.</span><span class="n">getrs!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">ipiv</span><span class="p">,</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>L, ipiv = CUDA.CUSOLVER.getrf!(a&#39;b)
+CUDA.CUSOLVER.getrs!(&#39;N&#39;, L, ipiv, CUDA.ones(Float64, 3))
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cufft">
 <h1>CUFFT<a class="headerlink" href="#cufft" title="Permalink to this headline">¶</a></h1>
 <p>Pour faire des FFTs sur le GPU, il est nécessaire d’utiliser les <code class="docutils literal notranslate"><span class="pre">plans</span></code> pour allouer l’espace nécessaire sur la carte graphique.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span>
-<span class="n">fft</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fft</span> <span class="o">=</span> <span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> 
+<span class="n">fft</span> <span class="o">*</span> <span class="n">a</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ifft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_ifft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
-<span class="n">real</span><span class="p">(</span><span class="n">ifft</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">fft</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ifft</span> <span class="o">=</span> <span class="n">CUFFT</span><span class="o">.</span><span class="n">plan_ifft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">real</span><span class="p">(</span><span class="n">ifft</span> <span class="o">*</span> <span class="p">(</span><span class="n">fft</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cuddn">
 <h1>CUDDN<a class="headerlink" href="#cuddn" title="Permalink to this headline">¶</a></h1>
 <p>Vous avez également accès à la bibliothèque NVIDIA pour les réseaux de neurones.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUDNN</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUDNN</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="cusparse">
 <h1>CUSPARSE<a class="headerlink" href="#cusparse" title="Permalink to this headline">¶</a></h1>
 <p>Les formats destinés aux matrices creuses sont aussi disponibles.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUSPARSE</span><span class="o">.</span><span class="n">CuSparseMatrixCSR</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">CUSPARSE</span><span class="o">.</span><span class="n">CuSparseMatrixCSR</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="workflow">
 <h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
@@ -657,67 +795,99 @@ de la carte graphique adéquate.</p>
 </div>
 <div class="section" id="exemple-avec-une-regression-lineaire">
 <h2>Exemple avec une regression linéaire<a class="headerlink" href="#exemple-avec-une-regression-lineaire" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># squared error loss function</span><span class="w"></span>
-<span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="c"># get gradient w.r.t to `w`</span><span class="w"></span>
-<span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
-<span class="c"># get derivative w.r.t to `b` (`ForwardDiff.derivative` is</span><span class="w"></span>
-<span class="c"># used instead of `ForwardDiff.gradient` because `b` is</span><span class="w"></span>
-<span class="c"># a scalar instead of an array)</span><span class="w"></span>
-<span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ForwardDiff</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># squared error loss function
+loss(w, b, x, y) = sum(abs2, y - (w*x .+ b)) / size(y, 2)
+# get gradient w.r.t to `w`
+loss∇w(w, b, x, y) = ForwardDiff.gradient(w -&gt; loss(w, b, x, y), w)
+# get derivative w.r.t to `b` (`ForwardDiff.derivative` is
+# used instead of `ForwardDiff.gradient` because `b` is
+# a scalar instead of an array)
+lossdb(w, b, x, y) = ForwardDiff.derivative(b -&gt; loss(w, b, x, y), b)
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># proximal gradient descent function</span><span class="w"></span>
-<span class="k">function</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">lmul!</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span><span class="w"> </span><span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">lr</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># proximal gradient descent function
+function train(w, b, x, y; lr=0.1)
+    w -= lmul!(lr, loss∇w(w, b, x, y))
+    b -= lr * lossdb(w, b, x, y)
+    return w, b
+end
 </pre></div>
+</div>
+</div>
 </div>
 <p>Version CPU</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">cpu_test</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="o">&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span><span class="w"></span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">iter</span><span class="w"></span>
-<span class="w">       </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">cpu_test</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="s1">&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="s1">&#39; * 0.1</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">iter</span>
+       <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">end</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">cpu_test</span><span class="p">()</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">cpu_test</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="version-gpu">
 <h3>Version GPU<a class="headerlink" href="#version-gpu" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">gpu_test</span><span class="p">(</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="o">&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span><span class="w"></span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">iter</span><span class="w"></span>
-<span class="w">       </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">       </span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">gpu_test</span><span class="p">(</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="s1">&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:];</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">.+</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="s1">&#39; * 0.1</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">iter</span>
+       <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+       
+    <span class="n">end</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">gpu_test</span><span class="p">()</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">gpu_test</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">cpu_test</span><span class="p">(</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">cpu_test</span><span class="p">(</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">gpu_test</span><span class="p">(</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span> <span class="n">gpu_test</span><span class="p">(</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -732,131 +902,235 @@ de la carte graphique adéquate.</p>
 </ul>
 <p>Programmer vos noyaux de manière incrémentale, en les gardant le plus simple possible et en vérifiant
 soigneusement que le résultat escompté est correct.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">function</span> <span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span>
+<span class="n">end</span>
 
-<span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@cuda</span> <span class="n">threads</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime norm($a)
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime norm($(Array(a)))
 </pre></div>
+</div>
+</div>
 </div>
 <p>La fonction <code class="docutils literal notranslate"><span class="pre">norm</span></code> est bine plus rapide exécutée sur le CPU</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">allowscalar</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">allowscalar</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">9_999_999</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">9_999_999</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Pour effectuer cette dernière instruction, vous avez besoin de programmer deux noyaux.
 La macro <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> n’est pas adéquate pour évaluer la performance car on a affaire à une opération de type “lazy”. C’est à dire que l’expression est programmée sur le GPU mais pas exécutée. Elle le sera lorsque vous transférerez le résultat vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> ou
 <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> du package <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@time</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@time</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="o">$</span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime CUDA.@sync $a .+ reverse($a);
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="kt">Array</span><span class="p">(</span><span class="n">a</span><span class="p">)));</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime CUDA.@sync $(Array(a)) .+ reverse($(Array(a)));
 </pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="aide-au-developpement">
 <h2>Aide au développement<a class="headerlink" href="#aide-au-developpement" title="Permalink to this headline">¶</a></h2>
 <p>Vous avez quelques macros disponibles pour vous aidez à implémenter vos noyaux:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span> <span class="o">=</span> <span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span> <span class="k">return</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span><span class="w"> </span><span class="n">kernel</span><span class="p">()</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">kernel</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s">&quot;bar&quot;</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span><span class="p">()</span> <span class="o">=</span> <span class="p">(</span><span class="nd">@cuprintln</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span> <span class="k">return</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span><span class="w"> </span><span class="n">kernel</span><span class="p">()</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">kernel</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Attention, exécuter plusieurs noyaux CUDA à la suite prend du temps car il y a un temps de lattence
 plus important que sur CPU.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">9_999_999</span><span class="p">)</span><span class="w"></span>
-<span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
-<span class="n">c</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">9_999_999</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">similar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">.=</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">b</span><span class="p">)[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">end</span>
+    <span class="k">return</span>
+<span class="n">end</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Essayons de remplacer la fonction <code class="docutils literal notranslate"><span class="pre">reverse</span></code></p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="k">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">end</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">end</span>
+    <span class="k">return</span>
+<span class="n">end</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Cela ne fonctionne pas car on n’itère pas sur un tableau alloué sur un GPU de la même manière qu’un tableau alloué sur CPU.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Les fonctions <code class="docutils literal notranslate"><span class="pre">blockIdx</span></code> et <code class="docutils literal notranslate"><span class="pre">threadIdx</span></code> sont disponibkes pour vous aider:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">attribute</span><span class="p">(</span><span class="n">device</span><span class="p">(),</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">attribute</span><span class="p">(</span><span class="n">device</span><span class="p">(),</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">blockIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="k">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">blockIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">blockDim</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nd">@inbounds</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">end</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">end</span>
+    <span class="k">return</span>
+<span class="n">end</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Le noyau construit est plus rapide que la fonction <code class="docutils literal notranslate"><span class="pre">reverse</span></code> initialement utilisée:</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="o">=</span><span class="mi">1024</span><span class="w"> </span><span class="n">blocks</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span><span class="o">÷</span><span class="mi">1024</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="o">$</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime CUDA.@sync @cuda threads=1024 blocks=length($a)÷1024+1 vadd_reverse($c, $a, $a)
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="o">$</span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@btime CUDA.@sync $a .+ reverse($a);
 </pre></div>
+</div>
+</div>
 </div>
 <p>Vous pouvez automatiser la configuration du noyau aux caractéristiques de votre carte.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">configurator</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">launch_configuration</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">config</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cld</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">threads</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">threads</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">configurator</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">launch_configuration</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">threads</span><span class="p">)</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">cld</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">threads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">threads</span><span class="o">=</span><span class="n">threads</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span><span class="w"> </span><span class="n">config</span><span class="o">=</span><span class="n">configurator</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">config</span><span class="o">=</span><span class="n">configurator</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -885,7 +1159,14 @@ plus important que sur CPU.</p>
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="09-metaprogrammation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Metaprogrammation</p>
+        </div>
+    </a>
 </div>
             
         </div>

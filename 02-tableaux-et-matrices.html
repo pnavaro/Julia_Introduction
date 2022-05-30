@@ -146,6 +146,11 @@ const thebe_selector_output = ".output, .cell_output"
    Metaprogrammation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-gpu.html">
+   GPU
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -187,9 +192,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/02-tableaux-et-matrices.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/02-tableaux-et-matrices.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -430,44 +435,88 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="tex2jax_ignore mathjax_ignore section" id="iterateur">
 <h1>Iterateur<a class="headerlink" href="#iterateur" title="Permalink to this headline">¶</a></h1>
 <p>Julia possède un Type particulier fait à l’aide du “:”</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">.+</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">2</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mi">2</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Ce type “formel” permet d’avoir une définition et une méthode associée sans stocker l’ensemble des valeurs. Attention celui-ci peut être vide :</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="w"> </span><span class="c"># itérateur formel mais correspond à un ensemble vide de valeurs</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span> <span class="c1"># itérateur formel mais correspond à un ensemble vide de valeurs</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="tableau">
 <h1>Tableau<a class="headerlink" href="#tableau" title="Permalink to this headline">¶</a></h1>
 <p>On vient de voir que l’on peut transformer l’itérateur précédent en tableau à l’aide de la commande “collect”</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="w"></span>
-<span class="n">aa</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">aa</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">a</span><span class="s1">&#39;)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w">  </span><span class="o">.+</span><span class="w"> </span><span class="n">a</span><span class="o">&#39;</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>  <span class="o">.+</span> <span class="n">a</span><span class="s1">&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>La réponse est de la forme <strong>Array{Type,dim}</strong> un tableau de <strong>Type</strong> à <strong>dim</strong> entrées (1 pour vecteur, 2 pour matrices …)</p>
 <p>A remarquer :</p>
@@ -477,82 +526,170 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>le crochet [ ] sert à extraire ou affecter une valeur ou un bloc de valeur. Attention le crochet [ ] sert également de “concatenateur” et constructeur de tableau (voir suite)</p></li>
 <li><p>Il est possible de faire des tableaux de n’importe quoi (fonction, tableau, …).</p></li>
 </ul>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="c"># pour accèder au dernier élément</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="c1"># pour accèder au dernier élément</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span><span class="o">.=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="n">end</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.=</span><span class="mi">1</span><span class="p">;</span> <span class="n">println</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Les crochets permettent la construction explicite de tableaux (ou leur concaténation)</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="c"># {espace} = séparateur de colonne</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="c1"># {espace} = séparateur de colonne</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="w">  </span><span class="n">A</span><span class="p">]</span><span class="w"> </span><span class="c"># concaténation par bloc</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span>  <span class="n">A</span><span class="p">]</span> <span class="c1"># concaténation par bloc</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># commande équivalent à la précédente [A  A]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span> <span class="c1"># commande équivalent à la précédente [A  A]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">A</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AA</span><span class="o">=</span><span class="p">[</span><span class="n">A</span> <span class="p">;</span> <span class="n">A</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># commande équivalent à la précédente [A  ; A]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span> <span class="c1"># commande équivalent à la précédente [A  ; A]</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>On peut accéder à tout ou partie d’un tableau à l’aide de 2 indices</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="k">end</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="n">end</span><span class="p">,</span><span class="n">end</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">AA</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">AA</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachrow</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">eachrow</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>A noter que l’on peut faire des tableaux de tout type voir de les mélanger (Any)</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="p">;</span><span class="s">&quot;deux&quot;</span><span class="p">]</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;un&quot;</span><span class="p">;</span><span class="s2">&quot;deux&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">false</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span><span class="n">true</span><span class="p">,</span><span class="n">false</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">true</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;un&quot;</span><span class="p">;</span> <span class="mi">2</span> <span class="p">;</span> <span class="n">true</span><span class="p">]</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l’exemple ci-dessous pour construire une matrice de VanderMonde</p>
 <div class="math notranslate nohighlight">
 \[ V_{i,j}=x_i^{j-1}\]</div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="n">V</span><span class="o">=</span><span class="p">[</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="c"># ligne et colonne</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.2</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">V</span><span class="o">=</span><span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="c1"># ligne et colonne</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="p">[</span><span class="w"> </span><span class="n">u</span><span class="o">*</span><span class="n">v</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mf">0.5</span><span class="o">:</span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="p">[</span> <span class="n">u</span><span class="o">*</span><span class="n">v</span> <span class="k">for</span> <span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mf">0.5</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>On peux évidemment faire des tableaux à 3,4… entrèes.</p>
 <div class="section" id="manipulation-de-tableau">
@@ -560,262 +697,522 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="push">
 <h3>push!<a class="headerlink" href="#push" title="Permalink to this headline">¶</a></h3>
 <p>Le fonction push permet d’ajouter à un tableau une valeur supplémentaire</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1,2]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1,2,4]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1,2,4,6]</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>a=[]
+push!(a,1)     # =&gt; [1]
+push!(a,2)     # =&gt; [1,2]
+push!(a,4)     # =&gt; [1,2,4]
+push!(a,6)     # =&gt; [1,2,4,6]
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="append">
 <h3>append!<a class="headerlink" href="#append" title="Permalink to this headline">¶</a></h3>
 <p>Cette fonction permet de mettre bout à bout 2 tableaux</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">append!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>append!(a,a)
 </pre></div>
+</div>
+</div>
 </div>
 <p>A noté le  <strong>Array{Any,1}</strong> !</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1,2]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w">     </span><span class="c"># =&gt; [1,2,4]</span><span class="w"></span>
-<span class="n">push!</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span><span class="w">  </span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>a=zeros(Int32,1)
+push!(a,1)     # =&gt; [1]
+push!(a,2)     # =&gt; [1,2]
+push!(a,4)     # =&gt; [1,2,4]
+push!(a,6)  
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">Int32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="attention-sur-la-conversion-de-type">
 <h3>Attention sur la conversion de type !<a class="headerlink" href="#attention-sur-la-conversion-de-type" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">map</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="n">Float64</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="kt">Float64</span><span class="o">.</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">Float64</span><span class="o">.</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="algebre-lineaire">
 <h2>Algèbre linéaire<a class="headerlink" href="#algebre-lineaire" title="Permalink to this headline">¶</a></h2>
 <p>On retrouve beaucoup (toutes) de fonctions usuelles de l’algèbre linéaire</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
-<span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">];</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span><span class="w"> </span><span class="c">#résolution du système Ax=b</span><span class="w"></span>
-<span class="n">x</span><span class="o">=</span><span class="n">A</span><span class="o">\</span><span class="n">b</span><span class="w"> </span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">];</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span> <span class="p">;</span> <span class="mi">3</span><span class="p">];</span> <span class="c1">#résolution du système Ax=b</span>
+<span class="n">x</span><span class="o">=</span><span class="n">A</span>\<span class="n">b</span> 
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="fonctions-scientifiques-et-operations">
 <h2>Fonctions scientifiques et opérations<a class="headerlink" href="#fonctions-scientifiques-et-operations" title="Permalink to this headline">¶</a></h2>
 <p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,<code>*</code>,<code>^</code>,<code>/</code> et <code class="docutils literal notranslate"><span class="pre">\</span></code>(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code>.&lt;/code&gt; toujours avec une contrainte de dimensions compatibles.</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
-<span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># exponentielle matricielle</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># exponentielle matricielle</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>De plus les tableaux possèdes des opérations de multiplication, division, puissance termes à termes</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="c">#Multiplication Matricielle</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">^</span><span class="mi">2</span> <span class="c1">#Multiplication Matricielle</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.^</span><span class="mi">2</span><span class="w"> </span><span class="c">#Multiplication terme à terme</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.^</span><span class="mi">2</span> <span class="c1">#Multiplication terme à terme</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="c">#Division terme à terme </span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="p">[</span><span class="mi">2</span> <span class="mi">3</span> <span class="p">;</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]</span> <span class="c1">#Division terme à terme </span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="mi">2</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">./</span><span class="mi">2</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="operateurs-booleens-sur-les-tableaux">
 <h2>Opérateurs booléens sur les tableaux<a class="headerlink" href="#operateurs-booleens-sur-les-tableaux" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="mi">2</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="mi">2</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span><span class="o">.&gt;</span><span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="particularite-max-maximum-min-minimum">
 <h2>Particularité max, maximum, min, minimum<a class="headerlink" href="#particularite-max-maximum-min-minimum" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">6</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="constructeurs">
 <h2>Constructeurs<a class="headerlink" href="#constructeurs" title="Permalink to this headline">¶</a></h2>
 <p>Enfin il est possible de construire rapidement certaines matrices</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="n">π</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c"># loi normale centrée de variance 1</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># loi normale centrée de variance 1</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="w"> </span><span class="c"># concaténation de tableaux</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="c1"># concaténation de tableaux</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span><span class="w"> </span><span class="c"># , ou ; jouent le rôle de retour à la ligne</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="c1"># , ou ; jouent le rôle de retour à la ligne</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">=</span><span class="n">Diagonal</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">=</span><span class="n">Diagonal</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="c"># extraction d&#39;une diagonale</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="c1"># extraction d&#39;une diagonale</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Matrix</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Matrix</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="type-sparse">
 <h2>type sparse<a class="headerlink" href="#type-sparse" title="Permalink to this headline">¶</a></h2>
 <p>Julia possède un type sparse i.e. des matrices creuses, ces dernières ayant un comportement identique aux matrices elles ne diffèrent que dans leur définition (et leur stockage).</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">SparseArrays</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spzeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spzeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">0</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="o">+</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="o">+</span><span class="n">spdiagm</span><span class="p">(</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sparse</span><span class="p">([</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="c"># pour rendre sparse une matrice &quot;full&quot;</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sparse</span><span class="p">([</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># pour rendre sparse une matrice &quot;full&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="affectation-et-copie">
 <h2>Affectation et copie<a class="headerlink" href="#affectation-et-copie" title="Permalink to this headline">¶</a></h2>
 <p>Attention julia à un mode de passage de valeur qui fonctionne différemment suivant une variable type ou un tableau.</p>
 <p>Pour une variable scalaire</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
-<span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="w"></span>
-<span class="n">b</span><span class="o">+=</span><span class="mi">1</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="n">b</span><span class="o">+=</span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Par contre maintenant si la variable est un tableau</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
-<span class="n">B</span><span class="o">=</span><span class="n">A</span><span class="w"></span>
-<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">A</span>
+<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Pour avoir un comportement il faut copier le tableau A</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
-<span class="n">B</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.+=</span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="dictionnaire">
 <h1>Dictionnaire<a class="headerlink" href="#dictionnaire" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="ss">:key1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;val1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:key2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;val2&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(:</span><span class="n">key1</span> <span class="o">=&gt;</span> <span class="s2">&quot;val1&quot;</span><span class="p">,</span> <span class="p">:</span><span class="n">key2</span> <span class="o">=&gt;</span> <span class="s2">&quot;val2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="c"># Toutes clés (itérateur)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># Toutes clés (itérateur)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="c"># Toutes valeurs (itérateur)</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># Toutes valeurs (itérateur)</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="c"># Itérer par paire clé-valeur</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;key: </span><span class="si">$k</span><span class="s">, value: </span><span class="si">$v</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">d</span> <span class="c1"># Itérer par paire clé-valeur</span>
+    <span class="n">println</span><span class="p">(</span><span class="s2">&quot;key: $k, value: $v&quot;</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">haskey</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="ss">:k</span><span class="p">)</span><span class="w"> </span><span class="c"># Vérifier la présence de la clé :k</span><span class="w"></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">haskey</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">k</span><span class="p">)</span> <span class="c1"># Vérifier la présence de la clé :k</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Les dictionnaires sont muables; quand des symboles sont utilisés comme clés, les clés sont immuables.</p>
 </div>
