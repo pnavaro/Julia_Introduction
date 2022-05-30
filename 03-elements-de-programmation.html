@@ -556,13 +556,13 @@ end
 </div>
 <div class="section" id="exemple-de-vectorisation">
 <h2>Exemple de vectorisation<a class="headerlink" href="#exemple-de-vectorisation" title="Permalink to this headline">¶</a></h2>
-<p>Regardons la vectorisation sous <em>Julia</em> à l’aide de la construction d’une matrice de Vandermond</p>
+<p>Regardons la vectorisation sous <em>Julia</em> à l’aide de la construction d’une matrice de Vandermonde</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">begin</span>
-    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
-    <span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
         <span class="n">V</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># calcul vectorisé</span>
     <span class="n">end</span>
@@ -583,9 +583,9 @@ end
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">begin</span>
-    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span>
-    <span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">X</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
         <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
             <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># calcul dévectorisé</span>
@@ -606,9 +606,9 @@ end
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">begin</span> 
-    <span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">;</span>
-    <span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">W</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
 <span class="n">end</span>
 </pre></div>
 </div>
@@ -624,8 +624,8 @@ end
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">Vander</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">V</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
         <span class="c1">#V[:,i]=x.^(i-1)</span>
         <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
@@ -656,7 +656,7 @@ end
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">Vander2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
 <span class="n">end</span>
 <span class="nd">@elapsed</span> <span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
@@ -678,7 +678,10 @@ end
 </div>
 </div>
 </div>
-<p>La conclusion n’est pas toujours évidente a priori… Néanmoins on peut voir que le fait de mettre le code dans une fonction impose une optimisation à la compilation et une contextualisation du type et que l’écriture explicite des boucles donne un meilleur résultat.</p>
+<p>La conclusion n’est pas toujours évidente a priori… Néanmoins on
+peut voir que le fait de mettre le code dans une fonction impose
+une optimisation à la compilation et une contextualisation du type
+et que l’écriture explicite des boucles donne un meilleur résultat.</p>
 </div>
 </div>
 

@@ -650,7 +650,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="type-et-constructeurs">
 <h1>Type et constructeurs<a class="headerlink" href="#type-et-constructeurs" title="Permalink to this headline">¶</a></h1>
-<p>Chaque langage “objet” définit un constructeur pour ces objets. Nous avons déjà utiliser un constructeur générique qui rempli chaque champ du nouveau type. Il est possible de faire une variante suivant le nombre d’arguments d’entrée et de leur type</p>
+<p>Chaque langage “objet” définit un constructeur pour ces objets. Nous avons déjà utilisé un constructeur générique qui rempli chaque champ du nouveau type. Il est possible de faire une variante suivant le nombre d’arguments d’entrée et de leur type</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">abstract</span> <span class="nb">type</span> <span class="n">AbstractGrid</span> <span class="n">end</span> <span class="c1"># juste en dessous de Any</span>
@@ -686,10 +686,12 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="les-iterateurs">
 <h1>Les Itérateurs<a class="headerlink" href="#les-iterateurs" title="Permalink to this headline">¶</a></h1>
-<p>Il est possible sur un type nouveau de définir un itérateur, comme ici de parcourrir les points de la grille, définissons (surchargeons) de nouvelles fonctions ou plutôt méthodes :</p>
+<p>Il est possible sur un type nouveau de définir un itérateur, comme ici de parcourir les points de la grille, définissons (surchargeons) de nouvelles fonctions ou plutôt méthodes :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Base.iterate(g::Grid1D, state=g.debut) = state &gt; g.fin ? nothing : (state, state+(g.fin-g.debut)/g.n)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Base.iterate(g::Grid1D, state=g.debut) = begin
+   state &gt; g.fin ? nothing : (state, state+(g.fin-g.debut)/g.n)
+end
 </pre></div>
 </div>
 </div>

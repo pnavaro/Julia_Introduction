@@ -428,8 +428,8 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="tableaux-et-matrices">
 <h1>Tableaux et matrices<a class="headerlink" href="#tableaux-et-matrices" title="Permalink to this headline">¶</a></h1>
 <p>La définition de tableaux i.e. vecteurs, matrices, hypermatrices est un élément essentiel de Julia.</p>
-<p>Julia ne possède qu’un seul type de tableau : <strong>Array</strong> on peut définir son nombre d’entrées (1 entrée= 1 dimension …) et son contenu de façon assez générale (Un tableau peut contenir des matrices à chaque élément…</p>
-<p>Une particularité est que les indices de tableaux commencent à 1, et l’accès aux éléments se fera à l’aide de ‘[‘ ’]’ et non ‘(‘ ‘)’ qui est réservé aux fonctions.</p>
+<p>Julia ne possède qu’un seul type de tableau : <strong>Array</strong> on peut définir son nombre d’entrées (1 entrée= 1 dimension …) et son contenu de façon assez générale. Un tableau peut contenir des matrices à chaque élément.</p>
+<p>Une particularité est que les indices de tableaux commencent à 1, et l’accès aux éléments se fera à l’aide de <code class="docutils literal notranslate"><span class="pre">[</span></code> <code class="docutils literal notranslate"><span class="pre">]</span></code> et non <code class="docutils literal notranslate"><span class="pre">(</span></code> <code class="docutils literal notranslate"><span class="pre">)</span></code> qui est réservé aux fonctions.</p>
 <p>Avant de rentrer dans la construction et manipulation de tableau regardons une autre classe</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="iterateur">
@@ -535,7 +535,21 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="n">begin</span><span class="p">]</span> <span class="c1"># pour accèder au premier élément</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aa</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="c1"># pour accèder au dernier élément</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">first</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">last</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -835,7 +849,7 @@ push!(a,6)
 </div>
 <div class="section" id="fonctions-scientifiques-et-operations">
 <h2>Fonctions scientifiques et opérations<a class="headerlink" href="#fonctions-scientifiques-et-operations" title="Permalink to this headline">¶</a></h2>
-<p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code>exp</code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,<code>*</code>,<code>^</code>,<code>/</code> et <code class="docutils literal notranslate"><span class="pre">\</span></code>(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code>.&lt;/code&gt; toujours avec une contrainte de dimensions compatibles.</p>
+<p>L’usage des fonction scientifiques se fait termes à termes pour l’ensemble des valeurs du tableau (sauf pour les fonctions matricielles comme <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code>log</code> …). L’usage des opérations <code>+</code>,<code>-</code>,<code>*</code>,<code>^</code>,<code>/</code> et <code class="docutils literal notranslate"><span class="pre">\</span></code>(résolution) est disponible à condition de respecter les contraintes de dimension (multiplication matricielle par exemple). Sont ajouté des opérations termes à termes <code>.*</code>,<code>.^</code>,<code>./</code> et <code class="docutils literal notranslate"><span class="pre">.</span></code> toujours avec une contrainte de dimensions compatibles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>

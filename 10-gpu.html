@@ -302,8 +302,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#workflow">
-     Workflow
+    <a class="reference internal nav-link" href="#les-etapes-pour-porter-votre-code-sur-gpu">
+     Les étapes pour porter votre code sur GPU
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -419,8 +419,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#workflow">
-     Workflow
+    <a class="reference internal nav-link" href="#les-etapes-pour-porter-votre-code-sur-gpu">
+     Les étapes pour porter votre code sur GPU
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -783,14 +783,13 @@ CUDA.CUSOLVER.getrs!(&#39;N&#39;, L, ipiv, CUDA.ones(Float64, 3))
 </div>
 </div>
 </div>
-<div class="section" id="workflow">
-<h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
-<p>Les étapes pour porter votre code sur GPU</p>
+<div class="section" id="les-etapes-pour-porter-votre-code-sur-gpu">
+<h2>Les étapes pour porter votre code sur GPU<a class="headerlink" href="#les-etapes-pour-porter-votre-code-sur-gpu" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Développez votre application sur votre CPU avec les tabeaux de type <code class="docutils literal notranslate"><span class="pre">Array</span></code></p></li>
-<li><p>port your application to the GPU by switching to the CuArray type</p></li>
-<li><p>disallow the CPU fallback (“scalar indexing”) to find operations that are not implemented for or incompatible with GPU execution</p></li>
-<li><p>(optional) use lower-level, CUDA-specific interfaces to implement missing functionality or optimize performance</p></li>
+<li><p>Portez votre application sur GPU en utilisant le type <code class="docutils literal notranslate"><span class="pre">CuArray</span></code></p></li>
+<li><p>Desactivez “scalar indexing” pour trouver les opérations incompatibles.</p></li>
+<li><p>Ecrivez vos propres kernels CUDA pour remplacer ces opérations.</p></li>
 </ol>
 </div>
 <div class="section" id="exemple-avec-une-regression-lineaire">
@@ -945,7 +944,7 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 </div>
-<p>La fonction <code class="docutils literal notranslate"><span class="pre">norm</span></code> est bine plus rapide exécutée sur le CPU</p>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">norm</span></code> est bien plus rapide exécutée sur le CPU</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">allowscalar</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
@@ -967,9 +966,13 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 </div>
-<p>Pour effectuer cette dernière instruction, vous avez besoin de programmer deux noyaux.
-La macro <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> n’est pas adéquate pour évaluer la performance car on a affaire à une opération de type “lazy”. C’est à dire que l’expression est programmée sur le GPU mais pas exécutée. Elle le sera lorsque vous transférerez le résultat vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> ou
-<code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> du package <code class="docutils literal notranslate"><span class="pre">CUDA</span></code>.</p>
+<p>Pour effectuer cette dernière instruction, vous avez besoin de
+programmer deux noyaux.  La macro <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> n’est pas adéquate pour
+évaluer la performance car on a affaire à une opération de type
+“lazy”. C’est à dire que l’expression est programmée sur le GPU
+mais pas exécutée. Elle le sera lorsque vous transférerez le résultat
+vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">&#64;sync</span></code> ou <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> du package
+<code class="docutils literal notranslate"><span class="pre">CUDA</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">CUDA</span><span class="o">.</span><span class="nd">@sync</span> <span class="n">a</span> <span class="o">.+</span> <span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
@@ -1029,8 +1032,8 @@ La macro <code class="docutils literal notranslate"><span class="pre">&#64;time<
 </div>
 </div>
 </div>
-<p>Attention, exécuter plusieurs noyaux CUDA à la suite prend du temps car il y a un temps de lattence
-plus important que sur CPU.</p>
+<p>Attention, exécuter plusieurs noyaux CUDA à la suite prend du temps
+car il y a un temps de lattence plus important que sur CPU.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">CuArray</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">9_999_999</span><span class="p">)</span>
@@ -1068,7 +1071,8 @@ plus important que sur CPU.</p>
 </div>
 </div>
 </div>
-<p>Cela ne fonctionne pas car on n’itère pas sur un tableau alloué sur un GPU de la même manière qu’un tableau alloué sur CPU.</p>
+<p>Cela ne fonctionne pas car on n’itère pas sur un tableau alloué sur
+un GPU de la même manière qu’un tableau alloué sur CPU.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
