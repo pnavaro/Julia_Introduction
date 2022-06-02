@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Packages utiles &#8212; Introduction au langage Julia</title>
+    <title>Packages graphiques &#8212; Introduction au langage Julia</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Calcul parallèle" href="06-calcul-parallele.html" />
+    <link rel="next" title="Type et méthodes" href="06-type-et-methode.html" />
     <link rel="prev" title="Les fonctions" href="04-les-fonctions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -121,22 +121,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Packages utiles
+   Packages graphiques
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-type-et-methode.html">
+  <a class="reference internal" href="06-type-et-methode.html">
    Type et méthodes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="08-performance.html">
+  <a class="reference internal" href="07-performance.html">
    Performance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-calcul-parallele.html">
+   Calcul parallèle
   </a>
  </li>
  <li class="toctree-l1">
@@ -190,7 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/05-quelques-packages-utiles.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="_sources/05-packages-graphiques.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -210,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F05-quelques-packages-utiles.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F05-packages-graphiques.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -236,32 +236,15 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Packages utiles
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots">
+   Plots
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#graphiques">
-   Graphiques
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataframes">
+   DataFrames
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plots">
-     Plots
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#type-dataframes">
-     Type DataFrames
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rdatasets">
-     RDatasets
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -273,7 +256,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Packages utiles</h1>
+                <h1>Packages graphiques</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -283,32 +266,15 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Packages utiles
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots">
+   Plots
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#graphiques">
-   Graphiques
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataframes">
+   DataFrames
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plots">
-     Plots
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#type-dataframes">
-     Type DataFrames
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rdatasets">
-     RDatasets
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -319,8 +285,8 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="packages-utiles">
-<h1>Packages utiles<a class="headerlink" href="#packages-utiles" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="packages-graphiques">
+<h1>Packages graphiques<a class="headerlink" href="#packages-graphiques" title="Permalink to this headline">¶</a></h1>
 <p>Comme vu dans l’introduction <em>Julia</em> possède une bibliothèque de packages assez grande dont il n’est pas forcément aisé d’en faire le tri…</p>
 <p>Je vous propose ici la description et utilisation de quelques classiques</p>
 <p>En premier lieu un packages graphiques :</p>
@@ -333,9 +299,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><strong>DataFrames</strong></p></li>
 <li><p><strong>RDatasets</strong></p></li>
 </ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="graphiques">
-<h1>Graphiques<a class="headerlink" href="#graphiques" title="Permalink to this headline">¶</a></h1>
 <p>La gestion graphique ne fait pas partie intégrante de <em>Julia</em> il faut faire appel à des packages extérieurs et plusieurs choix sont possibles. En voici quelques uns</p>
 <div class="section" id="plots">
 <h2>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
@@ -473,8 +436,8 @@ quiver!(xs, ys, quiver=v)
 voir <a class="reference external" href="https://github.com/JuliaPlots">JuliaPlots</a> et <a class="reference external" href="https://github.com/JuliaGraphics">JuliaGraphics</a></p></li>
 </ul>
 </div>
-<div class="section" id="type-dataframes">
-<h2>Type DataFrames<a class="headerlink" href="#type-dataframes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dataframes">
+<h2>DataFrames<a class="headerlink" href="#dataframes" title="Permalink to this headline">¶</a></h2>
 <p>But : travailler avec des tables de données.
 Ce sont des tables dont les colonnes sont des DataArray. Voici deux façons de construire des DataFrames :</p>
 <div class="cell docutils container">
@@ -539,9 +502,6 @@ df
 </div>
 </div>
 <p>Pour aller plus loin dans le travail statistique sur les Dataframes il nous faut le package RDatasets qui va fournir nombres exemples et on va y retrouver beaucoup de fonctionnalités communes au logiciel R.</p>
-</div>
-<div class="section" id="rdatasets">
-<h2>RDatasets<a class="headerlink" href="#rdatasets" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">RDatasets</span>
@@ -591,10 +551,10 @@ df
             <p class="prev-next-title">Les fonctions</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="06-calcul-parallele.html" title="next page">
+    <a class='right-next' id="next-link" href="06-type-et-methode.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calcul parallèle</p>
+        <p class="prev-next-title">Type et méthodes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
