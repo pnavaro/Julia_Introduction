@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Metaprogrammation &#8212; Introduction au langage Julia</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00-introduction.html">
-   Présentation
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-introduction.html">
+                    Présentation
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-prise-en-main.html">
    Prise en main
@@ -154,90 +169,209 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/09-metaprogrammation.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/pnavaro/Julia_Introduction"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F09-metaprogrammation.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/09-metaprogrammation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pnavaro/Julia_Introduction"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F09-metaprogrammation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/09-metaprogrammation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#euler-explicite">
    Euler explicite
@@ -270,12 +404,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Metaprogrammation</h1>
@@ -324,16 +457,17 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="metaprogrammation">
-<h1>Metaprogrammation<a class="headerlink" href="#metaprogrammation" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="metaprogrammation">
+<h1>Metaprogrammation<a class="headerlink" href="#metaprogrammation" title="Permalink to this headline">#</a></h1>
 <p>Définition de wikipédia : La métaprogrammation, nommée par analogie avec les métadonnées et les métaclasses, désigne l’écriture de programmes qui manipulent des données décrivant elles-mêmes des programmes. Dans le cas particulier où le programme manipule ses propres instructions pendant son exécution, on parle de programme auto-modifiant.</p>
 <p>La métaprogrammation est beaucoup utilisé dans le langage <strong>Julia</strong>, c’est elle qui vous donne accès à toutes ces macros commencant par <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> si pratiques. Cependant, elle est à utiliser avec précaution car il est souvent difficile de détecter des erreurs. Je conseille de l’utiliser uniquement si cela est vraiment nécessaire.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -344,184 +478,261 @@ const thebe_selector_output = ".output, .cell_output"
 y'(t) = 1 - y(t)
 \]</div>
 <p><span class="math notranslate nohighlight">\( t \in [0,5] \qquad \mbox{ and } \qquad y(0) = 0 \)</span></p>
-<div class="section" id="euler-explicite">
-<h2>Euler explicite<a class="headerlink" href="#euler-explicite" title="Permalink to this headline">¶</a></h2>
+<section id="euler-explicite">
+<h2>Euler explicite<a class="headerlink" href="#euler-explicite" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
 
-<span class="sd">   euler(f::Function, t::Float64, y::Float64, h::Float64)</span>
+<span class="s">   euler(f::Function, t::Float64, y::Float64, h::Float64)</span>
 
-<span class="sd">explicit euler method function that returns</span>
+<span class="s">explicit euler method function that returns</span>
 
-<span class="sd">```math</span>
-<span class="sd">y^{n+1} = y^n + h \\cdot f(t^n, y^n)</span>
-<span class="sd">```</span>
+<span class="s">```math</span>
+<span class="s">y^{n+1} = y^n + h </span><span class="se">\\</span><span class="s">cdot f(t^n, y^n)</span>
+<span class="s">```</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">function</span> <span class="n">euler</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">t</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">y</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">h</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="n">end</span>
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">euler</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>euler
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?euler
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">euler</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">euler</span> sch<span class=" -Color -Color-Bold">e</span>d<span class=" -Color -Color-Bold">ule</span> Nam<span class=" -Color -Color-Bold">e</span>dT<span class=" -Color -Color-Bold">u</span>p<span class=" -Color -Color-Bold">le</span> promot<span class=" -Color -Color-Bold">e</span>_r<span class=" -Color -Color-Bold">ule</span> bar<span class=" -Color -Color-Bold">e</span>mod<span class=" -Color -Color-Bold">ule</span> @Nam<span class=" -Color -Color-Bold">e</span>dT<span class=" -Color -Color-Bold">u</span>p<span class=" -Color -Color-Bold">le</span>
+</pre></div>
+</div>
+<p>euler(f::Function, t::Float64, y::Float64, h::Float64)</p>
+<p>explicit euler method function that returns</p>
+<p>$$
+y^{n+1} = y^n + h \cdot f(t^n, y^n)
+$$</p>
 </div>
 </div>
-<div class="section" id="runge-kutta-d-ordre-deux">
-<h2>Runge-Kutta d’ordre deux<a class="headerlink" href="#runge-kutta-d-ordre-deux" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="runge-kutta-d-ordre-deux">
+<h2>Runge-Kutta d’ordre deux<a class="headerlink" href="#runge-kutta-d-ordre-deux" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
 
-<span class="sd">   rk2(f::Function, t::Float64, y::Float64,  dt::Float64)</span>
+<span class="s">   rk2(f::Function, t::Float64, y::Float64,  dt::Float64)</span>
 
-<span class="sd">Runge-Kutta second order method function</span>
+<span class="s">Runge-Kutta second order method function</span>
 
-<span class="sd">```jldoctest</span>
-<span class="sd">julia&gt; f(t,y) = 1 - y</span>
-<span class="sd">julia&gt; rk2(f, 0.0, 0.0, 1.0)</span>
-<span class="sd">(1.0, 0.5)</span>
-<span class="sd">```</span>
+<span class="s">```jldoctest</span>
+<span class="s">julia&gt; f(t,y) = 1 - y</span>
+<span class="s">julia&gt; rk2(f, 0.0, 0.0, 1.0)</span>
+<span class="s">(1.0, 0.5)</span>
+<span class="s">```</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">function</span> <span class="n">rk2</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">t</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">y</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span>  <span class="n">h</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
-    <span class="n">ỹ</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">ỹ</span><span class="p">)</span>
-<span class="n">end</span>
-<span class="c1">#----------------------------------------------------------------------------</span>
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">rk2</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w">  </span><span class="n">h</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">ỹ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">ỹ</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="c">#----------------------------------------------------------------------------</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?rk2
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="runge-kutta-d-ordre-quatre">
-<h2>Runge-Kutta d’ordre quatre<a class="headerlink" href="#runge-kutta-d-ordre-quatre" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot;&quot;&quot;
-
-   rk4(f::Function, t::Float64, y::Float64,  dt::Float64)
-
-Runge-Kutta fourth order method function
-
-[Runge–Kutta methods on Wikipedia](https://en.wikipedia.org/wiki/Runge–Kutta_methods)
-
-&quot;&quot;&quot;
-function rk4(f::Function, t::Float64, y::Float64,  dt::Float64)
-
-    y₁ = dt * f(t,y)
-    y₂ = dt * f(t+dt/2,y+y₁/2)
-    y₃ = dt * f(t+dt/2,y+y₂/2)
-    y₄ = dt * f(t+dt,y+y₃)
-
-    t+dt, y+(y₁+2*y₂+2*y₃+y₄)/6
-
-end
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rk2
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?rk4
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">rk2</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">rk2</span>
+</pre></div>
+</div>
+<p>rk2(f::Function, t::Float64, y::Float64,  dt::Float64)</p>
+<p>Runge-Kutta second order method function</p>
+<div class="highlight-jldoctest notranslate"><div class="highlight"><pre><span></span>julia&gt; f(t,y) = 1 - y
+julia&gt; rk2(f, 0.0, 0.0, 1.0)
+(1.0, 0.5)
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="runge-kutta-d-ordre-quatre">
+<h2>Runge-Kutta d’ordre quatre<a class="headerlink" href="#runge-kutta-d-ordre-quatre" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+
+<span class="s">   rk4(f::Function, t::Float64, y::Float64,  dt::Float64)</span>
+
+<span class="s">Runge-Kutta fourth order method function</span>
+
+<span class="s">[Runge–Kutta methods on Wikipedia](https://en.wikipedia.org/wiki/Runge–Kutta_methods)</span>
+
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">rk4</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w">  </span><span class="n">dt</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">y₁</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y₂</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">y₁</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y₃</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">y₂</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y₄</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">y₃</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">+</span><span class="p">(</span><span class="n">y₁</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">y₂</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">y₃</span><span class="o">+</span><span class="n">y₄</span><span class="p">)</span><span class="o">/</span><span class="mi">6</span><span class="w"></span>
+
+<span class="k">end</span><span class="w"></span>
+</pre></div>
 </div>
-<div class="section" id="fonction-solveur">
-<h2>Fonction solveur<a class="headerlink" href="#fonction-solveur" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rk4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">rk4</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">rk4</span>
+</pre></div>
+</div>
+<p>rk4(f::Function, t::Float64, y::Float64,  dt::Float64)</p>
+<p>Runge-Kutta fourth order method function</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge–Kutta methods on Wikipedia</a></p>
+</div>
+</div>
+</section>
+<section id="fonction-solveur">
+<h2>Fonction solveur<a class="headerlink" href="#fonction-solveur" title="Permalink to this headline">#</a></h2>
 <p>Voici une fonction  permettant de résoudre l’équation différentielle avec la méthode numérique utilisée en paramètre.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot;&quot;&quot;
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
 
-    solver(f::Function, Method::Function, t₀::Float64,
-                y₀::Float64, dt::Float64, nsteps::Int64)
+<span class="s">    solver(f::Function, Method::Function, t₀::Float64,</span>
+<span class="s">                y₀::Float64, dt::Float64, nsteps::Int64)</span>
 
-Solve numerically the equation ``y&#39; = f(t, y)``
+<span class="s">Solve numerically the equation ``y&#39; = f(t, y)``</span>
 
-with `y(t₀)= y₀` and `nsteps` steps `h`
+<span class="s">with `y(t₀)= y₀` and `nsteps` steps `h`</span>
 
-## Arguments
-- `f::Function`: the function `f` of equation ``y&#39; = f(t,y)``.
-- `Method::Function`: numerical method from (tⁿ,yⁿ) returns ``(t^{n+1},y^{n+1})``
+<span class="s">## Arguments</span>
+<span class="s">- `f::Function`: the function `f` of equation ``y&#39; = f(t,y)``.</span>
+<span class="s">- `Method::Function`: numerical method from (tⁿ,yⁿ) returns ``(t^{n+1},y^{n+1})``</span>
 
 
-&quot;&quot;&quot;
-function solver(f::Function,
-                Method::Function,
-                t₀::Float64,
-                y₀::Float64, h::Float64, nsteps::Int64)
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="kt">Method</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">t₀</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">y₀</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">::</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="o">::</span><span class="kt">Int64</span><span class="p">)</span><span class="w"></span>
 
-    t = zeros(Float64,nsteps)
-    y = similar(t)
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"></span>
 
-    t[1] = t₀
-    y[1] = y₀
+<span class="w">    </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t₀</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y₀</span><span class="w"></span>
 
-    for i in 2:nsteps
-       t[i], y[i] = Method(f,t[i-1],y[i-1], h)
-    end
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">nsteps</span><span class="w"></span>
+<span class="w">       </span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    t, y
+<span class="w">    </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
 
-end
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>solver
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?solver
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">solver</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">solver</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>solver(f::Function, Method::Function, t₀::Float64,
+            y₀::Float64, dt::Float64, nsteps::Int64)
+</pre></div>
+</div>
+<p>Solve numerically the equation $y' = f(t, y)$</p>
+<p>with <code class="docutils literal notranslate"><span class="pre">y(t₀)=</span> <span class="pre">y₀</span></code> and <code class="docutils literal notranslate"><span class="pre">nsteps</span></code> steps <code class="docutils literal notranslate"><span class="pre">h</span></code></p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">/home/runner/work/Julia_Introduction/Julia_Introduction/09-metaprogrammation.ipynb</span>, line 10)</p>
+<p>Non-consecutive header level increase; 0 to 2 [myst.header]</p>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">nsteps</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="w"></span>
+<span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.0)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>nsteps, tfinal   = 7, 5.0
-t₀, x₀ = 0., 0.
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tfinal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">tfinal</span> <span class="o">/</span> <span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">x</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="w"> </span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">euler</span><span class="p">,</span><span class="w"> </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">);</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:o</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;euler&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">rk2</span><span class="p">,</span><span class="w">   </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">);</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:d</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;rk2&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">rk4</span><span class="p">,</span><span class="w">   </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">);</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:p</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;rk4&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">);</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;exact&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:right</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/09-metaprogrammation_17_0.svg" src="_images/09-metaprogrammation_17_0.svg" /></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plot( solver(f, euler, t₀, x₀, dt, nsteps); marker = :o, label=&quot;euler&quot;)
-plot!(solver(f, rk2,   t₀, x₀, dt, nsteps); marker = :d, label=&quot;rk2&quot;)
-plot!(solver(f, rk4,   t₀, x₀, dt, nsteps); marker = :p, label=&quot;rk4&quot;)
-t = 0:0.1:5
-plot!(t, 1 .- exp.(-t); line = 3, label = &quot;exact&quot;, legend = :right)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="objet-function">
-<h2>Objet function<a class="headerlink" href="#objet-function" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="objet-function">
+<h2>Objet function<a class="headerlink" href="#objet-function" title="Permalink to this headline">#</a></h2>
 <p>Pour améliorer l’interface, imaginons un type <code class="docutils literal notranslate"><span class="pre">RungeKutta</span></code> capable de fournir plusieurs méthodes de ce type.
 Un schéma de Runge-Kutta peut se construire en utilisant le tableau de Butcher:</p>
 <div class="math notranslate nohighlight">
@@ -547,150 +758,201 @@ y_{n+1} = y_n + h_n \sum_{k = 1}^q b_k p_{n,k}.
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">RungeKutta</span><span class="p">{</span><span class="n">T</span><span class="p">}</span>
-    
-    <span class="n">q</span> <span class="p">::</span> <span class="n">Int</span>
-    <span class="n">a</span> <span class="p">::</span> <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
-    <span class="n">b</span> <span class="p">::</span> <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
-    <span class="n">c</span> <span class="p">::</span> <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span>
-    
-    <span class="n">tn</span> <span class="p">::</span> <span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">}</span>
-    <span class="n">yn</span> <span class="p">::</span> <span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">}</span>
-    <span class="n">pn</span> <span class="p">::</span> <span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">}</span>
-    
-    <span class="n">function</span> <span class="n">RungeKutta</span><span class="p">(</span> <span class="n">a</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">b</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="n">c</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">})</span> <span class="n">where</span> <span class="n">T</span>
-        
-        <span class="n">q</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-        <span class="nd">@assert</span> <span class="p">(</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-        <span class="nd">@assert</span> <span class="p">(</span> <span class="n">length</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-        <span class="n">tn</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-        <span class="n">yn</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-        <span class="n">pn</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-        <span class="n">new</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">yn</span><span class="p">,</span> <span class="n">pn</span><span class="p">)</span>
-        
-    <span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">RungeKutta</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"></span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Array</span><span class="p">{</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Array</span><span class="p">{</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Array</span><span class="p">{</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">tn</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">yn</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">pn</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">RungeKutta</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="o">::</span><span class="kt">Array</span><span class="p">{</span><span class="kt">T</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">b</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">},</span><span class="w"> </span><span class="n">c</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"></span>
+<span class="w">        </span>
+<span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nd">@assert</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nd">@assert</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="n">tn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">yn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">pn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="kt">new</span><span class="p">{</span><span class="kt">T</span><span class="p">}(</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">tn</span><span class="p">,</span><span class="w"> </span><span class="n">yn</span><span class="p">,</span><span class="w"> </span><span class="n">pn</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-<span class="n">end</span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">(</span><span class="n">rk</span><span class="p">::</span><span class="n">RungeKutta</span><span class="p">)(</span><span class="n">f</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="n">t</span><span class="p">::</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">::</span><span class="n">T</span><span class="p">,</span>  <span class="n">h</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="p">(</span><span class="n">rk</span><span class="o">::</span><span class="kt">RungeKutta</span><span class="p">)(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w">  </span><span class="n">h</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">rk</span><span class="o">.</span><span class="n">q</span>
-        <span class="n">rk</span><span class="o">.</span><span class="n">tn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">rk</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span>
-        <span class="n">rk</span><span class="o">.</span><span class="n">yn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">rk</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">rk</span><span class="o">.</span><span class="n">tn</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">rk</span><span class="o">.</span><span class="n">yn</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">rk</span><span class="o">.</span><span class="n">q</span><span class="w"></span>
+<span class="w">        </span><span class="n">rk</span><span class="o">.</span><span class="n">tn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rk</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="w"></span>
+<span class="w">        </span><span class="n">rk</span><span class="o">.</span><span class="n">yn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">([</span><span class="n">rk</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">rk</span><span class="o">.</span><span class="n">tn</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">rk</span><span class="o">.</span><span class="n">yn</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    <span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">([</span><span class="n">rk</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">rk</span><span class="o">.</span><span class="n">q</span> <span class="p">])</span>
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">([</span><span class="n">rk</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">rk</span><span class="o">.</span><span class="n">pn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">rk</span><span class="o">.</span><span class="n">q</span><span class="w"> </span><span class="p">])</span><span class="w"></span>
 
-<span class="n">end</span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function solver(f::Function,
-                Method::RungeKutta,
-                t₀::T,
-                y₀::T, h::T, nsteps::Int) where T
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="kt">Method</span><span class="o">::</span><span class="kt">RungeKutta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">t₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">y₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"></span>
 
-    t = zeros(T,nsteps)
-    y = similar(t)
+<span class="w">    </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"></span>
 
-    t[1] = t₀
-    y[1] = y₀
+<span class="w">    </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t₀</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y₀</span><span class="w"></span>
 
-    for i in 2:nsteps
-       t[i], y[i] = Method(f,t[i-1],y[i-1], h)
-    end
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">nsteps</span><span class="w"></span>
+<span class="w">       </span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Method</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    t, y
+<span class="w">    </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
 
-end
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>solver (generic function with 2 methods)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">BigFloat</span><span class="o">.</span><span class="p">([</span> <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
-      <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="mi">0</span>   <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
-      <span class="mi">0</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> 
-      <span class="mi">0</span>   <span class="mi">0</span>   <span class="mi">1</span> <span class="mi">0</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">BigFloat</span><span class="o">.</span><span class="p">([</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">      </span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">      </span><span class="mi">0</span><span class="w">   </span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">      </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w">   </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{BigFloat}:
+ 0.0  0.0  0.0  0.0
+ 0.5  0.0  0.0  0.0
+ 0.0  0.5  0.0  0.0
+ 0.0  0.0  1.0  0.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span> <span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">]</span>
-<span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span>   <span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>  <span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">BigFloat</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="w"> </span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">])</span><span class="w"></span>
+<span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">BigFloat</span><span class="o">.</span><span class="p">([</span><span class="mi">0</span><span class="w">   </span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{BigFloat}:
+ 0.0
+ 0.5
+ 0.5
+ 1.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rk4_new</span> <span class="o">=</span> <span class="n">RungeKutta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rk4_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RungeKutta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RungeKutta{BigFloat}(4, BigFloat[0.0 0.0 0.0 0.0; 0.5 0.0 0.0 0.0; 0.0 0.5 0.0 0.0; 0.0 0.0 1.0 0.0], BigFloat[0.1666666666666666574148081281236954964697360992431640625, 0.333333333333333314829616256247390992939472198486328125, 0.333333333333333314829616256247390992939472198486328125, 0.1666666666666666574148081281236954964697360992431640625], BigFloat[0.0, 0.5, 0.5, 1.0], BigFloat[0.0, 0.0, 0.0, 0.0], BigFloat[0.0, 0.0, 0.0, 0.0], BigFloat[0.0, 0.0, 0.0, 0.0])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>using Plots
-t = 0:0.1:5
-f(t, x) = 1 - x
-t₀, x₀ = 0., 0.
-nsteps, tfinal   = 7, 5.0
-dt = tfinal / (nsteps-1)
-plot(t, 1 .- exp.(-t),label = &quot;exact&quot;, legend = :right)
-plot!(solver(f, rk4_new, t₀, x₀, dt, nsteps), marker = :o,  label=&quot;rk4_new&quot;)
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5</span><span class="w"></span>
+<span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
+<span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="w"></span>
+<span class="n">nsteps</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="w"></span>
+<span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tfinal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">nsteps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">),</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;exact&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:right</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">rk4_new</span><span class="p">,</span><span class="w"> </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">),</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:o</span><span class="p">,</span><span class="w">  </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;rk4_new&quot;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/09-metaprogrammation_25_0.svg" src="_images/09-metaprogrammation_25_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">     </span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="w">   </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">       </span><span class="mi">1</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
+  0.0        0.0  0.0  0.0
+  0.333333   0.0  0.0  0.0
+ -0.333333   1.0  0.0  0.0
+  1.0       -1.0  1.0  0.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>  <span class="mi">0</span>   <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">0</span><span class="p">;</span> 
-     <span class="mi">1</span><span class="o">/</span><span class="mi">3</span>   <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">0</span><span class="p">;</span> 
-    <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span>   <span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span><span class="p">;</span> 
-       <span class="mi">1</span>  <span class="o">-</span><span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">0</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">]</span><span class="w"></span>
+<span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
+<span class="n">rk4_38</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RungeKutta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">rk4_38</span><span class="p">,</span><span class="w"> </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">),</span><span class="w"> </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:r</span><span class="p">,</span><span class="w">  </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;rk4_38&quot;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/09-metaprogrammation_27_0.svg" src="_images/09-metaprogrammation_27_0.svg" /></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>b = [1/8, 3/8, 3/8, 1/8]
-c = [0, 1/3,  2/3, 1]
-rk4_38 = RungeKutta(a, b, c)
-plot!(solver(f, rk4_38, t₀, x₀, dt, nsteps), marker = :r,  label=&quot;rk4_38&quot;)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="id1">
-<h2>Metaprogrammation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="id1">
+<h2>Metaprogrammation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <p>Voyons maintenant comment créer la fonction “solveur” en utilisant la métaprogrammation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>macro addition(x, y)
-    return :($x + $y)
-end
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span><span class="w"> </span><span class="n">addition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">:</span><span class="p">(</span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">$</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@addition (macro with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@add</span> <span class="mi">2</span> <span class="mi">3</span>      <span class="c1">## ou @add(2, 3) </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@addition</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w">      </span><span class="c">## ou @add(2, 3) </span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
 </div>
@@ -698,10 +960,15 @@ end
 <p>Cette macro n’est pas une fonction, elle crée une expression en utilisant les deux arguments et place le symbole <code class="docutils literal notranslate"><span class="pre">+</span></code> entre les deux. Créons maintenant une macro pour calculer la valeur absolue.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>macro abs(x)
-    return :( $x &gt; 0 ? $x : -$x)
-end
-@abs(-2), @abs(2)
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">:</span><span class="p">(</span><span class="w"> </span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">-$</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="nd">@abs</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nd">@abs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 2)
 </pre></div>
 </div>
 </div>
@@ -709,44 +976,56 @@ end
 <p>Pour des expressions plus longues et plus compliquées, on utilisera le mot-clé <code class="docutils literal notranslate"><span class="pre">quote</span></code>. La macro suivante va créer la fonction solveur avec la méthode numérique choisie.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>macro make_method( meth)
-    return quote
-        function (f::Function, t₀::T, x₀::T, dt::T, nsteps::Int64) where T
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">macro</span><span class="w"> </span><span class="n">make_method</span><span class="p">(</span><span class="w"> </span><span class="n">meth</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">quote</span><span class="w"></span>
+<span class="w">        </span><span class="k">function</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="o">::</span><span class="kt">Function</span><span class="p">,</span><span class="w"> </span><span class="n">t₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="o">::</span><span class="kt">T</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="o">::</span><span class="kt">Int64</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"></span>
 
-            t = zeros(T,nsteps)
-            x = zeros(T,nsteps)
+<span class="w">            </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">nsteps</span><span class="p">)</span><span class="w"></span>
 
-            t[1] = t₀
-            x[1] = x₀
+<span class="w">            </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t₀</span><span class="w"></span>
+<span class="w">            </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x₀</span><span class="w"></span>
 
-            for i in 2:nsteps
-               t[i], x[i] = $meth(f,t[i-1],x[i-1], dt)
-            end
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">nsteps</span><span class="w"></span>
+<span class="w">               </span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">$</span><span class="n">meth</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
 
-            return t, x
-        end
-    end
-end
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>@make_method (macro with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rk4_solver</span> <span class="o">=</span> <span class="nd">@make_method</span> <span class="n">rk4</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rk4_solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@make_method</span><span class="w"> </span><span class="n">rk4</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#5 (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plot(rk4_solver(f, t₀, x₀, dt, nsteps))
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">rk4_solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">t₀</span><span class="p">,</span><span class="w"> </span><span class="n">x₀</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">nsteps</span><span class="p">))</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/09-metaprogrammation_36_0.svg" src="_images/09-metaprogrammation_36_0.svg" /></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -757,22 +1036,24 @@ end
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.7"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "julia-1.7",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.7'</script>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="08-calcul-parallele.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -788,24 +1069,28 @@ end
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By The Jupyter Book community<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

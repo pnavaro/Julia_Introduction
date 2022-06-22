@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Calcul parallèle &#8212; Introduction au langage Julia</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00-introduction.html">
-   Présentation
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-introduction.html">
+                    Présentation
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-prise-en-main.html">
    Prise en main
@@ -154,90 +169,209 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/08-calcul-parallele.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/pnavaro/Julia_Introduction"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F08-calcul-parallele.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/08-calcul-parallele.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/pnavaro/Julia_Introduction"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F08-calcul-parallele.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/08-calcul-parallele.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    Calcul parallèle
@@ -291,12 +425,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Calcul parallèle</h1>
@@ -366,16 +499,17 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="calcul-parallele">
-<h1>Calcul parallèle<a class="headerlink" href="#calcul-parallele" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="calcul-parallele">
+<h1>Calcul parallèle<a class="headerlink" href="#calcul-parallele" title="Permalink to this headline">#</a></h1>
 <p><em>Julia</em> permet nativement le calcul parallèle plus précisément le calcul parallèle à mémoire partagée ou distribuée.</p>
 <p>Le document référence officiel : <a class="reference external" href="https://docs.julialang.org/en/v1/manual/parallel-computing/">https://docs.julialang.org/en/v1/manual/parallel-computing/</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Plots</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -386,79 +520,168 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Autrement on peut à la volée ajouter/enlever des processeurs ou plutôt workers à l’aide des commandes <code>addproc()</code> <code>rmproc()</code> et <code>worker()</code> ainsi que les commandes <code>nprocs</code> et <code>nworker</code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Distributed</span>
-<span class="n">workers</span><span class="p">()</span> <span class="c1"># par défaut un worker le &quot;maitre&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="w"></span>
+
+<span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="c"># par défaut un worker le &quot;maitre&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#ajout de 2 workers</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c">#ajout de 2 workers</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Int64}:
+ 6
+ 7
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span> <span class="c1"># le processeur 1 n&#39;est plus worker il est devenu master</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="c"># le processeur 1 n&#39;est plus worker il est devenu master</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="parallelisation-avec-distributed">
-<h1>Parallélisation avec Distributed<a class="headerlink" href="#parallelisation-avec-distributed" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="parallelisation-avec-distributed">
+<h1>Parallélisation avec Distributed<a class="headerlink" href="#parallelisation-avec-distributed" title="Permalink to this headline">#</a></h1>
 <p><em>Julia</em> offre une façon simple de programmer des processus asynchrones à l’aide de fonction <code class="docutils literal notranslate"><span class="pre">pmap</span></code> et la macro &#64;spawnat</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span> <span class="n">begin</span>  <span class="c1"># la fonction slow_add est définit sur tous les processus</span>
-    <span class="n">function</span> <span class="n">slow_add</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-     <span class="n">end</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">begin</span><span class="w">  </span><span class="c"># la fonction slow_add est définit sur tous les processus</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">slow_add</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">     </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 
-<span class="nd">@elapsed</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+<span class="nd">@elapsed</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.036505513
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">results</span> <span class="o">=</span> <span class="n">pmap</span><span class="p">(</span><span class="n">slow_add</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">8</span> <span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pmap</span><span class="p">(</span><span class="n">slow_add</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.011168589
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>futures = []
-for x in 1:8
-    future = @spawnat :any slow_add(x)  # remplacez :any par un id pour exécuter 
-    push!(futures, future)              # sur un processus particulier
-end
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">]</span> <span class="c1"># les futures ont déjà été exécutées</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">futures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="w"></span>
+<span class="w">    </span><span class="n">future</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="ss">:any</span><span class="w"> </span><span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">  </span><span class="c"># remplacez :any par un id pour exécuter </span><span class="w"></span>
+<span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">futures</span><span class="p">,</span><span class="w"> </span><span class="n">future</span><span class="p">)</span><span class="w">              </span><span class="c"># sur un processus particulier</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">futures</span><span class="p">]</span><span class="w"> </span><span class="c"># les futures ont déjà été exécutées</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.546253522
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 </pre></div>
 </div>
 </div>
@@ -466,25 +689,36 @@ end
 <p>Regardons plus exactement la répartition du calcul pour cela utilisons un tableau partagé <code>SharedArray</code> (voir également <code>SharedMatrix</code>, <code>SharedVector</code>). Autrement dit un tableau qui sera accessible en lecture et en écriture pour chaque worker (et le master).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">SharedArrays</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SharedArrays</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">SharedArray</span><span class="p">{</span><span class="n">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="n">taille</span><span class="p">)</span> <span class="c1"># Tableau partagé</span>
-<span class="nd">@distributed</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">taille</span>
-    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">()</span> <span class="c1"># renvoie le numéro du worker stocké dans a</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="w"></span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SharedArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="n">taille</span><span class="p">)</span><span class="w"> </span><span class="c"># Tableau partagé</span><span class="w"></span>
+<span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">taille</span><span class="w"></span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">()</span><span class="w"> </span><span class="c"># renvoie le numéro du worker stocké dans a</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (runnable) @0x000000014385c010
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×7 SharedMatrix{Int64}:
+ 2  2  0  0  0  0  0
 </pre></div>
 </div>
 </div>
@@ -493,12 +727,28 @@ end
 <p>Regardons si nous n’avions pas utilisé de tableau partagé</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span> <span class="c1"># Tableau non partagé il est ici en local myid()==1</span>
-<span class="nd">@sync</span> <span class="nd">@distributed</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">taille</span>
-    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">()</span> <span class="c1"># renvoie le numéro du worker</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">taille</span><span class="o">=</span><span class="mi">7</span><span class="w"></span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span><span class="w"> </span><span class="c"># Tableau non partagé il est ici en local myid()==1</span><span class="w"></span>
+<span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">taille</span><span class="w"></span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">myid</span><span class="p">()</span><span class="w"> </span><span class="c"># renvoie le numéro du worker</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 2:	[2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 3:	[0.0, 0.0, 3.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 2:	[2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 4:	[0.0, 0.0, 0.0, 4.0, 0.0, 0.0, 0.0]
+      From worker 5:	[0.0, 0.0, 0.0, 0.0, 5.0, 0.0, 0.0]
+      From worker 7:	[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.0]
+      From worker 6:	[0.0, 0.0, 0.0, 0.0, 0.0, 6.0, 0.0]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x0000000144087490
 </pre></div>
 </div>
 </div>
@@ -507,7 +757,12 @@ end
 <p>Par contre</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 </pre></div>
 </div>
 </div>
@@ -515,98 +770,144 @@ end
 <p>la valeur sur master n’a pas été modifiée. Autrement dit chaque worker a utilisé une copie locale de a, localement modifiable mais une fois l’exécution terminée cette copie est effacée.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span>
-<span class="nd">@sync</span> <span class="n">begin</span>
-    <span class="nd">@distributed</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># nouvelle copie locale</span>
-    <span class="n">end</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">taille</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="c"># nouvelle copie locale</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 3:	[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+      From worker 2:	[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00000001442424d0
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="application-bassin-d-attraction-de-newton">
-<h1>Application Bassin d’attraction de Newton :<a class="headerlink" href="#application-bassin-d-attraction-de-newton" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="application-bassin-d-attraction-de-newton">
+<h1>Application Bassin d’attraction de Newton :<a class="headerlink" href="#application-bassin-d-attraction-de-newton" title="Permalink to this headline">#</a></h1>
 <p>Plaçons nous sur un exemple de calcul de bassin d’attraction de Newton</p>
-<div class="section" id="premier-calcul-mono-processeur-temps-de-reference">
-<h2>premier calcul mono-processeur (temps de référence)<a class="headerlink" href="#premier-calcul-mono-processeur-temps-de-reference" title="Permalink to this headline">¶</a></h2>
+<section id="premier-calcul-mono-processeur-temps-de-reference">
+<h2>premier calcul mono-processeur (temps de référence)<a class="headerlink" href="#premier-calcul-mono-processeur-temps-de-reference" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>    <span class="c1"># Pour la fonction `norm`</span>
-<span class="s2">&quot; Algorithme de Newton &quot;</span>
-<span class="n">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
-    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">x0</span>
-    <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>\<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">xnew</span>
-        <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>\<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">end</span>
-    <span class="k">return</span> <span class="n">xnew</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w">    </span><span class="c"># Pour la fonction `norm`</span><span class="w"></span>
+<span class="s">&quot; Algorithme de Newton &quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x0</span><span class="w"></span>
+<span class="w">    </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xnew</span><span class="w"></span>
+<span class="w">        </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xnew</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>newton
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
-<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
-<span class="c1"># le jacobien de f</span>
-<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span><span class="w"></span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="c"># le jacobien de f</span><span class="w"></span>
+<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">function</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-            <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-            <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
-        <span class="n">end</span>
-    <span class="n">end</span>
-    <span class="k">return</span> <span class="n">Imag</span>
-<span class="n">end</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="s">Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">            </span><span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calc_bassin
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span> <span class="c1"># pour la compilation</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">1024</span> <span class="c1"># un deuxième appel est plus rapide</span>
-<span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Imag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c"># pour la compilation</span><span class="w"></span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="c"># un deuxième appel est plus rapide</span><span class="w"></span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">Imag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_bassin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.080916 seconds (120.87 M allocations: 6.299 GiB, 13.33% gc time)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> 
-    <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="p">:</span><span class="n">equal</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">aspect_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:equal</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_28_0.svg" src="_images/08-calcul-parallele_28_0.svg" /></div>
 </div>
-</div>
-<div class="section" id="newton-en-parallele">
-<h2>Newton en parallèle<a class="headerlink" href="#newton-en-parallele" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="newton-en-parallele">
+<h2>Newton en parallèle<a class="headerlink" href="#newton-en-parallele" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Distributed</span><span class="p">,</span> <span class="n">SharedArrays</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="p">,</span><span class="w"> </span><span class="n">SharedArrays</span><span class="w"></span>
 
-<span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># on ajoute 2 processeurs</span>
+<span class="n">addprocs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c"># on ajoute 2 processeurs</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Int64}:
+ 8
+ 9
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">workers</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
 </pre></div>
 </div>
 </div>
@@ -614,24 +915,27 @@ end
 <p>Dans un premier temps on redéfinit les fonctions <code class="docutils literal notranslate"><span class="pre">newton</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code> et <code class="docutils literal notranslate"><span class="pre">df</span></code> pour tous les workers à l’aide de la macro &#64;everywhere</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span> <span class="n">using</span> <span class="n">LinearAlgebra</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">    </span>
+<span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
 
-<span class="c1"># algorithme de Newton</span>
-<span class="nd">@everywhere</span> <span class="n">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span>
-    <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">;</span>
-    <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>\<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">xnew</span>
-        <span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>\<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="n">end</span>
-    <span class="k">return</span> <span class="n">xnew</span>
-<span class="n">end</span>
-<span class="c1"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
-<span class="nd">@everywhere</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
-<span class="c1"># le jacobien de f</span>
-<span class="nd">@everywhere</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
+<span class="c"># algorithme de Newton</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="o">=</span><span class="n">xnew</span><span class="w"></span>
+<span class="w">        </span><span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xnew</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span><span class="w"></span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="c"># le jacobien de f</span><span class="w"></span>
+<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
+<span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -639,44 +943,56 @@ end
 <p>Puis on uitlise <code>&#64;parallel</code> dans la boucle extérieure ainsi que <code>&#64;sync</code> pour resynchroniser les process autrement attendre que tous les workers aient fini leurs calculs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">Imag</span> <span class="o">=</span> <span class="n">SharedArray</span><span class="p">{</span><span class="n">Int</span><span class="p">}(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="nd">@sync</span> <span class="n">begin</span>
-        <span class="nd">@distributed</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-             <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-                <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-                <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
-            <span class="n">end</span>
-        <span class="n">end</span>
-    <span class="n">end</span>
-    <span class="k">return</span> <span class="n">Imag</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SharedArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">        </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">             </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">                </span><span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calc_bassin_distributed (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1024</span> <span class="c1"># pour efficacité il faut relancer 2 fois</span>
-<span class="nd">@time</span> <span class="n">Imag</span> <span class="o">=</span> <span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="c"># pour efficacité il faut relancer 2 fois</span><span class="w"></span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">Imag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_bassin_distributed</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4.692517 seconds (127.02 k allocations: 6.777 MiB, 1.44% compilation time)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span>
-    <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="p">:</span><span class="n">equal</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">aspect_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:equal</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_37_0.svg" src="_images/08-calcul-parallele_37_0.svg" /></div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="encore-plus-de">
-<h1>Encore plus de //<a class="headerlink" href="#encore-plus-de" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="encore-plus-de">
+<h1>Encore plus de //<a class="headerlink" href="#encore-plus-de" title="Permalink to this headline">#</a></h1>
 <p>On a utilisé les macros <code>&#64;everywhere</code> <code>&#64;distributed</code> <code>&#64;sync</code>
 regardons</p>
 <ul class="simple">
@@ -689,69 +1005,118 @@ regardons</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">proc</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span> <span class="n">proc</span><span class="p">))</span> <span class="c1"># demande l&#39;exécution de myid() sur chaque proc</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">proc</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span><span class="w"> </span><span class="n">proc</span><span class="p">))</span><span class="w"> </span><span class="c"># demande l&#39;exécution de myid() sur chaque proc</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+3
+4
+5
+6
+7
+8
+9
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">nworkers</span><span class="p">())</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
-    <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-<span class="n">end</span>
-<span class="n">data</span> <span class="c1"># data contient les numéros des workers  </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">nworkers</span><span class="p">())</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">myid</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="n">data</span><span class="w"> </span><span class="c"># data contient les numéros des workers  </span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Float64}:
+ 2.0
+ 3.0
+ 4.0
+ 5.0
+ 6.0
+ 7.0
+ 8.0
+ 9.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="nd">@spawn</span> <span class="n">myid</span><span class="p">()</span> 
-    <span class="n">println</span><span class="p">(</span><span class="s2">&quot;process: $(r.where) int: $(fetch(r))&quot;</span><span class="p">)</span>  
-<span class="n">end</span>  
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w"></span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawn</span><span class="w"> </span><span class="n">myid</span><span class="p">()</span><span class="w"> </span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;process: </span><span class="si">$</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="k">where</span><span class="p">)</span><span class="s"> int: </span><span class="si">$</span><span class="p">(</span><span class="n">fetch</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="s">&quot;</span><span class="p">)</span><span class="w">  </span>
+<span class="k">end</span><span class="w">  </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>process: 8 int: 8
+process: 9 int: 9
+process: 2 int: 2
+process: 3 int: 3
+process: 4 int: 4
+process: 5 int: 5
+process: 6 int: 6
+process: 7 int: 7
+process: 8 int: 8
+process: 9 int: 9
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="newton-parallel-2">
-<h2>Newton parallel 2<a class="headerlink" href="#newton-parallel-2" title="Permalink to this headline">¶</a></h2>
+<section id="newton-parallel-2">
+<h2>Newton parallel 2<a class="headerlink" href="#newton-parallel-2" title="Permalink to this headline">#</a></h2>
 <p>Reprenons notre algorithme de calcul de bassin</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span>
-<span class="n">function</span> <span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">wo</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span>
-    <span class="n">nw</span><span class="o">=</span><span class="n">nworkers</span><span class="p">()</span>
-    <span class="nd">@sync</span> <span class="n">begin</span>
-        <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-            <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-                <span class="nd">@async</span> <span class="n">begin</span>    <span class="c1"># lancement asynchrone      </span>
-                    <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
-                    <span class="n">wk</span><span class="o">=</span><span class="n">wo</span><span class="p">[</span><span class="n">k</span><span class="o">%</span><span class="n">nw</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># worker suivant</span>
-                    <span class="n">r</span> <span class="o">=</span> <span class="nd">@spawnat</span> <span class="p">:</span><span class="nb">any</span> <span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-                    <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
-            <span class="n">end</span> <span class="c1"># ens @async</span>
-            <span class="n">end</span>
-        <span class="n">end</span>     
-    <span class="n">end</span> <span class="c1"># end @sync</span>
-    <span class="k">return</span> <span class="n">Imag</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
+<span class="w">    </span><span class="n">wo</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">nw</span><span class="o">=</span><span class="n">nworkers</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">                </span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span><span class="w">    </span><span class="c"># lancement asynchrone      </span><span class="w"></span>
+<span class="w">                    </span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                    </span><span class="n">wk</span><span class="o">=</span><span class="n">wo</span><span class="p">[</span><span class="n">k</span><span class="o">%</span><span class="n">nw</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="c"># worker suivant</span><span class="w"></span>
+<span class="w">                    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="ss">:any</span><span class="w"> </span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"> </span><span class="c"># ens @async</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w">     </span>
+<span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="c"># end @sync</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calc_bassin_async (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">32</span> <span class="c1"># efficacité pas très grande voir catastrophique !</span>
-<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">32</span><span class="w"> </span><span class="c"># efficacité pas très grande voir catastrophique !</span><span class="w"></span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.689928 seconds (334.60 k allocations: 17.498 MiB, 5.54% compilation time)
 </pre></div>
 </div>
 </div>
@@ -760,58 +1125,58 @@ regardons</p>
 <p>Changeons de principe et divisons la tache en nombre de workers :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># résoltion d&#39;un block du probleme du bassin de Newtown</span>
-<span class="nd">@everywhere</span> <span class="n">function</span> <span class="n">calc_block</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">n</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">m</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
-        <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">m</span>
-            <span class="nd">@inbounds</span> <span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-            <span class="nd">@inbounds</span> <span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
-        <span class="n">end</span>
-    <span class="n">end</span>
-    <span class="k">return</span> <span class="n">Imag</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># résoltion d&#39;un block du probleme du bassin de Newtown</span><span class="w"></span>
+<span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">calc_block</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">m</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">m</span><span class="w"></span>
+<span class="w">            </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function calc_bassin_parallel(f,df,n)
-    x=LinRange(-1,1,n)
-    y=LinRange(1,-1,n)
-    Imag=zeros(n,n)
-    
-    # permet la répartition du travail
-    wo=workers()
-    nw=nworkers()
-    parts = Iterators.partition(1:n, n ÷ nw)
-    
-    @sync for (i,part) in enumerate(parts) # répartition sur tous les workers
-        @async begin  
-            Imag[:,part] .=
-                remotecall_fetch(calc_block, wo[i], f,df,x[part],y)
-            end # end @async
-    end     
-    return Imag
-end
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c"># permet la répartition du travail</span><span class="w"></span>
+<span class="w">    </span><span class="n">wo</span><span class="o">=</span><span class="n">workers</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">nw</span><span class="o">=</span><span class="n">nworkers</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="n">nw</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">part</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span><span class="w"> </span><span class="c"># répartition sur tous les workers</span><span class="w"></span>
+<span class="w">        </span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span><span class="w">  </span>
+<span class="w">            </span><span class="n">Imag</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">part</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"></span>
+<span class="w">                </span><span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">calc_block</span><span class="p">,</span><span class="w"> </span><span class="n">wo</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">part</span><span class="p">],</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"> </span><span class="c"># end @async</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w">     </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span> <span class="c1"># efficacité correcte </span>
-<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="w"> </span><span class="c"># efficacité correcte </span><span class="w"></span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="p">:</span><span class="n">equal</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span><span class="w"> </span><span class="n">aspect_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:equal</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -819,16 +1184,16 @@ end
 <p>En diminuant le nombre d’appels on à retrouver une efficacité de l’ordre de 88% <span class="math notranslate nohighlight">\(\left(\dfrac{T_{ref}}{T_{multiproc} * nbproc}\right)\)</span> comme avec la macro <code>&#64;parallel</code> précédente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
-<span class="n">nworkers</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span><span class="w"></span>
+<span class="n">nworkers</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="threads">
-<h1>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="threads">
+<h1>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">#</a></h1>
 <p>Lisez ce <a class="reference external" href="https://julialang.org/blog/2019/07/multithreading/">billet de blog</a> pour une présentation des fonctionnalités multi-threading de Julia.</p>
 <p>Par défaut Julia n’utilise qu’un seul thread. Pour le démarrer avec plusieurs threads nous devons le lui dire explicitement :</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span><span class="w"></span>
@@ -839,43 +1204,76 @@ end
 <p>Pour vérifier que cela a fonctionné :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Base.Threads</span>
-<span class="n">using</span> <span class="n">LinearAlgebra</span>
-
-<span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_NUM_THREADS&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span> <span class="n">begin</span>
-    <span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">println</span><span class="p">(</span><span class="s2">&quot; Bonjour du thread $(Threads.threadid())&quot;</span><span class="p">)</span>
-    <span class="n">end</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">Threads</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
+
+<span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-<span class="n">end</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">    </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot; Bonjour du thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Bonjour du thread 3
+ Bonjour du thread 1
+ Bonjour du thread 2
+ Bonjour du thread 4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.069037926
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">slow_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">8</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="w"></span>
+<span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">etime</span> <span class="o">=</span> <span class="nd">@elapsed</span> <span class="n">begin</span>
-    <span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">slow_add</span><span class="p">(</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">end</span>
-<span class="n">end</span>
+<span class="n">etime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">    </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slow_add</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 
-<span class="n">etime</span><span class="p">,</span> <span class="n">w</span>
+<span class="n">etime</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.031185263, [2, 4, 6, 8, 10, 12, 14, 16])
 </pre></div>
 </div>
 </div>
@@ -883,164 +1281,184 @@ end
 <p>Je reprends l’exemple ci-dessus de la fractale et je parallélise avec la mémoire partagée.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function newton(x0,f,df,epsi)
-    k=0
-    x=x0
-    xnew=x-df(x)\f(x)
-    while (norm(x-xnew)&gt;epsi)&amp;(k&lt;1000)
-        x=xnew
-        xnew=x-df(x)\f(x)
-    end
-    return xnew
-end
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">epsi</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="w"></span>
+<span class="w">    </span><span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="o">=</span><span class="n">xnew</span><span class="w"></span>
+<span class="w">        </span><span class="n">xnew</span><span class="o">=</span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xnew</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
 
-# fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1
-f(x)=[x[1]^3-3*x[1]*x[2]^2-1,3*x[1]^2*x[2]-x[2]^3]
-# le jacobien de f
-df(x)=[3*x[1]^2-3*x[2]^2 -6*x[1]*x[2];6*x[1]*x[2] 3*x[1]^2-3*x[2]^2]
+<span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span><span class="w"></span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="c"># le jacobien de f</span><span class="w"></span>
+<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
 
-# Calcul du bassin si on converge vers la Ieme racine suivant le point de départ
-function calc_bassin_threads(f,df,n)
-    x = LinRange(-1,1,n)
-    y = LinRange(-1,1,n)
-    Imag=zeros(n,n)
-    nt = Threads.nthreads()
-    parts = Iterators.partition( 1:n, n ÷ nt)
-    Threads.@sync for part in parts
-        Threads.@spawn begin
-            println(&quot; Thread $(Threads.threadid()) : $part &quot;)
-            for i in part
-                for j=1:n
-                    @inbounds r = newton([x[i],y[n-j+1]],f,df,1e-10)
-                    @inbounds Imag[j,i]=(round(atan(r[2],r[1])*3/pi)+3)%3;
-                end
-            end
-        end
-    end
-    return Imag
-end
+<span class="c"># Calcul du bassin si on converge vers la Ieme racine suivant le point de départ</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Imag</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">nt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="n">nt</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">parts</span><span class="w"></span>
+<span class="w">        </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">&quot; Thread </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">())</span><span class="s"> : </span><span class="si">$part</span><span class="s"> &quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">part</span><span class="w"></span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">                    </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="nd">@inbounds</span><span class="w"> </span><span class="n">Imag</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="k">end</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Imag</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calc_bassin_threads (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span> <span class="c1"># un deuxième appel est plus rapide</span>
-<span class="nd">@time</span> <span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span> 
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="w"> </span><span class="c"># un deuxième appel est plus rapide</span><span class="w"></span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">Imag</span><span class="o">=</span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Thread 2 : 1:256 
+ Thread 3 : 257:512 
+ Thread 1 : 769:1024 
+ Thread 4 : 513:768 
+ 11.084295 seconds (112.78 M allocations: 6.190 GiB, 10.30% gc time, 1.65% compilation time)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contourf</span><span class="p">(</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span> <span class="n">aspect_ratio</span> <span class="o">=</span> <span class="p">:</span><span class="n">equal</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
+<span class="n">contourf</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">Imag</span><span class="p">,</span><span class="w"> </span><span class="n">aspect_ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:equal</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_61_0.svg" src="_images/08-calcul-parallele_61_0.svg" /></div>
 </div>
-<div class="section" id="cas-particulier-des-operations-de-reduction-parallele">
-<h2>Cas particulier des opérations de réduction parallèle<a class="headerlink" href="#cas-particulier-des-operations-de-reduction-parallele" title="Permalink to this headline">¶</a></h2>
+<section id="cas-particulier-des-operations-de-reduction-parallele">
+<h2>Cas particulier des opérations de réduction parallèle<a class="headerlink" href="#cas-particulier-des-operations-de-reduction-parallele" title="Permalink to this headline">#</a></h2>
 <p>La fonction suivante permet de calculer l’histogramme de particules tirées au hasard avec une distribution normale</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>using Random, Plots
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">Plots</span><span class="w"></span>
 
-const nx = 64
-const np = 100000
-const xmin = -6
-const xmax = +6
+<span class="k">const</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="mi">6</span><span class="w"></span>
 
 
-rng = MersenneTwister(123)
-xp = randn(rng, np)
+<span class="n">rng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MersenneTwister</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="w"></span>
+<span class="n">xp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span><span class="w"> </span><span class="n">np</span><span class="p">)</span><span class="w"></span>
 
-function serial_deposition( xp )
+<span class="k">function</span><span class="w"> </span><span class="n">serial_deposition</span><span class="p">(</span><span class="w"> </span><span class="n">xp</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
-    Lx = xmax - xmin
-    rho = zeros(Float64, nx)
-    
-    fill!(rho, 0.0)
+<span class="w">    </span><span class="n">Lx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xmin</span><span class="w"></span>
+<span class="w">    </span><span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">fill!</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"></span>
 
-    for i in eachindex(xp)
-        x_norm = (xp[i]-xmin) / Lx
-        ip = trunc(Int,  x_norm * nx)+1
-        rho[ip] += 1
-    end
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Lx</span><span class="w"></span>
+<span class="w">        </span><span class="n">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w">  </span><span class="n">x_norm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="n">rho</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    rho
+<span class="w">    </span><span class="n">rho</span><span class="w"></span>
 
-end
+<span class="k">end</span><span class="w"></span>
 
-histogram(xp, bins=nx)
-plot!(LinRange(xmin, xmax, nx), serial_deposition(xp), lw = 5)
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">),</span><span class="w"> </span><span class="n">serial_deposition</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="w"> </span><span class="n">lw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_64_0.svg" src="_images/08-calcul-parallele_64_0.svg" /></div>
 </div>
 <p>Si on essaye de paralléliser cette boucle, on se heurte à un problème d’accès concurrents. Chaque fil d’execution a accès à la mémoire occupée par le tableau <code class="docutils literal notranslate"><span class="pre">rho</span></code>. Lorsque deux threads accèdent à la mémoire en même temps c’est le dernier qui met à jour le tableau qui gagne et la modification faite par l’autre thread n’est pas toujours comptabilisé. Ce type d’opération de réduction n’est pas (encore) prise en charge par <strong>Julia</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function parallel_deposition_bad( xp )
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">parallel_deposition_bad</span><span class="p">(</span><span class="w"> </span><span class="n">xp</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
-    Lx = xmax - xmin
-    rho = zeros(Float64, nx)
-    Threads.@threads for i in eachindex(xp)
-        x_norm = (xp[i]-xmin) / Lx
-        ip = trunc(Int,  x_norm * nx)+1
-        rho[ip] += 1
-    end
+<span class="w">    </span><span class="n">Lx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xmin</span><span class="w"></span>
+<span class="w">    </span><span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Lx</span><span class="w"></span>
+<span class="w">        </span><span class="n">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w">  </span><span class="n">x_norm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="n">rho</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    rho
+<span class="w">    </span><span class="n">rho</span><span class="w"></span>
 
-end
+<span class="k">end</span><span class="w"></span>
 
-histogram(xp, bins=nx)
-plot!(LinRange(xmin, xmax, nx), parallel_deposition_bad(xp), lw = 5)
-
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">),</span><span class="w"> </span><span class="n">parallel_deposition_bad</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="w"> </span><span class="n">lw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_66_0.svg" src="_images/08-calcul-parallele_66_0.svg" /></div>
 </div>
 <p>On peut résoudre ce problème en créant une version de <code class="docutils literal notranslate"><span class="pre">rho</span></code> nommée <code class="docutils literal notranslate"><span class="pre">rho_local</span></code> qui sera propre à chaque thread.
 Il suffira ensuite de sommer ces tableaux locaux pour calculer le tableau global.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function parallel_deposition( xp )
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">parallel_deposition</span><span class="p">(</span><span class="w"> </span><span class="n">xp</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
-    Lx = xmax - xmin
-    rho = zeros(Float64, nx)
-    ntid = Threads.nthreads()
-    rho_local = [zero(rho) for _ in 1:ntid]
-    chunks = Iterators.partition(1:np, np÷ntid)
+<span class="w">    </span><span class="n">Lx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xmin</span><span class="w"></span>
+<span class="w">    </span><span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">ntid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">rho_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">zero</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">ntid</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Iterators</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">np</span><span class="p">,</span><span class="w"> </span><span class="n">np÷ntid</span><span class="p">)</span><span class="w"></span>
 
-    Threads.@sync for chunk in chunks
-        Threads.@spawn begin
-            tid = Threads.threadid()
-            fill!(rho_local[tid], 0.0)
-            for i in chunk
-                x_norm = (xp[i]-xmin) / Lx
-                ip = trunc(Int,  x_norm * nx)+1
-                rho_local[tid][ip] += 1
-            end
-        end
-    end
+<span class="w">    </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">chunks</span><span class="w"></span>
+<span class="w">        </span><span class="n">Threads</span><span class="o">.</span><span class="nd">@spawn</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w">            </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="n">fill!</span><span class="p">(</span><span class="n">rho_local</span><span class="p">[</span><span class="n">tid</span><span class="p">],</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">chunk</span><span class="w"></span>
+<span class="w">                </span><span class="n">x_norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Lx</span><span class="w"></span>
+<span class="w">                </span><span class="n">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trunc</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w">  </span><span class="n">x_norm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">                </span><span class="n">rho_local</span><span class="p">[</span><span class="n">tid</span><span class="p">][</span><span class="n">ip</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-    rho .= reduce(+,rho_local)
+<span class="w">    </span><span class="n">rho</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="n">rho_local</span><span class="p">)</span><span class="w"></span>
 
-    rho
+<span class="w">    </span><span class="n">rho</span><span class="w"></span>
 
-end
+<span class="k">end</span><span class="w"></span>
 
-histogram(xp, bins=nx)
-plot!(LinRange(xmin, xmax, nx), parallel_deposition(xp), lw = 5)
-
-
+<span class="n">histogram</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="n">nx</span><span class="p">)</span><span class="w"></span>
+<span class="n">plot!</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">),</span><span class="w"> </span><span class="n">parallel_deposition</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span><span class="w"> </span><span class="n">lw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/08-calcul-parallele_68_0.svg" src="_images/08-calcul-parallele_68_0.svg" /></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1051,22 +1469,24 @@ plot!(LinRange(xmin, xmax, nx), parallel_deposition(xp), lw = 5)
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia4-1.7"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "julia4-1.7",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia4-1.7'</script>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="07-performance.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1082,24 +1502,28 @@ plot!(LinRange(xmin, xmax, nx), parallel_deposition(xp), lw = 5)
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By The Jupyter Book community<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
