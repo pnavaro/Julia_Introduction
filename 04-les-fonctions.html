@@ -21,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -544,7 +544,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="c"># equivallent à la première écriture</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="c"># equivallent à la première écriture</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -574,7 +574,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="w"></span>
-<span class="w">    </span><span class="n">z</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">z</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
@@ -795,23 +795,40 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">cannot</span> <span class="n">declare</span> <span class="n">a</span> <span class="n">constant</span><span class="p">;</span> <span class="n">it</span> <span class="n">already</span> <span class="n">has</span> <span class="n">a</span> <span class="n">value</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span><span class="mi">1</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 <span class="k">function</span><span class="w"> </span><span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">α</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
-<span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="nd">@code_llvm</span><span class="w"> </span><span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[67]:2 within `ff`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_ff_2525<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ In[67]:3 within `ff`
+; ┌ @ int.jl:87 within `+`
+   %1 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">1</span>
+; └
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -823,7 +840,19 @@ title="Print to PDF"
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c"># on utilise a défini en dehors de la fonction</span><span class="w"></span>
 <span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c"># on tente de changer la valeur de a... error !</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
-<span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="c">#ff(1)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ff (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -832,32 +861,13 @@ title="Print to PDF"
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">ff</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">3</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">56</span><span class="p">]:</span><span class="mi">3</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">57</span><span class="p">]:</span><span class="mi">1</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="nb">eval</span>
    <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[34]:2 within `ff`
-; Function Attrs: noreturn
-define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_ff_2349<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
-top:
-;  @ In[34]:3 within `ff`
-  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @jl_undefined_var_error<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">4566140160</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">))</span>
-  <span class=" -Color -Color-Bold">unreachable</span>
-<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>
@@ -881,20 +891,16 @@ top:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">ff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[42]:2 within `ff`
-define <span class=" -Color -Color-Cyan">i64</span> @julia_ff_2353<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
-top:
-;  @ In[42]:4 within `ff`
-; ┌ @ int.jl:87 within `+`
-   %1 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">2</span>
-; └
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
-<span class=" -Color -Color-Yellow">}</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CodeInfo(
+1 ─      a = 2
+│   %2 = x + a
+└──      return %2
+)
 </pre></div>
 </div>
 </div>
@@ -929,17 +935,17 @@ top:
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching ^(::UnitRange{Int64}, ::Int64)
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="o">^</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">AbstractChar</span><span class="p">,</span> <span class="n">AbstractString</span><span class="p">},</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">strings</span><span class="o">/</span><span class="n">basic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">721</span>
-  <span class="o">^</span><span class="p">(::</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Hermitian</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">symmetric</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">726</span>
-  <span class="o">^</span><span class="p">(::</span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">Hermitian</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">S</span><span class="p">}</span> <span class="n">where</span> <span class="n">S</span><span class="o">&lt;</span><span class="p">:(</span><span class="n">AbstractMatrix</span><span class="p">{</span><span class="o">&lt;</span><span class="p">:</span><span class="n">T</span><span class="p">}),</span> <span class="p">::</span><span class="n">Real</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span> <span class="n">at</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">symmetric</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">737</span>
+  <span class="o">^</span><span class="p">(::</span><span class="n">Rational</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">475</span>
+  <span class="o">^</span><span class="p">(::</span><span class="n">Complex</span><span class="p">{</span><span class="o">&lt;</span><span class="p">:</span><span class="n">AbstractFloat</span><span class="p">},</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Julia</span><span class="o">-</span><span class="mf">1.7</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">Resources</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">/</span><span class="nb">complex</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">839</span>
   <span class="o">...</span>
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">literal_pow</span>
    <span class="o">@</span> <span class="o">./</span><span class="n">intfuncs</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">325</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">UnitRange</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">1</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">2</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">2</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">eval</span>
    <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>

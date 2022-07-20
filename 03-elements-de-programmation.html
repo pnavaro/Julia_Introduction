@@ -21,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -505,8 +505,8 @@ title="Print to PDF"
 <p>Le <strong>else</strong> permet de donner un résultat par défaut…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="n">k!</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;&gt;1&quot;</span><span class="p">)</span><span class="w"></span>
 <span class="k">else</span><span class="w"></span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span><span class="w"></span>
@@ -579,6 +579,21 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>String
 Int64
 Complex{Bool}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="o">.</span><span class="p">([</span><span class="s">&quot;un&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">im</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{DataType}:
+ String
+ Int64
+ Complex{Bool}
 </pre></div>
 </div>
 </div>
@@ -670,13 +685,13 @@ Complex{Bool}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
-<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="w"></span>
-<span class="w">    </span><span class="n">k</span><span class="o">+=</span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span><span class="w"></span>
+<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># k modulo 5 diffèrent de 0</span><span class="w"></span>
 <span class="w">        </span><span class="k">continue</span><span class="w"> </span><span class="c"># retour en début de boucle avec de nouveau un test sur k</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="o">&gt;</span><span class="mi">30</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"></span>
 <span class="w">        </span><span class="k">break</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
@@ -698,25 +713,25 @@ Complex{Bool}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2200</span><span class="w"></span>
-<span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-
-<span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000000</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;k </span><span class="se">\t</span><span class="s"> = </span><span class="se">\t</span><span class="s"> </span><span class="si">$k</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k </span><span class="se">\t</span><span class="s"> = </span><span class="se">\t</span><span class="s"> </span><span class="si">$k</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k 	 = 	 94
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+k 	 = 	 145
 </pre></div>
 </div>
 </div>
@@ -732,15 +747,15 @@ Complex{Bool}
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span><span class="w"></span>
 <span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
 <span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c"># Tableau vide qui contiendra des Float64</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="n">i</span><span class="p">]</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19.685532 seconds (496.93 k allocations: 37.266 GiB, 16.35% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24.233625 seconds (496.93 k allocations: 37.266 GiB, 17.33% gc time)
 </pre></div>
 </div>
 </div>
@@ -798,8 +813,8 @@ Complex{Bool}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
 <span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
@@ -807,7 +822,7 @@ Complex{Bool}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.020908 seconds (298.99 k allocations: 7.916 MiB, 48.68% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.017135 seconds (298.99 k allocations: 7.916 MiB)
 </pre></div>
 </div>
 </div>
@@ -853,16 +868,16 @@ Complex{Bool}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.012919 seconds (298.98 k allocations: 6.851 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.010592 seconds (298.98 k allocations: 6.851 MiB)
 </pre></div>
 </div>
 </div>
@@ -877,7 +892,7 @@ Complex{Bool}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000431 seconds (2 allocations: 781.297 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000141 seconds (2 allocations: 781.297 KiB)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Int64}:
@@ -920,7 +935,7 @@ Complex{Bool}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000087 seconds (4 allocations: 781.359 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000121 seconds (4 allocations: 781.359 KiB)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Int64}:
@@ -973,7 +988,7 @@ Complex{Bool}
 <p>Regardons la vectorisation sous <em>Julia</em> à l’aide de la construction d’une matrice de Vandermonde</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
 <span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
@@ -985,43 +1000,28 @@ Complex{Bool}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.310705157
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.339490 seconds (35.94 k allocations: 69.671 MiB, 8.98% gc time)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
-<span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="n">A</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
- 1.0  0.805922  0.69092
- 1.0  0.594346  0.959237
- 1.0  0.81107   0.306753
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
 <span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span><span class="w"></span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
+<span class="w">            </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.738869242
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.886602 seconds (49.41 M allocations: 960.007 MiB, 7.45% gc time)
 </pre></div>
 </div>
 </div>
@@ -1040,16 +1040,45 @@ Complex{Bool}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">begin</span><span class="w"> </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"> </span>
 <span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"></span>
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9183635
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.989547 seconds (33.01 M allocations: 575.400 MiB, 7.31% gc time, 6.61% compilation time)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
+ 1.0  1.0          1.0          …  1.0        1.0       1.0       1.0
+ 0.0  0.000333444  0.000666889     0.999      0.999333  0.999667  1.0
+ 0.0  1.11185e-7   4.44741e-7      0.998      0.998667  0.999333  1.0
+ 0.0  3.70741e-11  2.96593e-10     0.997002   0.998001  0.999     1.0
+ 0.0  1.23622e-14  1.97794e-13     0.996005   0.997335  0.998667  1.0
+ 0.0  4.12209e-18  1.31907e-16  …  0.995008   0.99667   0.998334  1.0
+ 0.0  1.37449e-21  8.79673e-20     0.994013   0.996005  0.998001  1.0
+ 0.0  4.58316e-25  5.86644e-23     0.993019   0.995341  0.997668  1.0
+ 0.0  1.52823e-28  3.91226e-26     0.992025   0.994677  0.997336  1.0
+ 0.0  5.09579e-32  2.60905e-29     0.991033   0.994014  0.997003  1.0
+ 0.0  1.69916e-35  1.73994e-32  …  0.990042   0.993351  0.996671  1.0
+ 0.0  5.66577e-39  1.16035e-35     0.989051   0.992689  0.996338  1.0
+ 0.0  1.88922e-42  7.73824e-39     0.988062   0.992027  0.996006  1.0
+ ⋮                              ⋱                                 
+ 0.0  0.0          0.0             0.0502627  0.136241  0.36917   1.0
+ 0.0  0.0          0.0             0.0502124  0.13615   0.369047  1.0
+ 0.0  0.0          0.0          …  0.0501622  0.136059  0.368924  1.0
+ 0.0  0.0          0.0             0.050112   0.135969  0.368801  1.0
+ 0.0  0.0          0.0             0.0500619  0.135878  0.368678  1.0
+ 0.0  0.0          0.0             0.0500118  0.135787  0.368555  1.0
+ 0.0  0.0          0.0             0.0499618  0.135697  0.368432  1.0
+ 0.0  0.0          0.0          …  0.0499118  0.135606  0.368309  1.0
+ 0.0  0.0          0.0             0.0498619  0.135516  0.368186  1.0
+ 0.0  0.0          0.0             0.049812   0.135426  0.368064  1.0
+ 0.0  0.0          0.0             0.0497621  0.135335  0.367941  1.0
+ 0.0  0.0          0.0             0.0497124  0.135245  0.367818  1.0
 </pre></div>
 </div>
 </div>
