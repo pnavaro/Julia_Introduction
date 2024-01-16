@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Prise en main &#8212; Introduction au langage Julia</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +64,104 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01-prise-en-main';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tableaux et matrices" href="02-tableaux-et-matrices.html" />
     <link rel="prev" title="Présentation" href="00-introduction.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00-introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Introduction au langage Julia - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Introduction au langage Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,374 +171,260 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Prise en main
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-tableaux-et-matrices.html">
-   Tableaux et matrices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-elements-de-programmation.html">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-les-fonctions.html">
-   Les fonctions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-packages-graphiques.html">
-   Packages graphiques
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-type-et-methode.html">
-   Type et méthodes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-performance.html">
-   Performance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-metaprogrammation.html">
-   Metaprogrammation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10-gpu.html">
-   GPU
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prise en main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tableaux-et-matrices.html">Tableaux et matrices</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03-elements-de-programmation.html">Eléments de programmation</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-les-fonctions.html">Les fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-packages-graphiques.html">Packages graphiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-type-et-methode.html">Type et méthodes</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="07-performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-calcul-parallele.html">Calcul parallèle</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="09-metaprogrammation.html">Metaprogrammation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-gpu.html">GPU</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/01-prise-en-main.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F01-prise-en-main.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/01-prise-en-main.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F01-prise-en-main.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/01-prise-en-main.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fonctions-scientifiques">
-   Fonctions scientifiques
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variables">
-   Variables
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convention-et-style">
-     Convention et style
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-de-variable">
-   Types de variable
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-nombres-scalaires">
-     Les nombres scalaires
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-booleens">
-     Les booléens
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-chaines-de-caractere">
-     Les chaines de caractère
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Prise en main</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fonctions-scientifiques">
-   Fonctions scientifiques
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variables">
-   Variables
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convention-et-style">
-     Convention et style
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-de-variable">
-   Types de variable
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-nombres-scalaires">
-     Les nombres scalaires
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-booleens">
-     Les booléens
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#les-chaines-de-caractere">
-     Les chaines de caractère
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Prise en main</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-scientifiques">Fonctions scientifiques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convention-et-style">Convention et style</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-de-variable">Types de variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-nombres-scalaires">Les nombres scalaires</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-booleens">Les booléens</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-chaines-de-caractere">Les chaines de caractère</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="prise-en-main">
-<h1>Prise en main<a class="headerlink" href="#prise-en-main" title="Permalink to this headline">#</a></h1>
+<h1>Prise en main<a class="headerlink" href="#prise-en-main" title="Permalink to this heading">#</a></h1>
 <p>Pour un apprentissage rapide je recommande cette lecture (tout est dans le titre) <a class="reference external" href="http://learnxinyminutes.com/docs/julia/">http://learnxinyminutes.com/docs/julia/</a></p>
 <section id="fonctions-scientifiques">
-<h2>Fonctions scientifiques<a class="headerlink" href="#fonctions-scientifiques" title="Permalink to this headline">#</a></h2>
+<h2>Fonctions scientifiques<a class="headerlink" href="#fonctions-scientifiques" title="Permalink to this heading">#</a></h2>
 <p>Regardons les possibilités de calcul offert par cet environnement !</p>
 <p>On est devant une superbe calculatrice comme dans la console de
 Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
@@ -493,7 +434,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>A remarquer l’utilisation de la fonction <code class="docutils literal notranslate"><span class="pre">log</span></code> comme le logarithme naturel (Népérien).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -505,7 +446,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log10</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log10</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -515,7 +456,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 </div>
 </div>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Fonctions usuelles</strong></p></th>
 </tr>
@@ -525,7 +466,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </tr>
 </tbody>
 </table>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Fonctions trigonométriques usuelles</strong></p></th>
 </tr>
@@ -540,7 +481,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>Il est possible d’utiliser les notations scientifiques <code class="docutils literal notranslate"><span class="pre">1e2</span></code> pour 100, ainsi que quelques nombre prédéfinis <code class="docutils literal notranslate"><span class="pre">pi</span></code>, <code class="docutils literal notranslate"><span class="pre">im</span></code> …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mf">1e-2</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mf">1e-2</span>
 </pre></div>
 </div>
 </div>
@@ -552,7 +493,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="nb">pi</span><span class="o">^</span><span class="mi">2</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="nb">pi</span><span class="o">^</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -564,7 +505,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="nb">im</span><span class="o">^</span><span class="mi">2</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="nb">im</span><span class="o">^</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -577,34 +518,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>Certaines fonctions possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>… sur <span class="math notranslate nohighlight">\(I\!\!R\)</span> extensible aux nombres complexes :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">DomainError</span> <span class="k">with</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
-<span class="n">sqrt</span> <span class="n">will</span> <span class="n">only</span> <span class="k">return</span> <span class="n">a</span> <span class="nb">complex</span> <span class="n">result</span> <span class="k">if</span> <span class="n">called</span> <span class="k">with</span> <span class="n">a</span> <span class="nb">complex</span> <span class="n">argument</span><span class="o">.</span> <span class="n">Try</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Complex</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">throw_complex_domainerror</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">x</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">Math</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">33</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">sqrt</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">567</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">Math</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1221</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">1</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="n">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="n">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -617,7 +531,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>L’ensemble des fonctions scientifiques est étendu au calcul complexe !</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -627,7 +541,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 </div>
 </div>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Fonctions d’arrondi</strong></p></th>
 </tr>
@@ -640,7 +554,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p><em>Julia</em> possède une algèbre étendue avec la possibilité de divisé par 0</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
 </pre></div>
 </div>
 </div>
@@ -652,7 +566,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="nb">Inf</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="nb">Inf</span>
 </pre></div>
 </div>
 </div>
@@ -664,7 +578,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">+</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -676,7 +590,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">/</span><span class="nb">Inf</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">/</span><span class="nb">Inf</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +602,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">-</span><span class="nb">Inf</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">Inf</span><span class="o">-</span><span class="nb">Inf</span>
 </pre></div>
 </div>
 </div>
@@ -700,7 +614,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="o">*</span><span class="nb">Inf</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="o">*</span><span class="nb">Inf</span>
 </pre></div>
 </div>
 </div>
@@ -712,7 +626,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">NaN</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">NaN</span><span class="o">+</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -725,7 +639,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p><code>Inf</code> et <code>NaN</code> représentant l’infini et Not A Number. Toutes les formes indéterminées donnant <code>NaN</code> et toute combinaison avec <code>NaN</code> renvoie également <code>NaN</code>. <code class="docutils literal notranslate"><span class="pre">missing</span></code> existe également avec un comportement similaire pour gérer les données manquantes mais attention, cela change le type de vos variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">NaN</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">NaN</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -737,7 +651,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -749,11 +663,11 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 </section>
 <section id="variables">
-<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h2>
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this heading">#</a></h2>
 <p>L’utilisation de variable est très intuitive sans déclaration préalable de type (entier, réel, imaginaire, fraction rationnelle…). Le nom de la variable doit commencer par une lettre entre a-z ou A-Z mais aussi par un underscore (‘_’) ou encore un caractère Unicode (voir dernier exemple pour comprendre)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -765,7 +679,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -777,7 +691,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -789,7 +703,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -801,7 +715,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="o">//</span><span class="mi">12</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="o">//</span><span class="mi">7</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="o">//</span><span class="mi">12</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="o">//</span><span class="mi">7</span>
 </pre></div>
 </div>
 </div>
@@ -813,7 +727,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -825,8 +739,8 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"></span>
-<span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -840,7 +754,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>Une particularité est de ne pas avoir la possibilité de supprimer une variable ! Il est juste possible de récupérer l’espace mémoire en faisant <code>a=[]</code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
 </pre></div>
 </div>
 </div>
@@ -852,7 +766,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
 </pre></div>
 </div>
 </div>
@@ -865,7 +779,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 <p>Toujours dans la rubrique particularité on verra que les fonctions sont aussi des variables, il sera donc possible de les passer en argument, de les affecter etc…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">∑</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">∑</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -877,7 +791,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ρ¹</span><span class="o">=</span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ρ¹</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -889,8 +803,8 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="n">β</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">β</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -902,28 +816,20 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">λ₁</span><span class="w"> </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">λ₁</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: λ₁ not defined
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="p">:</span><span class="mi">0</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
 </pre></div>
 </div>
 </div>
 </div>
-<p>L’utilisation de caractères spéciaux comme les lettres grecques se font par utilisation d’une syntaxe de type <span class="math notranslate nohighlight">\(\LaTeX\)</span>. Dans la plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le caractère</p>
+<p>L’utilisation de caractères spéciaux comme les lettres grecques se font par utilisation d’une syntaxe de type <span class="math notranslate nohighlight">\(\LaTeX\)</span>. Pour écrire <span class="math notranslate nohighlight">\(\rho\)</span> par exemple, dans la plupart des éditeurs il faut commencer par <code>\rho</code> puis la touche TAB fait afficher le caractère</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="nb">π</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="nb">π</span>
 </pre></div>
 </div>
 </div>
@@ -935,7 +841,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">ℯ</span><span class="w">     </span><span class="c"># \euler</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nb">ℯ</span><span class="w">     </span><span class="c"># \euler</span>
 </pre></div>
 </div>
 </div>
@@ -947,7 +853,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">√</span><span class="mi">2</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">√</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -958,23 +864,23 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 </div>
 <section id="convention-et-style">
-<h3>Convention et style<a class="headerlink" href="#convention-et-style" title="Permalink to this headline">#</a></h3>
+<h3>Convention et style<a class="headerlink" href="#convention-et-style" title="Permalink to this heading">#</a></h3>
 <p>Julia impose quelques restrictions de nom de variable, de plus les conventions suivantes sont d’usage :</p>
 <ul class="simple">
 <li><p>Les noms des variables sont en minuscule.</p></li>
 <li><p>La séparation des mots dans une variable se fait à l’aide d’un underscore (‘_’) mais cette pratique n’est pas recommandé pour une question de lisibilité des noms de variable.</p></li>
 <li><p>Les noms de Type ou de Modules commencent par une lettre majuscule, les majuscules séparant les différents mots du nom de la variable (exemple “MonModule”)</p></li>
 <li><p>Les noms des fonctions et macros sont en minuscule sans underscores.</p></li>
-<li><p>Les fonctions qui modifient en sortie leurs arguments d’entrée s’écrivent avec <code class="docutils literal notranslate"><span class="pre">!</span></code> en fin.</p></li>
+<li><p>Les fonctions qui modifient en sortie leurs arguments d’entrée s’écrivent avec <code class="docutils literal notranslate"><span class="pre">!</span></code> à la fin.</p></li>
 </ul>
 <p>Il existe différents styles possibles que vous pouvez retrouver dans la documentation de <a class="reference external" href="https://domluna.github.io/JuliaFormatter.jl/dev/">JuliaFormatter</a></p>
 </section>
 </section>
 <section id="types-de-variable">
-<h2>Types de variable<a class="headerlink" href="#types-de-variable" title="Permalink to this headline">#</a></h2>
+<h2>Types de variable<a class="headerlink" href="#types-de-variable" title="Permalink to this heading">#</a></h2>
 <p>Julia n’est pas à proprement parler un “langage objet” néanmoins c’est ce que l’on peut appeler un “langage typé”. En effet ce langage possède un certain nombre de types prédéfinis et permet d’en ajouter à volonté. Les nouveaux types faisant office de structure tel un objet (C++/Java…) permettant la surcharge des opérateurs standards <code class="docutils literal notranslate"><span class="pre">*,</span> <span class="pre">/,</span> <span class="pre">+,...</span></code>.</p>
 <section id="les-nombres-scalaires">
-<h3>Les nombres scalaires<a class="headerlink" href="#les-nombres-scalaires" title="Permalink to this headline">#</a></h3>
+<h3>Les nombres scalaires<a class="headerlink" href="#les-nombres-scalaires" title="Permalink to this heading">#</a></h3>
 <p>On a vu précédemment que <em>Julia</em> est assez flexible sur l’utilisation et l’affectation des variables et est capable de rendre compatible l’addition d’entier, réel (float)…</p>
 <p>De manière naturelle on trouve les types :</p>
 <ul class="simple">
@@ -984,7 +890,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1000000000000</span><span class="p">;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1000000000000</span><span class="p">;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -996,7 +902,7 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">10000000000000000000</span><span class="p">;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">10000000000000000000</span><span class="p">;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1008,10 +914,10 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"></span>
-<span class="n">b</span><span class="o">=</span><span class="kt">Int32</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">b</span><span class="o">=</span><span class="kt">Int32</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1024,8 +930,8 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
-<span class="kt">Float64</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="kt">Float64</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1037,8 +943,8 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="mf">1.0</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1053,8 +959,8 @@ Int32
 <p><code class="docutils literal notranslate"><span class="pre">+=</span></code>,  <code class="docutils literal notranslate"><span class="pre">-=</span></code>, <code class="docutils literal notranslate"><span class="pre">*=</span></code>,  <code class="docutils literal notranslate"><span class="pre">/=</span></code>, <code class="docutils literal notranslate"><span class="pre">\=</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1066,7 +972,7 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -1078,9 +984,9 @@ Int32
 </div>
 </section>
 <section id="les-booleens">
-<h3>Les booléens<a class="headerlink" href="#les-booleens" title="Permalink to this headline">#</a></h3>
+<h3>Les booléens<a class="headerlink" href="#les-booleens" title="Permalink to this heading">#</a></h3>
 <p>Les variables booléennes (1bit) sont naturellement définies dans <em>Julia</em> à l’aide des opérateurs de comparaison</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>opération</p></th>
 <th class="head"><p>égalité</p></th>
@@ -1104,7 +1010,7 @@ Int32
 </table>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">0</span><span class="w">  </span><span class="p">;</span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">  </span><span class="p">;</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;</span><span class="mi">0</span><span class="w">  </span><span class="p">;</span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">  </span><span class="p">;</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1118,7 +1024,7 @@ Int32
 </div>
 </div>
 <p>Avec les opérateurs de conjonctions</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>et</p></th>
 <th class="head"><p>ou</p></th>
@@ -1158,11 +1064,11 @@ Int32
 </div>
 </section>
 <section id="les-chaines-de-caractere">
-<h3>Les chaines de caractère<a class="headerlink" href="#les-chaines-de-caractere" title="Permalink to this headline">#</a></h3>
+<h3>Les chaines de caractère<a class="headerlink" href="#les-chaines-de-caractere" title="Permalink to this heading">#</a></h3>
 <p><em>Julia</em> possède un type <strong>Char</strong> (Charactere) il s’agit d’une lettre délimité par ‘’ à ne pas confondre avec la chaine de caractère.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -1174,7 +1080,7 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="c"># en ajoutant 1 on passe aux charactère suivant dans la table </span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="c"># en ajoutant 1 on passe aux charactère suivant dans la table </span>
 </pre></div>
 </div>
 </div>
@@ -1187,7 +1093,7 @@ Int32
 <p>La chaine de caractère est délimitée par “” et définit un type <strong>ASCIIString</strong> ou <strong>UTF8String</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Une chaine de caractère </span><span class="se">\n</span><span class="s">&quot;</span><span class="w">  </span><span class="c"># \n est le retour à la ligne</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Une chaine de caractère </span><span class="se">\n</span><span class="s">&quot;</span><span class="w">  </span><span class="c"># \n est le retour à la ligne</span>
 </pre></div>
 </div>
 </div>
@@ -1199,7 +1105,7 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1224,7 +1130,7 @@ Int32
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w">  </span><span class="c"># \n renvoie à la ligne</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w">  </span><span class="c"># \n renvoie à la ligne</span>
 </pre></div>
 </div>
 </div>
@@ -1237,7 +1143,7 @@ puis une autre...
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="s">&quot;puis une autre...&quot;</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="c"># la puissance permet de répéter la chaine</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="s">&quot;puis une autre...&quot;</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="c"># la puissance permet de répéter la chaine</span>
 </pre></div>
 </div>
 </div>
@@ -1247,10 +1153,23 @@ puis une autre...
 </div>
 </div>
 </div>
+<p>Vous pouvez également utiliser la fonction <code class="docutils literal notranslate"><span class="pre">string</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;HelloWorld&quot;
+</pre></div>
+</div>
+</div>
+</div>
 <p>On peut extraire ou affecter une partie de cette chaîne considérée comme un tableau</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1185,7 @@ puis une autre...
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1278,8 +1197,8 @@ puis une autre...
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="n">println</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">])))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">*</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">])))</span>
 </pre></div>
 </div>
 </div>
@@ -1294,8 +1213,8 @@ String
 <p>L’usage de $ permet comme en php de convertir et d’inclure une variable dans une chaîne de caractères (interpolation)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="w"></span>
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;le mois de novembre est le </span><span class="si">$m</span><span class="s"> ième mois &quot;</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;le mois de novembre est le </span><span class="si">$m</span><span class="s"> ième mois &quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1307,7 +1226,7 @@ String
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;racine de 2 : </span><span class="si">$</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="s">&quot;</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;racine de 2 : </span><span class="si">$</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="s">&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1317,7 +1236,27 @@ String
 </div>
 </div>
 </div>
-<p>Pour encore plus de possibilités avec les chaînes de caractère : <a class="reference external" href="https://docs.julialang.org/en/v1/manual/strings/#man-strings-1">https://docs.julialang.org/en/v1/manual/strings/#man-strings-1</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Printf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@printf</span><span class="w"> </span><span class="s">&quot;La valeur de π est </span><span class="si">%15.10f</span><span class="s">&quot;</span><span class="w"> </span><span class="nb">π</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La valeur de π est    3.1415926536
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pour encore plus de possibilités avec les chaînes de caractère : <a class="reference external" href="https://docs.julialang.org/en/v1/manual/strings/#man-strings-1">https://docs.julialang.org/en/v1/manual/strings/#man-strings-1</a>
+et sur <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Printf/">Printf</a></p>
 </section>
 </section>
 </section>
@@ -1331,61 +1270,123 @@ String
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.7"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.7'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="00-introduction.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Présentation</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00-introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Présentation</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="02-tableaux-et-matrices.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="02-tableaux-et-matrices.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Tableaux et matrices</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctions-scientifiques">Fonctions scientifiques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convention-et-style">Convention et style</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-de-variable">Types de variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-nombres-scalaires">Les nombres scalaires</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-booleens">Les booléens</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-chaines-de-caractere">Les chaines de caractère</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By The Jupyter Book community<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

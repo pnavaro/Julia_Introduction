@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Performance &#8212; Introduction au langage Julia</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +64,104 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07-performance';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Calcul parallèle" href="08-calcul-parallele.html" />
     <link rel="prev" title="Type et méthodes" href="06-type-et-methode.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00-introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Introduction au langage Julia - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Introduction au langage Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,377 +171,274 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-prise-en-main.html">
-   Prise en main
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-tableaux-et-matrices.html">
-   Tableaux et matrices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-elements-de-programmation.html">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-les-fonctions.html">
-   Les fonctions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-packages-graphiques.html">
-   Packages graphiques
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-type-et-methode.html">
-   Type et méthodes
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Performance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-metaprogrammation.html">
-   Metaprogrammation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10-gpu.html">
-   GPU
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-prise-en-main.html">Prise en main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tableaux-et-matrices.html">Tableaux et matrices</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03-elements-de-programmation.html">Eléments de programmation</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-les-fonctions.html">Les fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-packages-graphiques.html">Packages graphiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-type-et-methode.html">Type et méthodes</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-calcul-parallele.html">Calcul parallèle</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="09-metaprogrammation.html">Metaprogrammation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-gpu.html">GPU</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/07-performance.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F07-performance.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/07-performance.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F07-performance.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/07-performance.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#allocations">
-   Allocations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#alignement-de-la-memoire">
-   Alignement de la mémoire
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vues-explicites">
-   Vues explicites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#eviter-les-calculs-dans-l-environnement-global">
-   Eviter les calculs dans l’environnement global.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#instabilite-de-type">
-   Instabilité de type
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-xxx">
-     @code_XXX
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Performance</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#allocations">
-   Allocations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#alignement-de-la-memoire">
-   Alignement de la mémoire
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vues-explicites">
-   Vues explicites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#eviter-les-calculs-dans-l-environnement-global">
-   Eviter les calculs dans l’environnement global.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#instabilite-de-type">
-   Instabilité de type
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code-xxx">
-     @code_XXX
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Performance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allocations">Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alignement-de-la-memoire">Alignement de la mémoire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vues-explicites">Vues explicites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviter-les-calculs-dans-l-environnement-global">Eviter les calculs dans l’environnement global.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instabilite-de-type">Instabilité de type</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-xxx">@code_XXX</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="performance">
-<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">#</a></h1>
+<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading">#</a></h1>
 <p><em>Julia</em> avec la compilation <em>Just-In-Time</em> est un langage naturellement performant. Il n’est pas allergique aux boucles comme le sont les langages Python et R. Les opérations vectorisées fonctionnent également très bien à condition d’être attentifs aux allocations mémoire et aux vues explicites.</p>
 <section id="allocations">
-<h2>Allocations<a class="headerlink" href="#allocations" title="Permalink to this headline">#</a></h2>
+<h2>Allocations<a class="headerlink" href="#allocations" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="p">,</span><span class="w"> </span><span class="n">BenchmarkTools</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span>
+<span class="k">end</span>
 
-<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"></span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">);</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.443 ms (4 allocations: 16.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.903 ms (4 allocations: 16.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -495,17 +447,17 @@ title="Print to PDF"
 <code class="docutils literal notranslate"><span class="pre">rand</span></code> aient déjà été evaluées avant l’appel de la fonction <code class="docutils literal notranslate"><span class="pre">test</span></code>. La matrice <code class="docutils literal notranslate"><span class="pre">C</span></code> est modifiée dans la fonction suivante donc par convention on ajoute un <code class="docutils literal notranslate"><span class="pre">!</span></code> au nom de la fonction. Par convention également, l’argument modifié se placera en premier. Comme dans la fonction <code class="docutils literal notranslate"><span class="pre">push!</span></code> par exemple.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">test!</span><span class="p">(</span><span class="w"> </span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4.898 ms (2 allocations: 8.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.119 ms (2 allocations: 8.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -513,49 +465,66 @@ title="Print to PDF"
 <p>En effectuant une opération “en place”, on supprime une allocation mais celle pour effectuer l’opération <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code> est toujours nécessaire. On peut supprimer cette allocation en utilisant la bibliothèque <code class="docutils literal notranslate"><span class="pre">BLAS</span></code>, cependant le code perd en lisibilité ce qu’il a gagné en performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">BLAS</span><span class="o">.</span><span class="n">gemm!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<span class="w">    </span><span class="n">BLAS</span><span class="o">.</span><span class="n">gemm!</span><span class="p">(</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">test_opt!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.003 ms (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  954.786 μs (0 allocations: 0 bytes)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test_opt_mul!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span>
+<span class="w">    </span><span class="n">mul!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># mul!(C, A, B, α, β) -&gt; ABα + Cβ</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">C</span>
+<span class="k">end</span>
+
+<span class="nd">@btime</span><span class="w"> </span><span class="n">test_opt_mul!</span><span class="p">(</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  955.358 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="alignement-de-la-memoire">
-<h2>Alignement de la mémoire<a class="headerlink" href="#alignement-de-la-memoire" title="Permalink to this headline">#</a></h2>
+<h2>Alignement de la mémoire<a class="headerlink" href="#alignement-de-la-memoire" title="Permalink to this heading">#</a></h2>
 <p>Les opérations le long des premiers indices seront plus rapides.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span>
 
-<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"></span>
+<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="o">$</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="o">$</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8.291 ms (29 allocations: 32.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  10.439 ms (7 allocations: 32.00 MiB)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="o">$</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="o">$</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  33.095 ms (29 allocations: 32.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  28.566 ms (7 allocations: 32.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -563,24 +532,24 @@ title="Print to PDF"
 <p>Voici un autre exemple ou on calcule la dérivée de la quantité <span class="math notranslate nohighlight">\(f\)</span> suivant la coordonnée <span class="math notranslate nohighlight">\(y\)</span> en passant par l’espace de Fourier</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span>
 
-<span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
-<span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w"></span>
-<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="k">function</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">ifft</span><span class="p">(</span><span class="n">exky</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># f is a 2d array created by broadcasting</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">);</span><span class="w"></span>
+<span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="n">ifft</span><span class="p">(</span><span class="n">exky</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># f is a 2d array created by broadcasting</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  71.749 ms (59 allocations: 64.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  59.388 ms (14 allocations: 64.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -588,42 +557,42 @@ title="Print to PDF"
 <p>En utilisant les “plans” de FFTW qui permettent de pré-allouer la mémoire nécessaire et le calcul “en place”. On peut améliorer les performances. On réutilise le même tableau pour la valeur de <span class="math notranslate nohighlight">\(f\)</span> et sa transformée de Fourier. On prend soin également de respecter l’alignement de la mémoire en transposant le tableau contenant <span class="math notranslate nohighlight">\(f\)</span> pour calculer la FFT. On utilise plus de mémoire, on fait plus de calcul en ajoutant les transpositions mais finalement le calcul va 3 fois plus vite car on évite les allocations et on limite les accès mémoire.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span><span class="w"></span>
-<span class="n">fᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span><span class="w"></span>
-<span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span><span class="w"></span>
-<span class="n">f</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
-<span class="n">fft_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span><span class="w"></span>
-<span class="k">function</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w">  </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">exky</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
+<span class="n">fᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="n">f</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="n">fft_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+<span class="w">    </span><span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w">  </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
+<span class="w">    </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">exky</span>
+<span class="w">    </span><span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">)</span>
+<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="w"> </span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  18.432 ms (2 allocations: 96 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  21.431 ms (2 allocations: 112 bytes)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="vues-explicites">
-<h2>Vues explicites<a class="headerlink" href="#vues-explicites" title="Permalink to this headline">#</a></h2>
+<h2>Vues explicites<a class="headerlink" href="#vues-explicites" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c"># Somme de la première colonne</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c"># Somme de la première colonne</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.163 μs (3 allocations: 8.16 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.879 μs (3 allocations: 8.16 KiB)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-37.45424678271367
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.351104431816317
 </pre></div>
 </div>
 </div>
@@ -635,45 +604,45 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  229.237 ns (3 allocations: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  242.526 ns (3 allocations: 80 bytes)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-37.45424678271367
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.351104431816317
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="eviter-les-calculs-dans-l-environnement-global">
-<h2>Eviter les calculs dans l’environnement global.<a class="headerlink" href="#eviter-les-calculs-dans-l-environnement-global" title="Permalink to this headline">#</a></h2>
+<h2>Eviter les calculs dans l’environnement global.<a class="headerlink" href="#eviter-les-calculs-dans-l-environnement-global" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span>
+<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">acc</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  86.435 μs (3978 allocations: 77.77 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  77.261 μs (3978 allocations: 77.77 KiB)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>512.5043541109563
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>514.0748698860377
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">somme</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -702,34 +671,34 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Il faut écrire des fonctions</p>
+<p>Il faut écrire des fonctions avec les variables utilisées en argument</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span>
-<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">acc</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">acc</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span>
 <span class="w">    </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.300 μs (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.461 μs (1 allocation: 16 bytes)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>512.5043541109563
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>514.0748698860377
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -761,18 +730,18 @@ title="Print to PDF"
 <p>Pour comprendre pourquoi l’utilisation de variable global influence les performances, prenons un exemple simple d’une fonction additionnant deux nombres:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  19.534 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  16.569 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -783,16 +752,16 @@ title="Print to PDF"
 <p>Comparons la performance avec cette fonction qui retourne la somme de ses deux arguments</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.041 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.286 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -803,15 +772,15 @@ title="Print to PDF"
 <p>On remarque que la deuxième fonction est 300 fois plus rapide que la première. Pour comprendre pourquoi elle est plus rapide, on peut regarder le code généré avant la compilation. On s’appercoit que le code est relativement simple avec une utilisation unique de l’instruction <code class="docutils literal notranslate"><span class="pre">add</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_deux_arguments</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[26]:1 within `addition_deux_arguments`
-define <span class=" -Color -Color-Cyan">i64</span> @julia_addition_deux_arguments_2713<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0, <span class=" -Color -Color-Cyan">i64</span> signext %1<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[16]:1 within `addition_deux_arguments`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_addition_deux_arguments_1863<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0, <span class=" -Color -Color-Cyan">i64</span> signext %1<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-;  @ In[26]:2 within `addition_deux_arguments`
+;  @ In[16]:2 within `addition_deux_arguments`
 ; ┌ @ int.jl:87 within `+`
    %2 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %1, %0
 ; └
@@ -824,44 +793,47 @@ top:
 <p>Si on regarde le code généré utilisant la variable globale, on comprend rapidement pourquoi c’est plus long. Pourquoi le code est-il si compliqué ? Ici le langage ne connait pas le type de <code class="docutils literal notranslate"><span class="pre">variable</span></code>, il doit donc prendre en compte le fait que ce type puisse être modifié à tout moment. Comme tous les cas sont envisagés, cela provoque un surcoût important.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">addition_variable_globale</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[24]:3 within `addition_variable_globale`
-define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_addition_variable_globale_2715<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[15]:3 within `addition_variable_globale`
+define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_addition_variable_globale_1886<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
   %1 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
   %gcframe2 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">16</span>
   %gcframe2.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
   %.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
   %2 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i8</span>*
-  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0i8.i32<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span>* nonnull align <span class=" -Color -Color-Yellow">16</span> dereferenceable<span class=" -Color -Color-Yellow">(32)</span> %2, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> false<span class=" -Color -Color-Yellow">)</span>
-  %3 = <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Yellow">{}</span>*** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140703307841493</span> to <span class=" -Color -Color-Yellow">{}</span>*** <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span><span class=" -Color -Color-Yellow">)</span>*<span class=" -Color -Color-Yellow">)(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">260)</span> #3
-;  @ In[24]:4 within `addition_variable_globale`
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0i8.i64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span>* align <span class=" -Color -Color-Yellow">16</span> %2, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> true<span class=" -Color -Color-Yellow">)</span>
+  %thread_ptr = call <span class=" -Color -Color-Cyan">i8</span>* asm &quot;movq %fs:0, $0&quot;, &quot;=r&quot;<span class=" -Color -Color-Yellow">()</span> #6
+  %tls_ppgcstack = <span class=" -Color -Color-Bold">getelementptr</span> <span class=" -Color -Color-Cyan">i8</span>, <span class=" -Color -Color-Cyan">i8</span>* %thread_ptr, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">-8</span>
+  %3 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Cyan">i8</span>* %tls_ppgcstack to <span class=" -Color -Color-Yellow">{}</span>****
+  %tls_pgcstack = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>***, <span class=" -Color -Color-Yellow">{}</span>**** %3, align <span class=" -Color -Color-Yellow">8</span>
+;  @ In[15]:4 within `addition_variable_globale`
   %4 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i64</span>*
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">8</span>, <span class=" -Color -Color-Cyan">i64</span>* %4, align <span class=" -Color -Color-Yellow">16</span>
-  %5 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>**, <span class=" -Color -Color-Yellow">{}</span>*** %3, align <span class=" -Color -Color-Yellow">8</span>
-  %6 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
-  %7 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>** %6 to <span class=" -Color -Color-Yellow">{}</span>***
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %5, <span class=" -Color -Color-Yellow">{}</span>*** %7, align <span class=" -Color -Color-Yellow">8</span>
-  %8 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %3 to <span class=" -Color -Color-Yellow">{}</span>***
+  %5 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  %6 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>** %5 to <span class=" -Color -Color-Yellow">{}</span>***
+  %7 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>**, <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %7, <span class=" -Color -Color-Yellow">{}</span>*** %6, align <span class=" -Color -Color-Yellow">8</span>
+  %8 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack to <span class=" -Color -Color-Yellow">{}</span>***
   <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %gcframe2.sub, <span class=" -Color -Color-Yellow">{}</span>*** %8, align <span class=" -Color -Color-Yellow">8</span>
-  %9 = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">5350563688</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">8</span>
-  %10 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %10, align <span class=" -Color -Color-Yellow">16</span>
-  %11 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @jl_box_int64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span>
-  %12 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %12, align <span class=" -Color -Color-Yellow">8</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %11, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
-  %13 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %9, <span class=" -Color -Color-Yellow">{}</span>** %13, align <span class=" -Color -Color-Yellow">8</span>
-  %14 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @jl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">4792167856</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
-  %15 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %6, align <span class=" -Color -Color-Yellow">8</span>
-  %16 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %3 to <span class=" -Color -Color-Yellow">{}</span>**
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %15, <span class=" -Color -Color-Yellow">{}</span>** %16, align <span class=" -Color -Color-Yellow">8</span>
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %14
+  %variable = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139910041751984</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">16</span>
+  %9 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %variable, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">16</span>
+  %10 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_box_int64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span>
+  %11 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %11, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
+  %12 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %variable, <span class=" -Color -Color-Yellow">{}</span>** %12, align <span class=" -Color -Color-Yellow">8</span>
+  %13 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139909873737088</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %14 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %5, align <span class=" -Color -Color-Yellow">8</span>
+  %15 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %13
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
@@ -870,18 +842,18 @@ top:
 <p>Il est donc possible d’améliorer la performance en fixant la valeur de la variable globale avec l’instruction <code class="docutils literal notranslate"><span class="pre">const</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">constante</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">constante</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constante</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constante</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_constante</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.049 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.271 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -892,16 +864,16 @@ top:
 <p>On peut également fixer le type de cette variable. C’est mieux mais cela reste éloigné, en terme de performance, du résultat précedent.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span><span class="o">::</span><span class="kt">Int</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">variable</span><span class="o">::</span><span class="kt">Int</span>
+<span class="k">end</span>
 
-<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_typee</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.861 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.277 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -912,30 +884,43 @@ top:
 <p>Pour régler notre problème de performance avec une variable globale, il faut la passer en argument dans la fonction.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>addition_variable_globale_en_argument (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">variable</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">addition_variable_globale_en_argument</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">variable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.781 ns (0 allocations: 0 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="instabilite-de-type">
-<h2>Instabilité de type<a class="headerlink" href="#instabilite-de-type" title="Permalink to this headline">#</a></h2>
+<h2>Instabilité de type<a class="headerlink" href="#instabilite-de-type" title="Permalink to this heading">#</a></h2>
 <p>Une fonction est de type stable lorsque vous pouvez déduire ce que doit être la sortie de la fonction. L’exemple ci-dessous rendra les choses plus claires. En règle générale, les fonctions de type stable sont plus rapides.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="kt">Number</span><span class="w"></span>
-<span class="w">    </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="kt">Number</span>
+<span class="w">    </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">+</span><span class="mi">1</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -947,25 +932,25 @@ top:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.79927465273255
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2692504830309297
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for carre_plus_un(::Float64)
-  from carre_plus_un(v::T) where T&lt;:Number in Main at In[33]:1
+  from carre_plus_un(v::<span class=" -Color -Color-Bold">T</span>) where T&lt;:Number @ Main In[23]:1
 Static Parameters
   T = <span class=" -Color -Color-Cyan">Float64</span>
 Arguments
@@ -983,7 +968,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -995,13 +980,13 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">carre_plus_un</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for carre_plus_un(::Int64)
-  from carre_plus_un(v::T) where T&lt;:Number in Main at In[33]:1
+  from carre_plus_un(v::<span class=" -Color -Color-Bold">T</span>) where T&lt;:Number @ Main In[23]:1
 Static Parameters
   T = <span class=" -Color -Color-Cyan">Int64</span>
 Arguments
@@ -1029,18 +1014,18 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 <p>Créons maintenant un nouveau type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube</span>
+<span class="w">    </span><span class="n">length</span>
+<span class="w">    </span><span class="n">width</span>
+<span class="w">    </span><span class="n">height</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
 </div>
@@ -1052,12 +1037,12 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_typed</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_typed</span>
+<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">width</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">height</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
 </div>
@@ -1069,12 +1054,12 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">length</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span><span class="w"></span>
-<span class="w">    </span><span class="n">width</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span><span class="w"></span>
-<span class="w">    </span><span class="n">height</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_parametric_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="p">}</span>
+<span class="w">    </span><span class="n">length</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span>
+<span class="w">    </span><span class="n">width</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span>
+<span class="w">    </span><span class="n">height</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">T</span>
+<span class="k">end</span>
+<span class="n">volume</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Cube_parametric_typed</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">.</span><span class="n">length</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">width</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">height</span>
 </pre></div>
 </div>
 </div>
@@ -1086,10 +1071,10 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="n">c3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_parametric_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">c3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cube_parametric_typed</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1104,17 +1089,17 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="c"># not typed</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="c"># typed float</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="c"># typed parametric</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="c"># not typed</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="c"># typed float</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="c"># typed parametric</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  26.116 ns (1 allocation: 16 bytes)
-  6.881 ns (1 allocation: 16 bytes)
-  17.550 ns (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  23.127 ns (1 allocation: 16 bytes)
+  6.572 ns (1 allocation: 16 bytes)
+  17.361 ns (1 allocation: 16 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7160000000000002
@@ -1124,13 +1109,13 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Cube_parametric_typed</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.3</span><span class="p">)</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c4</span><span class="p">)</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  19.667 ns (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  17.300 ns (1 allocation: 16 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7160000000000002
@@ -1141,13 +1126,13 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 <p>The second and the third function calls are faster! Let’s call <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code> and check type stability</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube)
-  from volume(c::Cube) in Main at In[40]:1
+  from volume(c::<span class=" -Color -Color-Bold">Cube</span>) @ Main In[29]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube</span>
@@ -1163,13 +1148,13 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube_typed)
-  from volume(c::Cube_typed) in Main at In[41]:6
+  from volume(c::<span class=" -Color -Color-Bold">Cube_typed</span>) @ Main In[30]:6
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube_typed</span>
@@ -1185,13 +1170,13 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">volume</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube_parametric_typed{Float64})
-  from volume(c::Cube_parametric_typed) in Main at In[42]:6
+  from volume(c::<span class=" -Color -Color-Bold">Cube_parametric_typed</span>) @ Main In[31]:6
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube_parametric_typed{Float64}</span>
@@ -1208,24 +1193,24 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 <p><strong>Conclusion</strong>: Les types en Julia sont importants donc si vous les connaissez, ajoutez-les, cela peut améliorer les performances.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for zero_or_val(::Float64)
-  from zero_or_val(x::Real) in Main at In[51]:1
+  from zero_or_val(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[38]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(zero_or_val)</span>
   x<span class=" -Color -Color-Cyan">::Float64</span>
-Body<span class=" -Color -Color-Bold">::Union{Float64, Int64}</span>
+Body<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Float64, Int64}</span>
 1 ─ %1 = (x &gt;= 0)<span class=" -Color -Color-Cyan">::Bool</span>
 └──      goto #3 if not %1
 2 ─      return x
@@ -1236,40 +1221,39 @@ Body<span class=" -Color -Color-Bold">::Union{Float64, Int64}</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promote_type</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="kt">Int</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Real</span><span class="p">)</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promote_type</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">y</span>
+<span class="k">end</span>
+<span class="nd">@code_warntype</span><span class="w"> </span><span class="n">zero_or_val_stable</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for zero_or_val_stable(::Float64)
-  from zero_or_val_stable(x::Real) in Main at In[52]:1
+  from zero_or_val_stable(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[39]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(zero_or_val_stable)</span>
   x<span class=" -Color -Color-Cyan">::Float64</span>
 Locals
+  y<span class=" -Color -Color-Cyan">::Float64</span>
   T<span class=" -Color -Color-Cyan">::Type{Float64}</span>
-  y<span class=" -Color -Color-Bold">::Union{Float64, Int64}</span>
 Body<span class=" -Color -Color-Cyan">::Float64</span>
-1 ─       Core.NewvarNode(:(T))
-│         Core.NewvarNode(:(y))
-│   %3  = (x &gt;= 0)<span class=" -Color -Color-Cyan">::Bool</span>
-└──       goto #3 if not %3
-2 ─       (y = x)
-└──       goto #4
-3 ─       (y = 0)
-4 ┄ %8  = Main.typeof(x)<span class=" -Color -Color-Cyan">::Core.Const(Float64)</span>
-│         (T = Main.promote_type(%8, Main.Int))
-│   %10 = (T::Core.Const(Float64))(y)<span class=" -Color -Color-Cyan">::Float64</span>
-└──       return %10
+1 ─      Core.NewvarNode(:(y))
+│   %2 = Main.typeof(x)<span class=" -Color -Color-Cyan">::Core.Const(Float64)</span>
+│        (T = Main.promote_type(%2, Main.Int))
+│   %4 = (x &gt;= 0)<span class=" -Color -Color-Cyan">::Bool</span>
+└──      goto #3 if not %4
+2 ─      (y = x)
+└──      goto #4
+3 ─      (y = Main.zero(T::Core.Const(Float64)))
+4 ┄      return y
 </pre></div>
 </div>
 </div>
@@ -1279,31 +1263,31 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docutils literal notranslate"><span class="pre">rand()</span></code>), si c’est face (<code class="docutils literal notranslate"><span class="pre">&gt;=0.5</span></code>), vous ajoutez <code class="docutils literal notranslate"><span class="pre">1</span></code>. Sinon, vous ajoutez le nombre lui-même.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"></span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span>
+<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"></span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span><span class="w"></span>
-<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="w"></span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">myvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"></span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">v</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">T</span><span class="p">})</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">vi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span>
+<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="mf">0.5</span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">one</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vi</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+<span class="n">myvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1318,37 +1302,37 @@ Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docu
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span><span class="w"></span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">flipcoin_then_add_typed</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.434 μs (1 allocation: 7.94 KiB)
-  2.401 μs (1 allocation: 7.94 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.114 μs (1 allocation: 7.94 KiB)
+  1.247 μs (1 allocation: 7.94 KiB)
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Conclusion</strong>: Think about the variables you are declaring. Do you know their types? If so, specify the type somehow.</p>
 <section id="code-xxx">
-<h3>&#64;code_XXX<a class="headerlink" href="#code-xxx" title="Permalink to this headline">#</a></h3>
+<h3>&#64;code_XXX<a class="headerlink" href="#code-xxx" title="Permalink to this heading">#</a></h3>
 <p>Nous avons vu durant ce chapitre que regarder le code généré peut nous aider à améliorer les performances. Voici toutes les macros à votre disposition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># @code_llvm </span><span class="w"></span>
-<span class="c"># @code_lowered </span><span class="w"></span>
-<span class="c"># @code_native </span><span class="w"></span>
-<span class="c"># @code_typed </span><span class="w"></span>
-<span class="c"># @code_warntype</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># @code_llvm </span>
+<span class="c"># @code_lowered </span>
+<span class="c"># @code_native </span>
+<span class="c"># @code_typed </span>
+<span class="c"># @code_warntype</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">randval</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">randval</span><span class="o">&lt;</span><span class="mf">0.5</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;H&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">randval</span><span class="o">::</span><span class="kt">Float64</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">randval</span><span class="o">&lt;</span><span class="mf">0.5</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;H&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;T&quot;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -1360,7 +1344,7 @@ Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docu
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># syntax tree</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_lowered</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># syntax tree</span>
 </pre></div>
 </div>
 </div>
@@ -1377,13 +1361,13 @@ Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docu
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># try @code_typed</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># try @code_typed</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for flipcoin(::Float64)
-  from flipcoin(randval::Float64) in Main at In[55]:7
+  from flipcoin(randval::<span class=" -Color -Color-Bold">Float64</span>) @ Main In[42]:7
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(flipcoin)</span>
   randval<span class=" -Color -Color-Cyan">::Float64</span>
@@ -1398,21 +1382,21 @@ Body<span class=" -Color -Color-Cyan">::String</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># this and code_warntype are probably the most relevant</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="c"># this and code_warntype are probably the most relevant</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[55]:7 within `flipcoin`
-define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_flipcoin_3582<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[42]:7 within `flipcoin`
+define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_flipcoin_2470<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-;  @ In[55]:8 within `flipcoin`
-; ┌ @ float.jl:444 within `&lt;`
+;  @ In[42]:8 within `flipcoin`
+; ┌ @ float.jl:536 within `&lt;`
    %1 = <span class=" -Color -Color-Bold">fcmp</span> <span class=" -Color -Color-Bold">uge</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">5.000000e-01</span>
+   %. = <span class=" -Color -Color-Bold">select</span> <span class=" -Color -Color-Cyan">i1</span> %1, <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139910097979208</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">139910097979152</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>
 ; └
-  %spec.select = <span class=" -Color -Color-Bold">select</span> <span class=" -Color -Color-Cyan">i1</span> %1, <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">4529490128</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">4529490000</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>
-;  @ In[55]:9 within `flipcoin`
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %spec.select
+;  @ In[42] within `flipcoin`
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %.
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
@@ -1420,28 +1404,43 @@ top:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">flipcoin</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.section	__TEXT,__text,regular,pure_instructions
-; ┌ @ In[55]:7 within `flipcoin`
-	<span class=" -Color -Color-Bold">movabsq</span>	<span class=" -Color -Color-Yellow">$4526567312</span>, %rax               ## imm = <span class=" -Color -Color-Yellow">0x10DCDEF90</span>
-	<span class=" -Color -Color-Bold">vmovsd</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>, %xmm1                   ## xmm1 = mem<span class=" -Color -Color-Yellow">[0]</span>,zero
-; │ @ In[55]:8 within `flipcoin`
-; │┌ @ float.jl:444 within `&lt;`
-	<span class=" -Color -Color-Bold">xorl</span>	%ecx, %ecx
-	<span class=" -Color -Color-Bold">vucomisd</span>	%xmm0, %xmm1
-	<span class=" -Color -Color-Bold">setbe</span>	%cl
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;flipcoin&quot;
+	.section	.rodata.cst8,&quot;aM&quot;,@progbits,<span class=" -Color -Color-Yellow">8</span>
+	.p2align	<span class=" -Color -Color-Yellow">3</span>                               # -- Begin function julia_flipcoin_2486
+.LCPI0_0:
+	.quad	<span class=" -Color -Color-Yellow">0x3fe0000000000000</span>              # double 0.5
+	.text
+	.globl	julia_flipcoin_2486
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	julia_flipcoin_2486,@function
+julia_flipcoin_2486:                    # @julia_flipcoin_2486
+; ┌ @ In[42]:7 within `flipcoin`
+# %bb.0:                                # %top
+	<span class=" -Color -Color-Bold">push</span>	rbp
+	<span class=" -Color -Color-Bold">mov</span>	rbp, rsp
+	<span class=" -Color -Color-Bold">movabs</span>	rax, offset .LCPI0_0
+	<span class=" -Color -Color-Bold">vmovsd</span>	xmm1, qword ptr <span class=" -Color -Color-Yellow">[</span>rax<span class=" -Color -Color-Yellow">]</span>           # xmm1 = mem[0],zero
+; │ @ In[42]:8 within `flipcoin`
+; │┌ @ float.jl:536 within `&lt;`
+	<span class=" -Color -Color-Bold">vucomisd</span>	xmm1, xmm0
+	<span class=" -Color -Color-Bold">movabs</span>	rcx, <span class=" -Color -Color-Yellow">139910097979208</span>
+	<span class=" -Color -Color-Bold">movabs</span>	rax, <span class=" -Color -Color-Yellow">139910097979152</span>
+	<span class=" -Color -Color-Bold">cmovbe</span>	rax, rcx
 ; │└
-	<span class=" -Color -Color-Bold">shlq</span>	<span class=" -Color -Color-Yellow">$7</span>, %rcx
-	<span class=" -Color -Color-Bold">movabsq</span>	<span class=" -Color -Color-Yellow">$4529490000</span>, %rax               ## imm = <span class=" -Color -Color-Yellow">0x10DFA8850</span>
-	<span class=" -Color -Color-Bold">orq</span>	%rcx, %rax
-; │ @ In[55]:9 within `flipcoin`
-	<span class=" -Color -Color-Bold">retq</span>
-	<span class=" -Color -Color-Bold">nopl</span>	<span class=" -Color -Color-Yellow">(</span>%rax<span class=" -Color -Color-Yellow">)</span>
+; │ @ In[42] within `flipcoin`
+	<span class=" -Color -Color-Bold">pop</span>	rbp
+	<span class=" -Color -Color-Bold">ret</span>
+.Lfunc_end0:
+	.size	julia_flipcoin_2486, .Lfunc_end0-julia_flipcoin_2486
 ; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
 </pre></div>
 </div>
 </div>
@@ -1459,61 +1458,120 @@ top:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.7"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.7'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="06-type-et-methode.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Type et méthodes</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06-type-et-methode.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Type et méthodes</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="08-calcul-parallele.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="08-calcul-parallele.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Calcul parallèle</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allocations">Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alignement-de-la-memoire">Alignement de la mémoire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vues-explicites">Vues explicites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eviter-les-calculs-dans-l-environnement-global">Eviter les calculs dans l’environnement global.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instabilite-de-type">Instabilité de type</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-xxx">@code_XXX</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By The Jupyter Book community<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

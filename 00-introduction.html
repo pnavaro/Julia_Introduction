@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Présentation &#8212; Introduction au langage Julia</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,60 +62,103 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '00-introduction';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Prise en main" href="01-prise-en-main.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Introduction au langage Julia - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Introduction au langage Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
@@ -113,385 +168,264 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-prise-en-main.html">
-   Prise en main
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-tableaux-et-matrices.html">
-   Tableaux et matrices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-elements-de-programmation.html">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-les-fonctions.html">
-   Les fonctions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-packages-graphiques.html">
-   Packages graphiques
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-type-et-methode.html">
-   Type et méthodes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-performance.html">
-   Performance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-metaprogrammation.html">
-   Metaprogrammation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10-gpu.html">
-   GPU
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-prise-en-main.html">Prise en main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tableaux-et-matrices.html">Tableaux et matrices</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03-elements-de-programmation.html">Eléments de programmation</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-les-fonctions.html">Les fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-packages-graphiques.html">Packages graphiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-type-et-methode.html">Type et méthodes</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="07-performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-calcul-parallele.html">Calcul parallèle</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="09-metaprogrammation.html">Metaprogrammation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-gpu.html">GPU</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/00-introduction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F00-introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/00-introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F00-introduction.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/00-introduction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Présentation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installation-et-accessibilite">
-   Installation et accessibilité
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#le-terminal">
-     Le terminal
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#usage">
-     Usage
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#editeur-a-coloration-syntaxique">
-     Editeur à coloration syntaxique
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environnement-integre-ide">
-     Environnement intégré (IDE)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notebook">
-     Notebook
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#les-packages">
-   Les Packages
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Présentation</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Présentation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installation-et-accessibilite">
-   Installation et accessibilité
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#le-terminal">
-     Le terminal
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#usage">
-     Usage
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#editeur-a-coloration-syntaxique">
-     Editeur à coloration syntaxique
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environnement-integre-ide">
-     Environnement intégré (IDE)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notebook">
-     Notebook
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#les-packages">
-   Les Packages
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Présentation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Présentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-accessibilite">Installation et accessibilité</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-terminal">Le terminal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#editeur-a-coloration-syntaxique">Editeur à coloration syntaxique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environnement-integre-ide">Environnement intégré (IDE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook">Notebook</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#les-packages">Les Packages</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="presentation">
-<h1>Présentation<a class="headerlink" href="#presentation" title="Permalink to this headline">#</a></h1>
+<h1>Présentation<a class="headerlink" href="#presentation" title="Permalink to this heading">#</a></h1>
 <p>Hello tout le monde !</p>
-<p>Je me présente, je suis ingénieur calcul à l’Institut de Recherche
+<p>Je me présente, je suis ingénieur à l’Institut de Recherche
 Mathématiques de Rennes. J’ai une formation en mécanique des fluides.
 J’ai écrit beaucoup de codes en Fortran avec MPI et
-OpenMP. Pendant une dizaine d’années j’ai fait beaucoup de Python.
-J’ai commencé à apprendre le langage Julia en juillet 2018 mais je
-surveillais sa progression depuis 2015.  Les supports que je vais
-utiliser ont été écrits à l’origine par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a>.</p>
+OpenMP et pendant une dizaine d’années j’ai fait beaucoup de Python.
+J’ai commencé à apprendre le langage Julia en juillet 2018 avec la première version stable.<br />
+Les supports que je vais utiliser ont été écrits à l’origine par <a class="reference external" href="https://github.com/clopeau/Julia_Introduction">Thierry Clopeau</a>.</p>
 <p><strong>Julia</strong> est un langage de programmation de haut niveau dédié au
 calcul scientifique et calcul haute performance. C’est un logiciel
 libre sous <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/LICENSE.md">licence
@@ -520,14 +454,16 @@ durant la conférence JuliaCon à Londres. Les créateurs sont Jeff Bezanson, St
 <li><p><a class="reference external" href="http://bioinfo-fr.net/julia-le-successeur-de-r">http://bioinfo-fr.net/julia-le-successeur-de-r</a> un exemple en bioinfo.</p></li>
 <li><p><a class="reference external" href="https://juliadocs.github.io/Julia-Cheat-Sheet/fr/">https://juliadocs.github.io/Julia-Cheat-Sheet/fr/</a> Aide-mémoire</p></li>
 </ul>
+<p>Si vous souhaitez suivre l’actualité du langage, inscrivez-vous sur la <a class="reference external" href="https://listes.services.cnrs.fr/wws/info/julia">liste Julia du CNRS</a>. Vous recevrez les <a class="reference external" href="https://pnavaro.github.io/NouvellesJulia">nouvelles Julia</a> et tous les évènements liés au langage.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="installation-et-accessibilite">
-<h1>Installation et accessibilité<a class="headerlink" href="#installation-et-accessibilite" title="Permalink to this headline">#</a></h1>
+<h1>Installation et accessibilité<a class="headerlink" href="#installation-et-accessibilite" title="Permalink to this heading">#</a></h1>
 <section id="le-terminal">
-<h2>Le terminal<a class="headerlink" href="#le-terminal" title="Permalink to this headline">#</a></h2>
+<h2>Le terminal<a class="headerlink" href="#le-terminal" title="Permalink to this heading">#</a></h2>
 <p>Julia est disponible sous tout OS (Mac-linux et Windows) voici la page de téléchargement officielle <a class="reference external" href="http://julialang.org/downloads/">http://julialang.org/downloads/</a>
 Vous pouvez utiliser des installations plus spécifiques comme sous linux avec <a class="reference external" href="https://github.com/abelsiqueira/jill">jill</a> ou MacOS
 avec <a class="reference external" href="https://formulae.brew.sh/formula/julia#default">brew</a>.</p>
+<p>Je conseille vivement d’utiliser <a class="reference external" href="https://github.com/JuliaLang/juliaup">juliaup</a> qui est un outil multi plateforme qui vous permet d’avoir une version de Julia qui fonctionne bien et possède des fonctionnalités intéressantes pour aller plus loin.</p>
 <p>Une fois installé une interface <em>brut de pomme</em> apparait, en fait, une simple console ou REPL pour Read/Evaluate/Print/Loop :</p>
 <p><img alt="julia shell" src="_images/shell.png" /></p>
 <p>Le prompt <code>julia&gt;</code> invitant la commande…</p>
@@ -541,98 +477,36 @@ avec <a class="reference external" href="https://formulae.brew.sh/formula/julia#
 </ul>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">#</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
 <p>Un programme Julia est un script extension .jl on peut soit l’exécuter en ligne de commande “julia nomfichier.jl” ou en l’incluant</p>
-<!-- #endregion --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">\</span><span class="n">alpha</span><span class="p">,</span><span class="w"></span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
-<span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">filter</span><span class="p">(</span><span class="n">endswith</span><span class="p">(</span><span class="s">&quot;jl&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">readdir</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">syntax</span>: &quot;\&quot; is not a unary operator
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span><span class="mi">2</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{String}:
+ &quot;monfichier.jl&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="sb">`ls`</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00-introduction.ipynb
-01-prise-en-main.ipynb
-02-tableaux-et-matrices.ipynb
-03-elements-de-programmation.ipynb
-04-les-fonctions.ipynb
-05-packages-graphiques.ipynb
-06-type-et-methode.ipynb
-07-performance.ipynb
-08-calcul-parallele.ipynb
-09-metaprogrammation.ipynb
-10-gpu.ipynb
-LICENSE
-Manifest.toml
-Project.toml
-README.md
-_config.yml
-_toc.yml
-cmd_julia.png
-help_julia.png
-julia_shel.png
-logo.png
-monfichier.jl
-references.bib
-shell.png
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process(`ls`, ProcessExited(0))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/home/pnavaro/Julia_Introduction&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span><span class="p">()</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/Users/navaro/JuliaProjects/Julia_Introduction&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World!
-Le fichier s&#39;appelle /Users/navaro/JuliaProjects/Julia_Introduction/monfichier.jl
-Il est dans le répertoire /Users/navaro/JuliaProjects/Julia_Introduction
-14
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="sb">`cat monfichier.jl`</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -650,7 +524,19 @@ f(x, y) = 3x + 2
 println(f(4,5))
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process(`cat monfichier.jl`, ProcessExited(0))
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;monfichier.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World!
+Le fichier s&#39;appelle /home/pnavaro/Julia_Introduction/monfichier.jl
+Il est dans le répertoire /home/pnavaro/Julia_Introduction
+14
 </pre></div>
 </div>
 </div>
@@ -658,8 +544,8 @@ println(f(4,5))
 <p>Toute ligne ou fin de ligne commançant par <code class="docutils literal notranslate"><span class="pre">#</span></code> est en commentaire, une bloc est délimité par <code class="docutils literal notranslate"><span class="pre">#=</span></code> et <code class="docutils literal notranslate"><span class="pre">=#</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span><span class="w"></span>
-<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="w">    </span><span class="c">#commentaire en fin de ligne</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># commentaire</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="w">    </span><span class="c">#commentaire en fin de ligne</span>
 </pre></div>
 </div>
 </div>
@@ -680,7 +566,7 @@ println(f(4,5))
 </div>
 </section>
 <section id="editeur-a-coloration-syntaxique">
-<h2>Editeur à coloration syntaxique<a class="headerlink" href="#editeur-a-coloration-syntaxique" title="Permalink to this headline">#</a></h2>
+<h2>Editeur à coloration syntaxique<a class="headerlink" href="#editeur-a-coloration-syntaxique" title="Permalink to this heading">#</a></h2>
 <p>Il est parfaitement possible de travailler à l’aide d’un éditeur de texte et de la console en parallèle.</p>
 <p>Il existe des fichier de configuration pour la coloration syntaxique dans les éditeurs :</p>
 <ul class="simple">
@@ -695,22 +581,23 @@ println(f(4,5))
 Certains offrent la possibilité de gérer un terminal, les graphiques et un debugger dans la même fenêtre.</p>
 </section>
 <section id="environnement-integre-ide">
-<h2>Environnement intégré (IDE)<a class="headerlink" href="#environnement-integre-ide" title="Permalink to this headline">#</a></h2>
+<h2>Environnement intégré (IDE)<a class="headerlink" href="#environnement-integre-ide" title="Permalink to this heading">#</a></h2>
 <p>Il n’y a plus actuellement d’interface Julia Studio (équivalent de Rstudio)…</p>
 <p>Néanmoins certains éditeurs offrent des extensions qui “intègrent” Julia</p>
 <ul class="simple">
 <li><p>Sublime Text 3 et l’extension <a class="reference external" href="https://github.com/quinnj/Sublime-IJulia">Sublime-IJulia</a></p></li>
 <li><p>Atom et l’extension <a class="reference external" href="http://junolab.org/">JunoLab</a></p></li>
 </ul>
-<p>Depuis 2020 l’IDE préconisé par les développeurs de Julia est <a class="reference external" href="https://www.julia-vscode.org">Visual Studio Code</a>.</p>
+<p>Depuis 2020 l’IDE préconisé par les développeurs de Julia est <a class="reference external" href="https://www.julia-vscode.org">Visual Studio Code</a>.
+Il faut installer <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia">l’extension Julia</a> et sur votre clavier <strong>Alt-J+O</strong> devrait ouvrir une console Julia dans votre éditeur. En cas de souci il faut lire consulter <a class="reference external" href="https://github.com/julia-vscode/julia-vscode#installing-juliavs-codevs-code-julia-extension">ce site</a>.</p>
 </section>
 <section id="notebook">
-<h2>Notebook<a class="headerlink" href="#notebook" title="Permalink to this headline">#</a></h2>
+<h2>Notebook<a class="headerlink" href="#notebook" title="Permalink to this heading">#</a></h2>
 <p>Le notebook est la façon de programmer qui permet d’obtenir plus directement un rendu plus web-publiable. La plateforme Jupyter qui héberge les notebooks, offre des possibilités d’interaction supplémentaire avec l’utilisation de widgets…</p>
 <p>On peut installer sur sa propre machine une instance de <a class="reference external" href="http://jupyter.org/">Jupyter</a> (ex iPython) permettant de travailler dans son navigateur. Pour cela il faut installer le package <a class="reference external" href="https://github.com/JuliaLang/IJulia.jl">IJulia</a> dans le terminal (REPL) taper “]” :</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span><span class="w"></span>
-<span class="k">using</span><span class="w"> </span><span class="n">IJulia</span><span class="w"></span>
-<span class="n">notebook</span><span class="p">()</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="n">notebook</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>On peut aussi convertir un fichier notebook (extension <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) en fichier <code class="docutils literal notranslate"><span class="pre">.jl</span></code> (ou autre):</p>
@@ -725,189 +612,57 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="les-packages">
-<h1>Les Packages<a class="headerlink" href="#les-packages" title="Permalink to this headline">#</a></h1>
+<h1>Les Packages<a class="headerlink" href="#les-packages" title="Permalink to this heading">#</a></h1>
 <p>Julia possède une communauté très dynamique, à la fois pour développer le coeur du langage mais aussi pour mettre à disposition de nouvelles fonctionnalités qui pour certaines feront partie des prochaines versions de Julia.</p>
 <p>Un listing complet des packages officiels est disponible sur <a class="reference external" href="https://juliapackages.com">juliapackages.com</a> et/ou <a class="reference external" href="https://juliahub.com/ui/Packages">juliahub.com</a>.</p>
 <p>Pour installer un package faire “]”</p>
-<p>(v1.1) pkg&gt; add Plots</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">add</span> <span class="n">Plot</span>
+</pre></div>
+</div>
 <p>et il est installé physiquement dans votre espace disque (répertoire .julia/).</p>
 <p>L’utilisation se fait en début de chaque programme (ou script par “using”). L’initialisation peut être assez longue à cause de la compilation. Depuis la version 0.4 les packages sont compilés (ou pré-compilés) à l’installation ou premier usage et stocké en fichier pour être rechargé plus rapidement ultérieurement.</p>
+<p>Je conseille de faire une mise à jour régulière des packages installés. Le plus souvent possible car si le langage est stable, beaucoup de packages ne le sont pas.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v1</span><span class="mf">.1</span><span class="p">)</span> <span class="n">pkg</span><span class="o">&gt;</span> <span class="n">up</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Pkg</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Pkg</span>
 
-<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> registry at `~/.julia/registries/General.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/JuliaProjects/Julia_Introduction/Project.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/JuliaProjects/Julia_Introduction/Manifest.toml`
-<span class=" -Color -Color-Bold -Color-Bold-Green">Precompiling</span> project...
-<span class=" -Color -Color-Green">  ✓ </span>RoundingIntegers
-<span class=" -Color -Color-Green">  ✓ </span>IndirectArrays
-<span class=" -Color -Color-Green">  ✓ </span>StatsAPI
-<span class=" -Color -Color-Green">  ✓ </span>InverseFunctions
-<span class=" -Color -Color-Green">  ✓ </span>URIParser
-<span class=" -Color -Color-Green">  ✓ </span>Observables
-<span class=" -Color -Color-Green">  ✓ </span>Pidfile
-<span class=" -Color -Color-Green">  ✓ </span>Compat
-<span class=" -Color -Color-Green">  ✓ </span>IfElse
-<span class=" -Color -Color-Green">  ✓ </span>NaNMath
-<span class=" -Color -Color-Green">  ✓ </span>ProgressMeter
-<span class=" -Color -Color-Green">  ✓ </span>SentinelArrays
-<span class=" -Color -Color-Green">  ✓ </span>Hiccup
-<span class=" -Color -Color-Green">  ✓ </span>DataAPI
-<span class=" -Color -Color-Green">  ✓ </span>TranscodingStreams
-<span class=" -Color -Color-Green">  ✓ </span>LeftChildRightSiblingTrees
-<span class=" -Color -Color-Green">  ✓ </span>FunctionalCollections
-<span class=" -Color -Color-Green">  ✓ </span>MethodAnalysis
-<span class=" -Color -Color-Green">  ✓ </span>OpenSSL_jll
-<span class=" -Color -Color-Green">  ✓ </span>Kaleido_jll
-<span class=" -Color -Color-Green">  ✓ </span>BenchmarkTools
-<span class=" -Color -Color-Green">  ✓ </span>Latexify
-<span class=" -Color -Color-Green">  ✓ </span>IntelOpenMP_jll
-<span class=" -Color -Color-Green">  ✓ </span>Lazy
-<span class=" -Color -Color-Green">  ✓ </span>Expat_jll
-<span class=" -Color -Color-Green">  ✓ </span>hicolor_icon_theme_jll
-<span class=" -Color -Color-Green">  ✓ </span>iso_codes_jll
-<span class=" -Color -Color-Green">  ✓ </span>FFTW_jll
-<span class=" -Color -Color-Green">  ✓ </span>FileIO
-<span class=" -Color -Color-Green">  ✓ </span>WebSockets
-<span class=" -Color -Color-Green">  ✓ </span>Mocking
-<span class=" -Color -Color-Green">  ✓ </span>AssetRegistry
-<span class=" -Color -Color-Green">  ✓ </span>BinDeps
-<span class=" -Color -Color-Green">  ✓ </span>BinaryProvider
-<span class=" -Color -Color-Green">  ✓ </span>XML2_jll
-<span class=" -Color -Color-Green">  ✓ </span>FilePathsBase
-<span class=" -Color -Color-Green">  ✓ </span>PooledArrays
-<span class=" -Color -Color-Green">  ✓ </span>Static
-<span class=" -Color -Color-Green">  ✓ </span>ChainRulesCore
-<span class=" -Color -Color-Green">  ✓ </span>Tables
-<span class=" -Color -Color-Green">  ✓ </span>Missings
-<span class=" -Color -Color-Green">  ✓ </span>CodecZlib
-<span class=" -Color -Color-Green">  ✓ </span>adwaita_icon_theme_jll
-<span class=" -Color -Color-Green">  ✓ </span>Dbus_jll
-<span class=" -Color -Color-Green">  ✓ </span>MKL_jll
-<span class=" -Color -Color-Green">  ✓ </span>Libtiff_jll
-<span class=" -Color -Color-Green">  ✓ </span>DataStructures
-<span class=" -Color -Color-Green">  ✓ </span>StaticArrays
-<span class=" -Color -Color-Green">  ✓ </span>DataDeps
-<span class=" -Color -Color-Green">  ✓ </span>Mux
-<span class=" -Color -Color-Green">  ✓ </span>Gettext_jll
-<span class=" -Color -Color-Green">  ✓ </span>Wayland_jll
-<span class=" -Color -Color-Green">  ✓ </span>WeakRefStrings
-<span class=" -Color -Color-Green">  ✓ </span>ChangesOfVariables
-<span class=" -Color -Color-Green">  ✓ </span>AbstractFFTs
-<span class=" -Color -Color-Green">  ✓ </span>Mustache
-<span class=" -Color -Color-Green">  ✓ </span>Fontconfig_jll
-<span class=" -Color -Color-Green">  ✓ </span>ArrayInterface
-<span class=" -Color -Color-Green">  ✓ </span>XSLT_jll
-<span class=" -Color -Color-Green">  ✓ </span>SortingAlgorithms
-<span class=" -Color -Color-Green">  ✓ </span>CategoricalArrays
-<span class=" -Color -Color-Green">  ✓ </span>Contour
-<span class=" -Color -Color-Green">  ✓ </span>EllipsisNotation
-<span class=" -Color -Color-Green">  ✓ </span>LogExpFunctions
-<span class=" -Color -Color-Green">  ✓ </span>StructArrays
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libxcb_jll
-<span class=" -Color -Color-Green">  ✓ </span>Glib_jll
-<span class=" -Color -Color-Green">  ✓ </span>IntervalSets
-<span class=" -Color -Color-Green">  ✓ </span>TimeZones
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libX11_jll
-<span class=" -Color -Color-Green">  ✓ </span>ATK_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_image_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_keysyms_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_renderutil_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xcb_util_wm_jll
-<span class=" -Color -Color-Green">  ✓ </span>StatsBase
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrender_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXext_jll
-<span class=" -Color -Color-Green">  ✓ </span>PrettyTables
-<span class=" -Color -Color-Green">  ✓ </span>ColorTypes
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXfixes_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libxkbfile_jll
-<span class=" -Color -Color-Green">  ✓ </span>Libglvnd_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXinerama_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXrandr_jll
-<span class=" -Color -Color-Green">  ✓ </span>gdk_pixbuf_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXcomposite_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXdamage_jll
-<span class=" -Color -Color-Green">  ✓ </span>FFTW
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXcursor_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXi_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xkbcomp_jll
-<span class=" -Color -Color-Green">  ✓ </span>Libepoxy_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_libXtst_jll
-<span class=" -Color -Color-Green">  ✓ </span>GLFW_jll
-<span class=" -Color -Color-Green">  ✓ </span>Cairo_jll
-<span class=" -Color -Color-Green">  ✓ </span>Xorg_xkeyboard_config_jll
-<span class=" -Color -Color-Green">  ✓ </span>CSV
-<span class=" -Color -Color-Green">  ✓ </span>at_spi2_core_jll
-<span class=" -Color -Color-Green">  ✓ </span>xkbcommon_jll
-<span class=" -Color -Color-Green">  ✓ </span>at_spi2_atk_jll
-<span class=" -Color -Color-Green">  ✓ </span>HarfBuzz_jll
-<span class=" -Color -Color-Green">  ✓ </span>Qt5Base_jll
-<span class=" -Color -Color-Green">  ✓ </span>Colors
-<span class=" -Color -Color-Green">  ✓ </span>libass_jll
-<span class=" -Color -Color-Green">  ✓ </span>GeometryBasics
-<span class=" -Color -Color-Green">  ✓ </span>Pango_jll
-<span class=" -Color -Color-Green">  ✓ </span>Graphics
-<span class=" -Color -Color-Green">  ✓ </span>PalmerPenguins
-<span class=" -Color -Color-Green">  ✓ </span>Widgets
-<span class=" -Color -Color-Green">  ✓ </span>Librsvg_jll
-<span class=" -Color -Color-Green">  ✓ </span>GTK3_jll
-<span class=" -Color -Color-Green">  ✓ </span>Cairo
-<span class=" -Color -Color-Green">  ✓ </span>WebIO
-<span class=" -Color -Color-Green">  ✓ </span>FlameGraphs
-<span class=" -Color -Color-Green">  ✓ </span>JSExpr
-<span class=" -Color -Color-Green">  ✓ </span>ColorSchemes
-<span class=" -Color -Color-Green">  ✓ </span>FFMPEG_jll
-<span class=" -Color -Color-Green">  ✓ </span>FFMPEG
-<span class=" -Color -Color-Green">  ✓ </span>GR_jll
-<span class=" -Color -Color-Green">  ✓ </span>PyPlot
-<span class=" -Color -Color-Green">  ✓ </span>Blink
-<span class=" -Color -Color-Green">  ✓ </span>PlotlyBase
-<span class=" -Color -Color-Green">  ✓ </span>GR
-<span class=" -Color -Color-Green">  ✓ </span>Gtk
-<span class=" -Color -Color-Green">  ✓ </span>PlotUtils
-<span class=" -Color -Color-Green">  ✓ </span>PlotlyJS
-<span class=" -Color -Color-Green">  ✓ </span>RecipesPipeline
-<span class=" -Color -Color-Green">  ✓ </span>PlotThemes
-<span class=" -Color -Color-Green">  ✓ </span>DataFrames
-<span class=" -Color -Color-Green">  ✓ </span>GtkObservables
-<span class=" -Color -Color-Green">  ✓ </span>ProfileView
-<span class=" -Color -Color-Green">  ✓ </span>RData
-<span class=" -Color -Color-Green">  ✓ </span>RDatasets
-<span class=" -Color -Color-Green">  ✓ </span>Plots
-  136 dependencies successfully precompiled in 112 seconds (81 already precompiled)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/Julia_Introduction/Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/Julia_Introduction/Manifest.toml`
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">      Status</span> `~/JuliaProjects/Julia_Introduction/Project.toml`
-  [1520ce14] AbstractTrees v0.3.4
-  [6e4b80f9] BenchmarkTools v1.3.1
-  [a93c6f00] DataFrames v1.3.2
-  [7a1cc6ca] FFTW v1.4.6
-  [7073ff75] IJulia v1.23.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">Status</span> `~/Julia_Introduction/Project.toml`
+  [1520ce14] AbstractTrees v0.4.4
+  [6e4b80f9] BenchmarkTools v1.4.0
+  [a93c6f00] DataFrames v1.6.1
+  [7a1cc6ca] FFTW v1.7.2
+  [7073ff75] IJulia v1.24.2
   [8b842266] PalmerPenguins v0.1.4
-  [f0f68f2c] PlotlyJS v0.18.8
-  [91a5bcdd] Plots v1.26.0
-  [c46f51b8] ProfileView v1.5.0
-  [92933f4c] ProgressMeter v1.7.1
-  [438e738f] PyCall v1.93.1
-  [d330b81b] PyPlot v2.10.0
+  [f0f68f2c] PlotlyJS v0.18.11
+  [91a5bcdd] Plots v1.39.0
+  [c46f51b8] ProfileView v1.7.2
+  [92933f4c] ProgressMeter v1.9.0
+  [438e738f] PyCall v1.96.4
+  [d330b81b] PyPlot v2.11.2
   [ce6b1742] RDatasets v0.7.7
+  [8dfed614] Test
 </pre></div>
 </div>
 </div>
@@ -917,217 +672,50 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 <p>(v1.1) pkg&gt; update # comme dit le nom</p>
 <p>(v1.1) pkg&gt; precompile # pour forcer la compilation</p>
 <p>On verra dans les sections suivantes l’utilisation de quelques packages plus prisés et même jusqu’à la création d’un package !</p>
-<p>Vous pouvez utiliser une environnement local pour contôler les versions de vos packages avec la commande <code class="docutils literal notranslate"><span class="pre">activate</span></code>. Placez-vous dans le répertoire ou se trouve votre code:</p>
+<p>Vous pouvez utiliser un environnement local pour contôler les versions de vos packages avec la commande <code class="docutils literal notranslate"><span class="pre">activate</span></code>. Placez-vous dans le répertoire ou se trouve votre code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="n">cd</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mkpath</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">cd</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span><span class="p">()</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/Users/navaro/JuliaProjects/Julia_Introduction/test&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;/home/pnavaro/Julia_Introduction/test&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> new project at `~/JuliaProjects/Julia_Introduction/test`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> project at `~/Julia_Introduction/test`
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Plots&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">   Resolving</span> package versions...
-<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `~/JuliaProjects/Julia_Introduction/test/Project.toml`
-  [91a5bcdd] + Plots v1.30.1
-<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `~/JuliaProjects/Julia_Introduction/test/Manifest.toml`
-  [79e6a3ab] + Adapt v3.3.3
-  [d360d2e6] + ChainRulesCore v1.15.0
-  [9e997f8a] + ChangesOfVariables v0.1.3
-  [35d6a980] + ColorSchemes v3.18.0
-  [3da002f7] + ColorTypes v0.11.4
-  [c3611d14] + ColorVectorSpace v0.9.9
-  [5ae59095] + Colors v0.12.8
-  [34da2185] + Compat v4.1.0
-  [d38c429a] + Contour v0.5.7
-  [9a962f9c] + DataAPI v1.10.0
-  [864edb3b] + DataStructures v0.18.13
-  [e2d170a0] + DataValueInterfaces v1.0.0
-  [ffbed154] + DocStringExtensions v0.8.6
-  [c87230d0] + FFMPEG v0.4.1
-  [53c48c17] + FixedPointNumbers v0.8.4
-  [59287772] + Formatting v0.4.2
-  [28b8d3ca] + GR v0.64.4
-  [5c1252a2] + GeometryBasics v0.4.2
-  [42e2da0e] + Grisu v1.0.2
-  [cd3eb016] + HTTP v0.9.17
-  [83e8ac13] + IniFile v0.5.1
-  [3587e190] + InverseFunctions v0.1.7
-  [92d709cd] + IrrationalConstants v0.1.1
-  [c8e1da08] + IterTools v1.4.0
-  [82899510] + IteratorInterfaceExtensions v1.0.0
-  [692b3bcd] + JLLWrappers v1.4.1
-  [682c06a0] + JSON v0.21.3
-  [b964fa9f] + LaTeXStrings v1.3.0
-  [23fbe1c1] + Latexify v0.15.15
-  [2ab3a3ac] + LogExpFunctions v0.3.15
-  [1914dd2f] + MacroTools v0.5.9
-  [739be429] + MbedTLS v1.0.3
-  [442fdcdd] + Measures v0.3.1
-  [e1d29d7a] + Missings v1.0.2
-  [77ba4419] + NaNMath v1.0.0
-  [bac558e1] + OrderedCollections v1.4.1
-  [69de0a69] + Parsers v2.3.2
-  [ccf2f8ad] + PlotThemes v3.0.0
-  [995b91a9] + PlotUtils v1.2.0
-  [91a5bcdd] + Plots v1.30.1
-  [21216c6a] + Preferences v1.3.0
-  [3cdcf5f2] + RecipesBase v1.2.1
-  [01d81517] + RecipesPipeline v0.5.2
-  [189a3867] + Reexport v1.2.2
-  [05181044] + RelocatableFolders v0.1.3
-  [ae029012] + Requires v1.3.0
-  [6c6a2e73] + Scratch v1.1.0
-  [992d4aef] + Showoff v1.0.3
-  [a2af1166] + SortingAlgorithms v1.0.1
-  [276daf66] + SpecialFunctions v2.1.6
-  [90137ffa] + StaticArrays v1.4.7
-  [82ae8749] + StatsAPI v1.4.0
-  [2913bbd2] + StatsBase v0.33.17
-  [09ab397b] + StructArrays v0.6.8
-  [3783bdb8] + TableTraits v1.0.1
-  [bd369af6] + Tables v1.7.0
-  [62fd8b95] + TensorCore v0.1.1
-  [5c2747f8] + URIs v1.3.0
-  [1cfade01] + UnicodeFun v0.4.1
-  [41fe7b60] + Unzip v0.1.2
-  [6e34b625] + Bzip2_jll v1.0.8+0
-  [83423d85] + Cairo_jll v1.16.1+1
-  [5ae413db] + EarCut_jll v2.2.3+0
-  [2e619515] + Expat_jll v2.4.8+0
-  [b22a6f82] + FFMPEG_jll v4.4.0+0
-  [a3f928ae] + Fontconfig_jll v2.13.93+0
-  [d7e528f0] + FreeType2_jll v2.10.4+0
-  [559328eb] + FriBidi_jll v1.0.10+0
-  [0656b61e] + GLFW_jll v3.3.6+0
-  [d2c73de3] + GR_jll v0.64.4+0
-  [78b55507] + Gettext_jll v0.21.0+0
-  [7746bdde] + Glib_jll v2.68.3+2
-  [3b182d85] + Graphite2_jll v1.3.14+0
-  [2e76f6c2] + HarfBuzz_jll v2.8.1+1
-  [aacddb02] + JpegTurbo_jll v2.1.2+0
-  [c1c5ebd0] + LAME_jll v3.100.1+0
-  [88015f11] + LERC_jll v3.0.0+1
-  [dd4b983a] + LZO_jll v2.10.1+0
-  [e9f186c6] + Libffi_jll v3.2.2+1
-  [d4300ac3] + Libgcrypt_jll v1.8.7+0
-  [7e76a0d4] + Libglvnd_jll v1.3.0+3
-  [7add5ba3] + Libgpg_error_jll v1.42.0+0
-  [94ce4f54] + Libiconv_jll v1.16.1+1
-  [4b2f31a3] + Libmount_jll v2.35.0+0
-  [89763e89] + Libtiff_jll v4.4.0+0
-  [38a345b3] + Libuuid_jll v2.36.0+0
-  [e7412a2a] + Ogg_jll v1.3.5+1
-  [458c3c95] + OpenSSL_jll v1.1.14+0
-  [efe28fd5] + OpenSpecFun_jll v0.5.5+0
-  [91d4177d] + Opus_jll v1.3.2+0
-  [2f80f16e] + PCRE_jll v8.44.0+0
-  [30392449] + Pixman_jll v0.40.1+0
-  [ea2cea3b] + Qt5Base_jll v5.15.3+1
-  [a2964d1f] + Wayland_jll v1.19.0+0
-  [2381bf8a] + Wayland_protocols_jll v1.25.0+0
-  [02c8fc9c] + XML2_jll v2.9.14+0
-  [aed1982a] + XSLT_jll v1.1.34+0
-  [4f6342f7] + Xorg_libX11_jll v1.6.9+4
-  [0c0b7dd1] + Xorg_libXau_jll v1.0.9+4
-  [935fb764] + Xorg_libXcursor_jll v1.2.0+4
-  [a3789734] + Xorg_libXdmcp_jll v1.1.3+4
-  [1082639a] + Xorg_libXext_jll v1.3.4+4
-  [d091e8ba] + Xorg_libXfixes_jll v5.0.3+4
-  [a51aa0fd] + Xorg_libXi_jll v1.7.10+4
-  [d1454406] + Xorg_libXinerama_jll v1.1.4+4
-  [ec84b674] + Xorg_libXrandr_jll v1.5.2+4
-  [ea2f1a96] + Xorg_libXrender_jll v0.9.10+4
-  [14d82f49] + Xorg_libpthread_stubs_jll v0.1.0+3
-  [c7cfdc94] + Xorg_libxcb_jll v1.13.0+3
-  [cc61e674] + Xorg_libxkbfile_jll v1.1.0+4
-  [12413925] + Xorg_xcb_util_image_jll v0.4.0+1
-  [2def613f] + Xorg_xcb_util_jll v0.4.0+1
-  [975044d2] + Xorg_xcb_util_keysyms_jll v0.4.0+1
-  [0d47668e] + Xorg_xcb_util_renderutil_jll v0.3.9+1
-  [c22f9ab0] + Xorg_xcb_util_wm_jll v0.4.1+1
-  [35661453] + Xorg_xkbcomp_jll v1.4.2+4
-  [33bec58e] + Xorg_xkeyboard_config_jll v2.27.0+4
-  [c5fb5394] + Xorg_xtrans_jll v1.4.0+3
-  [3161d3a3] + Zstd_jll v1.5.2+0
-  [0ac62f75] + libass_jll v0.15.1+0
-  [f638f0a6] + libfdk_aac_jll v2.0.2+0
-  [b53b4c65] + libpng_jll v1.6.38+0
-  [f27f6e37] + libvorbis_jll v1.3.7+1
-  [1270edf5] + x264_jll v2021.5.5+0
-  [dfaa095f] + x265_jll v3.5.0+0
-  [d8fb68d0] + xkbcommon_jll v0.9.1+5
-  [0dad84c5] + ArgTools
-  [56f22d72] + Artifacts
-  [2a0f44e3] + Base64
-  [ade2ca70] + Dates
-  [8bb1440f] + DelimitedFiles
-  [f43a241f] + Downloads
-  [7b1f6079] + FileWatching
-  [b77e0a4c] + InteractiveUtils
-  [b27032c2] + LibCURL
-  [76f85450] + LibGit2
-  [8f399da3] + Libdl
-  [37e2e46d] + LinearAlgebra
-  [56ddb016] + Logging
-  [d6f4376e] + Markdown
-  [a63ad114] + Mmap
-  [ca575930] + NetworkOptions
-  [44cfe95a] + Pkg
-  [de0858da] + Printf
-  [3fa0cd96] + REPL
-  [9a3f8284] + Random
-  [ea8e919c] + SHA
-  [9e88b42a] + Serialization
-  [6462fe0b] + Sockets
-  [2f01184e] + SparseArrays
-  [10745b16] + Statistics
-  [fa267f1f] + TOML
-  [a4e569a6] + Tar
+<span class=" -Color -Color-Bold -Color-Bold-Green">    Updating</span> `~/Julia_Introduction/test/Project.toml`
   [8dfed614] + Test
-  [cf7118a7] + UUIDs
-  [4ec0a83e] + Unicode
-  [e66e0078] + CompilerSupportLibraries_jll
-  [deac9b47] + LibCURL_jll
-  [29816b5a] + LibSSH2_jll
-  [c8ffd9c3] + MbedTLS_jll
-  [14a3606d] + MozillaCACerts_jll
-  [4536629a] + OpenBLAS_jll
-  [05823500] + OpenLibm_jll
-  [83775a58] + Zlib_jll
-  [8e850b90] + libblastrampoline_jll
-  [8e850ede] + nghttp2_jll
-  [3f19e933] + p7zip_jll
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/Julia_Introduction/test/Manifest.toml`
 </pre></div>
 </div>
 </div>
@@ -1137,42 +725,37 @@ Intégré avec Jupyter, il permet d’ouvrir n’importe lequel de ces 3 formats
 <li><p>Project.toml qui contient les packages installés dans ce projet</p></li>
 <li><p>Manifest.toml qui contient l’état complet de votre installation Julia. Ce fichier est géré par Julia et ne doit pas être édité.</p></li>
 </ul>
+<p>Pour en savoir plus sur ces fichiers, vous pouvez consulter la <a class="reference external" href="https://pkgdocs.julialang.org/v1/toml-files/">documentation de Pkg.jl</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="sb">`cat Project.toml`</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;Project.toml&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[deps]
 Plots = &quot;91a5bcdd-55d7-5caf-9e0b-520d859cae80&quot;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process(`cat Project.toml`, ProcessExited(0))
+Test = &quot;8dfed614-e22c-5e08-85e1-65c5234f0b40&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="sb">`cat Manifest.toml`</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="kt">String</span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;Manifest.toml&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># This file is machine-generated - editing it directly is not advised
 
-julia_version = &quot;1.7.3&quot;
+julia_version = &quot;1.10.0&quot;
 manifest_format = &quot;2.0&quot;
-
-[[deps.Adapt]]
-deps = [&quot;LinearAlgebra&quot;]
-git-tree-sha1 = &quot;af92965fb30777147966f58acb05da51c5616b5f&quot;
-uuid = &quot;79e6a3ab-5dfb-504d-930d-738a2a938a0e&quot;
-version = &quot;3.3.3&quot;
+project_hash = &quot;1c9fba66420713b01381f621a386f3a4a9a64d74&quot;
 
 [[deps.ArgTools]]
 uuid = &quot;0dad84c5-d112-42e6-8d28-ef12dabb789f&quot;
+version = &quot;1.1.1&quot;
 
 [[deps.Artifacts]]
 uuid = &quot;56f22d72-fd6d-98f1-02f0-08ddc0907c33&quot;
@@ -1180,35 +763,34 @@ uuid = &quot;56f22d72-fd6d-98f1-02f0-08ddc0907c33&quot;
 [[deps.Base64]]
 uuid = &quot;2a0f44e3-6c83-55bd-87e4-b1978d98bd5f&quot;
 
+[[deps.BitFlags]]
+git-tree-sha1 = &quot;2dc09997850d68179b69dafb58ae806167a32b1b&quot;
+uuid = &quot;d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35&quot;
+version = &quot;0.1.8&quot;
+
 [[deps.Bzip2_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;19a35467a82e236ff51bc17a3a44b69ef35185a2&quot;
+git-tree-sha1 = &quot;9e2a6b69137e6969bab0152632dcb3bc108c8bdd&quot;
 uuid = &quot;6e34b625-4abd-537c-b88f-471c36dfa7a0&quot;
-version = &quot;1.0.8+0&quot;
+version = &quot;1.0.8+1&quot;
 
 [[deps.Cairo_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;FreeType2_jll&quot;, &quot;Glib_jll&quot;, &quot;JLLWrappers&quot;, &quot;LZO_jll&quot;, &quot;Libdl&quot;, &quot;Pixman_jll&quot;, &quot;Pkg&quot;, &quot;Xorg_libXext_jll&quot;, &quot;Xorg_libXrender_jll&quot;, &quot;Zlib_jll&quot;, &quot;libpng_jll&quot;]
+deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;FreeType2_jll&quot;, &quot;Glib_jll&quot;, &quot;JLLWrappers&quot;, &quot;LZO_jll&quot;, &quot;Libdl&quot;, &quot;Pixman_jll&quot;, &quot;Pkg&quot;, &quot;Xorg_libXext_jll&quot;, &quot;Xorg_libXrender_jll&quot;, &quot;Zlib_jll&quot;, &quot;libpng_jll&quot;]
 git-tree-sha1 = &quot;4b859a208b2397a7a623a03449e4636bdb17bcf2&quot;
 uuid = &quot;83423d85-b0ee-5818-9007-b63ccbeb887a&quot;
 version = &quot;1.16.1+1&quot;
 
-[[deps.ChainRulesCore]]
-deps = [&quot;Compat&quot;, &quot;LinearAlgebra&quot;, &quot;SparseArrays&quot;]
-git-tree-sha1 = &quot;9489214b993cd42d17f44c36e359bf6a7c919abf&quot;
-uuid = &quot;d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4&quot;
-version = &quot;1.15.0&quot;
-
-[[deps.ChangesOfVariables]]
-deps = [&quot;ChainRulesCore&quot;, &quot;LinearAlgebra&quot;, &quot;Test&quot;]
-git-tree-sha1 = &quot;1e315e3f4b0b7ce40feded39c73049692126cf53&quot;
-uuid = &quot;9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0&quot;
-version = &quot;0.1.3&quot;
+[[deps.CodecZlib]]
+deps = [&quot;TranscodingStreams&quot;, &quot;Zlib_jll&quot;]
+git-tree-sha1 = &quot;cd67fc487743b2f0fd4380d4cbd3a24660d0eec8&quot;
+uuid = &quot;944b1d66-785c-5afd-91f1-9de20f533193&quot;
+version = &quot;0.7.3&quot;
 
 [[deps.ColorSchemes]]
-deps = [&quot;ColorTypes&quot;, &quot;ColorVectorSpace&quot;, &quot;Colors&quot;, &quot;FixedPointNumbers&quot;, &quot;Random&quot;]
-git-tree-sha1 = &quot;7297381ccb5df764549818d9a7d57e45f1057d30&quot;
+deps = [&quot;ColorTypes&quot;, &quot;ColorVectorSpace&quot;, &quot;Colors&quot;, &quot;FixedPointNumbers&quot;, &quot;PrecompileTools&quot;, &quot;Random&quot;]
+git-tree-sha1 = &quot;67c1f244b991cad9b0aa4b7540fb758c2488b129&quot;
 uuid = &quot;35d6a980-a343-548e-a6ea-1d62b119f2f4&quot;
-version = &quot;3.18.0&quot;
+version = &quot;3.24.0&quot;
 
 [[deps.ColorTypes]]
 deps = [&quot;FixedPointNumbers&quot;, &quot;Random&quot;]
@@ -1217,48 +799,59 @@ uuid = &quot;3da002f7-5984-5a60-b8a6-cbb66c0b333f&quot;
 version = &quot;0.11.4&quot;
 
 [[deps.ColorVectorSpace]]
-deps = [&quot;ColorTypes&quot;, &quot;FixedPointNumbers&quot;, &quot;LinearAlgebra&quot;, &quot;SpecialFunctions&quot;, &quot;Statistics&quot;, &quot;TensorCore&quot;]
-git-tree-sha1 = &quot;d08c20eef1f2cbc6e60fd3612ac4340b89fea322&quot;
+deps = [&quot;ColorTypes&quot;, &quot;FixedPointNumbers&quot;, &quot;LinearAlgebra&quot;, &quot;Requires&quot;, &quot;Statistics&quot;, &quot;TensorCore&quot;]
+git-tree-sha1 = &quot;a1f44953f2382ebb937d60dafbe2deea4bd23249&quot;
 uuid = &quot;c3611d14-8923-5661-9e6a-0046d554d3a4&quot;
-version = &quot;0.9.9&quot;
+version = &quot;0.10.0&quot;
+
+    [deps.ColorVectorSpace.extensions]
+    SpecialFunctionsExt = &quot;SpecialFunctions&quot;
+
+    [deps.ColorVectorSpace.weakdeps]
+    SpecialFunctions = &quot;276daf66-3868-5448-9aa4-cd146d93841b&quot;
 
 [[deps.Colors]]
 deps = [&quot;ColorTypes&quot;, &quot;FixedPointNumbers&quot;, &quot;Reexport&quot;]
-git-tree-sha1 = &quot;417b0ed7b8b838aa6ca0a87aadf1bb9eb111ce40&quot;
+git-tree-sha1 = &quot;fc08e5930ee9a4e03f84bfb5211cb54e7769758a&quot;
 uuid = &quot;5ae59095-9a9b-59fe-a467-6f913c188581&quot;
-version = &quot;0.12.8&quot;
+version = &quot;0.12.10&quot;
 
 [[deps.Compat]]
-deps = [&quot;Dates&quot;, &quot;LinearAlgebra&quot;, &quot;UUIDs&quot;]
-git-tree-sha1 = &quot;924cdca592bc16f14d2f7006754a621735280b74&quot;
+deps = [&quot;TOML&quot;, &quot;UUIDs&quot;]
+git-tree-sha1 = &quot;75bd5b6fc5089df449b5d35fa501c846c9b6549b&quot;
 uuid = &quot;34da2185-b29b-5c13-b0c7-acf172513d20&quot;
-version = &quot;4.1.0&quot;
+version = &quot;4.12.0&quot;
+weakdeps = [&quot;Dates&quot;, &quot;LinearAlgebra&quot;]
+
+    [deps.Compat.extensions]
+    CompatLinearAlgebraExt = &quot;LinearAlgebra&quot;
 
 [[deps.CompilerSupportLibraries_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;e66e0078-7015-5450-92f7-15fbd957f2ae&quot;
+version = &quot;1.0.5+1&quot;
+
+[[deps.ConcurrentUtilities]]
+deps = [&quot;Serialization&quot;, &quot;Sockets&quot;]
+git-tree-sha1 = &quot;8cfa272e8bdedfa88b6aefbbca7c19f1befac519&quot;
+uuid = &quot;f0e56b4a-5159-44fe-b623-3e5288b988bb&quot;
+version = &quot;2.3.0&quot;
 
 [[deps.Contour]]
-deps = [&quot;StaticArrays&quot;]
-git-tree-sha1 = &quot;9f02045d934dc030edad45944ea80dbd1f0ebea7&quot;
+git-tree-sha1 = &quot;d05d9e7b7aedff4e5b51a029dced05cfb6125781&quot;
 uuid = &quot;d38c429a-6771-53c6-b99e-75d170b6e991&quot;
-version = &quot;0.5.7&quot;
+version = &quot;0.6.2&quot;
 
 [[deps.DataAPI]]
-git-tree-sha1 = &quot;fb5f5316dd3fd4c5e7c30a24d50643b73e37cd40&quot;
+git-tree-sha1 = &quot;8da84edb865b0b5b0100c0666a9bc9a0b71c553c&quot;
 uuid = &quot;9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a&quot;
-version = &quot;1.10.0&quot;
+version = &quot;1.15.0&quot;
 
 [[deps.DataStructures]]
 deps = [&quot;Compat&quot;, &quot;InteractiveUtils&quot;, &quot;OrderedCollections&quot;]
-git-tree-sha1 = &quot;d1fff3a548102f48987a52a2e0d114fa97d730f0&quot;
+git-tree-sha1 = &quot;ac67408d9ddf207de5cfa9a97e114352430f01ed&quot;
 uuid = &quot;864edb3b-99cc-5e75-8d2d-829cb0a9cfe8&quot;
-version = &quot;0.18.13&quot;
-
-[[deps.DataValueInterfaces]]
-git-tree-sha1 = &quot;bfc1187b79289637fa0ef6d4436ebdfe6905cbd6&quot;
-uuid = &quot;e2d170a0-9d28-54be-80f0-106bbe20a464&quot;
-version = &quot;1.0.0&quot;
+version = &quot;0.18.16&quot;
 
 [[deps.Dates]]
 deps = [&quot;Printf&quot;]
@@ -1266,29 +859,38 @@ uuid = &quot;ade2ca70-3891-5945-98fb-dc099432e06a&quot;
 
 [[deps.DelimitedFiles]]
 deps = [&quot;Mmap&quot;]
+git-tree-sha1 = &quot;9e2f36d3c96a820c678f2f1f1782582fcf685bae&quot;
 uuid = &quot;8bb1440f-4735-579b-a4ab-409b98df4dab&quot;
+version = &quot;1.9.1&quot;
 
 [[deps.DocStringExtensions]]
 deps = [&quot;LibGit2&quot;]
-git-tree-sha1 = &quot;b19534d1895d702889b219c382a6e18010797f0b&quot;
+git-tree-sha1 = &quot;2fb1e02f2b635d0845df5d7c167fec4dd739b00d&quot;
 uuid = &quot;ffbed154-4ef7-542d-bbb7-c09d3a79fcae&quot;
-version = &quot;0.8.6&quot;
+version = &quot;0.9.3&quot;
 
 [[deps.Downloads]]
 deps = [&quot;ArgTools&quot;, &quot;FileWatching&quot;, &quot;LibCURL&quot;, &quot;NetworkOptions&quot;]
 uuid = &quot;f43a241f-c20a-4ad4-852c-f6b1247861c6&quot;
+version = &quot;1.6.0&quot;
 
-[[deps.EarCut_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;3f3a2501fa7236e9b911e0f7a588c657e822bb6d&quot;
-uuid = &quot;5ae413db-bbd1-5e63-b57d-d24a61df00f5&quot;
-version = &quot;2.2.3+0&quot;
+[[deps.EpollShim_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;8e9441ee83492030ace98f9789a654a6d0b1f643&quot;
+uuid = &quot;2702e6a9-849d-5ed8-8c21-79e8b8f9ee43&quot;
+version = &quot;0.0.20230411+0&quot;
+
+[[deps.ExceptionUnwrapping]]
+deps = [&quot;Test&quot;]
+git-tree-sha1 = &quot;dcb08a0d93ec0b1cdc4af184b26b591e9695423a&quot;
+uuid = &quot;460bff9d-24e4-43bc-9d9f-a8973cb893f4&quot;
+version = &quot;0.1.10&quot;
 
 [[deps.Expat_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;bad72f730e9e91c08d9427d5e8db95478a3c323d&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;4558ab818dcceaab612d1bb8c19cee87eda2b83c&quot;
 uuid = &quot;2e619515-83b5-522b-bb60-26c02a35a201&quot;
-version = &quot;2.4.8+0&quot;
+version = &quot;2.5.0+0&quot;
 
 [[deps.FFMPEG]]
 deps = [&quot;FFMPEG_jll&quot;]
@@ -1297,10 +899,10 @@ uuid = &quot;c87230d0-a227-11e9-1b43-d7ebe4e7570a&quot;
 version = &quot;0.4.1&quot;
 
 [[deps.FFMPEG_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;FreeType2_jll&quot;, &quot;FriBidi_jll&quot;, &quot;JLLWrappers&quot;, &quot;LAME_jll&quot;, &quot;Libdl&quot;, &quot;Ogg_jll&quot;, &quot;OpenSSL_jll&quot;, &quot;Opus_jll&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;, &quot;libass_jll&quot;, &quot;libfdk_aac_jll&quot;, &quot;libvorbis_jll&quot;, &quot;x264_jll&quot;, &quot;x265_jll&quot;]
-git-tree-sha1 = &quot;d8a578692e3077ac998b50c0217dfd67f21d1e5f&quot;
+deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;FreeType2_jll&quot;, &quot;FriBidi_jll&quot;, &quot;JLLWrappers&quot;, &quot;LAME_jll&quot;, &quot;Libdl&quot;, &quot;Ogg_jll&quot;, &quot;OpenSSL_jll&quot;, &quot;Opus_jll&quot;, &quot;PCRE2_jll&quot;, &quot;Zlib_jll&quot;, &quot;libaom_jll&quot;, &quot;libass_jll&quot;, &quot;libfdk_aac_jll&quot;, &quot;libvorbis_jll&quot;, &quot;x264_jll&quot;, &quot;x265_jll&quot;]
+git-tree-sha1 = &quot;466d45dc38e15794ec7d5d63ec03d776a9aff36e&quot;
 uuid = &quot;b22a6f82-2f65-5046-a5b2-351ab43fb4e5&quot;
-version = &quot;4.4.0+0&quot;
+version = &quot;4.4.4+1&quot;
 
 [[deps.FileWatching]]
 uuid = &quot;7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee&quot;
@@ -1324,10 +926,10 @@ uuid = &quot;59287772-0a20-5a39-b81b-1366585eb4c0&quot;
 version = &quot;0.4.2&quot;
 
 [[deps.FreeType2_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;]
-git-tree-sha1 = &quot;87eb71354d8ec1a96d4a7636bd57a7347dde3ef9&quot;
+deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Zlib_jll&quot;]
+git-tree-sha1 = &quot;d8db6a5a2fe1381c1ea4ef2cab7c69c2de7f9ea0&quot;
 uuid = &quot;d7e528f0-a631-5988-bf34-fe36492bcfd7&quot;
-version = &quot;2.10.4+0&quot;
+version = &quot;2.13.1+0&quot;
 
 [[deps.FriBidi_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1336,28 +938,22 @@ uuid = &quot;559328eb-81f9-559d-9380-de523a88c83c&quot;
 version = &quot;1.0.10+0&quot;
 
 [[deps.GLFW_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libglvnd_jll&quot;, &quot;Pkg&quot;, &quot;Xorg_libXcursor_jll&quot;, &quot;Xorg_libXi_jll&quot;, &quot;Xorg_libXinerama_jll&quot;, &quot;Xorg_libXrandr_jll&quot;]
-git-tree-sha1 = &quot;51d2dfe8e590fbd74e7a842cf6d13d8a2f45dc01&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libglvnd_jll&quot;, &quot;Xorg_libXcursor_jll&quot;, &quot;Xorg_libXi_jll&quot;, &quot;Xorg_libXinerama_jll&quot;, &quot;Xorg_libXrandr_jll&quot;]
+git-tree-sha1 = &quot;ff38ba61beff76b8f4acad8ab0c97ef73bb670cb&quot;
 uuid = &quot;0656b61e-2033-5cc2-a64a-77c0f6c09b89&quot;
-version = &quot;3.3.6+0&quot;
+version = &quot;3.3.9+0&quot;
 
 [[deps.GR]]
-deps = [&quot;Base64&quot;, &quot;DelimitedFiles&quot;, &quot;GR_jll&quot;, &quot;HTTP&quot;, &quot;JSON&quot;, &quot;Libdl&quot;, &quot;LinearAlgebra&quot;, &quot;Pkg&quot;, &quot;Printf&quot;, &quot;Random&quot;, &quot;RelocatableFolders&quot;, &quot;Serialization&quot;, &quot;Sockets&quot;, &quot;Test&quot;, &quot;UUIDs&quot;]
-git-tree-sha1 = &quot;c98aea696662d09e215ef7cda5296024a9646c75&quot;
+deps = [&quot;Artifacts&quot;, &quot;Base64&quot;, &quot;DelimitedFiles&quot;, &quot;Downloads&quot;, &quot;GR_jll&quot;, &quot;HTTP&quot;, &quot;JSON&quot;, &quot;Libdl&quot;, &quot;LinearAlgebra&quot;, &quot;Pkg&quot;, &quot;Preferences&quot;, &quot;Printf&quot;, &quot;Random&quot;, &quot;Serialization&quot;, &quot;Sockets&quot;, &quot;TOML&quot;, &quot;Tar&quot;, &quot;Test&quot;, &quot;UUIDs&quot;, &quot;p7zip_jll&quot;]
+git-tree-sha1 = &quot;27442171f28c952804dede8ff72828a96f2bfc1f&quot;
 uuid = &quot;28b8d3ca-fb5f-59d9-8090-bfdbd6d07a71&quot;
-version = &quot;0.64.4&quot;
+version = &quot;0.72.10&quot;
 
 [[deps.GR_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;Cairo_jll&quot;, &quot;FFMPEG_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;GLFW_jll&quot;, &quot;JLLWrappers&quot;, &quot;JpegTurbo_jll&quot;, &quot;Libdl&quot;, &quot;Libtiff_jll&quot;, &quot;Pixman_jll&quot;, &quot;Pkg&quot;, &quot;Qt5Base_jll&quot;, &quot;Zlib_jll&quot;, &quot;libpng_jll&quot;]
-git-tree-sha1 = &quot;3a233eeeb2ca45842fe100e0413936834215abf5&quot;
+deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;Cairo_jll&quot;, &quot;FFMPEG_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;FreeType2_jll&quot;, &quot;GLFW_jll&quot;, &quot;JLLWrappers&quot;, &quot;JpegTurbo_jll&quot;, &quot;Libdl&quot;, &quot;Libtiff_jll&quot;, &quot;Pixman_jll&quot;, &quot;Qt6Base_jll&quot;, &quot;Zlib_jll&quot;, &quot;libpng_jll&quot;]
+git-tree-sha1 = &quot;025d171a2847f616becc0f84c8dc62fe18f0f6dd&quot;
 uuid = &quot;d2c73de3-f751-5644-a686-071e5b155ba9&quot;
-version = &quot;0.64.4+0&quot;
-
-[[deps.GeometryBasics]]
-deps = [&quot;EarCut_jll&quot;, &quot;IterTools&quot;, &quot;LinearAlgebra&quot;, &quot;StaticArrays&quot;, &quot;StructArrays&quot;, &quot;Tables&quot;]
-git-tree-sha1 = &quot;83ea630384a13fc4f002b77690bc0afeb4255ac9&quot;
-uuid = &quot;5c1252a2-5f33-56bf-86c9-59e7332b4326&quot;
-version = &quot;0.4.2&quot;
+version = &quot;0.72.10+0&quot;
 
 [[deps.Gettext_jll]]
 deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libiconv_jll&quot;, &quot;Pkg&quot;, &quot;XML2_jll&quot;]
@@ -1366,10 +962,10 @@ uuid = &quot;78b55507-aeef-58d4-861c-77aaff3498b1&quot;
 version = &quot;0.21.0+0&quot;
 
 [[deps.Glib_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Gettext_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libffi_jll&quot;, &quot;Libiconv_jll&quot;, &quot;Libmount_jll&quot;, &quot;PCRE_jll&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;]
-git-tree-sha1 = &quot;a32d672ac2c967f3deb8a81d828afc739c838a06&quot;
+deps = [&quot;Artifacts&quot;, &quot;Gettext_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libffi_jll&quot;, &quot;Libiconv_jll&quot;, &quot;Libmount_jll&quot;, &quot;PCRE2_jll&quot;, &quot;Zlib_jll&quot;]
+git-tree-sha1 = &quot;e94c92c7bf4819685eb80186d51c43e71d4afa17&quot;
 uuid = &quot;7746bdde-850d-59dc-9ae8-88ece973131d&quot;
-version = &quot;2.68.3+2&quot;
+version = &quot;2.76.5+0&quot;
 
 [[deps.Graphite2_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1383,10 +979,10 @@ uuid = &quot;42e2da0e-8278-4e71-bc24-59509adca0fe&quot;
 version = &quot;1.0.2&quot;
 
 [[deps.HTTP]]
-deps = [&quot;Base64&quot;, &quot;Dates&quot;, &quot;IniFile&quot;, &quot;Logging&quot;, &quot;MbedTLS&quot;, &quot;NetworkOptions&quot;, &quot;Sockets&quot;, &quot;URIs&quot;]
-git-tree-sha1 = &quot;0fa77022fe4b511826b39c894c90daf5fce3334a&quot;
+deps = [&quot;Base64&quot;, &quot;CodecZlib&quot;, &quot;ConcurrentUtilities&quot;, &quot;Dates&quot;, &quot;ExceptionUnwrapping&quot;, &quot;Logging&quot;, &quot;LoggingExtras&quot;, &quot;MbedTLS&quot;, &quot;NetworkOptions&quot;, &quot;OpenSSL&quot;, &quot;Random&quot;, &quot;SimpleBufferStream&quot;, &quot;Sockets&quot;, &quot;URIs&quot;, &quot;UUIDs&quot;]
+git-tree-sha1 = &quot;abbbb9ec3afd783a7cbd82ef01dcd088ea051398&quot;
 uuid = &quot;cd3eb016-35fb-5094-929b-558a96fad6f3&quot;
-version = &quot;0.9.17&quot;
+version = &quot;1.10.1&quot;
 
 [[deps.HarfBuzz_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Cairo_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;FreeType2_jll&quot;, &quot;Glib_jll&quot;, &quot;Graphite2_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libffi_jll&quot;, &quot;Pkg&quot;]
@@ -1394,53 +990,38 @@ git-tree-sha1 = &quot;129acf094d168394e80ee1dc4bc06ec835e510a3&quot;
 uuid = &quot;2e76f6c2-a576-52d4-95c1-20adfe4de566&quot;
 version = &quot;2.8.1+1&quot;
 
-[[deps.IniFile]]
-git-tree-sha1 = &quot;f550e6e32074c939295eb5ea6de31849ac2c9625&quot;
-uuid = &quot;83e8ac13-25f8-5344-8a64-a9f2b223428f&quot;
-version = &quot;0.5.1&quot;
-
 [[deps.InteractiveUtils]]
 deps = [&quot;Markdown&quot;]
 uuid = &quot;b77e0a4c-d291-57a0-90e8-8db25a27a240&quot;
 
-[[deps.InverseFunctions]]
-deps = [&quot;Test&quot;]
-git-tree-sha1 = &quot;b3364212fb5d870f724876ffcd34dd8ec6d98918&quot;
-uuid = &quot;3587e190-3f89-42d0-90ee-14403ec27112&quot;
+[[deps.IrrationalConstants]]
+git-tree-sha1 = &quot;630b497eafcc20001bba38a4651b327dcfc491d2&quot;
+uuid = &quot;92d709cd-6900-40b7-9082-c6be49f344b6&quot;
+version = &quot;0.2.2&quot;
+
+[[deps.JLFzf]]
+deps = [&quot;Pipe&quot;, &quot;REPL&quot;, &quot;Random&quot;, &quot;fzf_jll&quot;]
+git-tree-sha1 = &quot;a53ebe394b71470c7f97c2e7e170d51df21b17af&quot;
+uuid = &quot;1019f520-868f-41f5-a6de-eb00f4b6a39c&quot;
 version = &quot;0.1.7&quot;
 
-[[deps.IrrationalConstants]]
-git-tree-sha1 = &quot;7fd44fd4ff43fc60815f8e764c0f352b83c49151&quot;
-uuid = &quot;92d709cd-6900-40b7-9082-c6be49f344b6&quot;
-version = &quot;0.1.1&quot;
-
-[[deps.IterTools]]
-git-tree-sha1 = &quot;fa6287a4469f5e048d763df38279ee729fbd44e5&quot;
-uuid = &quot;c8e1da08-722c-5040-9ed9-7db0dc04731e&quot;
-version = &quot;1.4.0&quot;
-
-[[deps.IteratorInterfaceExtensions]]
-git-tree-sha1 = &quot;a3f24677c21f5bbe9d2a714f95dcd58337fb2856&quot;
-uuid = &quot;82899510-4779-5014-852e-03e436cf321d&quot;
-version = &quot;1.0.0&quot;
-
 [[deps.JLLWrappers]]
-deps = [&quot;Preferences&quot;]
-git-tree-sha1 = &quot;abc9885a7ca2052a736a600f7fa66209f96506e1&quot;
+deps = [&quot;Artifacts&quot;, &quot;Preferences&quot;]
+git-tree-sha1 = &quot;7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca&quot;
 uuid = &quot;692b3bcd-3c85-4b1f-b108-f13ce0eb3210&quot;
-version = &quot;1.4.1&quot;
+version = &quot;1.5.0&quot;
 
 [[deps.JSON]]
 deps = [&quot;Dates&quot;, &quot;Mmap&quot;, &quot;Parsers&quot;, &quot;Unicode&quot;]
-git-tree-sha1 = &quot;3c837543ddb02250ef42f4738347454f95079d4e&quot;
+git-tree-sha1 = &quot;31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a&quot;
 uuid = &quot;682c06a0-de6a-54ab-a142-c8b1cf79cde6&quot;
-version = &quot;0.21.3&quot;
+version = &quot;0.21.4&quot;
 
 [[deps.JpegTurbo_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;b53380851c6e6664204efb2e62cd24fa5c47e4ba&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;60b1194df0a3298f460063de985eae7b01bc011a&quot;
 uuid = &quot;aacddb02-875f-59d6-b918-886e6ef4fbf8&quot;
-version = &quot;2.1.2+0&quot;
+version = &quot;3.0.1+0&quot;
 
 [[deps.LAME_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1454,6 +1035,12 @@ git-tree-sha1 = &quot;bf36f528eec6634efc60d7ec062008f171071434&quot;
 uuid = &quot;88015f11-f218-50d7-93a8-a6af411a945d&quot;
 version = &quot;3.0.0+1&quot;
 
+[[deps.LLVMOpenMP_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;d986ce2d884d49126836ea94ed5bfb0f12679713&quot;
+uuid = &quot;1d63c593-3942-5779-bab2-d838dc0a180e&quot;
+version = &quot;15.0.7+0&quot;
+
 [[deps.LZO_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
 git-tree-sha1 = &quot;e5b909bcf985c5e2605737d2ce278ed791b89be6&quot;
@@ -1461,31 +1048,47 @@ uuid = &quot;dd4b983a-f0e5-5f8d-a1b7-129d4a5fb1ac&quot;
 version = &quot;2.10.1+0&quot;
 
 [[deps.LaTeXStrings]]
-git-tree-sha1 = &quot;f2355693d6778a178ade15952b7ac47a4ff97996&quot;
+git-tree-sha1 = &quot;50901ebc375ed41dbf8058da26f9de442febbbec&quot;
 uuid = &quot;b964fa9f-0449-5b57-a5c2-d3ea65f4040f&quot;
-version = &quot;1.3.0&quot;
+version = &quot;1.3.1&quot;
 
 [[deps.Latexify]]
-deps = [&quot;Formatting&quot;, &quot;InteractiveUtils&quot;, &quot;LaTeXStrings&quot;, &quot;MacroTools&quot;, &quot;Markdown&quot;, &quot;Printf&quot;, &quot;Requires&quot;]
-git-tree-sha1 = &quot;46a39b9c58749eefb5f2dc1178cb8fab5332b1ab&quot;
+deps = [&quot;Formatting&quot;, &quot;InteractiveUtils&quot;, &quot;LaTeXStrings&quot;, &quot;MacroTools&quot;, &quot;Markdown&quot;, &quot;OrderedCollections&quot;, &quot;Printf&quot;, &quot;Requires&quot;]
+git-tree-sha1 = &quot;f428ae552340899a935973270b8d98e5a31c49fe&quot;
 uuid = &quot;23fbe1c1-3f47-55db-b15f-69d7ec21a316&quot;
-version = &quot;0.15.15&quot;
+version = &quot;0.16.1&quot;
+
+    [deps.Latexify.extensions]
+    DataFramesExt = &quot;DataFrames&quot;
+    SymEngineExt = &quot;SymEngine&quot;
+
+    [deps.Latexify.weakdeps]
+    DataFrames = &quot;a93c6f00-e57d-5684-b7b6-d8193f3e46c0&quot;
+    SymEngine = &quot;123dc426-2d89-5057-bbad-38513e3affd8&quot;
 
 [[deps.LibCURL]]
 deps = [&quot;LibCURL_jll&quot;, &quot;MozillaCACerts_jll&quot;]
 uuid = &quot;b27032c2-a3e7-50c8-80cd-2d36dbcbfd21&quot;
+version = &quot;0.6.4&quot;
 
 [[deps.LibCURL_jll]]
 deps = [&quot;Artifacts&quot;, &quot;LibSSH2_jll&quot;, &quot;Libdl&quot;, &quot;MbedTLS_jll&quot;, &quot;Zlib_jll&quot;, &quot;nghttp2_jll&quot;]
 uuid = &quot;deac9b47-8bc7-5906-a0fe-35ac56dc84c0&quot;
+version = &quot;8.4.0+0&quot;
 
 [[deps.LibGit2]]
-deps = [&quot;Base64&quot;, &quot;NetworkOptions&quot;, &quot;Printf&quot;, &quot;SHA&quot;]
+deps = [&quot;Base64&quot;, &quot;LibGit2_jll&quot;, &quot;NetworkOptions&quot;, &quot;Printf&quot;, &quot;SHA&quot;]
 uuid = &quot;76f85450-5226-5b5a-8eaa-529ad045b433&quot;
+
+[[deps.LibGit2_jll]]
+deps = [&quot;Artifacts&quot;, &quot;LibSSH2_jll&quot;, &quot;Libdl&quot;, &quot;MbedTLS_jll&quot;]
+uuid = &quot;e37daf67-58a4-590a-8e99-b0245dd2ffc5&quot;
+version = &quot;1.6.4+0&quot;
 
 [[deps.LibSSH2_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;, &quot;MbedTLS_jll&quot;]
 uuid = &quot;29816b5a-b9ab-546f-933c-edad1886dfa8&quot;
+version = &quot;1.11.0+1&quot;
 
 [[deps.Libdl]]
 uuid = &quot;8f399da3-3557-5675-b5ff-fb832c97cbdb&quot;
@@ -1504,9 +1107,9 @@ version = &quot;1.8.7+0&quot;
 
 [[deps.Libglvnd_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libX11_jll&quot;, &quot;Xorg_libXext_jll&quot;]
-git-tree-sha1 = &quot;7739f837d6447403596a75d19ed01fd08d6f56bf&quot;
+git-tree-sha1 = &quot;6f73d1dd803986947b2c750138528a999a6c7733&quot;
 uuid = &quot;7e76a0d4-f3c7-5321-8279-8d96eeed0f29&quot;
-version = &quot;1.3.0+3&quot;
+version = &quot;1.6.0+0&quot;
 
 [[deps.Libgpg_error_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1515,10 +1118,10 @@ uuid = &quot;7add5ba3-2f88-524e-9cd5-f83b8a55f7b8&quot;
 version = &quot;1.42.0+0&quot;
 
 [[deps.Libiconv_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;42b62845d70a619f063a7da093d995ec8e15e778&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;f9557a255370125b405568f9767d6d195822a175&quot;
 uuid = &quot;94ce4f54-9a6c-5748-9c1c-f9c7231a4531&quot;
-version = &quot;1.16.1+1&quot;
+version = &quot;1.17.0+0&quot;
 
 [[deps.Libmount_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1527,10 +1130,10 @@ uuid = &quot;4b2f31a3-9ecc-558c-b454-b3730dcb73e9&quot;
 version = &quot;2.35.0+0&quot;
 
 [[deps.Libtiff_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;JpegTurbo_jll&quot;, &quot;LERC_jll&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;, &quot;Zstd_jll&quot;]
-git-tree-sha1 = &quot;3eb79b0ca5764d4799c06699573fd8f533259713&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;JpegTurbo_jll&quot;, &quot;LERC_jll&quot;, &quot;Libdl&quot;, &quot;XZ_jll&quot;, &quot;Zlib_jll&quot;, &quot;Zstd_jll&quot;]
+git-tree-sha1 = &quot;2da088d113af58221c52828a80378e16be7d037a&quot;
 uuid = &quot;89763e89-9b03-5906-acba-b20f662cd828&quot;
-version = &quot;4.4.0+0&quot;
+version = &quot;4.5.1+1&quot;
 
 [[deps.Libuuid_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1539,62 +1142,82 @@ uuid = &quot;38a345b3-de98-5d2b-a5d3-14cd9215e700&quot;
 version = &quot;2.36.0+0&quot;
 
 [[deps.LinearAlgebra]]
-deps = [&quot;Libdl&quot;, &quot;libblastrampoline_jll&quot;]
+deps = [&quot;Libdl&quot;, &quot;OpenBLAS_jll&quot;, &quot;libblastrampoline_jll&quot;]
 uuid = &quot;37e2e46d-f89d-539d-b4ee-838fcccc9c8e&quot;
 
 [[deps.LogExpFunctions]]
-deps = [&quot;ChainRulesCore&quot;, &quot;ChangesOfVariables&quot;, &quot;DocStringExtensions&quot;, &quot;InverseFunctions&quot;, &quot;IrrationalConstants&quot;, &quot;LinearAlgebra&quot;]
-git-tree-sha1 = &quot;09e4b894ce6a976c354a69041a04748180d43637&quot;
+deps = [&quot;DocStringExtensions&quot;, &quot;IrrationalConstants&quot;, &quot;LinearAlgebra&quot;]
+git-tree-sha1 = &quot;7d6dd4e9212aebaeed356de34ccf262a3cd415aa&quot;
 uuid = &quot;2ab3a3ac-af41-5b50-aa03-7779005ae688&quot;
-version = &quot;0.3.15&quot;
+version = &quot;0.3.26&quot;
+
+    [deps.LogExpFunctions.extensions]
+    LogExpFunctionsChainRulesCoreExt = &quot;ChainRulesCore&quot;
+    LogExpFunctionsChangesOfVariablesExt = &quot;ChangesOfVariables&quot;
+    LogExpFunctionsInverseFunctionsExt = &quot;InverseFunctions&quot;
+
+    [deps.LogExpFunctions.weakdeps]
+    ChainRulesCore = &quot;d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4&quot;
+    ChangesOfVariables = &quot;9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0&quot;
+    InverseFunctions = &quot;3587e190-3f89-42d0-90ee-14403ec27112&quot;
 
 [[deps.Logging]]
 uuid = &quot;56ddb016-857b-54e1-b83d-db4d58db5568&quot;
 
+[[deps.LoggingExtras]]
+deps = [&quot;Dates&quot;, &quot;Logging&quot;]
+git-tree-sha1 = &quot;c1dd6d7978c12545b4179fb6153b9250c96b0075&quot;
+uuid = &quot;e6f89c97-d47a-5376-807f-9c37f3926c36&quot;
+version = &quot;1.0.3&quot;
+
 [[deps.MacroTools]]
 deps = [&quot;Markdown&quot;, &quot;Random&quot;]
-git-tree-sha1 = &quot;3d3e902b31198a27340d0bf00d6ac452866021cf&quot;
+git-tree-sha1 = &quot;2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df&quot;
 uuid = &quot;1914dd2f-81c6-5fcd-8719-6d5c9610ff09&quot;
-version = &quot;0.5.9&quot;
+version = &quot;0.5.13&quot;
 
 [[deps.Markdown]]
 deps = [&quot;Base64&quot;]
 uuid = &quot;d6f4376e-aef5-505a-96c1-9c027394607a&quot;
 
 [[deps.MbedTLS]]
-deps = [&quot;Dates&quot;, &quot;MbedTLS_jll&quot;, &quot;Random&quot;, &quot;Sockets&quot;]
-git-tree-sha1 = &quot;1c38e51c3d08ef2278062ebceade0e46cefc96fe&quot;
+deps = [&quot;Dates&quot;, &quot;MbedTLS_jll&quot;, &quot;MozillaCACerts_jll&quot;, &quot;NetworkOptions&quot;, &quot;Random&quot;, &quot;Sockets&quot;]
+git-tree-sha1 = &quot;c067a280ddc25f196b5e7df3877c6b226d390aaf&quot;
 uuid = &quot;739be429-bea8-5141-9913-cc70e7f3736d&quot;
-version = &quot;1.0.3&quot;
+version = &quot;1.1.9&quot;
 
 [[deps.MbedTLS_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;c8ffd9c3-330d-5841-b78e-0817d7145fa1&quot;
+version = &quot;2.28.2+1&quot;
 
 [[deps.Measures]]
-git-tree-sha1 = &quot;e498ddeee6f9fdb4551ce855a46f54dbd900245f&quot;
+git-tree-sha1 = &quot;c13304c81eec1ed3af7fc20e75fb6b26092a1102&quot;
 uuid = &quot;442fdcdd-2543-5da2-b0f3-8c86c306513e&quot;
-version = &quot;0.3.1&quot;
+version = &quot;0.3.2&quot;
 
 [[deps.Missings]]
 deps = [&quot;DataAPI&quot;]
-git-tree-sha1 = &quot;bf210ce90b6c9eed32d25dbcae1ebc565df2687f&quot;
+git-tree-sha1 = &quot;f66bdc5de519e8f8ae43bdc598782d35a25b1272&quot;
 uuid = &quot;e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28&quot;
-version = &quot;1.0.2&quot;
+version = &quot;1.1.0&quot;
 
 [[deps.Mmap]]
 uuid = &quot;a63ad114-7e13-5084-954f-fe012c677804&quot;
 
 [[deps.MozillaCACerts_jll]]
 uuid = &quot;14a3606d-f60d-562e-9121-12d972cd8159&quot;
+version = &quot;2023.1.10&quot;
 
 [[deps.NaNMath]]
-git-tree-sha1 = &quot;737a5957f387b17e74d4ad2f440eb330b39a62c5&quot;
+deps = [&quot;OpenLibm_jll&quot;]
+git-tree-sha1 = &quot;0877504529a3e5c3343c6f8b4c0381e57e4387e4&quot;
 uuid = &quot;77ba4419-2d1f-58cd-9bb1-8ffee604a2e3&quot;
-version = &quot;1.0.0&quot;
+version = &quot;1.0.2&quot;
 
 [[deps.NetworkOptions]]
 uuid = &quot;ca575930-c2e3-43a9-ace4-1e988b2c1908&quot;
+version = &quot;1.2.0&quot;
 
 [[deps.Ogg_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1605,22 +1228,24 @@ version = &quot;1.3.5+1&quot;
 [[deps.OpenBLAS_jll]]
 deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;Libdl&quot;]
 uuid = &quot;4536629a-c528-5b80-bd46-f80d51c5b363&quot;
+version = &quot;0.3.23+2&quot;
 
 [[deps.OpenLibm_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;05823500-19ac-5b8b-9628-191a04bc5112&quot;
+version = &quot;0.8.1+2&quot;
+
+[[deps.OpenSSL]]
+deps = [&quot;BitFlags&quot;, &quot;Dates&quot;, &quot;MozillaCACerts_jll&quot;, &quot;OpenSSL_jll&quot;, &quot;Sockets&quot;]
+git-tree-sha1 = &quot;51901a49222b09e3743c65b8847687ae5fc78eb2&quot;
+uuid = &quot;4d8831e6-92b7-49fb-bdf8-b643e874388c&quot;
+version = &quot;1.4.1&quot;
 
 [[deps.OpenSSL_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;ab05aa4cc89736e95915b01e7279e61b1bfe33b8&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;cc6e1927ac521b659af340e0ca45828a3ffc748f&quot;
 uuid = &quot;458c3c95-2e84-50aa-8efc-19380b2a3a95&quot;
-version = &quot;1.1.14+0&quot;
-
-[[deps.OpenSpecFun_jll]]
-deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;13652491f6856acfd2db29360e1bbcd4565d04f1&quot;
-uuid = &quot;efe28fd5-8261-553b-a9e1-b2916fc3738e&quot;
-version = &quot;0.5.5+0&quot;
+version = &quot;3.0.12+0&quot;
 
 [[deps.Opus_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -1629,84 +1254,110 @@ uuid = &quot;91d4177d-7536-5919-b921-800302f37372&quot;
 version = &quot;1.3.2+0&quot;
 
 [[deps.OrderedCollections]]
-git-tree-sha1 = &quot;85f8e6578bf1f9ee0d11e7bb1b1456435479d47c&quot;
+git-tree-sha1 = &quot;dfdf5519f235516220579f949664f1bf44e741c5&quot;
 uuid = &quot;bac558e1-5e72-5ebc-8fee-abe8a469f55d&quot;
-version = &quot;1.4.1&quot;
+version = &quot;1.6.3&quot;
 
-[[deps.PCRE_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;b2a7af664e098055a7529ad1a900ded962bca488&quot;
-uuid = &quot;2f80f16e-611a-54ab-bc61-aa92de5b98fc&quot;
-version = &quot;8.44.0+0&quot;
+[[deps.PCRE2_jll]]
+deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
+uuid = &quot;efcefdf7-47ab-520b-bdef-62a2eaa19f15&quot;
+version = &quot;10.42.0+1&quot;
 
 [[deps.Parsers]]
-deps = [&quot;Dates&quot;]
-git-tree-sha1 = &quot;0044b23da09b5608b4ecacb4e5e6c6332f833a7e&quot;
+deps = [&quot;Dates&quot;, &quot;PrecompileTools&quot;, &quot;UUIDs&quot;]
+git-tree-sha1 = &quot;8489905bcdbcfac64d1daa51ca07c0d8f0283821&quot;
 uuid = &quot;69de0a69-1ddd-5017-9359-2bf0b02dc9f0&quot;
-version = &quot;2.3.2&quot;
+version = &quot;2.8.1&quot;
+
+[[deps.Pipe]]
+git-tree-sha1 = &quot;6842804e7867b115ca9de748a0cf6b364523c16d&quot;
+uuid = &quot;b98c9c47-44ae-5843-9183-064241ee97a0&quot;
+version = &quot;1.3.0&quot;
 
 [[deps.Pixman_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;b4f5d02549a10e20780a24fce72bea96b6329e29&quot;
+deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;JLLWrappers&quot;, &quot;LLVMOpenMP_jll&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;64779bc4c9784fee475689a1752ef4d5747c5e87&quot;
 uuid = &quot;30392449-352a-5448-841d-b1acce4e97dc&quot;
-version = &quot;0.40.1+0&quot;
+version = &quot;0.42.2+0&quot;
 
 [[deps.Pkg]]
-deps = [&quot;Artifacts&quot;, &quot;Dates&quot;, &quot;Downloads&quot;, &quot;LibGit2&quot;, &quot;Libdl&quot;, &quot;Logging&quot;, &quot;Markdown&quot;, &quot;Printf&quot;, &quot;REPL&quot;, &quot;Random&quot;, &quot;SHA&quot;, &quot;Serialization&quot;, &quot;TOML&quot;, &quot;Tar&quot;, &quot;UUIDs&quot;, &quot;p7zip_jll&quot;]
+deps = [&quot;Artifacts&quot;, &quot;Dates&quot;, &quot;Downloads&quot;, &quot;FileWatching&quot;, &quot;LibGit2&quot;, &quot;Libdl&quot;, &quot;Logging&quot;, &quot;Markdown&quot;, &quot;Printf&quot;, &quot;REPL&quot;, &quot;Random&quot;, &quot;SHA&quot;, &quot;Serialization&quot;, &quot;TOML&quot;, &quot;Tar&quot;, &quot;UUIDs&quot;, &quot;p7zip_jll&quot;]
 uuid = &quot;44cfe95a-1eb2-52ea-b672-e2afdf69b78f&quot;
+version = &quot;1.10.0&quot;
 
 [[deps.PlotThemes]]
 deps = [&quot;PlotUtils&quot;, &quot;Statistics&quot;]
-git-tree-sha1 = &quot;8162b2f8547bc23876edd0c5181b27702ae58dce&quot;
+git-tree-sha1 = &quot;1f03a2d339f42dca4a4da149c7e15e9b896ad899&quot;
 uuid = &quot;ccf2f8ad-2431-5c83-bf29-c5338b663b6a&quot;
-version = &quot;3.0.0&quot;
+version = &quot;3.1.0&quot;
 
 [[deps.PlotUtils]]
-deps = [&quot;ColorSchemes&quot;, &quot;Colors&quot;, &quot;Dates&quot;, &quot;Printf&quot;, &quot;Random&quot;, &quot;Reexport&quot;, &quot;Statistics&quot;]
-git-tree-sha1 = &quot;bb16469fd5224100e422f0b027d26c5a25de1200&quot;
+deps = [&quot;ColorSchemes&quot;, &quot;Colors&quot;, &quot;Dates&quot;, &quot;PrecompileTools&quot;, &quot;Printf&quot;, &quot;Random&quot;, &quot;Reexport&quot;, &quot;Statistics&quot;]
+git-tree-sha1 = &quot;862942baf5663da528f66d24996eb6da85218e76&quot;
 uuid = &quot;995b91a9-d308-5afd-9ec6-746e21dbc043&quot;
-version = &quot;1.2.0&quot;
+version = &quot;1.4.0&quot;
 
 [[deps.Plots]]
-deps = [&quot;Base64&quot;, &quot;Contour&quot;, &quot;Dates&quot;, &quot;Downloads&quot;, &quot;FFMPEG&quot;, &quot;FixedPointNumbers&quot;, &quot;GR&quot;, &quot;GeometryBasics&quot;, &quot;JSON&quot;, &quot;Latexify&quot;, &quot;LinearAlgebra&quot;, &quot;Measures&quot;, &quot;NaNMath&quot;, &quot;Pkg&quot;, &quot;PlotThemes&quot;, &quot;PlotUtils&quot;, &quot;Printf&quot;, &quot;REPL&quot;, &quot;Random&quot;, &quot;RecipesBase&quot;, &quot;RecipesPipeline&quot;, &quot;Reexport&quot;, &quot;Requires&quot;, &quot;Scratch&quot;, &quot;Showoff&quot;, &quot;SparseArrays&quot;, &quot;Statistics&quot;, &quot;StatsBase&quot;, &quot;UUIDs&quot;, &quot;UnicodeFun&quot;, &quot;Unzip&quot;]
-git-tree-sha1 = &quot;2402dffcbc5bb1631fb4f10cb5c3698acdce29ea&quot;
+deps = [&quot;Base64&quot;, &quot;Contour&quot;, &quot;Dates&quot;, &quot;Downloads&quot;, &quot;FFMPEG&quot;, &quot;FixedPointNumbers&quot;, &quot;GR&quot;, &quot;JLFzf&quot;, &quot;JSON&quot;, &quot;LaTeXStrings&quot;, &quot;Latexify&quot;, &quot;LinearAlgebra&quot;, &quot;Measures&quot;, &quot;NaNMath&quot;, &quot;Pkg&quot;, &quot;PlotThemes&quot;, &quot;PlotUtils&quot;, &quot;PrecompileTools&quot;, &quot;Preferences&quot;, &quot;Printf&quot;, &quot;REPL&quot;, &quot;Random&quot;, &quot;RecipesBase&quot;, &quot;RecipesPipeline&quot;, &quot;Reexport&quot;, &quot;RelocatableFolders&quot;, &quot;Requires&quot;, &quot;Scratch&quot;, &quot;Showoff&quot;, &quot;SparseArrays&quot;, &quot;Statistics&quot;, &quot;StatsBase&quot;, &quot;UUIDs&quot;, &quot;UnicodeFun&quot;, &quot;UnitfulLatexify&quot;, &quot;Unzip&quot;]
+git-tree-sha1 = &quot;ccee59c6e48e6f2edf8a5b64dc817b6729f99eb5&quot;
 uuid = &quot;91a5bcdd-55d7-5caf-9e0b-520d859cae80&quot;
-version = &quot;1.30.1&quot;
+version = &quot;1.39.0&quot;
+
+    [deps.Plots.extensions]
+    FileIOExt = &quot;FileIO&quot;
+    GeometryBasicsExt = &quot;GeometryBasics&quot;
+    IJuliaExt = &quot;IJulia&quot;
+    ImageInTerminalExt = &quot;ImageInTerminal&quot;
+    UnitfulExt = &quot;Unitful&quot;
+
+    [deps.Plots.weakdeps]
+    FileIO = &quot;5789e2e9-d7fb-5bc7-8068-2c6fae9b9549&quot;
+    GeometryBasics = &quot;5c1252a2-5f33-56bf-86c9-59e7332b4326&quot;
+    IJulia = &quot;7073ff75-c697-5162-941a-fcdaad2a7d2a&quot;
+    ImageInTerminal = &quot;d8c32880-2388-543b-8c61-d9f865259254&quot;
+    Unitful = &quot;1986cc42-f94f-5a68-af5c-568840ba703d&quot;
+
+[[deps.PrecompileTools]]
+deps = [&quot;Preferences&quot;]
+git-tree-sha1 = &quot;03b4c25b43cb84cee5c90aa9b5ea0a78fd848d2f&quot;
+uuid = &quot;aea7be01-6a6a-4083-8856-8a6e6704d82a&quot;
+version = &quot;1.2.0&quot;
 
 [[deps.Preferences]]
 deps = [&quot;TOML&quot;]
-git-tree-sha1 = &quot;47e5f437cc0e7ef2ce8406ce1e7e24d44915f88d&quot;
+git-tree-sha1 = &quot;00805cd429dcb4870060ff49ef443486c262e38e&quot;
 uuid = &quot;21216c6a-2e73-6563-6e65-726566657250&quot;
-version = &quot;1.3.0&quot;
+version = &quot;1.4.1&quot;
 
 [[deps.Printf]]
 deps = [&quot;Unicode&quot;]
 uuid = &quot;de0858da-6303-5e67-8744-51eddeeeb8d7&quot;
 
-[[deps.Qt5Base_jll]]
-deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;Glib_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libglvnd_jll&quot;, &quot;OpenSSL_jll&quot;, &quot;Pkg&quot;, &quot;Xorg_libXext_jll&quot;, &quot;Xorg_libxcb_jll&quot;, &quot;Xorg_xcb_util_image_jll&quot;, &quot;Xorg_xcb_util_keysyms_jll&quot;, &quot;Xorg_xcb_util_renderutil_jll&quot;, &quot;Xorg_xcb_util_wm_jll&quot;, &quot;Zlib_jll&quot;, &quot;xkbcommon_jll&quot;]
-git-tree-sha1 = &quot;c6c0f690d0cc7caddb74cef7aa847b824a16b256&quot;
-uuid = &quot;ea2cea3b-5b76-57ae-a6ef-0a8af62496e1&quot;
-version = &quot;5.15.3+1&quot;
+[[deps.Qt6Base_jll]]
+deps = [&quot;Artifacts&quot;, &quot;CompilerSupportLibraries_jll&quot;, &quot;Fontconfig_jll&quot;, &quot;Glib_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libglvnd_jll&quot;, &quot;OpenSSL_jll&quot;, &quot;Vulkan_Loader_jll&quot;, &quot;Xorg_libSM_jll&quot;, &quot;Xorg_libXext_jll&quot;, &quot;Xorg_libXrender_jll&quot;, &quot;Xorg_libxcb_jll&quot;, &quot;Xorg_xcb_util_cursor_jll&quot;, &quot;Xorg_xcb_util_image_jll&quot;, &quot;Xorg_xcb_util_keysyms_jll&quot;, &quot;Xorg_xcb_util_renderutil_jll&quot;, &quot;Xorg_xcb_util_wm_jll&quot;, &quot;Zlib_jll&quot;, &quot;libinput_jll&quot;, &quot;xkbcommon_jll&quot;]
+git-tree-sha1 = &quot;37b7bb7aabf9a085e0044307e1717436117f2b3b&quot;
+uuid = &quot;c0090381-4147-56d7-9ebc-da0b1113ec56&quot;
+version = &quot;6.5.3+1&quot;
 
 [[deps.REPL]]
 deps = [&quot;InteractiveUtils&quot;, &quot;Markdown&quot;, &quot;Sockets&quot;, &quot;Unicode&quot;]
 uuid = &quot;3fa0cd96-eef1-5676-8a61-b3b8758bbffb&quot;
 
 [[deps.Random]]
-deps = [&quot;SHA&quot;, &quot;Serialization&quot;]
+deps = [&quot;SHA&quot;]
 uuid = &quot;9a3f8284-a2c9-5f02-9a11-845980a1fd5c&quot;
 
 [[deps.RecipesBase]]
-git-tree-sha1 = &quot;6bf3f380ff52ce0832ddd3a2a7b9538ed1bcca7d&quot;
+deps = [&quot;PrecompileTools&quot;]
+git-tree-sha1 = &quot;5c3d09cc4f31f5fc6af001c250bf1278733100ff&quot;
 uuid = &quot;3cdcf5f2-1ef4-517c-9805-6587b60abb01&quot;
-version = &quot;1.2.1&quot;
+version = &quot;1.3.4&quot;
 
 [[deps.RecipesPipeline]]
-deps = [&quot;Dates&quot;, &quot;NaNMath&quot;, &quot;PlotUtils&quot;, &quot;RecipesBase&quot;]
-git-tree-sha1 = &quot;dc1e451e15d90347a7decc4221842a022b011714&quot;
+deps = [&quot;Dates&quot;, &quot;NaNMath&quot;, &quot;PlotUtils&quot;, &quot;PrecompileTools&quot;, &quot;RecipesBase&quot;]
+git-tree-sha1 = &quot;45cf9fd0ca5839d06ef333c8201714e888486342&quot;
 uuid = &quot;01d81517-befc-4cb6-b9ec-a95719d0359c&quot;
-version = &quot;0.5.2&quot;
+version = &quot;0.6.12&quot;
 
 [[deps.Reexport]]
 git-tree-sha1 = &quot;45e428421666073eab6f2da5c9d310d99bb12f9b&quot;
@@ -1715,9 +1366,9 @@ version = &quot;1.2.2&quot;
 
 [[deps.RelocatableFolders]]
 deps = [&quot;SHA&quot;, &quot;Scratch&quot;]
-git-tree-sha1 = &quot;cdbd3b1338c72ce29d9584fdbe9e9b70eeb5adca&quot;
+git-tree-sha1 = &quot;ffdaf70d81cf6ff22c2b6e733c900c3321cab864&quot;
 uuid = &quot;05181044-ff0b-4ac5-8273-598c1e38db00&quot;
-version = &quot;0.1.3&quot;
+version = &quot;1.0.1&quot;
 
 [[deps.Requires]]
 deps = [&quot;UUIDs&quot;]
@@ -1727,12 +1378,13 @@ version = &quot;1.3.0&quot;
 
 [[deps.SHA]]
 uuid = &quot;ea8e919c-243c-51af-8825-aaa63cd721ce&quot;
+version = &quot;0.7.0&quot;
 
 [[deps.Scratch]]
 deps = [&quot;Dates&quot;]
-git-tree-sha1 = &quot;0b4b7f1393cff97c33891da2a0bf69c6ed241fda&quot;
+git-tree-sha1 = &quot;3bac05bc7e74a75fd9cba4295cde4045d9fe2386&quot;
 uuid = &quot;6c6a2e73-6563-6170-7368-637461726353&quot;
-version = &quot;1.1.0&quot;
+version = &quot;1.2.1&quot;
 
 [[deps.Serialization]]
 uuid = &quot;9e88b42a-f829-5b0c-bbe9-9e923198166b&quot;
@@ -1743,72 +1395,56 @@ git-tree-sha1 = &quot;91eddf657aca81df9ae6ceb20b959ae5653ad1de&quot;
 uuid = &quot;992d4aef-0814-514b-bc4d-f2e9a6c4116f&quot;
 version = &quot;1.0.3&quot;
 
+[[deps.SimpleBufferStream]]
+git-tree-sha1 = &quot;874e8867b33a00e784c8a7e4b60afe9e037b74e1&quot;
+uuid = &quot;777ac1f9-54b0-4bf8-805c-2214025038e7&quot;
+version = &quot;1.1.0&quot;
+
 [[deps.Sockets]]
 uuid = &quot;6462fe0b-24de-5631-8697-dd941f90decc&quot;
 
 [[deps.SortingAlgorithms]]
 deps = [&quot;DataStructures&quot;]
-git-tree-sha1 = &quot;b3363d7460f7d098ca0912c69b082f75625d7508&quot;
+git-tree-sha1 = &quot;66e0a8e672a0bdfca2c3f5937efb8538b9ddc085&quot;
 uuid = &quot;a2af1166-a08f-5f64-846c-94a0d3cef48c&quot;
-version = &quot;1.0.1&quot;
+version = &quot;1.2.1&quot;
 
 [[deps.SparseArrays]]
-deps = [&quot;LinearAlgebra&quot;, &quot;Random&quot;]
+deps = [&quot;Libdl&quot;, &quot;LinearAlgebra&quot;, &quot;Random&quot;, &quot;Serialization&quot;, &quot;SuiteSparse_jll&quot;]
 uuid = &quot;2f01184e-e22b-5df5-ae63-d93ebab69eaf&quot;
-
-[[deps.SpecialFunctions]]
-deps = [&quot;ChainRulesCore&quot;, &quot;IrrationalConstants&quot;, &quot;LogExpFunctions&quot;, &quot;OpenLibm_jll&quot;, &quot;OpenSpecFun_jll&quot;]
-git-tree-sha1 = &quot;a9e798cae4867e3a41cae2dd9eb60c047f1212db&quot;
-uuid = &quot;276daf66-3868-5448-9aa4-cd146d93841b&quot;
-version = &quot;2.1.6&quot;
-
-[[deps.StaticArrays]]
-deps = [&quot;LinearAlgebra&quot;, &quot;Random&quot;, &quot;Statistics&quot;]
-git-tree-sha1 = &quot;2bbd9f2e40afd197a1379aef05e0d85dba649951&quot;
-uuid = &quot;90137ffa-7385-5640-81b9-e52037218182&quot;
-version = &quot;1.4.7&quot;
+version = &quot;1.10.0&quot;
 
 [[deps.Statistics]]
 deps = [&quot;LinearAlgebra&quot;, &quot;SparseArrays&quot;]
 uuid = &quot;10745b16-79ce-11e8-11f9-7d13ad32a3b2&quot;
+version = &quot;1.10.0&quot;
 
 [[deps.StatsAPI]]
 deps = [&quot;LinearAlgebra&quot;]
-git-tree-sha1 = &quot;2c11d7290036fe7aac9038ff312d3b3a2a5bf89e&quot;
+git-tree-sha1 = &quot;1ff449ad350c9c4cbc756624d6f8a8c3ef56d3ed&quot;
 uuid = &quot;82ae8749-77ed-4fe6-ae5f-f523153014b0&quot;
-version = &quot;1.4.0&quot;
+version = &quot;1.7.0&quot;
 
 [[deps.StatsBase]]
 deps = [&quot;DataAPI&quot;, &quot;DataStructures&quot;, &quot;LinearAlgebra&quot;, &quot;LogExpFunctions&quot;, &quot;Missings&quot;, &quot;Printf&quot;, &quot;Random&quot;, &quot;SortingAlgorithms&quot;, &quot;SparseArrays&quot;, &quot;Statistics&quot;, &quot;StatsAPI&quot;]
-git-tree-sha1 = &quot;642f08bf9ff9e39ccc7b710b2eb9a24971b52b1a&quot;
+git-tree-sha1 = &quot;1d77abd07f617c4868c33d4f5b9e1dbb2643c9cf&quot;
 uuid = &quot;2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91&quot;
-version = &quot;0.33.17&quot;
+version = &quot;0.34.2&quot;
 
-[[deps.StructArrays]]
-deps = [&quot;Adapt&quot;, &quot;DataAPI&quot;, &quot;StaticArrays&quot;, &quot;Tables&quot;]
-git-tree-sha1 = &quot;9abba8f8fb8458e9adf07c8a2377a070674a24f1&quot;
-uuid = &quot;09ab397b-f2b6-538f-b94a-2f83cf4a842a&quot;
-version = &quot;0.6.8&quot;
+[[deps.SuiteSparse_jll]]
+deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;, &quot;libblastrampoline_jll&quot;]
+uuid = &quot;bea87d4a-7f5b-5778-9afe-8cc45184846c&quot;
+version = &quot;7.2.1+1&quot;
 
 [[deps.TOML]]
 deps = [&quot;Dates&quot;]
 uuid = &quot;fa267f1f-6049-4f14-aa54-33bafae1ed76&quot;
-
-[[deps.TableTraits]]
-deps = [&quot;IteratorInterfaceExtensions&quot;]
-git-tree-sha1 = &quot;c06b2f539df1c6efa794486abfb6ed2022561a39&quot;
-uuid = &quot;3783bdb8-4a98-5b6b-af9a-565f29a5fe9c&quot;
-version = &quot;1.0.1&quot;
-
-[[deps.Tables]]
-deps = [&quot;DataAPI&quot;, &quot;DataValueInterfaces&quot;, &quot;IteratorInterfaceExtensions&quot;, &quot;LinearAlgebra&quot;, &quot;OrderedCollections&quot;, &quot;TableTraits&quot;, &quot;Test&quot;]
-git-tree-sha1 = &quot;5ce79ce186cc678bbb5c5681ca3379d1ddae11a1&quot;
-uuid = &quot;bd369af6-aec1-5ad0-b16a-f7cc5008161c&quot;
-version = &quot;1.7.0&quot;
+version = &quot;1.0.3&quot;
 
 [[deps.Tar]]
 deps = [&quot;ArgTools&quot;, &quot;SHA&quot;]
 uuid = &quot;a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e&quot;
+version = &quot;1.10.0&quot;
 
 [[deps.TensorCore]]
 deps = [&quot;LinearAlgebra&quot;]
@@ -1820,10 +1456,19 @@ version = &quot;0.1.1&quot;
 deps = [&quot;InteractiveUtils&quot;, &quot;Logging&quot;, &quot;Random&quot;, &quot;Serialization&quot;]
 uuid = &quot;8dfed614-e22c-5e08-85e1-65c5234f0b40&quot;
 
+[[deps.TranscodingStreams]]
+git-tree-sha1 = &quot;1fbeaaca45801b4ba17c251dd8603ef24801dd84&quot;
+uuid = &quot;3bb67fe8-82b1-5028-8e26-92a6c54297fa&quot;
+version = &quot;0.10.2&quot;
+weakdeps = [&quot;Random&quot;, &quot;Test&quot;]
+
+    [deps.TranscodingStreams.extensions]
+    TestExt = [&quot;Test&quot;, &quot;Random&quot;]
+
 [[deps.URIs]]
-git-tree-sha1 = &quot;97bbe755a53fe859669cd907f2d96aee8d2c1355&quot;
+git-tree-sha1 = &quot;67db6cc7b3821e19ebe75791a9dd19c9b1188f2b&quot;
 uuid = &quot;5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4&quot;
-version = &quot;1.3.0&quot;
+version = &quot;1.5.1&quot;
 
 [[deps.UUIDs]]
 deps = [&quot;Random&quot;, &quot;SHA&quot;]
@@ -1838,28 +1483,54 @@ git-tree-sha1 = &quot;53915e50200959667e78a92a418594b428dffddf&quot;
 uuid = &quot;1cfade01-22cf-5700-b092-accc4b62d6e1&quot;
 version = &quot;0.4.1&quot;
 
+[[deps.Unitful]]
+deps = [&quot;Dates&quot;, &quot;LinearAlgebra&quot;, &quot;Random&quot;]
+git-tree-sha1 = &quot;3c793be6df9dd77a0cf49d80984ef9ff996948fa&quot;
+uuid = &quot;1986cc42-f94f-5a68-af5c-568840ba703d&quot;
+version = &quot;1.19.0&quot;
+
+    [deps.Unitful.extensions]
+    ConstructionBaseUnitfulExt = &quot;ConstructionBase&quot;
+    InverseFunctionsUnitfulExt = &quot;InverseFunctions&quot;
+
+    [deps.Unitful.weakdeps]
+    ConstructionBase = &quot;187b0558-2788-49d3-abe0-74a17ed4e7c9&quot;
+    InverseFunctions = &quot;3587e190-3f89-42d0-90ee-14403ec27112&quot;
+
+[[deps.UnitfulLatexify]]
+deps = [&quot;LaTeXStrings&quot;, &quot;Latexify&quot;, &quot;Unitful&quot;]
+git-tree-sha1 = &quot;e2d817cc500e960fdbafcf988ac8436ba3208bfd&quot;
+uuid = &quot;45397f5d-5981-4c77-b2b3-fc36d6e9b728&quot;
+version = &quot;1.6.3&quot;
+
 [[deps.Unzip]]
-git-tree-sha1 = &quot;34db80951901073501137bdbc3d5a8e7bbd06670&quot;
+git-tree-sha1 = &quot;ca0969166a028236229f63514992fc073799bb78&quot;
 uuid = &quot;41fe7b60-77ed-43a1-b4f0-825fd5a5650d&quot;
-version = &quot;0.1.2&quot;
+version = &quot;0.2.0&quot;
+
+[[deps.Vulkan_Loader_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Wayland_jll&quot;, &quot;Xorg_libX11_jll&quot;, &quot;Xorg_libXrandr_jll&quot;, &quot;xkbcommon_jll&quot;]
+git-tree-sha1 = &quot;2f0486047a07670caad3a81a075d2e518acc5c59&quot;
+uuid = &quot;a44049a8-05dd-5a78-86c9-5fde0876e88c&quot;
+version = &quot;1.3.243+0&quot;
 
 [[deps.Wayland_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Expat_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libffi_jll&quot;, &quot;Pkg&quot;, &quot;XML2_jll&quot;]
-git-tree-sha1 = &quot;3e61f0b86f90dacb0bc0e73a0c5a83f6a8636e23&quot;
+deps = [&quot;Artifacts&quot;, &quot;EpollShim_jll&quot;, &quot;Expat_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libffi_jll&quot;, &quot;Pkg&quot;, &quot;XML2_jll&quot;]
+git-tree-sha1 = &quot;7558e29847e99bc3f04d6569e82d0f5c54460703&quot;
 uuid = &quot;a2964d1f-97da-50d4-b82a-358c7fce9d89&quot;
-version = &quot;1.19.0+0&quot;
+version = &quot;1.21.0+1&quot;
 
 [[deps.Wayland_protocols_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;4528479aa01ee1b3b4cd0e6faef0e04cf16466da&quot;
+git-tree-sha1 = &quot;93f43ab61b16ddfb2fd3bb13b3ce241cafb0e6c9&quot;
 uuid = &quot;2381bf8a-dfd0-557d-9999-79630e7b1b91&quot;
-version = &quot;1.25.0+0&quot;
+version = &quot;1.31.0+0&quot;
 
 [[deps.XML2_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libiconv_jll&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;]
-git-tree-sha1 = &quot;58443b63fb7e465a8a7210828c91c08b92132dff&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libiconv_jll&quot;, &quot;Zlib_jll&quot;]
+git-tree-sha1 = &quot;801cbe47eae69adc50f36c3caec4758d2650741b&quot;
 uuid = &quot;02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a&quot;
-version = &quot;2.9.14+0&quot;
+version = &quot;2.12.2+0&quot;
 
 [[deps.XSLT_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Libgcrypt_jll&quot;, &quot;Libgpg_error_jll&quot;, &quot;Libiconv_jll&quot;, &quot;Pkg&quot;, &quot;XML2_jll&quot;, &quot;Zlib_jll&quot;]
@@ -1867,17 +1538,35 @@ git-tree-sha1 = &quot;91844873c4085240b95e795f692c4cec4d805f8a&quot;
 uuid = &quot;aed1982a-8fda-507f-9586-7b0439959a61&quot;
 version = &quot;1.1.34+0&quot;
 
+[[deps.XZ_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;522b8414d40c4cbbab8dee346ac3a09f9768f25d&quot;
+uuid = &quot;ffd25f8a-64ca-5728-b0f7-c24cf3aae800&quot;
+version = &quot;5.4.5+0&quot;
+
+[[deps.Xorg_libICE_jll]]
+deps = [&quot;Libdl&quot;, &quot;Pkg&quot;]
+git-tree-sha1 = &quot;e5becd4411063bdcac16be8b66fc2f9f6f1e8fe5&quot;
+uuid = &quot;f67eecfb-183a-506d-b269-f58e52b52d7c&quot;
+version = &quot;1.0.10+1&quot;
+
+[[deps.Xorg_libSM_jll]]
+deps = [&quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libICE_jll&quot;]
+git-tree-sha1 = &quot;4a9d9e4c180e1e8119b5ffc224a7b59d3a7f7e18&quot;
+uuid = &quot;c834827a-8449-5923-a945-d239c165b7dd&quot;
+version = &quot;1.2.3+0&quot;
+
 [[deps.Xorg_libX11_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libxcb_jll&quot;, &quot;Xorg_xtrans_jll&quot;]
-git-tree-sha1 = &quot;5be649d550f3f4b95308bf0183b82e2582876527&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Xorg_libxcb_jll&quot;, &quot;Xorg_xtrans_jll&quot;]
+git-tree-sha1 = &quot;afead5aba5aa507ad5a3bf01f58f82c8d1403495&quot;
 uuid = &quot;4f6342f7-b3d2-589e-9d20-edeb45f2b2bc&quot;
-version = &quot;1.6.9+4&quot;
+version = &quot;1.8.6+0&quot;
 
 [[deps.Xorg_libXau_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;4e490d5c960c314f33885790ed410ff3a94ce67e&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;6035850dcc70518ca32f012e46015b9beeda49d8&quot;
 uuid = &quot;0c0b7dd1-d40b-584c-a123-a41640f87eec&quot;
-version = &quot;1.0.9+4&quot;
+version = &quot;1.0.11+0&quot;
 
 [[deps.Xorg_libXcursor_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libXfixes_jll&quot;, &quot;Xorg_libXrender_jll&quot;]
@@ -1886,10 +1575,10 @@ uuid = &quot;935fb764-8cf2-53bf-bb30-45bb1f8bf724&quot;
 version = &quot;1.2.0+4&quot;
 
 [[deps.Xorg_libXdmcp_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;4fe47bd2247248125c428978740e18a681372dd4&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;34d526d318358a859d7de23da945578e8e8727b7&quot;
 uuid = &quot;a3789734-cfe1-5b06-b2d0-1dd0d9d62d05&quot;
-version = &quot;1.1.3+4&quot;
+version = &quot;1.1.4+0&quot;
 
 [[deps.Xorg_libXext_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libX11_jll&quot;]
@@ -1928,22 +1617,28 @@ uuid = &quot;ea2f1a96-1ddc-540d-b46f-429655e07cfa&quot;
 version = &quot;0.9.10+4&quot;
 
 [[deps.Xorg_libpthread_stubs_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;6783737e45d3c59a4a4c4091f5f88cdcf0908cbb&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;8fdda4c692503d44d04a0603d9ac0982054635f9&quot;
 uuid = &quot;14d82f49-176c-5ed1-bb49-ad3f5cbd8c74&quot;
-version = &quot;0.1.0+3&quot;
+version = &quot;0.1.1+0&quot;
 
 [[deps.Xorg_libxcb_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;XSLT_jll&quot;, &quot;Xorg_libXau_jll&quot;, &quot;Xorg_libXdmcp_jll&quot;, &quot;Xorg_libpthread_stubs_jll&quot;]
-git-tree-sha1 = &quot;daf17f441228e7a3833846cd048892861cff16d6&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;XSLT_jll&quot;, &quot;Xorg_libXau_jll&quot;, &quot;Xorg_libXdmcp_jll&quot;, &quot;Xorg_libpthread_stubs_jll&quot;]
+git-tree-sha1 = &quot;b4bfde5d5b652e22b9c790ad00af08b6d042b97d&quot;
 uuid = &quot;c7cfdc94-dc32-55de-ac96-5a1b8d977c5b&quot;
-version = &quot;1.13.0+3&quot;
+version = &quot;1.15.0+0&quot;
 
 [[deps.Xorg_libxkbfile_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libX11_jll&quot;]
-git-tree-sha1 = &quot;926af861744212db0eb001d9e40b5d16292080b2&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Xorg_libX11_jll&quot;]
+git-tree-sha1 = &quot;730eeca102434283c50ccf7d1ecdadf521a765a4&quot;
 uuid = &quot;cc61e674-0454-545c-8b26-ed2c68acab7a&quot;
-version = &quot;1.1.0+4&quot;
+version = &quot;1.1.2+0&quot;
+
+[[deps.Xorg_xcb_util_cursor_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Xorg_xcb_util_image_jll&quot;, &quot;Xorg_xcb_util_jll&quot;, &quot;Xorg_xcb_util_renderutil_jll&quot;]
+git-tree-sha1 = &quot;04341cb870f29dcd5e39055f895c39d016e18ccd&quot;
+uuid = &quot;e920d4aa-a673-5f3a-b3d7-f755a4d47c43&quot;
+version = &quot;0.1.4+0&quot;
 
 [[deps.Xorg_xcb_util_image_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_xcb_util_jll&quot;]
@@ -1976,32 +1671,57 @@ uuid = &quot;c22f9ab0-d5fe-5066-847c-f4bb1cd4e361&quot;
 version = &quot;0.4.1+1&quot;
 
 [[deps.Xorg_xkbcomp_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_libxkbfile_jll&quot;]
-git-tree-sha1 = &quot;4bcbf660f6c2e714f87e960a171b119d06ee163b&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Xorg_libxkbfile_jll&quot;]
+git-tree-sha1 = &quot;330f955bc41bb8f5270a369c473fc4a5a4e4d3cb&quot;
 uuid = &quot;35661453-b289-5fab-8a00-3d9160c6a3a4&quot;
-version = &quot;1.4.2+4&quot;
+version = &quot;1.4.6+0&quot;
 
 [[deps.Xorg_xkeyboard_config_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Xorg_xkbcomp_jll&quot;]
-git-tree-sha1 = &quot;5c8424f8a67c3f2209646d4425f3d415fee5931d&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Xorg_xkbcomp_jll&quot;]
+git-tree-sha1 = &quot;691634e5453ad362044e2ad653e79f3ee3bb98c3&quot;
 uuid = &quot;33bec58e-1273-512f-9401-5d533626f822&quot;
-version = &quot;2.27.0+4&quot;
+version = &quot;2.39.0+0&quot;
 
 [[deps.Xorg_xtrans_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;79c31e7844f6ecf779705fbc12146eb190b7d845&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;e92a1a012a10506618f10b7047e478403a046c77&quot;
 uuid = &quot;c5fb5394-a638-5e4d-96e5-b29de1b5cf10&quot;
-version = &quot;1.4.0+3&quot;
+version = &quot;1.5.0+0&quot;
 
 [[deps.Zlib_jll]]
 deps = [&quot;Libdl&quot;]
 uuid = &quot;83775a58-1f1d-513f-b197-d71354ab007a&quot;
+version = &quot;1.2.13+1&quot;
 
 [[deps.Zstd_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
-git-tree-sha1 = &quot;e45044cd873ded54b6a5bac0eb5c971392cf1927&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;49ce682769cd5de6c72dcf1b94ed7790cd08974c&quot;
 uuid = &quot;3161d3a3-bdf6-5164-811a-617609db77b4&quot;
-version = &quot;1.5.2+0&quot;
+version = &quot;1.5.5+0&quot;
+
+[[deps.eudev_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;gperf_jll&quot;]
+git-tree-sha1 = &quot;431b678a28ebb559d224c0b6b6d01afce87c51ba&quot;
+uuid = &quot;35ca27e7-8b34-5b7f-bca9-bdc33f59eb06&quot;
+version = &quot;3.2.9+0&quot;
+
+[[deps.fzf_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;]
+git-tree-sha1 = &quot;a68c9655fbe6dfcab3d972808f1aafec151ce3f8&quot;
+uuid = &quot;214eeab7-80f7-51ab-84ad-2988db7cef09&quot;
+version = &quot;0.43.0+0&quot;
+
+[[deps.gperf_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
+git-tree-sha1 = &quot;3516a5630f741c9eecb3720b1ec9d8edc3ecc033&quot;
+uuid = &quot;1a1c6b14-54f6-533d-8383-74cd7377aa70&quot;
+version = &quot;3.1.1+0&quot;
+
+[[deps.libaom_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
+git-tree-sha1 = &quot;3a2ea60308f0996d26f1e5354e10c24e9ef905d4&quot;
+uuid = &quot;a4ae2306-e953-59d6-aa16-d00cac43593b&quot;
+version = &quot;3.4.0+0&quot;
 
 [[deps.libass_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Bzip2_jll&quot;, &quot;FreeType2_jll&quot;, &quot;FriBidi_jll&quot;, &quot;HarfBuzz_jll&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;]
@@ -2010,8 +1730,15 @@ uuid = &quot;0ac62f75-1d6f-5e53-bd7c-93b484bb37c0&quot;
 version = &quot;0.15.1+0&quot;
 
 [[deps.libblastrampoline_jll]]
-deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;, &quot;OpenBLAS_jll&quot;]
+deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;8e850b90-86db-534c-a0d3-1478176c7d93&quot;
+version = &quot;5.8.0+1&quot;
+
+[[deps.libevdev_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
+git-tree-sha1 = &quot;141fe65dc3efabb0b1d5ba74e91f6ad26f84cc22&quot;
+uuid = &quot;2db6ffa8-e38f-5e21-84af-90c45d0032cc&quot;
+version = &quot;1.11.0+0&quot;
 
 [[deps.libfdk_aac_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -2019,11 +1746,17 @@ git-tree-sha1 = &quot;daacc84a041563f965be61859a36e17c4e4fcd55&quot;
 uuid = &quot;f638f0a6-7fb0-5443-88ba-1cc74229b280&quot;
 version = &quot;2.0.2+0&quot;
 
+[[deps.libinput_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;eudev_jll&quot;, &quot;libevdev_jll&quot;, &quot;mtdev_jll&quot;]
+git-tree-sha1 = &quot;ad50e5b90f222cfe78aa3d5183a20a12de1322ce&quot;
+uuid = &quot;36db933b-70db-51c0-b978-0f229ee0e533&quot;
+version = &quot;1.18.0+0&quot;
+
 [[deps.libpng_jll]]
-deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Zlib_jll&quot;]
-git-tree-sha1 = &quot;94d180a6d2b5e55e447e2d27a29ed04fe79eb30c&quot;
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Zlib_jll&quot;]
+git-tree-sha1 = &quot;93284c28274d9e75218a416c65ec49d0e0fcdf3d&quot;
 uuid = &quot;b53b4c65-9356-5827-b1ea-8c7a1a84506f&quot;
-version = &quot;1.6.38+0&quot;
+version = &quot;1.6.40+0&quot;
 
 [[deps.libvorbis_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Ogg_jll&quot;, &quot;Pkg&quot;]
@@ -2031,13 +1764,21 @@ git-tree-sha1 = &quot;b910cb81ef3fe6e78bf6acee440bda86fd6ae00c&quot;
 uuid = &quot;f27f6e37-5d2b-51aa-960f-b287f2bc3b7a&quot;
 version = &quot;1.3.7+1&quot;
 
+[[deps.mtdev_jll]]
+deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
+git-tree-sha1 = &quot;814e154bdb7be91d78b6802843f76b6ece642f11&quot;
+uuid = &quot;009596ad-96f7-51b1-9f1b-5ce2d5e8a71e&quot;
+version = &quot;1.1.6+0&quot;
+
 [[deps.nghttp2_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;8e850ede-7688-5339-a07c-302acd2aaf8d&quot;
+version = &quot;1.52.0+1&quot;
 
 [[deps.p7zip_jll]]
 deps = [&quot;Artifacts&quot;, &quot;Libdl&quot;]
 uuid = &quot;3f19e933-33d8-53b3-aaab-bd5110c3b7a0&quot;
+version = &quot;17.4.0+2&quot;
 
 [[deps.x264_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;]
@@ -2053,20 +1794,9 @@ version = &quot;3.5.0+0&quot;
 
 [[deps.xkbcommon_jll]]
 deps = [&quot;Artifacts&quot;, &quot;JLLWrappers&quot;, &quot;Libdl&quot;, &quot;Pkg&quot;, &quot;Wayland_jll&quot;, &quot;Wayland_protocols_jll&quot;, &quot;Xorg_libxcb_jll&quot;, &quot;Xorg_xkeyboard_config_jll&quot;]
-git-tree-sha1 = &quot;ece2350174195bb31de1a63bea3a41ae1aa593b6&quot;
+git-tree-sha1 = &quot;9c304562909ab2bab0262639bd4f444d7bc2be37&quot;
 uuid = &quot;d8fb68d0-12a3-5cfd-a85a-d49703b185fd&quot;
-version = &quot;0.9.1+5&quot;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Process(`cat Manifest.toml`, ProcessExited(0))
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span><span class="w"></span>
-<span class="n">P</span><span class="w"></span>
+version = &quot;1.4.1+1&quot;
 </pre></div>
 </div>
 </div>
@@ -2084,54 +1814,114 @@ version = &quot;0.9.1+5&quot;
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.7"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.7'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="01-prise-en-main.html" title="next page">
-    <div class="prev-next-info">
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="01-prise-en-main.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Prise en main</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Présentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-et-accessibilite">Installation et accessibilité</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-terminal">Le terminal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#editeur-a-coloration-syntaxique">Editeur à coloration syntaxique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environnement-integre-ide">Environnement intégré (IDE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook">Notebook</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#les-packages">Les Packages</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By The Jupyter Book community<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

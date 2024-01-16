@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Eléments de programmation &#8212; Introduction au langage Julia</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +64,104 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03-elements-de-programmation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Les fonctions" href="04-les-fonctions.html" />
     <link rel="prev" title="Tableaux et matrices" href="02-tableaux-et-matrices.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00-introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Introduction au langage Julia - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Introduction au langage Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,367 +171,256 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-prise-en-main.html">
-   Prise en main
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-tableaux-et-matrices.html">
-   Tableaux et matrices
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-les-fonctions.html">
-   Les fonctions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-packages-graphiques.html">
-   Packages graphiques
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-type-et-methode.html">
-   Type et méthodes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-performance.html">
-   Performance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-metaprogrammation.html">
-   Metaprogrammation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10-gpu.html">
-   GPU
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-prise-en-main.html">Prise en main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tableaux-et-matrices.html">Tableaux et matrices</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Eléments de programmation</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-les-fonctions.html">Les fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-packages-graphiques.html">Packages graphiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-type-et-methode.html">Type et méthodes</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="07-performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-calcul-parallele.html">Calcul parallèle</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="09-metaprogrammation.html">Metaprogrammation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-gpu.html">GPU</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/03-elements-de-programmation.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F03-elements-de-programmation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03-elements-de-programmation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F03-elements-de-programmation.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/03-elements-de-programmation.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#if-elseif-else-end">
-   if … elseif … else … end
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-boucle-for">
-   La boucle for
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-boucle-while">
-   La boucle while
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#un-peu-d-optimisation">
-   Un peu d’optimisation
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exemple-de-preallocation-et-utilisation-de-push">
-     Exemple de préallocation et utilisation de push!
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exemple-de-vectorisation">
-     Exemple de vectorisation
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Eléments de programmation</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#if-elseif-else-end">
-   if … elseif … else … end
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-boucle-for">
-   La boucle for
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-boucle-while">
-   La boucle while
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#un-peu-d-optimisation">
-   Un peu d’optimisation
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exemple-de-preallocation-et-utilisation-de-push">
-     Exemple de préallocation et utilisation de push!
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exemple-de-vectorisation">
-     Exemple de vectorisation
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Eléments de programmation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Eléments de programmation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elseif-else-end">if … elseif … else … end</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-for">La boucle for</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-while">La boucle while</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#un-peu-d-optimisation">Un peu d’optimisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-preallocation-et-utilisation-de-push">Exemple de préallocation et utilisation de push!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-vectorisation">Exemple de vectorisation</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="elements-de-programmation">
-<h1>Eléments de programmation<a class="headerlink" href="#elements-de-programmation" title="Permalink to this headline">#</a></h1>
+<h1>Eléments de programmation<a class="headerlink" href="#elements-de-programmation" title="Permalink to this heading">#</a></h1>
 <p>Pour mener à bien un calcul algorithmique le nombre d’éléments de langage n’est pas très important et peut se résumer aux 3 syntaxes suivantes</p>
 <ul class="simple">
 <li><p>Le choix conditionnel <strong>if</strong>-<strong>elseif</strong>-<strong>else</strong>-<strong>end</strong>.</p></li>
@@ -485,14 +429,27 @@ title="Print to PDF"
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="if-elseif-else-end">
-<h1>if … elseif … else … end<a class="headerlink" href="#if-elseif-else-end" title="Permalink to this headline">#</a></h1>
+<h1>if … elseif … else … end<a class="headerlink" href="#if-elseif-else-end" title="Permalink to this heading">#</a></h1>
 <p>Un choix simple si le test est vrai (k==1) alors le bloc d’instruction est évalué</p>
 <!-- #endregion --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k=1
+</pre></div>
+</div>
+</div>
+</div>
+<p>en Julia une autre syntaxe est possible avec</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -505,17 +462,18 @@ title="Print to PDF"
 <p>Le <strong>else</strong> permet de donner un résultat par défaut…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;&gt;1&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">else</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span>
+<span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k ≠ 1&quot;</span><span class="p">)</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k=1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k ≠ 1
 </pre></div>
 </div>
 </div>
@@ -523,32 +481,33 @@ title="Print to PDF"
 <p>Une succession de <strong>elseif</strong> permet de choisir parmi plusieurs critères, dans la succession des blocs de <strong>if</strong> et <strong>elseif</strong> le premier qui est “vrai” est évaluer et l’instruction s’arrète.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="w"></span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">elseif</span><span class="w"> </span><span class="n">k</span><span class="o">&gt;</span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&gt;1&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="o">==</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="k">elseif</span><span class="w"> </span><span class="n">k</span><span class="o">&gt;</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&gt;1&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="w"> </span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;1&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;1&quot;</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k&gt;1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k = rand(1:3) = 1
+k=1
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="la-boucle-for">
-<h1>La boucle for<a class="headerlink" href="#la-boucle-for" title="Permalink to this headline">#</a></h1>
+<h1>La boucle for<a class="headerlink" href="#la-boucle-for" title="Permalink to this heading">#</a></h1>
 <p>Elle peut se définir à l’aide d’itérateurs ou de tableaux de valeurs les syntaxes “=” , “in” ou “<span class="math notranslate nohighlight">\(\in\)</span>” sont équivalentes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -569,9 +528,9 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nb">im</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;un&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nb">im</span><span class="p">]</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -585,7 +544,7 @@ Complex{Bool}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="o">.</span><span class="p">([</span><span class="s">&quot;un&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">im</span><span class="p">])</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="o">.</span><span class="p">([</span><span class="s">&quot;un&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nb">im</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -600,7 +559,7 @@ Complex{Bool}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eltype</span><span class="p">([</span><span class="s">&quot;un&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nb">im</span><span class="p">])</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eltype</span><span class="p">([</span><span class="s">&quot;un&quot;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nb">im</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -613,12 +572,12 @@ Complex{Bool}
 <p>La commande <strong>break</strong> permet de sortir d’une boucle à tout moment</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1000</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
-<span class="w">       </span><span class="k">break</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">       </span><span class="k">break</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -635,12 +594,12 @@ Complex{Bool}
 <p>La commande <strong>continue</strong> permet elle de courtcircuiter la boucle en court et de passer à la valeur suivante</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># i modulo 3 different de 0</span><span class="w"></span>
-<span class="w">        </span><span class="k">continue</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># i modulo 3 different de 0</span>
+<span class="w">        </span><span class="k">continue</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -654,15 +613,15 @@ Complex{Bool}
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="la-boucle-while">
-<h1>La boucle while<a class="headerlink" href="#la-boucle-while" title="Permalink to this headline">#</a></h1>
+<h1>La boucle while<a class="headerlink" href="#la-boucle-while" title="Permalink to this heading">#</a></h1>
 <p>Tant que le test est “vrai” le bloc est évalué, le test se faisant en entrée de bloc</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="o">&lt;</span><span class="mi">10</span><span class="w"></span>
-<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="o">&lt;</span><span class="mi">10</span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -684,17 +643,17 @@ Complex{Bool}
 <p>De même que la boucle <strong>for</strong> les commandes <strong>break</strong> et <strong>continue</strong> sont valables …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="w"></span>
-<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
-<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># k modulo 5 diffèrent de 0</span><span class="w"></span>
-<span class="w">        </span><span class="k">continue</span><span class="w"> </span><span class="c"># retour en début de boucle avec de nouveau un test sur k</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"></span>
-<span class="w">        </span><span class="k">break</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c"># k=k+1</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c"># k modulo 5 diffèrent de 0</span>
+<span class="w">        </span><span class="k">continue</span><span class="w"> </span><span class="c"># retour en début de boucle avec de nouveau un test sur k</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -713,19 +672,19 @@ Complex{Bool}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000000</span><span class="w"></span>
-<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="w"></span>
-<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k </span><span class="se">\t</span><span class="s"> = </span><span class="se">\t</span><span class="s"> </span><span class="si">$k</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000000</span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">÷</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k </span><span class="se">\t</span><span class="s"> = </span><span class="se">\t</span><span class="s"> </span><span class="si">$k</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -738,318 +697,158 @@ k 	 = 	 145
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="un-peu-d-optimisation">
-<h1>Un peu d’optimisation<a class="headerlink" href="#un-peu-d-optimisation" title="Permalink to this headline">#</a></h1>
+<h1>Un peu d’optimisation<a class="headerlink" href="#un-peu-d-optimisation" title="Permalink to this heading">#</a></h1>
 <p><em>Julia</em> est dit un langage performant, regardons rapidement quelques exemples à faire ou ne pas faire.</p>
 <section id="exemple-de-preallocation-et-utilisation-de-push">
-<h2>Exemple de préallocation et utilisation de push!<a class="headerlink" href="#exemple-de-preallocation-et-utilisation-de-push" title="Permalink to this headline">#</a></h2>
+<h2>Exemple de préallocation et utilisation de push!<a class="headerlink" href="#exemple-de-preallocation-et-utilisation-de-push" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span><span class="w"></span>
-<span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c"># Tableau vide qui contiendra des Float64</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c"># Tableau vide qui contiendra des Float64</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24.233625 seconds (496.93 k allocations: 37.266 GiB, 17.33% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991.0, 99992.0, 99993.0, 99994.0, 99995.0, 99996.0, 99997.0, 99998.0, 99999.0, 100000.0]
+  7.581140 seconds (323.98 k allocations: 37.270 GiB, 8.10% gc time, 2.01% compilation time)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Cet exemple montre le coût prohibitif d’une réallocation dynamique qui impose une recopie totale de A à chaque itération. Il faut donc récrire notre code différemment pour réduire cet utilisation excessive du ramasse miettes.
+Heureusement plusieurs solutions s’offrent à vous</p>
+<ul class="simple">
+<li><p>Utiliser la fonction <code class="docutils literal notranslate"><span class="pre">push!</span></code></p></li>
+<li><p>Allouer le tableau <code class="docutils literal notranslate"><span class="pre">A</span></code> avant la boucle si on cannait sa taille</p></li>
+<li><p>Utiliser un itérateur avec la fonction <code class="docutils literal notranslate"><span class="pre">collect</span></code> forsque c’est possible</p></li>
+<li><p>Utiliser la comprehension</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Float64} (alias for Array{Float64, 1})
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Float64}:
-      1.0
-      2.0
-      3.0
-      4.0
-      5.0
-      6.0
-      7.0
-      8.0
-      9.0
-     10.0
-     11.0
-     12.0
-     13.0
-      ⋮
-  99989.0
-  99990.0
-  99991.0
-  99992.0
-  99993.0
-  99994.0
-  99995.0
-  99996.0
-  99997.0
-  99998.0
-  99999.0
- 100000.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991.0, 99992.0, 99993.0, 99994.0, 99995.0, 99996.0, 99997.0, 99998.0, 99999.0, 100000.0]
+  0.001357 seconds (324 allocations: 1.838 MiB)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w">   </span><span class="c"># a chaque itération on change la taille de A</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.017135 seconds (298.99 k allocations: 7.916 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
+  0.000547 seconds (304 allocations: 788.203 KiB)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Float64}:
-      1.0
-      2.0
-      3.0
-      4.0
-      5.0
-      6.0
-      7.0
-      8.0
-      9.0
-     10.0
-     11.0
-     12.0
-     13.0
-      ⋮
-  99989.0
-  99990.0
-  99991.0
-  99992.0
-  99993.0
-  99994.0
-  99995.0
-  99996.0
-  99997.0
-  99998.0
-  99999.0
- 100000.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
+  0.000448 seconds (304 allocations: 788.203 KiB)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">last</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.010592 seconds (298.98 k allocations: 6.851 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
+  0.000474 seconds (304 allocations: 788.203 KiB)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int64</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">fill!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000141 seconds (2 allocations: 781.297 KiB)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Int64}:
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- ⋮
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
- 1
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000121 seconds (4 allocations: 781.359 KiB)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100000-element Vector{Int64}:
-      1
-      2
-      3
-      4
-      5
-      6
-      7
-      8
-      9
-     10
-     11
-     12
-     13
-      ⋮
-  99989
-  99990
-  99991
-  99992
-  99993
-  99994
-  99995
-  99996
-  99997
-  99998
-  99999
- 100000
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector{Int64} (alias for Array{Int64, 1})
-</pre></div>
-</div>
-</div>
-</div>
-<p>Cet exemple montre le coût prohibitif d’une réallocation dynamique qui impose une recopie totale de A à chaque itération.</p>
 </section>
 <section id="exemple-de-vectorisation">
-<h2>Exemple de vectorisation<a class="headerlink" href="#exemple-de-vectorisation" title="Permalink to this headline">#</a></h2>
+<h2>Exemple de vectorisation<a class="headerlink" href="#exemple-de-vectorisation" title="Permalink to this heading">#</a></h2>
 <p>Regardons la vectorisation sous <em>Julia</em> à l’aide de la construction d’une matrice de Vandermonde</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul vectorisé</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul vectorisé</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.339490 seconds (35.94 k allocations: 69.671 MiB, 8.98% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.357312 seconds (2 allocations: 68.665 MiB, 2.94% gc time)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">            </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.886602 seconds (49.41 M allocations: 960.007 MiB, 7.45% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.346809 seconds (2 allocations: 68.665 MiB)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64} (alias for Array{Float64, 2})
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span><span class="w"> </span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.989547 seconds (33.01 M allocations: 575.400 MiB, 7.31% gc time, 6.61% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.580601 seconds (31.26 k allocations: 70.847 MiB, 4.73% compilation time)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
@@ -1083,101 +882,148 @@ k 	 = 	 145
 </div>
 </div>
 </div>
+<p>Pour obtenir de meilleures performances il faut le plus souvent possible écrire des fonctions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">W</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">Vander1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">x</span><span class="o">.^</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span>
+<span class="k">end</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander1</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64} (alias for Array{Float64, 2})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  358.726 ms (2 allocations: 68.66 MiB)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Vander</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">        </span><span class="c">#V[:,i]=x.^(i-1)</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">            </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span><span class="w"></span>
-<span class="w">        </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@elapsed</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.184000873
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.206228317
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span><span class="w"> </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.179519609
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
+ 1.0  0.0          0.0         0.0          …  0.0          0.0
+ 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
+ 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
+ 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
+ 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
+ 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
+ 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
+ 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
+ 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
+ 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
+ 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
+ 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
+ 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
+ ⋮                                          ⋱               
+ 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
+ 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
+ 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
+ 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
+ 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
+ 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
+ 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
+ 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
+ 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
+ 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
+ 1.0  0.999667     0.999333    0.999           0.367941     0.367818
+ 1.0  1.0          1.0         1.0             1.0          1.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Vander2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="nd">@elapsed</span><span class="w"> </span><span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Vander2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span>
+<span class="k">end</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.314779955
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  360.145 ms (2 allocations: 68.66 MiB)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
+ 1.0  0.0          0.0         0.0          …  0.0          0.0
+ 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
+ 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
+ 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
+ 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
+ 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
+ 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
+ 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
+ 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
+ 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
+ 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
+ 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
+ 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
+ ⋮                                          ⋱               
+ 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
+ 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
+ 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
+ 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
+ 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
+ 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
+ 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
+ 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
+ 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
+ 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
+ 1.0  0.999667     0.999333    0.999           0.367941     0.367818
+ 1.0  1.0          1.0         1.0             1.0          1.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">Z2</span><span class="o">=</span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Vander3</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+<span class="k">end</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="o">=</span><span class="n">Vander3</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.293058917
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  406.121 ms (2 allocations: 68.66 MiB)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">Z2</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix{Float64} (alias for Array{Float64, 2})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
+ 1.0  0.0          0.0         0.0          …  0.0          0.0
+ 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
+ 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
+ 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
+ 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
+ 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
+ 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
+ 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
+ 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
+ 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
+ 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
+ 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
+ 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
+ ⋮                                          ⋱               
+ 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
+ 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
+ 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
+ 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
+ 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
+ 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
+ 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
+ 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
+ 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
+ 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
+ 1.0  0.999667     0.999333    0.999           0.367941     0.367818
+ 1.0  1.0          1.0         1.0             1.0          1.0
 </pre></div>
 </div>
 </div>
@@ -1198,61 +1044,122 @@ et que l’écriture explicite des boucles donne un meilleur résultat.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.7"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.7'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02-tableaux-et-matrices.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Tableaux et matrices</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-tableaux-et-matrices.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tableaux et matrices</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="04-les-fonctions.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="04-les-fonctions.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Les fonctions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Eléments de programmation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elseif-else-end">if … elseif … else … end</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-for">La boucle for</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-while">La boucle while</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#un-peu-d-optimisation">Un peu d’optimisation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-preallocation-et-utilisation-de-push">Exemple de préallocation et utilisation de push!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-de-vectorisation">Exemple de vectorisation</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By The Jupyter Book community<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Type et méthodes &#8212; Introduction au langage Julia</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,61 +62,104 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-type-et-methode';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Performance" href="07-performance.html" />
     <link rel="prev" title="Packages graphiques" href="05-packages-graphiques.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="00-introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction au langage Julia</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Introduction au langage Julia - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Introduction au langage Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -114,392 +169,275 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01-prise-en-main.html">
-   Prise en main
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02-tableaux-et-matrices.html">
-   Tableaux et matrices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03-elements-de-programmation.html">
-   Eléments de programmation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04-les-fonctions.html">
-   Les fonctions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05-packages-graphiques.html">
-   Packages graphiques
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Type et méthodes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07-performance.html">
-   Performance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08-calcul-parallele.html">
-   Calcul parallèle
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09-metaprogrammation.html">
-   Metaprogrammation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10-gpu.html">
-   GPU
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01-prise-en-main.html">Prise en main</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tableaux-et-matrices.html">Tableaux et matrices</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03-elements-de-programmation.html">Eléments de programmation</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-les-fonctions.html">Les fonctions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-packages-graphiques.html">Packages graphiques</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Type et méthodes</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="07-performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-calcul-parallele.html">Calcul parallèle</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="09-metaprogrammation.html">Metaprogrammation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-gpu.html">GPU</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/pnavaro/Julia_Introduction/master?urlpath=tree/06-type-et-methode.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F06-type-et-methode.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06-type-et-methode.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/pnavaro/Julia_Introduction/issues/new?title=Issue%20on%20page%20%2F06-type-et-methode.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/06-type-et-methode.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Type et méthodes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methodes">
-   Méthodes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#construction-d-un-nouveau-type-de-variable">
-   Construction d’un nouveau Type de variable
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#surcharge-des-operateurs">
-   Surcharge des opérateurs
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#addition-soustraction">
-     Addition, soustraction …
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autres-surcharges">
-     Autres surcharges
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#type-et-constructeurs">
-   Type et constructeurs
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#les-iterateurs">
-   Les Itérateurs
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Type et méthodes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Type et méthodes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methodes">
-   Méthodes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#construction-d-un-nouveau-type-de-variable">
-   Construction d’un nouveau Type de variable
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#surcharge-des-operateurs">
-   Surcharge des opérateurs
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#addition-soustraction">
-     Addition, soustraction …
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autres-surcharges">
-     Autres surcharges
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#type-et-constructeurs">
-   Type et constructeurs
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#les-iterateurs">
-   Les Itérateurs
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Type et méthodes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Type et méthodes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes">Méthodes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-d-un-nouveau-type-de-variable">Construction d’un nouveau Type de variable</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#surcharge-des-operateurs">Surcharge des opérateurs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addition-soustraction">Addition, soustraction …</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-surcharges">Autres surcharges</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-et-constructeurs">Type et constructeurs</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#les-iterateurs">Les Itérateurs</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="type-et-methodes">
-<h1>Type et méthodes<a class="headerlink" href="#type-et-methodes" title="Permalink to this headline">#</a></h1>
+<h1>Type et méthodes<a class="headerlink" href="#type-et-methodes" title="Permalink to this heading">#</a></h1>
 <p><em>Julia</em> possède un système de type et de méthode qui lui confère une approche objet.
-La fonction <code class="docutils literal notranslate"><span class="pre">typeof()</span></code> renvoie le type d’une variable de base <code class="docutils literal notranslate"><span class="pre">Int32</span></code>, <code class="docutils literal notranslate"><span class="pre">Float64</span></code>… <em>Julia</em> est conçu pour permettre facilement d’étendre l’environnement à de nouveaux type de variable.</p>
+La fonction <code class="docutils literal notranslate"><span class="pre">typeof()</span></code> renvoie le type d’une variable de base <code class="docutils literal notranslate"><span class="pre">Int32</span></code>, <code class="docutils literal notranslate"><span class="pre">Float64</span></code>… <em>Julia</em> est conçu pour permettre facilement d’étendre l’environnement à de nouveau type de variable.</p>
 <p>Le types sont organisés suivant un hiérarchie comme on peut le voir sur l’arborescence partielle ci-dessous</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">AbstractTrees</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">AbstractTrees</span>
 
-<span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="n">print_tree</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span><span class="w"></span>
+<span class="n">print_tree</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number
+├─ MultiplicativeInverse
+│  ├─ SignedMultiplicativeInverse
+│  └─ UnsignedMultiplicativeInverse
 ├─ Complex
 └─ Real
    ├─ AbstractFloat
@@ -532,7 +470,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>Dans cette arborescence, certains types sont “abstraits” et d’autres “concrets”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Real</span><span class="p">),</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Real</span><span class="p">),</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -545,7 +483,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>Un réel sera forcemment de type concret <code class="docutils literal notranslate"><span class="pre">Float64</span></code> ou <code class="docutils literal notranslate"><span class="pre">Float32</span></code> par exemple, et pourra être utilisé comme argument par toutes les fonctions acceptant le type abstrait <code class="docutils literal notranslate"><span class="pre">AbstractFloat</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractFloat</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractFloat</span>
 </pre></div>
 </div>
 </div>
@@ -557,13 +495,13 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="methodes">
-<h1>Méthodes<a class="headerlink" href="#methodes" title="Permalink to this headline">#</a></h1>
+<h1>Méthodes<a class="headerlink" href="#methodes" title="Permalink to this heading">#</a></h1>
 <p>A chaque fonction est associée une méthode dépendante du type d’entrée comme dans ce qui suit suivant que l’entrée soit un entier ou pas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -575,9 +513,9 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">n</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span>
+<span class="w">    </span><span class="n">n</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -589,7 +527,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -601,16 +539,16 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"># 2 methods for generic function <b>f</b>:<ul><li> f(n::<b>Integer</b>) in Main at In[9]:1</li> <li> f(x) in Main at In[8]:1</li> </ul></div></div>
+<div class="output text_html"># 2 methods for generic function <b>f</b> from [35mMain[39m:<ul><li> f(n::<b>Integer</b>) in Main at In[6]:1</li> <li> f(x) in Main at In[5]:1</li> </ul></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -622,7 +560,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="nb">im</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="nb">im</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -634,7 +572,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,19 +584,19 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 208 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 189 methods)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -670,7 +608,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -682,39 +620,39 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="construction-d-un-nouveau-type-de-variable">
-<h1>Construction d’un nouveau Type de variable<a class="headerlink" href="#construction-d-un-nouveau-type-de-variable" title="Permalink to this headline">#</a></h1>
+<h1>Construction d’un nouveau Type de variable<a class="headerlink" href="#construction-d-un-nouveau-type-de-variable" title="Permalink to this heading">#</a></h1>
 <p>En premier lieu il faut définir un type abstrait puis une instance sous-hiérarchiquement concrète :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span>
 
-<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Grid1d</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span><span class="w"></span>
-<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Grid1</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span>
+<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid1d(0, 1, 2) = Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid1(0, 1, 2) = Grid1(0.0, 1.0, 2)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid1(0.0, 1.0, 2)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">debut</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">debut</span>
 </pre></div>
 </div>
 </div>
@@ -726,7 +664,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">fin</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">fin</span>
 </pre></div>
 </div>
 </div>
@@ -738,7 +676,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span>
 </pre></div>
 </div>
 </div>
@@ -750,20 +688,20 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="surcharge-des-operateurs">
-<h1>Surcharge des opérateurs<a class="headerlink" href="#surcharge-des-operateurs" title="Permalink to this headline">#</a></h1>
+<h1>Surcharge des opérateurs<a class="headerlink" href="#surcharge-des-operateurs" title="Permalink to this heading">#</a></h1>
 <p>La surcharge des opérations usuelles se fait en définissant une nouvelle méthode associé au nouveau type pour chaque opérateur, commençons par surcharger l’affichage à l’écran de notre nouveau type. Pour cela on va ajouter une méthode à la fonction “show”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1d : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1d : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -775,7 +713,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -787,7 +725,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
 </pre></div>
 </div>
 </div>
@@ -799,7 +737,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span>
 </pre></div>
 </div>
 </div>
@@ -813,28 +751,28 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <section id="addition-soustraction">
-<h2>Addition, soustraction …<a class="headerlink" href="#addition-soustraction" title="Permalink to this headline">#</a></h2>
+<h2>Addition, soustraction …<a class="headerlink" href="#addition-soustraction" title="Permalink to this heading">#</a></h2>
 <p>Ces fonctions sont de la forme +(), -() c’est à dire</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">:+</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">:+</span>
 
-<span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">::</span><span class="kt">Integer</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 209 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 191 methods)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -846,7 +784,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="mi">2</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -858,7 +796,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -872,19 +810,23 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span>
-<span class="w">    </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
-<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
-<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Int64, ::Grid1d)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Int64, ::Grid1)
+
 Closest candidates are:
-  +(::Any, ::Any, ::Any, ::Any...) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/operators.jl:655
-  +(::T, ::T) where T&lt;:Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8} at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/int.jl:87
-  +(::Union{Int16, Int32, Int64, Int8}, ::BigInt) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/gmp.jl:535
+  +(::Any, ::Any, ::Any, ::Any...)
+   @ Base operators.jl:587
+  +(::Real, ::Complex{Bool})
+   @ Base complex.jl:319
+  +(::Number, ::LinearAlgebra.UniformScaling)
+   @ <span class=" -Color -Color-Cyan">LinearAlgebra</span> ~/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/share/julia/stdlib/v1.10/LinearAlgebra/src/uniformscaling.jl:145
   ...
 </pre></div>
 </div>
@@ -894,19 +836,23 @@ Closest candidates are:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span>
-<span class="w">    </span><span class="o">-</span><span class="n">a</span><span class="w"></span>
-<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
-<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">-</span><span class="n">a</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 <span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching -(::Grid1d)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching -(::Grid1)
+
 Closest candidates are:
-  -(::Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8}) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/int.jl:85
-  -(::T, ::T) where T&lt;:Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8} at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/int.jl:86
-  -(::Union{UInt16, UInt32, UInt64, UInt8}, ::BigInt) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/gmp.jl:532
+  -(::Base.CoreLogging.LogLevel, ::Integer)
+   @ Base logging.jl:132
+  -(::Bool, ::Complex{Bool})
+   @ Base complex.jl:307
+  -(::Bool, ::Bool)
+   @ Base bool.jl:167
   ...
 </pre></div>
 </div>
@@ -915,20 +861,24 @@ Closest candidates are:
 <p>Notez le message d’erreur qui est très claire !</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"></span>
-<span class="w">    </span><span class="n">a</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
-<span class="k">catch</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
-<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="w">    </span><span class="n">a</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 <span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Grid1d, ::Vector{Int64})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Grid1, ::Vector{Int64})
+
 Closest candidates are:
-  +(::Any, ::Any, ::Any, ::Any...) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/operators.jl:655
-  +(::SparseArrays.AbstractSparseMatrixCSC, ::Array) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/stdlib/v1.7/SparseArrays/src/sparsematrix.jl:1774
-  +(::Array, ::Array...) at /Applications/Julia-1.7.app/Contents/Resources/julia/share/julia/base/arraymath.jl:43
+  +(::Any, ::Any, ::Any, ::Any...)
+   @ Base operators.jl:587
+  +(::Grid1, ::Int64)
+   @ <span class=" -Color -Color-Magenta">Main</span> In[27]:3
+  +(::Grid1, ::Integer)
+   @ <span class=" -Color -Color-Magenta">Main</span> In[26]:3
   ...
 </pre></div>
 </div>
@@ -936,20 +886,20 @@ Closest candidates are:
 </div>
 </section>
 <section id="autres-surcharges">
-<h2>Autres surcharges<a class="headerlink" href="#autres-surcharges" title="Permalink to this headline">#</a></h2>
+<h2>Autres surcharges<a class="headerlink" href="#autres-surcharges" title="Permalink to this heading">#</a></h2>
 <p>Toutes les fonctions usuelles sont surchargeable sans limite : size(); det() …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">AbstractGrid</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">AbstractGrid</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -961,10 +911,10 @@ Closest candidates are:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1d</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span>
 <span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
@@ -972,7 +922,7 @@ Closest candidates are:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -985,44 +935,46 @@ Closest candidates are:
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="type-et-constructeurs">
-<h1>Type et constructeurs<a class="headerlink" href="#type-et-constructeurs" title="Permalink to this headline">#</a></h1>
+<h1>Type et constructeurs<a class="headerlink" href="#type-et-constructeurs" title="Permalink to this heading">#</a></h1>
 <p>Chaque langage “objet” définit un constructeur pour ces objets. Nous avons déjà utilisé un constructeur générique qui rempli chaque champ du nouveau type. Il est possible de faire une variante suivant le nombre d’arguments d’entrée et de leur type</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span>
 
-<span class="k">struct</span> <span class="kt">Grid1D</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span><span class="w"></span>
-<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span><span class="w"></span>
-<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span><span class="w"></span>
+<span class="k">struct</span> <span class="kt">Grid1D</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span>
+<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="c"># constructeurs par défaut sans argument</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c"># constructeurs par défaut sans argument</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">()</span>
+<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="c"># constructeurs par défaut avec argument</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nd">@error</span><span class="p">(</span><span class="s">&quot;pas possible&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c"># constructeurs par défaut avec argument</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@assert</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">&quot;Attention la taille de la grille est négative ou nulle&quot;</span>
+<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Error: pas possible
-└ @ Main In[46]:15
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid1D(0.0, 1.0, -1)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">AssertionError</span>: Attention la taille de la grille est négative ou nulle
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">b</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">c</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">15</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1031,20 +983,20 @@ Closest candidates are:
 <p>Il faut au préalable bien penser sa hiérarchie de type et écrire autant de fonctions constructeurs que de cas d’initialisation du nouveau type.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="les-iterateurs">
-<h1>Les Itérateurs<a class="headerlink" href="#les-iterateurs" title="Permalink to this headline">#</a></h1>
+<h1>Les Itérateurs<a class="headerlink" href="#les-iterateurs" title="Permalink to this heading">#</a></h1>
 <p>Il est possible sur un type nouveau de définir un itérateur, comme ici de parcourir les points de la grille, définissons (surchargeons) de nouvelles fonctions ou plutôt méthodes :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">   </span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1056,9 +1008,9 @@ Closest candidates are:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">grid</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">grid</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
@@ -1090,61 +1042,123 @@ Closest candidates are:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.7"
+            mode: "julia-1.10"
         },
         kernelOptions: {
-            kernelName: "julia-1.7",
+            name: "julia-1.10",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.7'</script>
+    <script>kernelName = 'julia-1.10'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="05-packages-graphiques.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Packages graphiques</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05-packages-graphiques.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Packages graphiques</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="07-performance.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="07-performance.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Performance</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Type et méthodes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methodes">Méthodes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-d-un-nouveau-type-de-variable">Construction d’un nouveau Type de variable</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#surcharge-des-operateurs">Surcharge des opérateurs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addition-soustraction">Addition, soustraction …</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autres-surcharges">Autres surcharges</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-et-constructeurs">Type et constructeurs</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#les-iterateurs">Les Itérateurs</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By The Jupyter Book community<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
