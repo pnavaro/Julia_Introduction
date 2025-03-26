@@ -536,7 +536,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w">  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">collect</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">sum</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w">  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">sum</span>
 </pre></div>
 </div>
 </div>
@@ -613,7 +613,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">&#39;</span><span class="n">a</span>
 </pre></div>
 </div>
 </div>
@@ -687,6 +687,21 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">first</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Int64}:
+ 1
+ 2
+ 3
 </pre></div>
 </div>
 </div>
@@ -774,6 +789,20 @@ document.write(`
  3  4
  1  2
  3  4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span><span class="p">([</span><span class="n">A</span><span class="w"> </span><span class="n">A</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×4 Matrix{Int64}:
+ 1  2  1  2
+ 3  4  3  4
 </pre></div>
 </div>
 </div>
@@ -930,6 +959,23 @@ document.write(`
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">axes</span><span class="p">(</span><span class="n">AA</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="p">(</span><span class="n">AA</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="o">:</span><span class="p">])</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2]
+[3, 4]
+[1, 2]
+[3, 4]
+</pre></div>
+</div>
+</div>
+</div>
 <p>A noter que l’on peut faire des tableaux de tout type voir de les mélanger (Any)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -978,6 +1024,20 @@ document.write(`
 <p>Le crochet [ ] permet également la construction rapide de matrice ou tableau comme le montre l’exemple ci-dessous pour construire une matrice de VanderMonde</p>
 <div class="math notranslate nohighlight">
 \[ V_{i,j}=x_i^{j-1}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"> </span><span class="mi">2</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">7</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="o">%</span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Int64}:
+  9
+ 15
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mf">0.2</span><span class="o">:</span><span class="mi">1</span>
@@ -1082,6 +1142,20 @@ document.write(`
  2
  4
  6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="n">push!</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Any}:
+ 1
 </pre></div>
 </div>
 </div>
@@ -1214,7 +1288,34 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">map</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 Matrix{Float64}:
+ 1.0      1.0
+ 3.82843  1.0
+ 1.0      1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1235,9 +1336,9 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 Matrix{ComplexF64}:
-     1.0+0.0im  1.0+0.0im
- 3.82843+0.0im  1.0+0.0im
-     1.0+0.0im  1.0+0.0im
+     0.0+0.0im  0.0+0.0im
+ 1.41421+0.0im  0.0+0.0im
+     0.0+0.0im  0.0+0.0im
 </pre></div>
 </div>
 </div>
@@ -1262,11 +1363,11 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 SymTridiagonal{Float64, Vector{Float64}}:
- 0.847034  0.307827    ⋅          ⋅         ⋅ 
- 0.307827  0.898      0.0554185   ⋅         ⋅ 
-  ⋅        0.0554185  0.825485   0.063353   ⋅ 
-  ⋅         ⋅         0.063353   0.763637  0.134202
-  ⋅         ⋅          ⋅         0.134202  0.927218
+ 0.596195  0.995888    ⋅         ⋅          ⋅ 
+ 0.995888  0.0915333  0.96164    ⋅          ⋅ 
+  ⋅        0.96164    0.325559  0.281823    ⋅ 
+  ⋅         ⋅         0.281823  0.0580011  0.818569
+  ⋅         ⋅          ⋅        0.818569   0.814168
 </pre></div>
 </div>
 </div>
@@ -1278,7 +1379,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3750274106551066
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5940315482568199
 </pre></div>
 </div>
 </div>
@@ -1290,7 +1391,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.261373765642171
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8854572089080275
 </pre></div>
 </div>
 </div>
@@ -1303,11 +1404,28 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Float64}:
- 0.5577547428227645
- 0.6695570133399208
- 0.839919198728379
- 1.007956036262465
- 1.1861867744886425
+ -1.1471357975742635
+ -0.48185818356519805
+  0.47076037068002313
+  1.3397105997246765
+  1.7039802196427891
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
+  0.928377   0.44835   -1.00412   -0.369917   0.371917
+  0.44835   -0.268408   0.601121   0.221453  -0.22265
+ -1.00412    0.601121   0.982661   0.362013  -0.363969
+ -0.369917   0.221453   0.362013  -1.17384    1.18018
+  0.371917  -0.22265   -0.363969   1.18018    0.0416864
 </pre></div>
 </div>
 </div>
@@ -1321,11 +1439,11 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Float64}:
- 0.5058104234190263
- 1.8567601832194116
- 3.1925664157211275
- 4.130619194095755
- 4.794623364454379
+ -0.8073607245130343
+  1.4874604752324947
+  2.77431260680225
+  2.3645866975061125
+  3.7638690954987677
 </pre></div>
 </div>
 </div>
@@ -1504,7 +1622,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="o">...</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1521,16 +1639,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">max</span> <span class=" -Color -Color-Bold">max</span>imum <span class=" -Color -Color-Bold">max</span>imum! <span class=" -Color -Color-Bold">max</span>intfloat arg<span class=" -Color -Color-Bold">max</span> eig<span class=" -Color -Color-Bold">max</span> Row<span class=" -Color -Color-Bold">Max</span>imum type<span class=" -Color -Color-Bold">max</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">max</span> <span class=" -Color -Color-Bold">ma</span>p arg<span class=" -Color -Color-Bold">max</span> <span class=" -Color -Color-Bold">ma</span>p! eig<span class=" -Color -Color-Bold">max</span> <span class=" -Color -Color-Bold">m</span>inm<span class=" -Color -Color-Bold">ax</span> i<span class=" -Color -Color-Bold">ma</span>g <span class=" -Color -Color-Bold">ma</span>rk
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Return the maximum of the arguments (with respect to <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">isless</span></code></a>). See also the <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">maximum</span></code></a> function to take the maximum element from a collection.</p>
+<p>Return the maximum of the arguments, with respect to <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">isless</span></code></a>. If any of the arguments is <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">missing</span></code></a>, return <code class="docutils literal notranslate"><span class="pre">missing</span></code>. See also the <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">maximum</span></code></a> function to take the maximum element from a collection.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-jldoctest notranslate"><div class="highlight"><pre><span></span>julia&gt; max(2, 5, 1)
 5
+
+julia&gt; max(5, missing, 6)
+missing
 </pre></div>
 </div>
 </div>
@@ -1586,12 +1707,24 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="o">=</span><span class="mi">2</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0:0.6981317007977318:6.283185307179586
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0:1.0:9.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="n">step</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">.</span><span class="n">len</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, Base.TwicePrecision{Float64}(1.0, 0.0), 10)
 </pre></div>
 </div>
 </div>
@@ -1611,6 +1744,18 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">lendiv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">collect</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1618,15 +1763,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10-element Vector{Float64}:
  0.0
- 0.6981317007977318
- 1.3962634015954636
- 2.0943951023931953
- 2.792526803190927
- 3.490658503988659
- 4.1887902047863905
- 4.886921905584122
- 5.585053606381854
- 6.283185307179586
+ 1.0
+ 2.0
+ 3.0
+ 4.0
+ 5.0
+ 6.0
+ 7.0
+ 8.0
+ 9.0
 </pre></div>
 </div>
 </div>
@@ -1791,33 +1936,43 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">Vt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="o">&#39;</span><span class="n">A</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">Vt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
+ 0.45212   0.763946  0.321369  0.831543   0.451148
+ 0.644975  0.25924   0.629856  0.474678   0.883872
+ 0.954511  0.617385  0.790909  0.0154513  0.587455
+ 0.904441  0.916117  0.80773   0.557855   0.804184
+ 0.130696  0.673001  0.866445  0.279696   0.814844
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVD{Float64, Float64, Matrix{Float64}, Vector{Float64}}
 U factor:
 5×5 Matrix{Float64}:
- -0.463543  -0.293881   0.0810887   0.470752   -0.685987
- -0.37719   -0.31532    0.0182981  -0.849448   -0.190799
- -0.46022   -0.101653  -0.792201    0.144199    0.359845
- -0.463886   0.869596   0.0914905  -0.0901132  -0.110102
- -0.46461   -0.218351   0.597609    0.167082    0.592795
+ -0.376949   0.769359     0.252357   -0.105813  -0.437167
+ -0.413076  -0.0907311   -0.0956054   0.897896  -0.0760163
+ -0.444158  -0.629893     0.35609    -0.268589  -0.454991
+ -0.569283   0.0547333    0.240927   -0.16583    0.766405
+ -0.40733   -0.00961577  -0.861586   -0.288005  -0.093345
 singular values:
 5-element Vector{Float64}:
- 5.039741452325593
- 0.95604231508676
- 0.47342133951040216
- 0.09810077368527008
- 0.01592566168359706
+ 3.160584859379253
+ 0.7576582320223484
+ 0.6224526623621192
+ 0.46417008239217245
+ 0.014960414255275447
 Vt factor:
 5×5 Matrix{Float64}:
- -0.463543   -0.37719    -0.46022   -0.463886   -0.46461
- -0.293881   -0.31532    -0.101653   0.869596   -0.218351
-  0.0810887   0.0182981  -0.792201   0.0914905   0.597609
-  0.470752   -0.849448    0.144199  -0.0901132   0.167082
- -0.685987   -0.190799    0.359845  -0.110102    0.592795
+ -0.452107   -0.463501   -0.488948  -0.299912  -0.501745
+ -0.348008    0.289064   -0.359277   0.811446  -0.0883688
+  0.799456    0.0461337  -0.400665   0.101832  -0.433405
+  0.188044   -0.774792   -0.138691   0.346878   0.474107
+ -0.0004548   0.314926   -0.67237   -0.347728   0.57256
 </pre></div>
 </div>
 </div>
@@ -1830,11 +1985,11 @@ Vt factor:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
- 1.19782   0.933319  1.07601   0.839931  1.17092
- 0.933319  0.883594  0.885522  0.628307  0.938472
- 1.07601   0.885522  1.37852   0.955203  0.880463
- 0.839931  0.628307  0.955203  1.81241   0.928034
- 1.17092   0.938472  0.880463  0.928034  1.31089
+ 2.36659  2.01843  2.15026  1.23796  2.16861
+ 2.01843  2.32418  2.22018  1.46715  2.22159
+ 2.15026  2.22018  2.52869  1.27137  2.5219
+ 1.23796  1.46715  1.27137  1.30645  1.48031
+ 2.16861  2.22159  2.5219   1.48031  2.64055
 </pre></div>
 </div>
 </div>
@@ -1847,11 +2002,11 @@ Vt factor:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 Matrix{Float64}:
- 1.15486  0.813783  -0.227291  -0.86153   1.65842
- 1.03096  0.581025  -0.175963  -0.630546  1.37203
- 1.27517  0.761444   0.111975  -1.0637    1.4765
- 0.7551   0.4132    -0.210532  -1.80001   1.46064
- 1.02194  0.737384  -0.410679  -0.884052  1.75168
+ 0.209659  0.487396  -0.990667  -0.71759     0.0918338
+ 0.526789  0.794147  -0.980133  -0.0399562  -0.126619
+ 0.788302  0.170384  -1.24285    0.0285756  -0.259234
+ 0.738247  0.520793  -1.50941   -0.412534   -0.0536239
+ 0.888435  0.530245  -0.827688  -0.209097    0.404567
 </pre></div>
 </div>
 </div>
@@ -2161,7 +2316,8 @@ Vt factor:
 <p>Il faut faire attention à ce comportement lorsque l’on utilise des vecteurs de vecteurs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vecs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">A</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">vecs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2183,9 +2339,92 @@ Vt factor:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Vector{Int64}}:
- [2, 3, 4, 5, 6]
- [2, 3, 4, 5, 6]
- [2, 3, 4, 5, 6]
+ [1, 2, 3, 4, 5]
+ [1, 2, 3, 4, 5]
+ [1, 2, 3, 4, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">.*=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Int64}:
+ -2
+ -3
+ -4
+ -5
+ -6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+ 6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Int64}:
+ -2
+ -3
+ -4
+ -5
+ -6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vecs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.*=</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5-element Vector{Int64}:
+  2
+  4
+  6
+  8
+ 10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vecs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element Vector{Vector{Int64}}:
+ [2, 4, 6, 8, 10]
+ [1, 2, 3, 4, 5]
+ [1, 2, 3, 4, 5]
 </pre></div>
 </div>
 </div>
@@ -2194,6 +2433,18 @@ Vt factor:
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dictionnaire">
 <h1>Dictionnaire<a class="headerlink" href="#dictionnaire" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="ss">:A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Symbol
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="ss">:key1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;val1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:key2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;val2&quot;</span><span class="p">)</span>
@@ -2264,6 +2515,49 @@ key: key1, value: val1
 </div>
 </div>
 <p>Les dictionnaires sont muables; quand des symboles sont utilisés comme clés, les clés sont immuables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1000</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+<span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="w">    </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>234168
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1000</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>234168
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sum</span><span class="p">(</span><span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>234168
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2275,16 +2569,16 @@ key: key1, value: val1
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.10"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "julia-1.10",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.10'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               

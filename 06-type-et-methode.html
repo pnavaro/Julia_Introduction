@@ -429,40 +429,76 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 
 <span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="n">print_tree</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span>
+<span class="n">print_tree</span><span class="p">(</span><span class="kt">AbstractArray</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number
-├─ MultiplicativeInverse
-│  ├─ SignedMultiplicativeInverse
-│  └─ UnsignedMultiplicativeInverse
-├─ Complex
-└─ Real
-   ├─ AbstractFloat
-   │  ├─ BigFloat
-   │  ├─ Float16
-   │  ├─ Float32
-   │  └─ Float64
-   ├─ AbstractIrrational
-   │  └─ Irrational
-   ├─ Integer
-   │  ├─ Bool
-   │  ├─ Signed
-   │  │  ├─ BigInt
-   │  │  ├─ Int128
-   │  │  ├─ Int16
-   │  │  ├─ Int32
-   │  │  ├─ Int64
-   │  │  └─ Int8
-   │  └─ Unsigned
-   │     ├─ UInt128
-   │     ├─ UInt16
-   │     ├─ UInt32
-   │     ├─ UInt64
-   │     └─ UInt8
-   └─ Rational
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AbstractArray
+├─ AbstractRange
+│  ├─ LinRange
+│  ├─ OrdinalRange
+│  │  ├─ AbstractUnitRange
+│  │  │  ├─ IdentityUnitRange
+│  │  │  ├─ OneTo
+│  │  │  ├─ Slice
+│  │  │  └─ UnitRange
+│  │  └─ StepRange
+│  └─ StepRangeLen
+├─ AbstractSlices
+│  └─ Slices
+├─ ExceptionStack
+├─ LogRange
+├─ LogicalIndex
+├─ MethodList
+├─ ReinterpretArray
+├─ ReshapedArray
+├─ SCartesianIndices2
+├─ WithoutMissingVector
+├─ BitArray
+├─ CartesianIndices
+├─ AbstractRange
+├─ LinRange
+│  ├─ OrdinalRange
+│  │  ├─ AbstractUnitRange
+│  │  │  ├─ IdentityUnitRange
+│  │  │  ├─ OneTo
+│  │  │  ├─ Slice
+│  │  │  ├─ StmtRange
+│  │  │  └─ UnitRange
+│  │  └─ StepRange
+│  └─ StepRangeLen
+├─ BitArray
+├─ ExceptionStack
+├─ LinearIndices
+├─ LogRange
+├─ MethodList
+├─ TwoPhaseDefUseMap
+├─ TwoPhaseVectorView
+├─ DenseArray
+│  ├─ Array
+│  ├─ CodeUnits
+│  ├─ Const
+│  ├─ GenericMemory
+│  └─ UnsafeView
+├─ AbstractTriangular
+│  ├─ LowerTriangular
+│  ├─ UnitLowerTriangular
+│  ├─ UnitUpperTriangular
+│  └─ UpperTriangular
+├─ Adjoint
+├─ Bidiagonal
+├─ Diagonal
+├─ Hermitian
+├─ SymTridiagonal
+├─ Symmetric
+├─ Transpose
+├─ Tridiagonal
+├─ UpperHessenberg
+├─ LinearIndices
+├─ PermutedDimsArray
+├─ SubArray
+└─ Message
 </pre></div>
 </div>
 </div>
@@ -470,12 +506,12 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>Dans cette arborescence, certains types sont “abstraits” et d’autres “concrets”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Real</span><span class="p">),</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Rational</span><span class="p">{</span><span class="kt">Int32</span><span class="p">}),</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="kt">Float64</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(false, true)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(true, true)
 </pre></div>
 </div>
 </div>
@@ -483,12 +519,12 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>Un réel sera forcemment de type concret <code class="docutils literal notranslate"><span class="pre">Float64</span></code> ou <code class="docutils literal notranslate"><span class="pre">Float32</span></code> par exemple, et pourra être utilisé comme argument par toutes les fonctions acceptant le type abstrait <code class="docutils literal notranslate"><span class="pre">AbstractFloat</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Float64</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractFloat</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Int32</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Complex</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>false
 </pre></div>
 </div>
 </div>
@@ -499,7 +535,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>A chaque fonction est associée une méthode dépendante du type d’entrée comme dans ce qui suit suivant que l’entrée soit un entier ou pas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span><span class="w"> </span>
 <span class="w">    </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
@@ -539,12 +575,24 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"># 2 methods for generic function <b>f</b> from [35mMain[39m:<ul><li> f(n::<b>Integer</b>) in Main at In[6]:1</li> <li> f(x) in Main at In[5]:1</li> </ul></div></div>
+<div class="output text_html"># 2 methods for generic function <b>f</b> from [35mMain[39m:<ul><li> f(n::<b>Integer</b>) in Main at In[7]:1</li> <li> f(x) in Main at In[6]:1</li> </ul></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,19 +637,19 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 189 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 198 methods)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
 </div>
@@ -624,9 +672,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>En premier lieu il faut définir un type abstrait puis une instance sous-hiérarchiquement concrète :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span>
-
-<span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Grid1</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Grid1</span><span class="w"> </span>
 <span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
@@ -682,6 +728,36 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid1(0.0, 1.0, 2)
 </pre></div>
 </div>
 </div>
@@ -765,7 +841,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 191 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 199 methods)
 </pre></div>
 </div>
 </div>
@@ -789,7 +865,15 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 4 éléments
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="p">::</span><span class="n">Grid1</span><span class="p">,</span> <span class="n">n</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">4</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -801,7 +885,15 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 5 éléments
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="p">::</span><span class="n">Grid1</span><span class="p">,</span> <span class="n">n</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">4</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -819,14 +911,15 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Int64, ::Grid1)
+The function `+` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
   +(::Any, ::Any, ::Any, ::Any...)
-   @ Base operators.jl:587
+   @ Base operators.jl:596
   +(::Real, ::Complex{Bool})
-   @ Base complex.jl:319
-  +(::Number, ::LinearAlgebra.UniformScaling)
-   @ <span class=" -Color -Color-Cyan">LinearAlgebra</span> ~/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/share/julia/stdlib/v1.10/LinearAlgebra/src/uniformscaling.jl:145
+   @ Base complex.jl:322
+  +(::Integer, ::AbstractChar)
+   @ Base char.jl:247
   ...
 </pre></div>
 </div>
@@ -845,14 +938,15 @@ Closest candidates are:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching -(::Grid1)
+The function `-` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
-  -(::Base.CoreLogging.LogLevel, ::Integer)
-   @ Base logging.jl:132
   -(::Bool, ::Complex{Bool})
-   @ Base complex.jl:307
+   @ Base complex.jl:310
   -(::Bool, ::Bool)
    @ Base bool.jl:167
+  -(::Bool)
+   @ Base bool.jl:164
   ...
 </pre></div>
 </div>
@@ -871,14 +965,15 @@ Closest candidates are:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Grid1, ::Vector{Int64})
+The function `+` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
   +(::Any, ::Any, ::Any, ::Any...)
-   @ Base operators.jl:587
+   @ Base operators.jl:596
   +(::Grid1, ::Int64)
-   @ <span class=" -Color -Color-Magenta">Main</span> In[27]:3
-  +(::Grid1, ::Integer)
-   @ <span class=" -Color -Color-Magenta">Main</span> In[26]:3
+   @ <span class=" -Color -Color-Magenta">Main</span> In[29]:3
+  +(::Array, ::Array...)
+   @ Base arraymath.jl:12
   ...
 </pre></div>
 </div>
@@ -896,6 +991,16 @@ Closest candidates are:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `AbstractGrid` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,7 +1009,22 @@ Closest candidates are:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching size(::Grid1)
+The function `size` exists, but no method is defined for this combination of argument types.
+
+Closest candidates are:
+  size(::ZMQ.Message)
+   @ ZMQ ~/.julia/packages/ZMQ/Lz9O7/src/message.jl:164
+  size(::Base.MethodList)
+   @ Base reflection.jl:1193
+  size(::Base.ExceptionStack)
+   @ Base errorshow.jl:1066
+  ...
+
+
+Stacktrace:
+ [1] top-level scope
+   @ In[37]:1
 </pre></div>
 </div>
 </div>
@@ -972,9 +1092,9 @@ Closest candidates are:
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">b</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">c</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">15</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">15</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1042,16 +1162,16 @@ Closest candidates are:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.10"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "julia-1.10",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.10'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               

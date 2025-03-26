@@ -617,7 +617,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#5 (generic function with 1 method)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#3 (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -641,7 +641,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>var&quot;#5#6&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>var&quot;#3#4&quot;
 </pre></div>
 </div>
 </div>
@@ -672,6 +672,30 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, -1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 5, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tuple{Int64, Int64, Int64}
 </pre></div>
 </div>
 </div>
@@ -779,42 +803,41 @@ la fonction doit prendre en compte les modifications éventuelles de la variable
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[30]:1 within `ff1`
-define nonnull <span class=" -Color -Color-Yellow">{}</span>* @julia_ff1_1363<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: ff1(Int64)
+;  @ In[29]:1 within `ff1`
+define nonnull ptr @julia_ff1_9215<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-  %1 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
-  %gcframe2 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">16</span>
-  %gcframe2.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
-  %.sub = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>
-  %2 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i8</span>*
-  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0i8.i64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i8</span>* align <span class=" -Color -Color-Yellow">16</span> %2, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> true<span class=" -Color -Color-Yellow">)</span>
-  %thread_ptr = call <span class=" -Color -Color-Cyan">i8</span>* asm &quot;movq %fs:0, $0&quot;, &quot;=r&quot;<span class=" -Color -Color-Yellow">()</span> #6
-  %tls_ppgcstack = <span class=" -Color -Color-Bold">getelementptr</span> <span class=" -Color -Color-Cyan">i8</span>, <span class=" -Color -Color-Cyan">i8</span>* %thread_ptr, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">-8</span>
-  %3 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Cyan">i8</span>* %tls_ppgcstack to <span class=" -Color -Color-Yellow">{}</span>****
-  %tls_pgcstack = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>***, <span class=" -Color -Color-Yellow">{}</span>**** %3, align <span class=" -Color -Color-Yellow">8</span>
-;  @ In[30]:2 within `ff1`
-  %4 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2 to <span class=" -Color -Color-Cyan">i64</span>*
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">8</span>, <span class=" -Color -Color-Cyan">i64</span>* %4, align <span class=" -Color -Color-Yellow">16</span>
-  %5 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
-  %6 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>** %5 to <span class=" -Color -Color-Yellow">{}</span>***
-  %7 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>**, <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack, align <span class=" -Color -Color-Yellow">8</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %7, <span class=" -Color -Color-Yellow">{}</span>*** %6, align <span class=" -Color -Color-Yellow">8</span>
-  %8 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack to <span class=" -Color -Color-Yellow">{}</span>***
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>** %gcframe2.sub, <span class=" -Color -Color-Yellow">{}</span>*** %8, align <span class=" -Color -Color-Yellow">8</span>
-  %a = <span class=" -Color -Color-Bold">load</span> atomic <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140122390545264</span> to <span class=" -Color -Color-Yellow">{}</span>**<span class=" -Color -Color-Yellow">)</span> unordered, align <span class=" -Color -Color-Yellow">16</span>
-  %9 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %a, <span class=" -Color -Color-Yellow">{}</span>** %9, align <span class=" -Color -Color-Yellow">16</span>
-  %10 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_box_int64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span>
-  %11 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[4</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %11, align <span class=" -Color -Color-Yellow">8</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %10, <span class=" -Color -Color-Yellow">{}</span>** %.sub, align <span class=" -Color -Color-Yellow">8</span>
-  %12 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>, <span class=" -Color -Color-Yellow">[2</span> x <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">]</span>* %1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %a, <span class=" -Color -Color-Yellow">{}</span>** %12, align <span class=" -Color -Color-Yellow">8</span>
-  %13 = <span class=" -Color -Color-Bold">call</span> nonnull <span class=" -Color -Color-Yellow">{}</span>* @ijl_apply_generic<span class=" -Color -Color-Yellow">({}</span>* inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140122214190464</span> to <span class=" -Color -Color-Yellow">{}</span>*<span class=" -Color -Color-Yellow">)</span>, <span class=" -Color -Color-Yellow">{}</span>** nonnull %.sub, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
-  %14 = <span class=" -Color -Color-Bold">load</span> <span class=" -Color -Color-Yellow">{}</span>*, <span class=" -Color -Color-Yellow">{}</span>** %5, align <span class=" -Color -Color-Yellow">8</span>
-  %15 = <span class=" -Color -Color-Bold">bitcast</span> <span class=" -Color -Color-Yellow">{}</span>*** %tls_pgcstack to <span class=" -Color -Color-Yellow">{}</span>**
-  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Yellow">{}</span>* %14, <span class=" -Color -Color-Yellow">{}</span>** %15, align <span class=" -Color -Color-Yellow">8</span>
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">{}</span>* %13
+  %jlcallframe1 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[2</span> x ptr<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
+  %gcframe2 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[4</span> x ptr<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">16</span>
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @llvm.memset.p0.i64<span class=" -Color -Color-Yellow">(</span>ptr align <span class=" -Color -Color-Yellow">16</span> %gcframe2, <span class=" -Color -Color-Cyan">i8</span> <span class=" -Color -Color-Yellow">0</span>, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">32</span>, <span class=" -Color -Color-Cyan">i1</span> true<span class=" -Color -Color-Yellow">)</span>
+  %pgcstack = <span class=" -Color -Color-Bold">call</span> ptr inttoptr <span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">140703173070805</span> to ptr<span class=" -Color -Color-Yellow">)(</span><span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">261)</span> #9
+  <span class=" -Color -Color-Bold">store</span> <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">8</span>, ptr %gcframe2, align <span class=" -Color -Color-Yellow">16</span>
+  %task.gcstack = <span class=" -Color -Color-Bold">load</span> ptr, ptr %pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+  %frame.prev = <span class=" -Color -Color-Bold">getelementptr</span> inbounds ptr, ptr %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %task.gcstack, ptr %frame.prev, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %gcframe2, ptr %pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+;  @ In[29]:2 within `ff1`
+  %a.checked = <span class=" -Color -Color-Bold">load</span> atomic ptr, ptr @&quot;*Main.a#9217.jit&quot; unordered, align <span class=" -Color -Color-Yellow">16</span>
+  %.not = <span class=" -Color -Color-Bold">icmp</span> <span class=" -Color -Color-Bold">eq</span> ptr %a.checked, null
+  <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %.not, <span class=" -Color -Color-Cyan">label</span> %err, <span class=" -Color -Color-Cyan">label</span> %ok
+
+err:                                              ; preds = %top
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @ijl_undefined_var_error<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_sym#a#9218.jit&quot;, ptr nonnull @&quot;jl_global#9219.jit&quot;<span class=" -Color -Color-Yellow">)</span>
+  <span class=" -Color -Color-Bold">unreachable</span>
+
+ok:                                               ; preds = %top
+  %gc_slot_addr_1 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds ptr, ptr %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">3</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %a.checked, ptr %gc_slot_addr_1, align <span class=" -Color -Color-Yellow">8</span>
+  %box_Int64 = <span class=" -Color -Color-Bold">call</span> nonnull align <span class=" -Color -Color-Yellow">8</span> dereferenceable<span class=" -Color -Color-Yellow">(8)</span> ptr @ijl_box_int64<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #3
+  %gc_slot_addr_0 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds ptr, ptr %gcframe2, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">2</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %box_Int64, ptr %gc_slot_addr_0, align <span class=" -Color -Color-Yellow">16</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %box_Int64, ptr %jlcallframe1, align <span class=" -Color -Color-Yellow">8</span>
+  %0 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds ptr, ptr %jlcallframe1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %a.checked, ptr %0, align <span class=" -Color -Color-Yellow">8</span>
+  %1 = <span class=" -Color -Color-Bold">call</span> nonnull ptr @ijl_apply_generic<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_global#9221.jit&quot;, ptr nonnull %jlcallframe1, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %frame.prev6 = <span class=" -Color -Color-Bold">load</span> ptr, ptr %frame.prev, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">store</span> ptr %frame.prev6, ptr %pgcstack, align <span class=" -Color -Color-Yellow">8</span>
+  <span class=" -Color -Color-Bold">ret</span> ptr %1
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
@@ -833,14 +856,15 @@ top:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[31]:2 within `ff2`
-define <span class=" -Color -Color-Cyan">i64</span> @julia_ff2_1388<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: ff2(Int64)
+;  @ In[30]:2 within `ff2`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_ff2_9327<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-;  @ In[31]:3 within `ff2`
+;  @ In[30]:3 within `ff2`
 ; ┌ @ int.jl:87 within `+`
-   %1 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %0, <span class=" -Color -Color-Yellow">1</span>
+   %0 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %&quot;x::Int64&quot;, <span class=" -Color -Color-Yellow">1</span>
+   <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %0
 ; └
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %1
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
@@ -876,25 +900,26 @@ top:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching ^(::UnitRange{Int64}, ::Int64)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching ^(::UnitRange{Int64}, ::Int64)
+The function `^` exists, but no method is defined for this combination of argument types.
 
-<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="o">^</span><span class="p">(::</span><span class="n">Float16</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1283</span>
-  <span class="o">^</span><span class="p">(::</span><span class="n">Regex</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">regex</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">863</span>
-  <span class="o">^</span><span class="p">(::</span><span class="n">Float32</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1277</span>
-  <span class="o">...</span>
+Closest candidates are:
+  ^(::Regex, ::Integer)
+   @ Base regex.jl:895
+  ^(::Missing, ::Integer)
+   @ Base missing.jl:155
+  ^(::Missing, ::Number)
+   @ Base missing.jl:123
+  ...
 
 
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">literal_pow</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">intfuncs</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">351</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">UnitRange</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">1</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">2</span>
+Stacktrace:
+ [1] literal_pow
+   @ ./intfuncs.jl:389 [inlined]
+ [2] f(x::UnitRange{Int64})
+   @ Main ./In[32]:1
+ [3] top-level scope
+   @ In[32]:2
 </pre></div>
 </div>
 </div>
@@ -1069,6 +1094,30 @@ top:
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f4!</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w">  </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">z</span>
+<span class="k">end</span>
+
+<span class="nd">@show</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">f4!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z = collect(1:5) = [1, 2, 3, 4, 5]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element view(::Vector{Int64}, 1:2) with eltype Int64:
+ 9
+ 9
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -1081,16 +1130,16 @@ top:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.10"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "julia-1.10",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.10'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               
