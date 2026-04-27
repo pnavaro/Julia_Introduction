@@ -199,7 +199,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
 </ul>
 
     </div>
@@ -407,16 +406,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tirages-aleatoires">Tirages aléatoires</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curand">CURAND</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cublas">CUBLAS</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cusolver">CUSOLVER</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cufft">CUFFT</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cusparse">CUSPARSE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-etapes-pour-porter-votre-code-sur-gpu">Les étapes pour porter votre code sur GPU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-avec-une-regression-lineaire">Exemple avec une regression linéaire</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-gpu">Version GPU</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#noyaux-cuda">Noyaux CUDA</a><ul class="visible nav section-nav flex-column">
@@ -467,30 +461,35 @@ graphiques de la marque NVIDIA.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA runtime 12.3, artifact installation
-CUDA driver 12.3
-NVIDIA driver 545.23.8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA toolchain: 
+- runtime 12.9, artifact installation
+- driver 575.57.8 for 12.9
+- compiler 12.9
 
 CUDA libraries: 
-- CUBLAS: 12.3.4
-- CURAND: 10.3.4
-- CUFFT: 11.0.12
-- CUSOLVER: 11.5.4
-- CUSPARSE: 12.2.0
-- CUPTI: 21.0.0
-- NVML: 12.0.0+545.23.8
+- cuBLAS: 12.9.1
+- cuSPARSE: 12.5.10
+- cuSOLVER: 11.7.5
+- cuFFT: 11.4.1
+- cuRAND: 10.3.10
+- CUPTI: 2025.2.1 (API 12.9.1)
+- NVML: 12.0.0+575.57.8
 
 Julia packages: 
-- CUDA: 5.1.2
-- CUDA_Driver_jll: 0.7.0+1
-- CUDA_Runtime_jll: 0.10.1+0
+- CUDACore: 6.0.0
+- GPUArrays: 11.5.3
+- GPUCompiler: 1.9.1
+- KernelAbstractions: 0.9.41
+- CUDA_Driver_jll: 13.2.1+0
+- CUDA_Compiler_jll: 0.4.3+0
+- CUDA_Runtime_jll: 0.21.0+1
 
 Toolchain:
-- Julia: 1.10.0
-- LLVM: 15.0.7
+- Julia: 1.12.6
+- LLVM: 18.1.7
 
 1 device:
-  0: Tesla V100S-PCIE-32GB (sm_70, 31.731 GiB / 32.000 GiB available)
+  0: Tesla V100S-PCIE-32GB (sm_70, 31.724 GiB / 32.000 GiB available)
 </pre></div>
 </div>
 </div>
@@ -541,7 +540,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDACore.DeviceMemory}:
  0.0  0.0
  0.0  0.0
 </pre></div>
@@ -555,7 +554,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDACore.DeviceMemory}:
  0.0  0.0
  0.0  0.0
 </pre></div>
@@ -569,7 +568,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element CuArray{Int64, 1, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-element CuArray{Int64, 1, CUDACore.DeviceMemory}:
  1
  2
  3
@@ -621,7 +620,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float32, 1, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float32, 1, CUDACore.DeviceMemory}:
  1.0
  1.0
 </pre></div>
@@ -635,7 +634,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float32, 1, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float32, 1, CUDACore.DeviceMemory}:
  0.0
  0.0
 </pre></div>
@@ -661,7 +660,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×4 CuArray{Int64, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×4 CuArray{Int64, 2, CUDACore.DeviceMemory}:
  42  42  42  42
  42  42  42  42
  42  42  42  42
@@ -680,9 +679,9 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
- 0.0669919  0.579217
- 0.446205   0.902117
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 CuArray{Float32, 2, CUDACore.DeviceMemory}:
+ 0.936359  0.00342143
+ 0.274716  0.112303
 </pre></div>
 </div>
 </div>
@@ -694,9 +693,9 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×1 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
- 0.6862308
- 0.18606864
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×1 CuArray{Float32, 2, CUDACore.DeviceMemory}:
+  0.9938167
+ -0.6869481
 </pre></div>
 </div>
 </div>
@@ -714,159 +713,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="400" viewBox="0 0 2400 1600">
-<defs>
-  <clipPath id="clip990">
-    <rect x="0" y="0" width="2400" height="1600"/>
-  </clipPath>
-</defs>
-<path clip-path="url(#clip990)" d="M0 1600 L2400 1600 L2400 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<defs>
-  <clipPath id="clip991">
-    <rect x="480" y="0" width="1681" height="1600"/>
-  </clipPath>
-</defs>
-<path clip-path="url(#clip990)" d="M156.598 1486.45 L2352.76 1486.45 L2352.76 47.2441 L156.598 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<defs>
-  <clipPath id="clip992">
-    <rect x="156" y="47" width="2197" height="1440"/>
-  </clipPath>
-</defs>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,1486.45 156.598,47.2441 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="595.83,1486.45 595.83,47.2441 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1035.06,1486.45 1035.06,47.2441 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1474.29,1486.45 1474.29,47.2441 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1913.52,1486.45 1913.52,47.2441 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2352.76,1486.45 2352.76,47.2441 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1486.45 2352.76,1486.45 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1486.45 156.598,1467.55 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="595.83,1486.45 595.83,1467.55 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1035.06,1486.45 1035.06,1467.55 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1474.29,1486.45 1474.29,1467.55 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1913.52,1486.45 1913.52,1467.55 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2352.76,1486.45 2352.76,1467.55 "/>
-<path clip-path="url(#clip990)" d="M133.983 1517.37 Q130.372 1517.37 128.543 1520.93 Q126.737 1524.47 126.737 1531.6 Q126.737 1538.71 128.543 1542.27 Q130.372 1545.82 133.983 1545.82 Q137.617 1545.82 139.422 1542.27 Q141.251 1538.71 141.251 1531.6 Q141.251 1524.47 139.422 1520.93 Q137.617 1517.37 133.983 1517.37 M133.983 1513.66 Q139.793 1513.66 142.848 1518.27 Q145.927 1522.85 145.927 1531.6 Q145.927 1540.33 142.848 1544.94 Q139.793 1549.52 133.983 1549.52 Q128.172 1549.52 125.094 1544.94 Q122.038 1540.33 122.038 1531.6 Q122.038 1522.85 125.094 1518.27 Q128.172 1513.66 133.983 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M154.145 1542.97 L159.029 1542.97 L159.029 1548.85 L154.145 1548.85 L154.145 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M179.214 1517.37 Q175.603 1517.37 173.774 1520.93 Q171.969 1524.47 171.969 1531.6 Q171.969 1538.71 173.774 1542.27 Q175.603 1545.82 179.214 1545.82 Q182.848 1545.82 184.654 1542.27 Q186.482 1538.71 186.482 1531.6 Q186.482 1524.47 184.654 1520.93 Q182.848 1517.37 179.214 1517.37 M179.214 1513.66 Q185.024 1513.66 188.08 1518.27 Q191.158 1522.85 191.158 1531.6 Q191.158 1540.33 188.08 1544.94 Q185.024 1549.52 179.214 1549.52 Q173.404 1549.52 170.325 1544.94 Q167.269 1540.33 167.269 1531.6 Q167.269 1522.85 170.325 1518.27 Q173.404 1513.66 179.214 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M574.013 1517.37 Q570.402 1517.37 568.573 1520.93 Q566.767 1524.47 566.767 1531.6 Q566.767 1538.71 568.573 1542.27 Q570.402 1545.82 574.013 1545.82 Q577.647 1545.82 579.453 1542.27 Q581.281 1538.71 581.281 1531.6 Q581.281 1524.47 579.453 1520.93 Q577.647 1517.37 574.013 1517.37 M574.013 1513.66 Q579.823 1513.66 582.878 1518.27 Q585.957 1522.85 585.957 1531.6 Q585.957 1540.33 582.878 1544.94 Q579.823 1549.52 574.013 1549.52 Q568.203 1549.52 565.124 1544.94 Q562.068 1540.33 562.068 1531.6 Q562.068 1522.85 565.124 1518.27 Q568.203 1513.66 574.013 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M594.175 1542.97 L599.059 1542.97 L599.059 1548.85 L594.175 1548.85 L594.175 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M613.272 1544.91 L629.591 1544.91 L629.591 1548.85 L607.647 1548.85 L607.647 1544.91 Q610.309 1542.16 614.892 1537.53 Q619.499 1532.88 620.679 1531.53 Q622.925 1529.01 623.804 1527.27 Q624.707 1525.51 624.707 1523.82 Q624.707 1521.07 622.762 1519.33 Q620.841 1517.6 617.739 1517.6 Q615.54 1517.6 613.087 1518.36 Q610.656 1519.13 607.878 1520.68 L607.878 1515.95 Q610.702 1514.82 613.156 1514.24 Q615.61 1513.66 617.647 1513.66 Q623.017 1513.66 626.212 1516.35 Q629.406 1519.03 629.406 1523.52 Q629.406 1525.65 628.596 1527.57 Q627.809 1529.47 625.702 1532.07 Q625.124 1532.74 622.022 1535.95 Q618.92 1539.15 613.272 1544.91 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1012.2 1517.37 Q1008.59 1517.37 1006.76 1520.93 Q1004.96 1524.47 1004.96 1531.6 Q1004.96 1538.71 1006.76 1542.27 Q1008.59 1545.82 1012.2 1545.82 Q1015.84 1545.82 1017.64 1542.27 Q1019.47 1538.71 1019.47 1531.6 Q1019.47 1524.47 1017.64 1520.93 Q1015.84 1517.37 1012.2 1517.37 M1012.2 1513.66 Q1018.01 1513.66 1021.07 1518.27 Q1024.15 1522.85 1024.15 1531.6 Q1024.15 1540.33 1021.07 1544.94 Q1018.01 1549.52 1012.2 1549.52 Q1006.39 1549.52 1003.31 1544.94 Q1000.26 1540.33 1000.26 1531.6 Q1000.26 1522.85 1003.31 1518.27 Q1006.39 1513.66 1012.2 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1032.36 1542.97 L1037.25 1542.97 L1037.25 1548.85 L1032.36 1548.85 L1032.36 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1060.28 1518.36 L1048.48 1536.81 L1060.28 1536.81 L1060.28 1518.36 M1059.05 1514.29 L1064.93 1514.29 L1064.93 1536.81 L1069.86 1536.81 L1069.86 1540.7 L1064.93 1540.7 L1064.93 1548.85 L1060.28 1548.85 L1060.28 1540.7 L1044.68 1540.7 L1044.68 1536.19 L1059.05 1514.29 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1451.6 1517.37 Q1447.99 1517.37 1446.16 1520.93 Q1444.35 1524.47 1444.35 1531.6 Q1444.35 1538.71 1446.16 1542.27 Q1447.99 1545.82 1451.6 1545.82 Q1455.23 1545.82 1457.04 1542.27 Q1458.86 1538.71 1458.86 1531.6 Q1458.86 1524.47 1457.04 1520.93 Q1455.23 1517.37 1451.6 1517.37 M1451.6 1513.66 Q1457.41 1513.66 1460.46 1518.27 Q1463.54 1522.85 1463.54 1531.6 Q1463.54 1540.33 1460.46 1544.94 Q1457.41 1549.52 1451.6 1549.52 Q1445.79 1549.52 1442.71 1544.94 Q1439.65 1540.33 1439.65 1531.6 Q1439.65 1522.85 1442.71 1518.27 Q1445.79 1513.66 1451.6 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1471.76 1542.97 L1476.64 1542.97 L1476.64 1548.85 L1471.76 1548.85 L1471.76 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1497.41 1529.7 Q1494.26 1529.7 1492.41 1531.86 Q1490.58 1534.01 1490.58 1537.76 Q1490.58 1541.49 1492.41 1543.66 Q1494.26 1545.82 1497.41 1545.82 Q1500.55 1545.82 1502.38 1543.66 Q1504.23 1541.49 1504.23 1537.76 Q1504.23 1534.01 1502.38 1531.86 Q1500.55 1529.7 1497.41 1529.7 M1506.69 1515.05 L1506.69 1519.31 Q1504.93 1518.48 1503.12 1518.04 Q1501.34 1517.6 1499.58 1517.6 Q1494.95 1517.6 1492.5 1520.72 Q1490.07 1523.85 1489.72 1530.17 Q1491.09 1528.15 1493.15 1527.09 Q1495.21 1526 1497.68 1526 Q1502.89 1526 1505.9 1529.17 Q1508.93 1532.32 1508.93 1537.76 Q1508.93 1543.08 1505.79 1546.3 Q1502.64 1549.52 1497.41 1549.52 Q1491.41 1549.52 1488.24 1544.94 Q1485.07 1540.33 1485.07 1531.6 Q1485.07 1523.41 1488.96 1518.55 Q1492.85 1513.66 1499.4 1513.66 Q1501.16 1513.66 1502.94 1514.01 Q1504.74 1514.36 1506.69 1515.05 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1890.96 1517.37 Q1887.34 1517.37 1885.52 1520.93 Q1883.71 1524.47 1883.71 1531.6 Q1883.71 1538.71 1885.52 1542.27 Q1887.34 1545.82 1890.96 1545.82 Q1894.59 1545.82 1896.39 1542.27 Q1898.22 1538.71 1898.22 1531.6 Q1898.22 1524.47 1896.39 1520.93 Q1894.59 1517.37 1890.96 1517.37 M1890.96 1513.66 Q1896.77 1513.66 1899.82 1518.27 Q1902.9 1522.85 1902.9 1531.6 Q1902.9 1540.33 1899.82 1544.94 Q1896.77 1549.52 1890.96 1549.52 Q1885.14 1549.52 1882.07 1544.94 Q1879.01 1540.33 1879.01 1531.6 Q1879.01 1522.85 1882.07 1518.27 Q1885.14 1513.66 1890.96 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1911.12 1542.97 L1916 1542.97 L1916 1548.85 L1911.12 1548.85 L1911.12 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M1936.19 1532.44 Q1932.85 1532.44 1930.93 1534.22 Q1929.03 1536 1929.03 1539.13 Q1929.03 1542.25 1930.93 1544.03 Q1932.85 1545.82 1936.19 1545.82 Q1939.52 1545.82 1941.44 1544.03 Q1943.36 1542.23 1943.36 1539.13 Q1943.36 1536 1941.44 1534.22 Q1939.54 1532.44 1936.19 1532.44 M1931.51 1530.45 Q1928.5 1529.7 1926.81 1527.64 Q1925.14 1525.58 1925.14 1522.62 Q1925.14 1518.48 1928.08 1516.07 Q1931.05 1513.66 1936.19 1513.66 Q1941.35 1513.66 1944.29 1516.07 Q1947.23 1518.48 1947.23 1522.62 Q1947.23 1525.58 1945.54 1527.64 Q1943.87 1529.7 1940.89 1530.45 Q1944.26 1531.23 1946.14 1533.52 Q1948.04 1535.82 1948.04 1539.13 Q1948.04 1544.15 1944.96 1546.83 Q1941.9 1549.52 1936.19 1549.52 Q1930.47 1549.52 1927.39 1546.83 Q1924.33 1544.15 1924.33 1539.13 Q1924.33 1535.82 1926.23 1533.52 Q1928.13 1531.23 1931.51 1530.45 M1929.8 1523.06 Q1929.8 1525.75 1931.46 1527.25 Q1933.15 1528.76 1936.19 1528.76 Q1939.2 1528.76 1940.89 1527.25 Q1942.6 1525.75 1942.6 1523.06 Q1942.6 1520.38 1940.89 1518.87 Q1939.2 1517.37 1936.19 1517.37 Q1933.15 1517.37 1931.46 1518.87 Q1929.8 1520.38 1929.8 1523.06 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M2319.91 1544.91 L2327.55 1544.91 L2327.55 1518.55 L2319.24 1520.21 L2319.24 1515.95 L2327.5 1514.29 L2332.18 1514.29 L2332.18 1544.91 L2339.82 1544.91 L2339.82 1548.85 L2319.91 1548.85 L2319.91 1544.91 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M2349.26 1542.97 L2354.14 1542.97 L2354.14 1548.85 L2349.26 1548.85 L2349.26 1542.97 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M2374.33 1517.37 Q2370.72 1517.37 2368.89 1520.93 Q2367.08 1524.47 2367.08 1531.6 Q2367.08 1538.71 2368.89 1542.27 Q2370.72 1545.82 2374.33 1545.82 Q2377.96 1545.82 2379.77 1542.27 Q2381.6 1538.71 2381.6 1531.6 Q2381.6 1524.47 2379.77 1520.93 Q2377.96 1517.37 2374.33 1517.37 M2374.33 1513.66 Q2380.14 1513.66 2383.2 1518.27 Q2386.27 1522.85 2386.27 1531.6 Q2386.27 1540.33 2383.2 1544.94 Q2380.14 1549.52 2374.33 1549.52 Q2368.52 1549.52 2365.44 1544.94 Q2362.39 1540.33 2362.39 1531.6 Q2362.39 1522.85 2365.44 1518.27 Q2368.52 1513.66 2374.33 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,1486.45 2352.76,1486.45 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,1198.61 2352.76,1198.61 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,910.766 2352.76,910.766 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,622.926 2352.76,622.926 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,335.085 2352.76,335.085 "/>
-<polyline clip-path="url(#clip992)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="156.598,47.2441 2352.76,47.2441 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1486.45 156.598,47.2441 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1486.45 175.496,1486.45 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1198.61 175.496,1198.61 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,910.766 175.496,910.766 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,622.926 175.496,622.926 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,335.085 175.496,335.085 "/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,47.2441 175.496,47.2441 "/>
-<path clip-path="url(#clip990)" d="M63.4226 1472.25 Q59.8115 1472.25 57.9828 1475.81 Q56.1773 1479.35 56.1773 1486.48 Q56.1773 1493.59 57.9828 1497.15 Q59.8115 1500.7 63.4226 1500.7 Q67.0569 1500.7 68.8624 1497.15 Q70.6911 1493.59 70.6911 1486.48 Q70.6911 1479.35 68.8624 1475.81 Q67.0569 1472.25 63.4226 1472.25 M63.4226 1468.54 Q69.2328 1468.54 72.2883 1473.15 Q75.367 1477.73 75.367 1486.48 Q75.367 1495.21 72.2883 1499.82 Q69.2328 1504.4 63.4226 1504.4 Q57.6125 1504.4 54.5338 1499.82 Q51.4782 1495.21 51.4782 1486.48 Q51.4782 1477.73 54.5338 1473.15 Q57.6125 1468.54 63.4226 1468.54 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M83.5845 1497.85 L88.4688 1497.85 L88.4688 1503.73 L83.5845 1503.73 L83.5845 1497.85 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M108.654 1472.25 Q105.043 1472.25 103.214 1475.81 Q101.409 1479.35 101.409 1486.48 Q101.409 1493.59 103.214 1497.15 Q105.043 1500.7 108.654 1500.7 Q112.288 1500.7 114.094 1497.15 Q115.922 1493.59 115.922 1486.48 Q115.922 1479.35 114.094 1475.81 Q112.288 1472.25 108.654 1472.25 M108.654 1468.54 Q114.464 1468.54 117.52 1473.15 Q120.598 1477.73 120.598 1486.48 Q120.598 1495.21 117.52 1499.82 Q114.464 1504.4 108.654 1504.4 Q102.844 1504.4 99.765 1499.82 Q96.7095 1495.21 96.7095 1486.48 Q96.7095 1477.73 99.765 1473.15 Q102.844 1468.54 108.654 1468.54 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M65.0198 1184.41 Q61.4087 1184.41 59.58 1187.97 Q57.7745 1191.51 57.7745 1198.64 Q57.7745 1205.75 59.58 1209.31 Q61.4087 1212.85 65.0198 1212.85 Q68.6541 1212.85 70.4596 1209.31 Q72.2883 1205.75 72.2883 1198.64 Q72.2883 1191.51 70.4596 1187.97 Q68.6541 1184.41 65.0198 1184.41 M65.0198 1180.7 Q70.83 1180.7 73.8855 1185.31 Q76.9642 1189.89 76.9642 1198.64 Q76.9642 1207.37 73.8855 1211.98 Q70.83 1216.56 65.0198 1216.56 Q59.2097 1216.56 56.131 1211.98 Q53.0754 1207.37 53.0754 1198.64 Q53.0754 1189.89 56.131 1185.31 Q59.2097 1180.7 65.0198 1180.7 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M85.1818 1210.01 L90.066 1210.01 L90.066 1215.89 L85.1818 1215.89 L85.1818 1210.01 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M104.279 1211.95 L120.598 1211.95 L120.598 1215.89 L98.6539 1215.89 L98.6539 1211.95 Q101.316 1209.2 105.899 1204.57 Q110.506 1199.91 111.686 1198.57 Q113.932 1196.05 114.811 1194.31 Q115.714 1192.55 115.714 1190.86 Q115.714 1188.11 113.77 1186.37 Q111.848 1184.64 108.746 1184.64 Q106.547 1184.64 104.094 1185.4 Q101.663 1186.17 98.8854 1187.72 L98.8854 1182.99 Q101.709 1181.86 104.163 1181.28 Q106.617 1180.7 108.654 1180.7 Q114.024 1180.7 117.219 1183.39 Q120.413 1186.07 120.413 1190.56 Q120.413 1192.69 119.603 1194.61 Q118.816 1196.51 116.709 1199.1 Q116.131 1199.78 113.029 1202.99 Q109.927 1206.19 104.279 1211.95 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M62.9365 896.565 Q59.3254 896.565 57.4967 900.13 Q55.6912 903.671 55.6912 910.801 Q55.6912 917.908 57.4967 921.472 Q59.3254 925.014 62.9365 925.014 Q66.5707 925.014 68.3763 921.472 Q70.205 917.908 70.205 910.801 Q70.205 903.671 68.3763 900.13 Q66.5707 896.565 62.9365 896.565 M62.9365 892.861 Q68.7467 892.861 71.8022 897.468 Q74.8809 902.051 74.8809 910.801 Q74.8809 919.528 71.8022 924.134 Q68.7467 928.718 62.9365 928.718 Q57.1264 928.718 54.0477 924.134 Q50.9921 919.528 50.9921 910.801 Q50.9921 902.051 54.0477 897.468 Q57.1264 892.861 62.9365 892.861 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M83.0984 922.167 L87.9827 922.167 L87.9827 928.046 L83.0984 928.046 L83.0984 922.167 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M111.015 897.56 L99.2095 916.009 L111.015 916.009 L111.015 897.56 M109.788 893.486 L115.668 893.486 L115.668 916.009 L120.598 916.009 L120.598 919.898 L115.668 919.898 L115.668 928.046 L111.015 928.046 L111.015 919.898 L95.4132 919.898 L95.4132 915.384 L109.788 893.486 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M63.2606 608.724 Q59.6495 608.724 57.8208 612.289 Q56.0152 615.831 56.0152 622.96 Q56.0152 630.067 57.8208 633.632 Q59.6495 637.173 63.2606 637.173 Q66.8948 637.173 68.7004 633.632 Q70.5291 630.067 70.5291 622.96 Q70.5291 615.831 68.7004 612.289 Q66.8948 608.724 63.2606 608.724 M63.2606 605.021 Q69.0707 605.021 72.1263 609.627 Q75.205 614.21 75.205 622.96 Q75.205 631.687 72.1263 636.294 Q69.0707 640.877 63.2606 640.877 Q57.4504 640.877 54.3717 636.294 Q51.3162 631.687 51.3162 622.96 Q51.3162 614.21 54.3717 609.627 Q57.4504 605.021 63.2606 605.021 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M83.4225 634.326 L88.3067 634.326 L88.3067 640.206 L83.4225 640.206 L83.4225 634.326 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M109.071 621.062 Q105.922 621.062 104.071 623.215 Q102.242 625.368 102.242 629.118 Q102.242 632.845 104.071 635.02 Q105.922 637.173 109.071 637.173 Q112.219 637.173 114.047 635.02 Q115.899 632.845 115.899 629.118 Q115.899 625.368 114.047 623.215 Q112.219 621.062 109.071 621.062 M118.353 606.409 L118.353 610.669 Q116.594 609.835 114.788 609.396 Q113.006 608.956 111.246 608.956 Q106.617 608.956 104.163 612.081 Q101.733 615.206 101.385 621.525 Q102.751 619.511 104.811 618.446 Q106.871 617.359 109.348 617.359 Q114.557 617.359 117.566 620.53 Q120.598 623.678 120.598 629.118 Q120.598 634.442 117.45 637.659 Q114.302 640.877 109.071 640.877 Q103.075 640.877 99.9039 636.294 Q96.7326 631.687 96.7326 622.96 Q96.7326 614.766 100.621 609.905 Q104.51 605.021 111.061 605.021 Q112.82 605.021 114.603 605.368 Q116.408 605.715 118.353 606.409 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M63.5152 320.884 Q59.9041 320.884 58.0754 324.448 Q56.2699 327.99 56.2699 335.12 Q56.2699 342.226 58.0754 345.791 Q59.9041 349.332 63.5152 349.332 Q67.1494 349.332 68.955 345.791 Q70.7837 342.226 70.7837 335.12 Q70.7837 327.99 68.955 324.448 Q67.1494 320.884 63.5152 320.884 M63.5152 317.18 Q69.3254 317.18 72.3809 321.786 Q75.4596 326.37 75.4596 335.12 Q75.4596 343.846 72.3809 348.453 Q69.3254 353.036 63.5152 353.036 Q57.7051 353.036 54.6264 348.453 Q51.5708 343.846 51.5708 335.12 Q51.5708 326.37 54.6264 321.786 Q57.7051 317.18 63.5152 317.18 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M83.6771 346.485 L88.5614 346.485 L88.5614 352.365 L83.6771 352.365 L83.6771 346.485 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M108.746 335.953 Q105.413 335.953 103.492 337.735 Q101.594 339.518 101.594 342.643 Q101.594 345.768 103.492 347.55 Q105.413 349.332 108.746 349.332 Q112.08 349.332 114.001 347.55 Q115.922 345.745 115.922 342.643 Q115.922 339.518 114.001 337.735 Q112.103 335.953 108.746 335.953 M104.071 333.962 Q101.061 333.221 99.3715 331.161 Q97.7048 329.101 97.7048 326.138 Q97.7048 321.995 100.645 319.587 Q103.608 317.18 108.746 317.18 Q113.908 317.18 116.848 319.587 Q119.788 321.995 119.788 326.138 Q119.788 329.101 118.098 331.161 Q116.432 333.221 113.445 333.962 Q116.825 334.749 118.7 337.041 Q120.598 339.333 120.598 342.643 Q120.598 347.666 117.52 350.351 Q114.464 353.036 108.746 353.036 Q103.029 353.036 99.9502 350.351 Q96.8947 347.666 96.8947 342.643 Q96.8947 339.333 98.7928 337.041 Q100.691 334.749 104.071 333.962 M102.358 326.578 Q102.358 329.263 104.024 330.768 Q105.714 332.272 108.746 332.272 Q111.756 332.272 113.445 330.768 Q115.158 329.263 115.158 326.578 Q115.158 323.893 113.445 322.388 Q111.756 320.884 108.746 320.884 Q105.714 320.884 104.024 322.388 Q102.358 323.893 102.358 326.578 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M54.2328 60.5889 L61.8717 60.5889 L61.8717 34.2233 L53.5616 35.89 L53.5616 31.6308 L61.8254 29.9641 L66.5013 29.9641 L66.5013 60.5889 L74.1402 60.5889 L74.1402 64.5241 L54.2328 64.5241 L54.2328 60.5889 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M83.5845 58.6445 L88.4688 58.6445 L88.4688 64.5241 L83.5845 64.5241 L83.5845 58.6445 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M108.654 33.0428 Q105.043 33.0428 103.214 36.6076 Q101.409 40.1492 101.409 47.2788 Q101.409 54.3853 103.214 57.9501 Q105.043 61.4917 108.654 61.4917 Q112.288 61.4917 114.094 57.9501 Q115.922 54.3853 115.922 47.2788 Q115.922 40.1492 114.094 36.6076 Q112.288 33.0428 108.654 33.0428 M108.654 29.3391 Q114.464 29.3391 117.52 33.9456 Q120.598 38.5289 120.598 47.2788 Q120.598 56.0056 117.52 60.6121 Q114.464 65.1954 108.654 65.1954 Q102.844 65.1954 99.765 60.6121 Q96.7095 56.0056 96.7095 47.2788 Q96.7095 38.5289 99.765 33.9456 Q102.844 29.3391 108.654 29.3391 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><circle clip-path="url(#clip992)" cx="156.598" cy="1160.56" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="178.56" cy="1210.84" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="200.521" cy="1054.98" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="222.483" cy="1093.17" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="244.445" cy="1184.08" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="266.406" cy="1186.15" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="288.368" cy="1143.36" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="310.329" cy="1110.07" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="332.291" cy="1404.1" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="354.252" cy="1316.47" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="376.214" cy="1020.57" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="398.176" cy="1289.29" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="420.137" cy="1079.23" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="442.099" cy="981.557" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="464.06" cy="1154.57" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="486.022" cy="1211.22" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="507.983" cy="1259.09" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="529.945" cy="1271.82" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="551.907" cy="866.613" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="573.868" cy="1190.42" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="595.83" cy="785.969" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="617.791" cy="1239.2" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="639.753" cy="1041.83" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="661.714" cy="1113.49" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="683.676" cy="1151.09" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="705.638" cy="1176.5" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="727.599" cy="1191.46" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="749.561" cy="1304.18" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="771.522" cy="1275.04" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="793.484" cy="1277.27" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="815.446" cy="796.384" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="837.407" cy="1316.65" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="859.369" cy="1022.28" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="881.33" cy="1118.35" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="903.292" cy="1194.01" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="925.253" cy="1040.96" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="947.215" cy="1067.52" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="969.177" cy="897.022" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="991.138" cy="1083.42" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1013.1" cy="709.333" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1035.06" cy="868.771" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1057.02" cy="1164.38" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1078.98" cy="1053.16" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1100.95" cy="999.918" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1122.91" cy="1130.19" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1144.87" cy="742.669" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1166.83" cy="847.198" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1188.79" cy="927.1" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1210.75" cy="736.529" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1232.72" cy="977.632" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1254.68" cy="617.232" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1276.64" cy="718.648" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1298.6" cy="821.143" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1320.56" cy="619.92" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1342.52" cy="792.2" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1364.48" cy="770.691" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1386.45" cy="855.975" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1408.41" cy="846.96" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1430.37" cy="636.739" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1452.33" cy="768.697" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1474.29" cy="775.609" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1496.25" cy="575.604" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1518.22" cy="711.333" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1540.18" cy="875.296" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1562.14" cy="796.607" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1584.1" cy="778.424" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1606.06" cy="767.273" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1628.02" cy="479.972" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1649.99" cy="912.043" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1671.95" cy="774.422" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1693.91" cy="861.623" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1715.87" cy="782.247" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1737.83" cy="232.787" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1759.79" cy="834" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1781.75" cy="354.333" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1803.72" cy="694.225" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1825.68" cy="667.392" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1847.64" cy="558.555" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1869.6" cy="751.32" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1891.56" cy="798.261" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1913.52" cy="771.348" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1935.49" cy="616.53" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1957.45" cy="681.323" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="1979.41" cy="434.269" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2001.37" cy="745.391" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2023.33" cy="489.056" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2045.29" cy="593.286" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2067.26" cy="523.13" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2089.22" cy="361.75" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2111.18" cy="604.674" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2133.14" cy="447.892" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2155.1" cy="696.159" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2177.06" cy="279.301" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2199.02" cy="495.033" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2220.99" cy="277.271" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2242.95" cy="541.027" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2264.91" cy="156.361" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2286.87" cy="599.301" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2308.83" cy="603.314" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2330.79" cy="413.689" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<circle clip-path="url(#clip992)" cx="2352.76" cy="738.662" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"/>
-<polyline clip-path="url(#clip992)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="156.598,1198.61 170.896,1193.92 303.104,1150.6 382.555,1124.57 449.73,1102.56 522.701,1078.65 589.973,1056.61 662.097,1032.97 745.659,1005.59 819.919,981.261 885.038,959.924 956.035,936.66 1027.45,913.259 1106.42,887.385 1181.55,862.767 1259.67,837.17 1325.43,815.623 1405.72,789.316 1479.26,765.218 1547.19,742.961 1615.99,720.415 1693.11,695.148 1762.98,672.252 1842.99,646.037 1917.07,621.765 1990.1,597.835 2061,574.602 2133.69,550.784 2213.33,524.689 2329.02,486.782 2352.76,479.005 "/>
-<path clip-path="url(#clip990)" d="M229.803 250.738 L501.85 250.738 L501.85 95.2176 L229.803 95.2176  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"/>
-<polyline clip-path="url(#clip990)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="229.803,250.738 501.85,250.738 501.85,95.2176 229.803,95.2176 229.803,250.738 "/>
-<circle clip-path="url(#clip990)" cx="327.41" cy="147.058" r="20.48" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4.55111"/>
-<path clip-path="url(#clip990)" d="M438.86 166.745 Q437.054 171.375 435.342 172.787 Q433.629 174.199 430.758 174.199 L427.355 174.199 L427.355 170.634 L429.855 170.634 Q431.615 170.634 432.587 169.8 Q433.559 168.967 434.74 165.865 L435.504 163.921 L425.018 138.412 L429.531 138.412 L437.633 158.689 L445.735 138.412 L450.249 138.412 L438.86 166.745 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M457.54 160.402 L465.179 160.402 L465.179 134.037 L456.869 135.703 L456.869 131.444 L465.133 129.778 L469.809 129.778 L469.809 160.402 L477.448 160.402 L477.448 164.338 L457.54 164.338 L457.54 160.402 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><polyline clip-path="url(#clip990)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="254.205,198.898 400.616,198.898 "/>
-<path clip-path="url(#clip990)" d="M438.86 218.585 Q437.054 223.215 435.342 224.627 Q433.629 226.039 430.758 226.039 L427.355 226.039 L427.355 222.474 L429.855 222.474 Q431.615 222.474 432.587 221.64 Q433.559 220.807 434.74 217.705 L435.504 215.761 L425.018 190.252 L429.531 190.252 L437.633 210.529 L445.735 190.252 L450.249 190.252 L438.86 218.585 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /><path clip-path="url(#clip990)" d="M460.758 212.242 L477.077 212.242 L477.077 216.178 L455.133 216.178 L455.133 212.242 Q457.795 209.488 462.378 204.858 Q466.985 200.205 468.165 198.863 Q470.411 196.34 471.29 194.604 Q472.193 192.844 472.193 191.155 Q472.193 188.4 470.249 186.664 Q468.327 184.928 465.226 184.928 Q463.027 184.928 460.573 185.692 Q458.142 186.455 455.365 188.006 L455.365 183.284 Q458.189 182.15 460.642 181.571 Q463.096 180.993 465.133 180.993 Q470.503 180.993 473.698 183.678 Q476.892 186.363 476.892 190.854 Q476.892 192.983 476.082 194.905 Q475.295 196.803 473.189 199.395 Q472.61 200.067 469.508 203.284 Q466.406 206.479 460.758 212.242 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1" /></svg>
-</div></div>
+<div class="output text_html"><img src="data:image/png;base64,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" /></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -882,9 +729,9 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float64, 1, CUDA.Mem.DeviceBuffer}:
- 0.1489812408196948
- 0.5715402006584419
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Float64, 1, CUDACore.DeviceMemory}:
+ 0.1942306079021719
+ 0.5163624904090824
 </pre></div>
 </div>
 </div>
@@ -896,7 +743,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Int64, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Int64, 2, CUDACore.DeviceMemory}:
  1  2  3
 </pre></div>
 </div>
@@ -909,7 +756,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Int64, 1, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element CuArray{Int64, 1, CUDACore.DeviceMemory}:
  2
  3
 </pre></div>
@@ -928,7 +775,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDACore.DeviceMemory}:
  2.0  3.0  4.0
 </pre></div>
 </div>
@@ -953,7 +800,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDACore.DeviceMemory}:
  4.0  9.0  15.0
 </pre></div>
 </div>
@@ -998,22 +845,6 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="curand">
-<h1>CURAND<a class="headerlink" href="#curand" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand!</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Int64, 2, CUDA.Mem.DeviceBuffer}:
- 1285325108864083557  -4288312989882602970  7022867384820671593
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="cublas">
 <h1>CUBLAS<a class="headerlink" href="#cublas" title="Permalink to this heading">#</a></h1>
 <p>Les opérations entre tableaux alloués sur le GPU sont effectués sur le co-processeur.</p>
@@ -1024,8 +855,8 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×1 CuArray{Int64, 2, CUDA.Mem.DeviceBuffer}:
- 7390195721257797320
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×1 CuArray{Int64, 2, CUDACore.DeviceMemory}:
+ 32
 </pre></div>
 </div>
 </div>
@@ -1049,7 +880,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×2 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×2 CuArray{Float32, 2, CUDACore.DeviceMemory}:
   9.52   18.47
  24.35    2.25
   0.77  -13.28
@@ -1066,7 +897,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×2 CuArray{Float32, 2, CUDA.Mem.DeviceBuffer}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×2 CuArray{Float32, 2, CUDACore.DeviceMemory}:
   1.0  3.0
  -1.0  2.0
   3.0  4.0
@@ -1087,8 +918,8 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{ComplexF64, 2, CUDA.Mem.DeviceBuffer}:
- 4.01988e18+0.0im  -8.19521e16+9.79577e18im  -8.19521e16-9.79577e18im
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{ComplexF64, 2, CUDACore.DeviceMemory}:
+ 6.0+0.0im  -1.5+0.866025im  -1.5-0.866025im
 </pre></div>
 </div>
 </div>
@@ -1101,8 +932,8 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDA.Mem.DeviceBuffer}:
- 1.28533e18  -4.28831e18  7.02287e18
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 CuArray{Float64, 2, CUDACore.DeviceMemory}:
+ 1.0  2.0  3.0
 </pre></div>
 </div>
 </div>
@@ -1138,7 +969,7 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 CUDA.CUSPARSE.CuSparseMatrixCSR{Float64, Int32} with 13 stored entries:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 cuSPARSE.CuSparseMatrixCSR{Float64, Int32} with 13 stored entries:
   4.0  -2.0    ⋅     ⋅    ⋅ 
  -2.0  10.0  -6.0    ⋅    ⋅ 
    ⋅   -6.0  29.0  15.0   ⋅ 
@@ -1156,126 +987,6 @@ name(device) = &quot;Tesla V100S-PCIE-32GB&quot;
 <li><p>Desactivez “scalar indexing” pour trouver les opérations incompatibles.</p></li>
 <li><p>Ecrivez vos propres kernels CUDA pour remplacer ces opérations.</p></li>
 </ol>
-</section>
-<section id="exemple-avec-une-regression-lineaire">
-<h2>Exemple avec une regression linéaire<a class="headerlink" href="#exemple-avec-une-regression-lineaire" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># squared error loss function</span>
-<span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">abs2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="c"># get gradient w.r.t to `w`</span>
-<span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ForwardDiff</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">w</span><span class="p">)</span>
-<span class="c"># get derivative w.r.t to `b` (`ForwardDiff.derivative` is</span>
-<span class="c"># used instead of `ForwardDiff.gradient` because `b` is</span>
-<span class="c"># a scalar instead of an array)</span>
-<span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ForwardDiff</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lossdb (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># proximal gradient descent function</span>
-<span class="k">function</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">lmul!</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span><span class="w"> </span><span class="n">loss∇w</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">lr</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lossdb</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>train (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Version CPU</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">cpu_test</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">iter</span>
-<span class="w">       </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cpu_test (generic function with 4 methods)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">cpu_test</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.493956 seconds (29.16 k allocations: 293.562 MiB, 6.10% gc time)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00844803236035335
-</pre></div>
-</div>
-</div>
-</div>
-<section id="version-gpu">
-<h3>Version GPU<a class="headerlink" href="#version-gpu" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">gpu_test</span><span class="p">(</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="o">&#39;</span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="o">:</span><span class="p">];</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CuArray</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">iter</span>
-<span class="w">       </span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="w">       </span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gpu_test (generic function with 4 methods)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span><span class="o">.</span><span class="nd">@time</span><span class="w"> </span><span class="n">gpu_test</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.219352 seconds (286.71 k CPU allocations: 32.688 MiB, 1.58% gc time) (5.31 k GPU allocations: 273.907 MiB, 5.40% memmgmt time)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.009242421749201495
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="noyaux-cuda">
@@ -1303,7 +1014,7 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA.HostKernel for kernel(CuDeviceVector{Float32, 1})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDACore.HostKernel for kernel(CuDeviceVector{Float32, 1})
 </pre></div>
 </div>
 </div>
@@ -1315,33 +1026,33 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000-element CuArray{Int64, 1, CUDA.Mem.DeviceBuffer}:
-  8726977891724946538
-  8102203060114050644
- -2324662444209111707
- -2236005512266091185
-  5398334102334545665
-  4948735269063725833
-  6903187273555962966
-  7794400730534534606
-   824395876830002788
-  1439602654372866302
-   595248745661331761
-  5579557520461901172
-  7997208311163723735
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000-element CuArray{Int64, 1, CUDACore.DeviceMemory}:
+  8024292473858245638
+  8366351865986462909
+  -478590473994982443
+  6455011415532812414
+  1971351246391272035
+  5127364939284440565
+  2630115178803638390
+ -5644401552727578332
+ -5140528744280786978
+ -8499091271048549664
+ -7694186532867547595
+ -5255459634966745612
+ -8333941916029631128
                     ⋮
- -8904397796379406376
- -4188108673638662386
-  3852756849226548902
-  -153668276667599758
- -1399699205008749530
- -1860905514385694967
- -7742877243104628179
-  5953993226180949518
- -3307988546881151255
- -2175406870093928238
- -1707559153844648754
- -4040208573527860570
+  6957052522391132310
+  7706424498257350667
+  -511530605672646660
+  1377069193052232014
+   530995064234415733
+  5972871715024742470
+   873356819365331130
+ -3572393798617098110
+ -7632414263804863927
+  5519996393447067089
+   959190096788747155
+ -2201510031648981104
 </pre></div>
 </div>
 </div>
@@ -1353,7 +1064,7 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.693367490961741e20
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.715004771591657e20
 </pre></div>
 </div>
 </div>
@@ -1365,10 +1076,10 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  50.885 μs (119 allocations: 5.17 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  83.401 μs (147 allocations: 4.17 KiB)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.693367490961741e20
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.715004771591657e20
 </pre></div>
 </div>
 </div>
@@ -1380,10 +1091,10 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.143 μs (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.704 μs (0 allocations: 0 bytes)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.693367490961741e20
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.715004771591657e20
 </pre></div>
 </div>
 </div>
@@ -1410,7 +1121,7 @@ soigneusement que le résultat escompté est correct.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.592333 seconds (1.31 M allocations: 91.360 MiB, 4.32% gc time, 89.45% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.003002 seconds (491 allocations: 12.594 KiB)
 </pre></div>
 </div>
 </div>
@@ -1429,7 +1140,7 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000881 seconds (96 allocations: 5.828 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000578 seconds (223 allocations: 4.766 KiB)
 </pre></div>
 </div>
 </div>
@@ -1441,7 +1152,7 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.001145 seconds (128 CPU allocations: 7.406 KiB) (2 GPU allocations: 152.588 MiB, 40.47% memmgmt time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000847 seconds (196 CPU allocations: 4.344 KiB) (2 GPU allocations: 152.588 MiB, 44.69% memmgmt time)
 </pre></div>
 </div>
 </div>
@@ -1453,7 +1164,7 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  419.399 μs (74 allocations: 3.98 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  424.485 μs (80 allocations: 2.39 KiB)
 </pre></div>
 </div>
 </div>
@@ -1465,7 +1176,7 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  79.483 ms (4 allocations: 152.59 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  92.583 ms (8 allocations: 152.59 MiB)
 </pre></div>
 </div>
 </div>
@@ -1492,10 +1203,7 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA.HostKernel for kernel()
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>foo
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDACore.HostKernel for kernel()
 </pre></div>
 </div>
 </div>
@@ -1519,7 +1227,10 @@ vers le CPU. Vous pouvez utiliser <code class="docutils literal notranslate"><sp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA.HostKernel for kernel()
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>foo
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDACore.HostKernel for kernel()
 </pre></div>
 </div>
 </div>
@@ -1582,52 +1293,16 @@ car il y a un temps de lattence plus important que sur CPU.</p>
 un GPU de la même manière qu’un tableau alloué sur CPU.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="w">    </span><span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">vadd_reverse</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">argument</span> <span class="p">(</span><span class="n">code</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ERROR_INVALID_VALUE</span><span class="p">)</span>
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">throw_api_error</span><span class="p">(</span><span class="n">res</span><span class="p">::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">cudaError_enum</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">libcuda</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">27</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">check</span>
-    <span class="o">@</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">libcuda</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">34</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">cuLaunchKernel</span>
-    <span class="o">@</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">call</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">26</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">(::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#891#892&quot;</span><span class="p">{</span><span class="n">Bool</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">CuStream</span><span class="p">,</span> <span class="n">CuFunction</span><span class="p">,</span> <span class="n">CuDim3</span><span class="p">,</span> <span class="n">CuDim3</span><span class="p">})(</span><span class="n">kernelParams</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Nothing</span><span class="p">}})</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">69</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">33</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">pack_arguments</span><span class="p">(::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">var</span><span class="s2">&quot;#891#892&quot;</span><span class="p">{</span><span class="n">Bool</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">CuStream</span><span class="p">,</span> <span class="n">CuFunction</span><span class="p">,</span> <span class="n">CuDim3</span><span class="p">,</span> <span class="n">CuDim3</span><span class="p">},</span> <span class="p">::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">KernelState</span><span class="p">,</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">launch</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">CuFunction</span><span class="p">,</span> <span class="n">args</span><span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Any</span><span class="p">,</span> <span class="n">N</span><span class="p">};</span> <span class="n">blocks</span><span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">},</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">},</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">}},</span> <span class="n">threads</span><span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">},</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">},</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="p">}},</span> <span class="n">cooperative</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">shmem</span><span class="p">::</span><span class="n">Integer</span><span class="p">,</span> <span class="n">stream</span><span class="p">::</span><span class="n">CuStream</span><span class="p">)</span> <span class="n">where</span> <span class="n">N</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="c1">#896</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">136</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">95</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">convert_arguments</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="c1">#cudacall#895</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">135</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">cudacall</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cudadrv</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">134</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">258</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="n">call</span><span class="p">(::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">HostKernel</span><span class="p">{</span><span class="n">typeof</span><span class="p">(</span><span class="n">vadd_reverse</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">}}},</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span> <span class="n">call_kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{</span><span class="n">threads</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">blocks</span><span class="p">::</span><span class="n">Int64</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span>
- <span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="p">(::</span><span class="n">CUDA</span><span class="o">.</span><span class="n">HostKernel</span><span class="p">{</span><span class="n">typeof</span><span class="p">(</span><span class="n">vadd_reverse</span><span class="p">),</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">CuDeviceVector</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">}}})(::</span><span class="n">CuArray</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">Mem</span><span class="o">.</span><span class="n">DeviceBuffer</span><span class="p">},</span> <span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">CuArray</span><span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CUDA</span><span class="o">.</span><span class="n">Mem</span><span class="o">.</span><span class="n">DeviceBuffer</span><span class="p">}};</span> <span class="n">threads</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">blocks</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-    <span class="o">@</span> <span class="n">CUDA</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">381</span>
- <span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">CUDA</span><span class="o">/</span><span class="n">rXson</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">execution</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">106</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of threads in x-dimension exceeds device limit (9999999 &gt; 1024).
 </pre></div>
 </div>
 </div>
@@ -1760,16 +1435,11 @@ un GPU de la même manière qu’un tableau alloué sur CPU.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tirages-aleatoires">Tirages aléatoires</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curand">CURAND</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cublas">CUBLAS</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cusolver">CUSOLVER</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cufft">CUFFT</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cusparse">CUSPARSE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-etapes-pour-porter-votre-code-sur-gpu">Les étapes pour porter votre code sur GPU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-avec-une-regression-lineaire">Exemple avec une regression linéaire</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-gpu">Version GPU</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#noyaux-cuda">Noyaux CUDA</a><ul class="visible nav section-nav flex-column">
