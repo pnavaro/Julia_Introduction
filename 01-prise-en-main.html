@@ -463,13 +463,13 @@ Matlab/Scilab ou R. On a donc l’utilisation des opérateurs classiques
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">log1p</span> <span class=" -Color -Color-Bold">log1</span>0 <span class=" -Color -Color-Bold">log</span>2 <span class=" -Color -Color-Bold">log</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">log1p</span> <span class=" -Color -Color-Bold">log1</span>0 <span class=" -Color -Color-Bold">log</span> <span class=" -Color -Color-Bold">log</span>2
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log1p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log1p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Accurate natural logarithm of <code class="docutils literal notranslate"><span class="pre">1+x</span></code>. Throws <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">DomainError</span></code></a> for <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">Real</span></code></a> arguments less than -1.</p>
+<p>Accurate natural logarithm of <code class="docutils literal notranslate"><span class="pre">1+x</span></code>. Throw a <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">DomainError</span></code></a> for <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">Real</span></code></a> arguments less than -1.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-jldoctest; notranslate"><div class="highlight"><pre><span></span>julia&gt; log1p(-0.5)
 -0.6931471805599453
@@ -483,6 +483,43 @@ log1p was called with a real argument &lt; -1 but will only return a complex res
 Stacktrace:
  [1] throw_complex_domainerror(::Symbol, ::Float64) at ./math.jl:31
 [...]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">sincos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>search: <span class=" -Color -Color-Bold">sincos</span> <span class=" -Color -Color-Bold">sincos</span>d <span class=" -Color -Color-Bold">sincos</span>pi <span class=" -Color -Color-Bold">sinc</span> <span class=" -Color -Color-Bold">sin</span> <span class=" -Color -Color-Bold">si</span>zeof <span class=" -Color -Color-Bold">sin</span>h <span class=" -Color -Color-Bold">sin</span>pi co<span class=" -Color -Color-Bold">s</span> @info <span class=" -Color -Color-Bold">sin</span>d aco<span class=" -Color -Color-Bold">s</span>
+</pre></div>
+</div>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sincos</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Tuple</span><span class="p">{</span><span class="kt">float</span><span class="p">(</span><span class="kt">T</span><span class="p">),</span><span class="kt">float</span><span class="p">(</span><span class="kt">T</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>Simultaneously compute the sine and cosine of <code class="docutils literal notranslate"><span class="pre">x</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is in radians, returning a tuple <code class="docutils literal notranslate"><span class="pre">(sine,</span> <span class="pre">cosine)</span></code>.</p>
+<p>Throw a <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">DomainError</span></code></a> if <code class="docutils literal notranslate"><span class="pre">isinf(x)</span></code>, return a <code class="docutils literal notranslate"><span class="pre">(T(NaN),</span> <span class="pre">T(NaN))</span></code> if <code class="docutils literal notranslate"><span class="pre">isnan(x)</span></code>.</p>
+<p>See also <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">cis</span></code></a>, <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">sincospi</span></code></a>, <a class="reference external" href="&#64;ref"><code class="docutils literal notranslate"><span class="pre">sincosd</span></code></a>.</p>
+<hr class="docutils" />
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sincos</span><span class="p">(</span><span class="n">A</span><span class="o">::</span><span class="kt">AbstractMatrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compute the matrix sine and cosine of a square matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-jldoctest notranslate"><div class="highlight"><pre><span></span>julia&gt; S, C = sincos(fill(1.0, (2,2)));
+
+julia&gt; S
+2×2 Matrix{Float64}:
+ 0.454649  0.454649
+ 0.454649  0.454649
+
+julia&gt; C
+2×2 Matrix{Float64}:
+  0.291927  -0.708073
+ -0.708073   0.291927
 </pre></div>
 </div>
 </div>
@@ -561,23 +598,17 @@ Stacktrace:
 <p>Certaines fonctions possèdent un domaine de définition comme <code>sqrt</code>, <code>log</code>… sur <span class="math notranslate nohighlight">\(I\!\!R\)</span> extensible aux nombres complexes :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="w">   </span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">catch</span>
+<span class="w">    </span><span class="nd">@warn</span><span class="w"> </span><span class="s">&quot;An error occurred!&quot;</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">DomainError</span> <span class="k">with</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
-<span class="n">sqrt</span> <span class="n">was</span> <span class="n">called</span> <span class="k">with</span> <span class="n">a</span> <span class="n">negative</span> <span class="n">real</span> <span class="n">argument</span> <span class="n">but</span> <span class="n">will</span> <span class="n">only</span> <span class="k">return</span> <span class="n">a</span> <span class="nb">complex</span> <span class="n">result</span> <span class="k">if</span> <span class="n">called</span> <span class="k">with</span> <span class="n">a</span> <span class="nb">complex</span> <span class="n">argument</span><span class="o">.</span> <span class="n">Try</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Complex</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">throw_complex_domainerror</span><span class="p">(</span><span class="n">f</span><span class="p">::</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">x</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">Math</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">33</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">sqrt</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">608</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">Math</span> <span class="o">./</span><span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1531</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">67</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">┌ Warning: </span>An error occurred!
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">└ </span>@ Main In[73]:4
 </pre></div>
 </div>
 </div>
@@ -1384,16 +1415,16 @@ et sur <a class="reference external" href="https://docs.julialang.org/en/v1/stdl
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.11"
+            mode: "julia-1.12"
         },
         kernelOptions: {
-            name: "julia-1.11",
+            name: "julia-1.12",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.11'</script>
+    <script>kernelName = 'julia-1.12'</script>
 
                 </article>
               

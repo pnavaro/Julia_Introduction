@@ -429,76 +429,36 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 
 <span class="n">AbstractTrees</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Type</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="n">print_tree</span><span class="p">(</span><span class="kt">AbstractArray</span><span class="p">)</span>
+<span class="n">print_tree</span><span class="p">(</span><span class="kt">Real</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AbstractArray
-├─ AbstractRange
-│  ├─ LinRange
-│  ├─ OrdinalRange
-│  │  ├─ AbstractUnitRange
-│  │  │  ├─ IdentityUnitRange
-│  │  │  ├─ OneTo
-│  │  │  ├─ Slice
-│  │  │  └─ UnitRange
-│  │  └─ StepRange
-│  └─ StepRangeLen
-├─ AbstractSlices
-│  └─ Slices
-├─ ExceptionStack
-├─ LogRange
-├─ LogicalIndex
-├─ MethodList
-├─ ReinterpretArray
-├─ ReshapedArray
-├─ SCartesianIndices2
-├─ WithoutMissingVector
-├─ BitArray
-├─ CartesianIndices
-├─ AbstractRange
-├─ LinRange
-│  ├─ OrdinalRange
-│  │  ├─ AbstractUnitRange
-│  │  │  ├─ IdentityUnitRange
-│  │  │  ├─ OneTo
-│  │  │  ├─ Slice
-│  │  │  ├─ StmtRange
-│  │  │  └─ UnitRange
-│  │  └─ StepRange
-│  └─ StepRangeLen
-├─ BitArray
-├─ ExceptionStack
-├─ LinearIndices
-├─ LogRange
-├─ MethodList
-├─ TwoPhaseDefUseMap
-├─ TwoPhaseVectorView
-├─ DenseArray
-│  ├─ Array
-│  ├─ CodeUnits
-│  ├─ Const
-│  ├─ GenericMemory
-│  └─ UnsafeView
-├─ AbstractTriangular
-│  ├─ LowerTriangular
-│  ├─ UnitLowerTriangular
-│  ├─ UnitUpperTriangular
-│  └─ UpperTriangular
-├─ Adjoint
-├─ Bidiagonal
-├─ Diagonal
-├─ Hermitian
-├─ SymTridiagonal
-├─ Symmetric
-├─ Transpose
-├─ Tridiagonal
-├─ UpperHessenberg
-├─ LinearIndices
-├─ PermutedDimsArray
-├─ SubArray
-└─ Message
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Real
+├─ AbstractFloat
+│  ├─ BigFloat
+│  ├─ BFloat16
+│  ├─ Float16
+│  ├─ Float32
+│  └─ Float64
+├─ AbstractIrrational
+│  └─ Irrational
+├─ Integer
+│  ├─ Bool
+│  ├─ Signed
+│  │  ├─ BigInt
+│  │  ├─ Int128
+│  │  ├─ Int16
+│  │  ├─ Int32
+│  │  ├─ Int64
+│  │  └─ Int8
+│  └─ Unsigned
+│     ├─ UInt128
+│     ├─ UInt16
+│     ├─ UInt32
+│     ├─ UInt64
+│     └─ UInt8
+└─ Rational
 </pre></div>
 </div>
 </div>
@@ -637,7 +597,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 198 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 189 methods)
 </pre></div>
 </div>
 </div>
@@ -672,7 +632,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>En premier lieu il faut définir un type abstrait puis une instance sous-hiérarchiquement concrète :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Grid1</span><span class="w"> </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">OneDimensionalGrid</span>
 <span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
@@ -683,15 +643,15 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid1(0, 1, 2) = Grid1(0.0, 1.0, 2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = OneDimensionalGrid(0, 1, 2) = OneDimensionalGrid(0.0, 1.0, 2)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid1(0.0, 1.0, 2)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OneDimensionalGrid(0.0, 1.0, 2)
 </pre></div>
 </div>
 </div>
@@ -734,18 +694,16 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="w">    </span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>setfield!: immutable struct of type OneDimensionalGrid cannot be changed
 </pre></div>
 </div>
 </div>
@@ -757,7 +715,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid1(0.0, 1.0, 2)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
@@ -768,8 +726,8 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <p>La surcharge des opérations usuelles se fait en définissant une nouvelle méthode associé au nouveau type pour chaque opérateur, commençons par surcharger l’affichage à l’écran de notre nouveau type. Pour cela on va ajouter une méthode à la fonction “show”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">)</span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1d : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1D : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -782,7 +740,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
@@ -794,7 +752,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
@@ -806,7 +764,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
@@ -818,10 +776,10 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
@@ -833,47 +791,38 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">:+</span>
 
-<span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
-<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">n</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span>
+<span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 199 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 191 methods)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1d : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="mi">2</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="p">::</span><span class="n">Grid1</span><span class="p">,</span> <span class="n">n</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">4</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 4 éléments
 </pre></div>
 </div>
 </div>
@@ -885,15 +834,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>Grid1<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::Grid1,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::Int64<span class="o">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="p">::</span><span class="n">Grid1</span><span class="p">,</span> <span class="n">n</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">4</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 3 éléments
 </pre></div>
 </div>
 </div>
@@ -910,16 +851,16 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Int64, ::Grid1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Int64, ::OneDimensionalGrid)
 The function `+` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
   +(::Any, ::Any, ::Any, ::Any...)
-   @ Base operators.jl:596
+   @ Base operators.jl:642
   +(::Real, ::Complex{Bool})
    @ Base complex.jl:322
-  +(::Integer, ::AbstractChar)
-   @ Base char.jl:247
+  +(::Real, ::Complex)
+   @ Base complex.jl:334
   ...
 </pre></div>
 </div>
@@ -937,16 +878,16 @@ Closest candidates are:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching -(::Grid1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching -(::OneDimensionalGrid)
 The function `-` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
   -(::Bool, ::Complex{Bool})
    @ Base complex.jl:310
   -(::Bool, ::Bool)
-   @ Base bool.jl:167
+   @ Base bool.jl:169
   -(::Bool)
-   @ Base bool.jl:164
+   @ Base bool.jl:166
   ...
 </pre></div>
 </div>
@@ -964,14 +905,14 @@ Closest candidates are:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::Grid1, ::Vector{Int64})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching +(::OneDimensionalGrid, ::Vector{Int64})
 The function `+` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
   +(::Any, ::Any, ::Any, ::Any...)
-   @ Base operators.jl:596
-  +(::Grid1, ::Int64)
-   @ <span class=" -Color -Color-Magenta">Main</span> In[29]:3
+   @ Base operators.jl:642
+  +(::OneDimensionalGrid, ::Int64)
+   @ <span class=" -Color -Color-Magenta">Main</span> In[63]:3
   +(::Array, ::Array...)
    @ Base arraymath.jl:12
   ...
@@ -985,46 +926,21 @@ Closest candidates are:
 <p>Toutes les fonctions usuelles sont surchargeable sans limite : size(); det() …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">AbstractGrid</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span>
 <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `AbstractGrid` not defined in `Main`
-<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>MethodError: no method matching size(::Grid1)
-The function `size` exists, but no method is defined for this combination of argument types.
-
-Closest candidates are:
-  size(::ZMQ.Message)
-   @ ZMQ ~/.julia/packages/ZMQ/Lz9O7/src/message.jl:164
-  size(::Base.MethodList)
-   @ Base reflection.jl:1193
-  size(::Base.ExceptionStack)
-   @ Base errorshow.jl:1066
-  ...
-
-
-Stacktrace:
- [1] top-level scope
-   @ In[37]:1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
@@ -1033,7 +949,7 @@ Stacktrace:
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
 <span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span>
 <span class="k">end</span><span class="w"> </span>
 </pre></div>
@@ -1083,18 +999,16 @@ Stacktrace:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">catch</span><span class="w"> </span><span class="n">e</span>
+<span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">AssertionError</span>: Attention la taille de la grille est négative ou nulle
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">b</span><span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="n">c</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">15</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AssertionError: Attention la taille de la grille est négative ou nulle
 </pre></div>
 </div>
 </div>
@@ -1162,16 +1076,16 @@ Stacktrace:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.11"
+            mode: "julia-1.12"
         },
         kernelOptions: {
-            name: "julia-1.11",
+            name: "julia-1.12",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.11'</script>
+    <script>kernelName = 'julia-1.12'</script>
 
                 </article>
               

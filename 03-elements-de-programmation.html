@@ -433,9 +433,10 @@ document.write(`
 <p>Un choix simple si le test est vrai (k==1) alors le bloc d’instruction est évalué</p>
 <!-- #endregion --><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">       </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -463,17 +464,18 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Random</span>
-<span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k ≠ 1&quot;</span><span class="p">)</span>
-<span class="k">else</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="k">let</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k ≠ 1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k ≠ 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k=1
 </pre></div>
 </div>
 </div>
@@ -481,20 +483,22 @@ document.write(`
 <p>Une succession de <strong>elseif</strong> permet de choisir parmi plusieurs critères, dans la succession des blocs de <strong>if</strong> et <strong>elseif</strong> le premier qui est “vrai” est évaluer et l’instruction s’arrète.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="o">==</span><span class="mi">1</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k=1&quot;</span><span class="p">)</span>
-<span class="k">elseif</span><span class="w"> </span><span class="n">k</span><span class="o">&gt;</span><span class="mi">1</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&gt;1&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="w"> </span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k&lt;1&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">k</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k = 5&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k &gt; 5&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;k &lt; 5&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k = rand(1:3) = 2
-k&gt;1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k = 3
+k &lt; 5
 </pre></div>
 </div>
 </div>
@@ -671,7 +675,7 @@ Complex{Bool}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">syracuse</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000000</span>
 <span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
@@ -681,15 +685,16 @@ Complex{Bool}
 <span class="w">        </span><span class="k">end</span>
 <span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">k</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
 <span class="k">end</span>
-
-<span class="n">syracuse</span><span class="p">(</span><span class="mi">10000000000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>124
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(k, n) = (145, 1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(145, 1)
 </pre></div>
 </div>
 </div>
@@ -714,7 +719,7 @@ Complex{Bool}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991.0, 99992.0, 99993.0, 99994.0, 99995.0, 99996.0, 99997.0, 99998.0, 99999.0, 100000.0]
- 19.149154 seconds (2.38 M allocations: 37.313 GiB, 16.20% gc time, 1.61% compilation time)
+ 16.006378 seconds (2.54 M allocations: 37.524 GiB, 17.30% gc time, 3.47% compilation time)
 </pre></div>
 </div>
 </div>
@@ -741,7 +746,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991.0, 99992.0, 99993.0, 99994.0, 99995.0, 99996.0, 99997.0, 99998.0, 99999.0, 100000.0]
-  0.001691 seconds (363 allocations: 1.839 MiB)
+  0.001748 seconds (169 allocations: 2.144 MiB)
 </pre></div>
 </div>
 </div>
@@ -760,7 +765,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
-  0.001620 seconds (327 allocations: 789.047 KiB)
+  0.218892 seconds (188.50 k allocations: 11.779 MiB, 99.44% compilation time)
 </pre></div>
 </div>
 </div>
@@ -776,7 +781,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
-  0.001031 seconds (325 allocations: 787.453 KiB)
+  0.001123 seconds (136 allocations: 787.344 KiB)
 </pre></div>
 </div>
 </div>
@@ -792,7 +797,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[99991, 99992, 99993, 99994, 99995, 99996, 99997, 99998, 99999, 100000]
-  0.000976 seconds (327 allocations: 789.047 KiB)
+  0.005138 seconds (142 allocations: 787.562 KiB, 75.52% gc time)
 </pre></div>
 </div>
 </div>
@@ -814,7 +819,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.465299 seconds (3 allocations: 68.665 MiB, 13.01% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.775452 seconds (2 allocations: 68.668 MiB, 0.38% gc time)
 </pre></div>
 </div>
 </div>
@@ -832,7 +837,7 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.329071 seconds (3 allocations: 190.735 MiB, 4.76% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.257027 seconds (2 allocations: 190.738 MiB, 0.59% gc time)
 </pre></div>
 </div>
 </div>
@@ -842,17 +847,15 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">            </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
-<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.240383 seconds (3 allocations: 190.735 MiB, 1.09% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.999436 seconds (3 allocations: 190.738 MiB, 0.64% gc time)
 </pre></div>
 </div>
 </div>
@@ -862,17 +865,15 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="w">           </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
-<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">axes</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># calcul dévectorisé</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.737419 seconds (3 allocations: 190.735 MiB, 0.70% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.472503 seconds (3 allocations: 190.738 MiB, 0.53% gc time)
 </pre></div>
 </div>
 </div>
@@ -882,41 +883,12 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
-<span class="k">end</span>
+<span class="k">end</span><span class="p">;</span><span class="w">  </span><span class="c"># le &#39;;&#39; permet d&#39;éviter que la matrice W soit affichée</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.658236 seconds (110.93 k allocations: 76.306 MiB, 10.54% compilation time)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
- 1.0  1.0          1.0          …  1.0        1.0       1.0       1.0
- 0.0  0.000333444  0.000666889     0.999      0.999333  0.999667  1.0
- 0.0  1.11185e-7   4.44741e-7      0.998      0.998667  0.999333  1.0
- 0.0  3.70741e-11  2.96593e-10     0.997002   0.998001  0.999     1.0
- 0.0  1.23622e-14  1.97794e-13     0.996005   0.997335  0.998667  1.0
- 0.0  4.12209e-18  1.31907e-16  …  0.995008   0.99667   0.998334  1.0
- 0.0  1.37449e-21  8.79673e-20     0.994013   0.996005  0.998001  1.0
- 0.0  4.58316e-25  5.86644e-23     0.993019   0.995341  0.997668  1.0
- 0.0  1.52823e-28  3.91226e-26     0.992025   0.994677  0.997336  1.0
- 0.0  5.09579e-32  2.60905e-29     0.991033   0.994014  0.997003  1.0
- 0.0  1.69916e-35  1.73994e-32  …  0.990042   0.993351  0.996671  1.0
- 0.0  5.66577e-39  1.16035e-35     0.989051   0.992689  0.996338  1.0
- 0.0  1.88922e-42  7.73824e-39     0.988062   0.992027  0.996006  1.0
- ⋮                              ⋱                                 
- 0.0  0.0          0.0             0.0502627  0.136241  0.36917   1.0
- 0.0  0.0          0.0             0.0502124  0.13615   0.369047  1.0
- 0.0  0.0          0.0          …  0.0501622  0.136059  0.368924  1.0
- 0.0  0.0          0.0             0.050112   0.135969  0.368801  1.0
- 0.0  0.0          0.0             0.0500619  0.135878  0.368678  1.0
- 0.0  0.0          0.0             0.0500118  0.135787  0.368555  1.0
- 0.0  0.0          0.0             0.0499618  0.135697  0.368432  1.0
- 0.0  0.0          0.0          …  0.0499118  0.135606  0.368309  1.0
- 0.0  0.0          0.0             0.0498619  0.135516  0.368186  1.0
- 0.0  0.0          0.0             0.049812   0.135426  0.368064  1.0
- 0.0  0.0          0.0             0.0497621  0.135335  0.367941  1.0
- 0.0  0.0          0.0             0.0497124  0.135245  0.367818  1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.931028 seconds (63.53 k allocations: 71.957 MiB, 4.07% gc time, 5.16% compilation time)
 </pre></div>
 </div>
 </div>
@@ -934,41 +906,12 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span>
 <span class="k">end</span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander1</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander1</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  369.993 ms (2 allocations: 68.66 MiB)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
- 1.0  0.0          0.0         0.0          …  0.0          0.0
- 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
- 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
- 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
- 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
- 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
- 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
- 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
- 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
- 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
- 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
- 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
- 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
- ⋮                                          ⋱               
- 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
- 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
- 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
- 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
- 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
- 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
- 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
- 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
- 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
- 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
- 1.0  0.999667     0.999333    0.999           0.367941     0.367818
- 1.0  1.0          1.0         1.0             1.0          1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  665.432 ms (3 allocations: 68.67 MiB)
 </pre></div>
 </div>
 </div>
@@ -980,16 +923,16 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 14 samples with 1 evaluation.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">352.713 ms</span> … <span class=" -Color -Color-Magenta">411.177 ms</span>  ┊ GC (min … max): 1.19% … 3.98%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">367.749 ms               </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">373.594 ms</span> ± <span class=" -Color -Color-Green"> 18.128 ms</span>  ┊ GC (mean ± σ):  0.91% ± 1.60%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 8 samples with 1 evaluation per sample.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">663.924 ms</span> … <span class=" -Color -Color-Magenta">672.849 ms</span>  ┊ GC (min … max): 0.68% … 0.68%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">667.708 ms               </span>┊ GC (median):    0.67%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">668.039 ms</span> ± <span class=" -Color -Color-Green">  3.338 ms</span>  ┊ GC (mean ± σ):  0.67% ± 0.01%
 
-  ▁  ▁▁    ▁  █  █<span class=" -Color -Color-Blue"> </span>   ▁ <span class=" -Color -Color-Green">▁</span>    ▁                ▁         ▁     ▁  
-  █▁▁██▁▁▁▁█▁▁█▁▁█<span class=" -Color -Color-Blue">▁</span>▁▁▁█▁<span class=" -Color -Color-Green">█</span>▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁█▁▁▁▁▁█ ▁
-  353 ms           Histogram: frequency by time          411 ms <span class=" -Color -Color-Bold">&lt;</span>
+  █     █   █              <span class=" -Color -Color-Blue">█</span>█ <span class=" -Color -Color-Green"> </span>      █                      █ █  
+  █▁▁▁▁▁█▁▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁<span class=" -Color -Color-Blue">█</span>█▁<span class=" -Color -Color-Green">▁</span>▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁█ ▁
+  664 ms           Histogram: frequency by time          673 ms <span class=" -Color -Color-Bold">&lt;</span>
 
- Memory estimate: <span class=" -Color -Color-Yellow">68.66 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">2</span>.
+ Memory estimate: <span class=" -Color -Color-Yellow">68.67 MiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">3</span>.
 </pre></div>
 </div>
 </div>
@@ -1004,41 +947,12 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span>
 <span class="k">end</span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vander2</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  344.251 ms (2 allocations: 68.66 MiB)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
- 1.0  0.0          0.0         0.0          …  0.0          0.0
- 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
- 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
- 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
- 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
- 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
- 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
- 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
- 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
- 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
- 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
- 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
- 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
- ⋮                                          ⋱               
- 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
- 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
- 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
- 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
- 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
- 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
- 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
- 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
- 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
- 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
- 1.0  0.999667     0.999333    0.999           0.367941     0.367818
- 1.0  1.0          1.0         1.0             1.0          1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  671.756 ms (3 allocations: 68.67 MiB)
 </pre></div>
 </div>
 </div>
@@ -1049,41 +963,12 @@ Heureusement plusieurs solutions s’offrent à vous</p>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
 <span class="k">end</span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="o">=</span><span class="n">Vander3</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">Z</span><span class="o">=</span><span class="n">Vander3</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  453.929 ms (2 allocations: 68.66 MiB)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000×3000 Matrix{Float64}:
- 1.0  0.0          0.0         0.0          …  0.0          0.0
- 1.0  0.000333444  1.11185e-7  3.70741e-11     0.0          0.0
- 1.0  0.000666889  4.44741e-7  2.96593e-10     0.0          0.0
- 1.0  0.00100033   1.00067e-6  1.001e-9        0.0          0.0
- 1.0  0.00133378   1.77896e-6  2.37274e-9      0.0          0.0
- 1.0  0.00166722   2.77963e-6  4.63426e-9   …  0.0          0.0
- 1.0  0.00200067   4.00267e-6  8.00801e-9      0.0          0.0
- 1.0  0.00233411   5.44808e-6  1.27164e-8      0.0          0.0
- 1.0  0.00266756   7.11585e-6  1.89819e-8      0.0          0.0
- 1.0  0.003001     9.006e-6    2.7027e-8       0.0          0.0
- 1.0  0.00333444   1.11185e-5  3.70741e-8   …  0.0          0.0
- 1.0  0.00366789   1.34534e-5  4.93456e-8      0.0          0.0
- 1.0  0.00400133   1.60107e-5  6.4064e-8       0.0          0.0
- ⋮                                          ⋱               
- 1.0  0.996332     0.992678    0.989037        1.64276e-5   1.63673e-5
- 1.0  0.996666     0.993342    0.99003         4.4797e-5    4.46476e-5
- 1.0  0.996999     0.994007    0.991024     …  0.000122118  0.000121751
- 1.0  0.997332     0.994672    0.992019        0.000332784  0.000331896
- 1.0  0.997666     0.995337    0.993014        0.000906567  0.000904451
- 1.0  0.997999     0.996003    0.99401         0.00246884   0.0024639
- 1.0  0.998333     0.996668    0.995007        0.0067211    0.00670989
- 1.0  0.998666     0.997334    0.996004     …  0.0182912    0.0182668
- 1.0  0.999        0.998       0.997002        0.0497621    0.0497124
- 1.0  0.999333     0.998667    0.998001        0.135335     0.135245
- 1.0  0.999667     0.999333    0.999           0.367941     0.367818
- 1.0  1.0          1.0         1.0             1.0          1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  678.149 ms (3 allocations: 68.67 MiB)
 </pre></div>
 </div>
 </div>
@@ -1104,16 +989,16 @@ et que l’écriture explicite des boucles donne un meilleur résultat.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia-1.11"
+            mode: "julia-1.12"
         },
         kernelOptions: {
-            name: "julia-1.11",
+            name: "julia-1.12",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia-1.11'</script>
+    <script>kernelName = 'julia-1.12'</script>
 
                 </article>
               
