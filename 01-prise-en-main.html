@@ -607,7 +607,7 @@ julia&gt; C
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Yellow">┌ Warning: </span>An error occurred!
-<span class=" -Color -Color-Bold -Color-Bold-Yellow">└ </span>@ Main In[73]:4
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">└ </span>@ Main In[9]:4
 </pre></div>
 </div>
 </div>
@@ -639,7 +639,7 @@ julia&gt; C
 <p>L’ensemble des fonctions scientifiques est étendu au calcul complexe !</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1032,6 +1032,7 @@ julia&gt; C
 <li><p><code>Float16</code> (simple précision i.e 8 chiffres significatifs), <code>Float32</code> (double précision, 16 chiffres significatifs), <code>Float64</code> (32 chiffres significatifs)</p></li>
 <li><p><code>ComplexF32</code>, <code>ComplexF64</code>.</p></li>
 </ul>
+<p>On peut aller encore plus loin grâce à des packages tels que <a class="reference external" href="https://github.com/JuliaMath/DoubleFloats.jl">DoubleFloats</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">1000000000000</span><span class="p">;</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
