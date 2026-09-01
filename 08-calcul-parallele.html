@@ -506,7 +506,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.046999801
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.042637219
 </pre></div>
 </div>
 </div>
@@ -538,7 +538,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.453896085
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.388354403
 </pre></div>
 </div>
 </div>
@@ -576,7 +576,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.008407258
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.200507568
 </pre></div>
 </div>
 </div>
@@ -620,7 +620,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (runnable, started) @0x000000016fe85690
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (runnable, started) @0x000000010749dc30
 </pre></div>
 </div>
 </div>
@@ -661,17 +661,17 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 3:	[0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0]
-      From worker 2:	[2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-      From worker 2:	[2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-      From worker 2:	[2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-      From worker 2:	[2.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      From worker 2:	[2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 3:	[0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0]
       From worker 3:	[0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 0.0, 0.0]
       From worker 3:	[0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 3.0, 0.0]
       From worker 3:	[0.0, 0.0, 0.0, 0.0, 3.0, 3.0, 3.0, 3.0]
+      From worker 2:	[2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 2:	[2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      From worker 2:	[2.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0, 0.0]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x0000000171bb1a50
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x000000018d44b490
 </pre></div>
 </div>
 </div>
@@ -707,7 +707,7 @@ document.write(`
       From worker 2:	[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00000001783db850
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task (done) @0x00000001836904c0
 </pre></div>
 </div>
 </div>
@@ -729,6 +729,7 @@ document.write(`
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="o">&gt;</span><span class="n">epsi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">)</span>
 <span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xnew</span>
 <span class="w">        </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">\</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xnew</span>
 <span class="k">end</span>
@@ -758,7 +759,7 @@ document.write(`
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">            </span><span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-<span class="w">            </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+<span class="w">            </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">zi</span>
@@ -781,7 +782,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.405104 seconds (140.49 M allocations: 5.608 GiB, 9.00% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.234608 seconds (138.40 M allocations: 5.576 GiB, 8.89% gc time)
 </pre></div>
 </div>
 </div>
@@ -805,9 +806,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Int64}:
- 2
- 3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Int64}:
+ 1
 </pre></div>
 </div>
 </div>
@@ -852,7 +852,7 @@ document.write(`
 <span class="w">        </span><span class="nd">@distributed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">             </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">                </span><span class="n">r</span><span class="o">=</span><span class="n">newton</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="mf">1e-10</span><span class="p">)</span>
-<span class="w">                </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
+<span class="w">                </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">;</span>
 <span class="w">            </span><span class="k">end</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
@@ -875,7 +875,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.029511 seconds (822 allocations: 37.500 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6.853350 seconds (132.62 M allocations: 5.501 GiB, 9.99% gc time, 10.19% compilation time)
 </pre></div>
 </div>
 </div>
@@ -1004,7 +1004,7 @@ process: 3 int: 3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.178628 seconds (739.90 k allocations: 36.137 MiB, 1.58% gc time, 4101 lock conflicts)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.786734 seconds (884.60 k allocations: 43.725 MiB, 0.33% gc time, 4098 lock conflicts, 3.70% compilation time)
 </pre></div>
 </div>
 </div>
@@ -1065,7 +1065,7 @@ process: 3 int: 3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.590004 seconds (808.25 k allocations: 56.931 MiB, 0.26% gc time, 12.96% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.414217 seconds (808.22 k allocations: 56.913 MiB, 0.33% gc time, 12.00% compilation time)
 </pre></div>
 </div>
 </div>
@@ -1132,13 +1132,13 @@ process: 3 int: 3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Bonjour du thread 2
- Bonjour du thread 5
- Bonjour du thread 4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Bonjour du thread 5
  Bonjour du thread 3
+ Bonjour du thread 4
+ Bonjour du thread 2
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.156009931
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.130040405
 </pre></div>
 </div>
 </div>
@@ -1172,41 +1172,45 @@ process: 3 int: 3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>serial elapsed time : 8.025782341  w = [2, 4, 6, 8, 10, 12, 14, 16]
-threads elapsed time : 2.09136639  w = [2, 4, 6, 8, 10, 12, 14, 16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>serial elapsed time : 8.031871959  w = [2, 4, 6, 8, 10, 12, 14, 16]
+threads elapsed time : 2.065639791  w = [2, 4, 6, 8, 10, 12, 14, 16]
 </pre></div>
 </div>
 </div>
 </div>
 <p>Je reprends l’exemple ci-dessus de la fractale et je parallélise avec la mémoire partagée.</p>
+<p>Julia alloue les vecteurs et matrices <strong>sur le tas</strong> (<em>heap</em>) à chaque itération. Avec plusieurs threads, ces allocations créent une contention sur le ramasse-miettes (<em>garbage collector</em>), qui doit parfois mettre en pause <strong>tous</strong> les threads pour libérer la mémoire — ce qui annule le bénéfice du parallélisme.</p>
+<p>La solution est d’utiliser le package <code class="docutils literal notranslate"><span class="pre">StaticArrays</span></code>, qui permet de déclarer des tableaux de taille <strong>fixe et connue à la compilation</strong>. Ces tableaux sont alors alloués <strong>sur la pile</strong> (<em>stack</em>) plutôt que sur le tas, ce qui signifie qu’ils sont libérés automatiquement à la fin de la fonction, sans passer par le ramasse-miettes.</p>
+<p>Dans ton cas, comme tu travailles toujours avec des vecteurs 2D et des matrices 2×2, c’est exactement le bon outil : <code class="docutils literal notranslate"><span class="pre">SVector{2}</span></code> pour les vecteurs et <code class="docutils literal notranslate"><span class="pre">SMatrix{2,2}</span></code> pour les matrices. Une fois ces types utilisés, chaque appel à <code class="docutils literal notranslate"><span class="pre">newton</span></code> n’alloue plus rien sur le tas, la contention entre threads disparaît, et <code class="docutils literal notranslate"><span class="pre">&#64;threads</span></code> peut enfin donner un vrai gain de performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># fonction f(x)=0 à résoudre ici z=x+iy et f(z)=z^3-1</span>
-<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">]</span>
-<span class="c"># le jacobien de f</span>
-<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
+<span class="k">using</span><span class="w"> </span><span class="o">.</span><span class="n">Threads</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">ϵ</span><span class="p">)</span>
-<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="o">...</span><span class="p">]</span>
-<span class="w">    </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xnew</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ϵ</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
-<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">xnew</span>
-<span class="w">        </span><span class="n">xnew</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">SVector</span><span class="p">{</span><span class="mi">2</span><span class="p">})</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">SVector</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">SVector</span><span class="p">{</span><span class="mi">2</span><span class="p">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SMatrix</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">}(</span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">                                  </span><span class="o">-</span><span class="mi">6</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w">       </span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="o">::</span><span class="kt">SVector</span><span class="p">{</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">epsi</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">x0</span>
+<span class="w">    </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">k</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xnew</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">epsi</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">        </span><span class="n">x</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">xnew</span>
+<span class="w">        </span><span class="n">xnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">k</span><span class="w">   </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xnew</span>
 <span class="k">end</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="n">zi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachindex</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="w">            </span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="w">            </span><span class="n">r1</span><span class="p">,</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">)</span>
-<span class="w">            </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span><span class="w"> </span><span class="n">r1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">pi</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span>
+<span class="k">function</span><span class="w"> </span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">zi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="nd">@threads</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">            </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">SVector</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">)</span>
+<span class="w">            </span><span class="n">zi</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">zi</span>
@@ -1223,7 +1227,14 @@ threads elapsed time : 2.09136639  w = [2, 4, 6, 8, 10, 12, 14, 16]
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">nthreads</span><span class="p">()</span>
 <span class="nd">@time</span><span class="w"> </span><span class="n">zi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_bassin_threads</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nthreads() = 4
+  0.114858 seconds (82.04 k allocations: 12.108 MiB, 187.28% compilation time: 100% of which was recompilation)
 </pre></div>
 </div>
 </div>
