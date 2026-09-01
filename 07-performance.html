@@ -437,7 +437,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.827 ms (6 allocations: 16.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.728 ms (6 allocations: 16.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -456,7 +456,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7.145 ms (3 allocations: 8.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4.892 ms (3 allocations: 8.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -474,7 +474,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.164 ms (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.220 ms (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -491,7 +491,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5.163 ms (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.382 ms (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>
@@ -511,7 +511,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  12.346 ms (11 allocations: 32.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  11.414 ms (11 allocations: 32.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -523,7 +523,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  41.740 ms (11 allocations: 32.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  36.883 ms (11 allocations: 32.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -533,22 +533,28 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FFTW</span>
 
-<span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
-<span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
-<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
 <span class="k">function</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span>
 <span class="w">    </span><span class="n">ifft</span><span class="p">(</span><span class="n">exky</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="k">end</span>
-<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># f is a 2d array created by broadcasting</span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">);</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">test1</span><span class="p">()</span><span class="w"> </span>
+<span class="w">    </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># f is a 2d array created by broadcasting</span>
+<span class="w">    </span><span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="n">test1</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  87.338 ms (22 allocations: 64.00 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  82.238 ms (22 allocations: 64.00 MiB)
 </pre></div>
 </div>
 </div>
@@ -556,24 +562,37 @@ document.write(`
 <p>En utilisant les “plans” de FFTW qui permettent de pré-allouer la mémoire nécessaire et le calcul “en place”. On peut améliorer les performances. On réutilise le même tableau pour la valeur de <span class="math notranslate nohighlight">\(f\)</span> et sa transformée de Fourier. On prend soin également de respecter l’alignement de la mémoire en transposant le tableau contenant <span class="math notranslate nohighlight">\(f\)</span> pour calculer la FFT. On utilise plus de mémoire, on fait plus de calcul en ajoutant les transpositions mais finalement le calcul va 3 fois plus vite car on évite les allocations et on limite les accès mémoire.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
-<span class="n">fᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
-<span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
-<span class="n">f</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span>
-<span class="n">fft_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span>
-<span class="k">function</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
-<span class="w">    </span><span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w">  </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
-<span class="w">    </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">exky</span>
-<span class="w">    </span><span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">)</span>
-<span class="w">    </span><span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">exky</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="n">transpose!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+<span class="w">        </span><span class="n">mul!</span><span class="p">(</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w">  </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
+<span class="w">        </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">exky</span>
+<span class="w">        </span><span class="n">ldiv!</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="n">fft_plan</span><span class="p">,</span><span class="w"> </span><span class="n">f̂ᵗ</span><span class="p">)</span>
+<span class="w">        </span><span class="n">transpose!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fᵗ</span><span class="p">)</span>
 <span class="k">end</span>
-<span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="w"> </span><span class="p">);</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">test2</span><span class="p">()</span><span class="w"> </span>
+<span class="w">    </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">ky</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="nb">π</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="n">ny÷2</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">ny÷2</span><span class="o">-</span><span class="n">ny</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">exky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ky</span><span class="o">&#39;</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">f</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
+<span class="w">    </span><span class="n">fᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="w">    </span><span class="n">f̂ᵗ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">ComplexF64</span><span class="p">,</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+<span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">y</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">fft_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plan_fft</span><span class="p">(</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="o">=</span><span class="n">FFTW</span><span class="o">.</span><span class="n">PATIENT</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nd">@btime</span><span class="w"> </span><span class="n">df_dy!</span><span class="p">(</span><span class="o">$</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">f̂ᵗ</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">exky</span><span class="p">,</span><span class="w"> </span><span class="o">$</span><span class="n">fft_plan</span><span class="w"> </span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">test2</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  26.603 ms (2 allocations: 64 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  18.650 ms (2 allocations: 64 bytes)
 </pre></div>
 </div>
 </div>
@@ -588,10 +607,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  958.053 ns (5 allocations: 8.09 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  950.100 ns (5 allocations: 8.09 KiB)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.99639308202583
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.15569122713952
 </pre></div>
 </div>
 </div>
@@ -603,10 +622,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  438.828 ns (3 allocations: 80 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  368.019 ns (3 allocations: 80 bytes)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.99639308202583
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.15569122713952
 </pre></div>
 </div>
 </div>
@@ -631,10 +650,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  144.767 μs (3978 allocations: 77.77 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  115.114 μs (3978 allocations: 77.77 KiB)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>511.4173121564719
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>491.55379365151003
 </pre></div>
 </div>
 </div>
@@ -695,10 +714,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  789.727 ns (1 allocation: 16 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.162 μs (1 allocation: 16 bytes)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>511.4173121564719
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>491.55379365151003
 </pre></div>
 </div>
 </div>
@@ -766,7 +785,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  39.016 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  35.655 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -786,7 +805,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.657 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.718 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -803,10 +822,10 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: addition_deux_arguments(Int64, Int64)
-;  @ In[17]:1 within `addition_deux_arguments`
-define <span class=" -Color -Color-Cyan">i64</span> @julia_addition_deux_arguments_5601<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;, <span class=" -Color -Color-Cyan">i64</span> signext %&quot;y::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+;  @ In[40]:1 within `addition_deux_arguments`
+define <span class=" -Color -Color-Cyan">i64</span> @julia_addition_deux_arguments_6815<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;, <span class=" -Color -Color-Cyan">i64</span> signext %&quot;y::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-;  @ In[17]:2 within `addition_deux_arguments`
+;  @ In[40]:2 within `addition_deux_arguments`
 ; ┌ @ int.jl:87 within `+`
    %0 = <span class=" -Color -Color-Bold">add</span> <span class=" -Color -Color-Cyan">i64</span> %&quot;y::Int64&quot;, %&quot;x::Int64&quot;
    <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %0
@@ -825,17 +844,17 @@ top:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: addition_variable_globale(Int64)
-;  @ In[16]:3 within `addition_variable_globale`
-define nonnull ptr @julia_addition_variable_globale_5661<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+;  @ In[39]:3 within `addition_variable_globale`
+define nonnull ptr @julia_addition_variable_globale_6875<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
   %jlcallframe1 = <span class=" -Color -Color-Bold">alloca</span> <span class=" -Color -Color-Yellow">[2</span> x ptr<span class=" -Color -Color-Yellow">]</span>, align <span class=" -Color -Color-Yellow">8</span>
-;  @ In[16]:4 within `addition_variable_globale`
-  %0 = <span class=" -Color -Color-Bold">call</span> ptr @jl_get_binding_value_seqcst<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;*Main.variable#5663.jit&quot;<span class=" -Color -Color-Yellow">)</span>
+;  @ In[39]:4 within `addition_variable_globale`
+  %0 = <span class=" -Color -Color-Bold">call</span> ptr @jl_get_binding_value_seqcst<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;*Main.variable#6877.jit&quot;<span class=" -Color -Color-Yellow">)</span>
   %.not = <span class=" -Color -Color-Bold">icmp</span> <span class=" -Color -Color-Bold">eq</span> ptr %0, null
   <span class=" -Color -Color-Bold">br</span> <span class=" -Color -Color-Cyan">i1</span> %.not, <span class=" -Color -Color-Cyan">label</span> %err, <span class=" -Color -Color-Cyan">label</span> %ok
 
 err:                                              ; preds = %top
-  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @ijl_undefined_var_error<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_sym#variable#5664.jit&quot;, ptr nonnull @&quot;jl_global#5665.jit&quot;<span class=" -Color -Color-Yellow">)</span>
+  <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">void</span> @ijl_undefined_var_error<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_sym#variable#6878.jit&quot;, ptr nonnull @&quot;jl_global#6879.jit&quot;<span class=" -Color -Color-Yellow">)</span>
   <span class=" -Color -Color-Bold">unreachable</span>
 
 ok:                                               ; preds = %top
@@ -843,7 +862,7 @@ ok:                                               ; preds = %top
   <span class=" -Color -Color-Bold">store</span> ptr %box_Int64, ptr %jlcallframe1, align <span class=" -Color -Color-Yellow">8</span>
   %1 = <span class=" -Color -Color-Bold">getelementptr</span> inbounds ptr, ptr %jlcallframe1, <span class=" -Color -Color-Cyan">i64</span> <span class=" -Color -Color-Yellow">1</span>
   <span class=" -Color -Color-Bold">store</span> ptr %0, ptr %1, align <span class=" -Color -Color-Yellow">8</span>
-  %2 = <span class=" -Color -Color-Bold">call</span> nonnull ptr @ijl_apply_generic<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_global#5666.jit&quot;, ptr nonnull %jlcallframe1, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
+  %2 = <span class=" -Color -Color-Bold">call</span> nonnull ptr @ijl_apply_generic<span class=" -Color -Color-Yellow">(</span>ptr nonnull @&quot;jl_global#6880.jit&quot;, ptr nonnull %jlcallframe1, <span class=" -Color -Color-Cyan">i32</span> <span class=" -Color -Color-Yellow">2)</span>
   <span class=" -Color -Color-Bold">ret</span> ptr %2
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
@@ -864,7 +883,7 @@ ok:                                               ; preds = %top
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.570 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.666 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -884,7 +903,7 @@ ok:                                               ; preds = %top
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.195 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.995 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -914,7 +933,7 @@ ok:                                               ; preds = %top
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.901 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.694 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
@@ -948,7 +967,7 @@ ok:                                               ; preds = %top
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3933831280400072
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.24183347991472504
 </pre></div>
 </div>
 </div>
@@ -961,7 +980,7 @@ ok:                                               ; preds = %top
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for carre_plus_un(::Float64)
- @ Main In[29]:1Number
+  from carre_plus_un(v::<span class=" -Color -Color-Bold">T</span>) where T&lt;:Number @ Main In[47]:1
 Static Parameters
   T = <span class=" -Color -Color-Cyan">Float64</span>
 Arguments
@@ -970,10 +989,12 @@ Arguments
 Locals
   g<span class=" -Color -Color-Cyan">::Float64</span>
 Body<span class=" -Color -Color-Cyan">::Float64</span>
-      (g = v * v)
-│   %2 = g<span class=" -Color -Color-Cyan">::Float64</span>
-│   %3 = (%2 + 1)<span class=" -Color -Color-Cyan">::Float64</span>
-└──      return %3
+1 ─ %1 = Main.:*<span class=" -Color -Color-Cyan">::Core.Const(*)</span>
+│        (g = (%1)(v, v))
+│   %3 = Main.:+<span class=" -Color -Color-Cyan">::Core.Const(+)</span>
+│   %4 = g<span class=" -Color -Color-Cyan">::Float64</span>
+│   %5 = (%3)(%4, 1)<span class=" -Color -Color-Cyan">::Float64</span>
+└──      return %5
 </pre></div>
 </div>
 </div>
@@ -998,7 +1019,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for carre_plus_un(::Int64)
-  from carre_plus_un(v::<span class=" -Color -Color-Bold">T</span>) where T&lt;:Number @ Main In[29]:1
+  from carre_plus_un(v::<span class=" -Color -Color-Bold">T</span>) where T&lt;:Number @ Main In[47]:1
 Static Parameters
   T = <span class=" -Color -Color-Cyan">Int64</span>
 Arguments
@@ -1007,10 +1028,12 @@ Arguments
 Locals
   g<span class=" -Color -Color-Cyan">::Int64</span>
 Body<span class=" -Color -Color-Cyan">::Int64</span>
-1 ─      (g = v * v)
-│   %2 = g<span class=" -Color -Color-Cyan">::Int64</span>
-│   %3 = (%2 + 1)<span class=" -Color -Color-Cyan">::Int64</span>
-└──      return %3
+1 ─ %1 = Main.:*<span class=" -Color -Color-Cyan">::Core.Const(*)</span>
+│        (g = (%1)(v, v))
+│   %3 = Main.:+<span class=" -Color -Color-Cyan">::Core.Const(+)</span>
+│   %4 = g<span class=" -Color -Color-Cyan">::Int64</span>
+│   %5 = (%3)(%4, 1)<span class=" -Color -Color-Cyan">::Int64</span>
+└──      return %5
 </pre></div>
 </div>
 </div>
@@ -1110,9 +1133,9 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  34.895 ns (1 allocation: 16 bytes)
-  2.849 ns (0 allocations: 0 bytes)
-  2.849 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  28.433 ns (1 allocation: 16 bytes)
+  2.902 ns (0 allocations: 0 bytes)
+  2.625 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7160000000000002
@@ -1128,7 +1151,7 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3.006 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2.618 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7160000000000002
@@ -1145,7 +1168,7 @@ Body<span class=" -Color -Color-Cyan">::Int64</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube)
-  from volume(c::<span class=" -Color -Color-Bold">Cube</span>) @ Main In[22]:1
+  from volume(c::<span class=" -Color -Color-Bold">Cube</span>) @ Main In[53]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube</span>
@@ -1168,7 +1191,7 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube_typed)
-  from volume(c::<span class=" -Color -Color-Bold">Cube_typed</span>) @ Main In[23]:6
+  from volume(c::<span class=" -Color -Color-Bold">Cube_typed</span>) @ Main In[54]:6
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube_typed</span>
@@ -1191,7 +1214,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for volume(::Cube_parametric_typed{Float64})
-  from volume(c::<span class=" -Color -Color-Bold">Cube_parametric_typed</span>) @ Main In[24]:6
+  from volume(c::<span class=" -Color -Color-Bold">Cube_parametric_typed</span>) @ Main In[55]:6
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.volume)</span>
   c<span class=" -Color -Color-Cyan">::Cube_parametric_typed{Float64}</span>
@@ -1222,7 +1245,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for zero_or_val(::Float64)
-  from zero_or_val(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[31]:1
+  from zero_or_val(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[62]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.zero_or_val)</span>
   x<span class=" -Color -Color-Cyan">::Float64</span>
@@ -1255,7 +1278,7 @@ Body<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Float64, Int64}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for zero_or_val_stable(::Float64)
-  from zero_or_val_stable(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[32]:1
+  from zero_or_val_stable(x::<span class=" -Color -Color-Bold">Real</span>) @ Main In[63]:1
 Arguments
   #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.zero_or_val_stable)</span>
   x<span class=" -Color -Color-Cyan">::Float64</span>
@@ -1332,8 +1355,8 @@ Pour chaque nombre du vecteur, on lance une pièce de monnaie (<code class="docu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  927.333 ns (0 allocations: 0 bytes)
-  927.812 ns (0 allocations: 0 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  791.887 ns (0 allocations: 0 bytes)
+  766.902 ns (0 allocations: 0 bytes)
 </pre></div>
 </div>
 </div>

@@ -551,7 +551,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"># 2 methods for generic function <b>f</b> from [35mMain[39m:<ul><li> f(n::<b>Integer</b>) in Main at In[7]:1</li> <li> f(x) in Main at In[6]:1</li> </ul></div></div>
+<div class="output text_html"># 2 methods for generic function <b>f</b> from [35mMain[39m:<ul><li> f(n::<b>Integer</b>) in Main at In[5]:1</li> <li> f(x) in Main at In[4]:1</li> </ul></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -567,7 +567,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -596,11 +596,12 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 189 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 191 methods)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Les opérateurs sont aussi des fonctions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -632,9 +633,9 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">OneDimensionalGrid</span>
-<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
-<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
-<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="w">    </span><span class="n">start</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">stop</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">Int32</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -642,22 +643,22 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = OneDimensionalGrid(0, 1, 2) = OneDimensionalGrid(0.0, 1.0, 2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = OneDimensionalGrid(0, 1, 5) = OneDimensionalGrid(0.0, 1.0, 5)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OneDimensionalGrid(0.0, 1.0, 2)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OneDimensionalGrid(0.0, 1.0, 5)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">debut</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">start</span>
 </pre></div>
 </div>
 </div>
@@ -669,7 +670,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">fin</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">stop</span>
 </pre></div>
 </div>
 </div>
@@ -681,12 +682,12 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">n</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">length</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
 </div>
@@ -694,7 +695,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
-<span class="w">    </span><span class="n">a</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="n">a</span><span class="o">.</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <span class="k">catch</span><span class="w"> </span><span class="n">e</span>
 <span class="w">    </span><span class="n">showerror</span><span class="p">(</span><span class="nb">stdout</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 <span class="k">end</span>
@@ -714,7 +715,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OneDimensionalGrid(0.0, 1.0, 5)
 </pre></div>
 </div>
 </div>
@@ -726,7 +727,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="kt">IO</span><span class="p">,</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1D : début </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="s"> , fin </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span><span class="s"> éléments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Grid 1D : start </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="s"> , end </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span><span class="s"> , </span><span class="si">$</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="s"> points</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -739,7 +740,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 5 points
 </pre></div>
 </div>
 </div>
@@ -751,7 +752,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 5 points
 </pre></div>
 </div>
 </div>
@@ -763,7 +764,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 5 points
 </pre></div>
 </div>
 </div>
@@ -775,10 +776,10 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = Grid 1D : start 0.0 , end 1.0 , 5 points
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 5 points
 </pre></div>
 </div>
 </div>
@@ -791,13 +792,13 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Base</span><span class="o">:+</span>
 
 <span class="k">function</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">OneDimensionalGrid</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 191 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+ (generic function with 192 methods)
 </pre></div>
 </div>
 </div>
@@ -809,7 +810,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 2 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 2 points
 </pre></div>
 </div>
 </div>
@@ -821,7 +822,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 4 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 4 points
 </pre></div>
 </div>
 </div>
@@ -833,7 +834,7 @@ La fonction <code class="docutils literal notranslate"><span class="pre">typeof(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : début 0.0 , fin 1.0 , 3 éléments
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid 1D : start 0.0 , end 1.0 , 3 points
 </pre></div>
 </div>
 </div>
@@ -881,12 +882,12 @@ Closest candidates are:
 The function `-` exists, but no method is defined for this combination of argument types.
 
 Closest candidates are:
+  -(::Pkg.Resolve.FieldValue, ::Pkg.Resolve.FieldValue)
+   @ <span class=" -Color -Color-Cyan">Pkg</span> /Applications/Julia-1.12.app/Contents/Resources/julia/share/julia/stdlib/v1.12/Pkg/src/Resolve/fieldvalues.jl:42
   -(::Bool, ::Complex{Bool})
    @ Base complex.jl:310
   -(::Bool, ::Bool)
    @ Base bool.jl:169
-  -(::Bool)
-   @ Base bool.jl:166
   ...
 </pre></div>
 </div>
@@ -911,7 +912,7 @@ Closest candidates are:
   +(::Any, ::Any, ::Any, ::Any...)
    @ Base operators.jl:642
   +(::OneDimensionalGrid, ::Int64)
-   @ <span class=" -Color -Color-Magenta">Main</span> In[63]:3
+   @ <span class=" -Color -Color-Magenta">Main</span> In[27]:3
   +(::Array, ::Array...)
    @ Base arraymath.jl:12
   ...
@@ -926,7 +927,7 @@ Closest candidates are:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">Base</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">n</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">length</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -949,7 +950,7 @@ Closest candidates are:
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
 
 <span class="k">function</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">OneDimensionalGrid</span><span class="p">)</span>
-<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span>
+<span class="w">    </span><span class="n">g</span><span class="o">.</span><span class="n">stop</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">start</span>
 <span class="k">end</span><span class="w"> </span>
 </pre></div>
 </div>
@@ -977,9 +978,9 @@ Closest candidates are:
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractGrid</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="c"># juste en dessous de Any</span>
 
 <span class="k">struct</span> <span class="kt">Grid1D</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractGrid</span>
-<span class="w">    </span><span class="n">debut</span><span class="o">::</span><span class="kt">Float64</span>
-<span class="w">    </span><span class="n">fin</span><span class="o">::</span><span class="kt">Float64</span>
-<span class="w">    </span><span class="n">n</span><span class="o">::</span><span class="kt">Int32</span>
+<span class="w">    </span><span class="n">start</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">stop</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="w">    </span><span class="n">length</span><span class="o">::</span><span class="kt">Int32</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c"># constructeurs par défaut sans argument</span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">()</span>
@@ -988,7 +989,7 @@ Closest candidates are:
 <span class="w">    </span>
 <span class="w">    </span><span class="c"># constructeurs par défaut avec argument</span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Grid1D</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-<span class="w">        </span><span class="nd">@assert</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">&quot;Attention la taille de la grille est négative ou nulle&quot;</span>
+<span class="w">        </span><span class="nd">@assert</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">&quot;Grid length must be positive&quot;</span>
 <span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
@@ -1007,7 +1008,7 @@ Closest candidates are:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AssertionError: Attention la taille de la grille est négative ou nulle
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AssertionError: Grid length must be positive
 </pre></div>
 </div>
 </div>
@@ -1020,8 +1021,8 @@ Closest candidates are:
 <p>Il est possible sur un type nouveau de définir un itérateur, comme ici de parcourir les points de la grille, définissons (surchargeons) de nouvelles fonctions ou plutôt méthodes :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">begin</span>
-<span class="w">   </span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">fin</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">debut</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">g</span><span class="o">::</span><span class="kt">Grid1D</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">   </span><span class="n">state</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="n">stop</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">state</span><span class="o">+</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">stop</span><span class="o">-</span><span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
